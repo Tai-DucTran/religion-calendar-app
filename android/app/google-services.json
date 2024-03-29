@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "453741065442",
+    "project_id": "religion-calendar-app",
+    "storage_bucket": "religion-calendar-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453741065442:android:a65d240eb53815bb615abb",
+        "android_client_info": {
+          "package_name": "com.gmaildeve.taitran.religion_calendar_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF1yufofk4-_B0x29rLVlAQ0KAbSA499Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
