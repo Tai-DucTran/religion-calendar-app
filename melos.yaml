@@ -1,0 +1,23 @@
+name: religion_calendar_app
+
+packages:
+  - .
+  - packages/**
+
+scripts:
+  format:
+    run: dart format . --set-exit-if-changed
+    description: Formats all files in this project.
+
+  generate:
+    description: Build all generated files for Flutter packages in this project.
+    exec: flutter pub run build_runner build --delete-conflicting-outputs
+    packageFilters:
+      dependsOn: build_runner
+      flutter: true
+
+  generate:all:
+    run: melos run generate:nav --no-select && melos run generate:core --no-select && melos run generate:cdd-emp --no-select
+
+  analyze:
+    exec: dart analyze .

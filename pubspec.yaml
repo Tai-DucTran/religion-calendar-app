@@ -7,7 +7,7 @@ version: 1.0.0+1
 environment:
   sdk: ">=3.3.3 <4.0.0"
 dependencies:
-  lib_designs:
+  aries:
     path: packages/aries
   flutter:
     sdk: flutter
@@ -23,10 +23,12 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^3.0.0
+  melos: ^5.2.2
 flutter:
   uses-material-design: true
   assets:
-    - packages/lib_designs/assets/images/icons/
+    - packages/aries/assets/images/icons/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
