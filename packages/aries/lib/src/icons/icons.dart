@@ -1,7 +1,10 @@
 class AriesIcons {
   AriesIcons._();
-  static const facebookIcon = 'assets/icons/facebook_icon.svg';
-  static const googleIcon = 'assets/icons/google_icon.svg';
-  static const appleIcon = 'assets/icons/apple_icon.svg';
-  static const accountBoxLine = 'assets/images/icons/account-box-line.svg';
+  static const facebookIcon =
+      'packages/aries/assets/images/icons/facebook_icon.svg';
+  static const googleIcon =
+      'packages/aries/assets/images/icons/google_icon.svg';
+  static const appleIcon = 'packages/aries/assets/images/icons/apple_icon.svg';
+  static const accountBoxLine =
+      'packages/aries/assets/images/icons/account-box-line.svg';
 }
