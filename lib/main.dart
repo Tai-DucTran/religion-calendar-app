@@ -49,7 +49,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
@@ -59,7 +61,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               CustomElevatedButton(
-                text: 'Sign Up',
+                text: 'Sign In',
                 onPressed: () {},
                 marginHorizontal: 30,
                 buttonColor: Colors.blue[400],

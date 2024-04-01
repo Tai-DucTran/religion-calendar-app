@@ -1,3 +1,4 @@
 {
-  "dart.flutterSdkPath": "~/Development/flutter"
+  "dart.flutterSdkPath": "~/Development/flutter",
+  "cmake.sourceDirectory": "/Volumes/tai-tran/Software-Development/personal-projects/religion_calendar_app/linux"
 }
