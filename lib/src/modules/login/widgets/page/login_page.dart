@@ -1,4 +1,5 @@
 import 'package:aries/aries.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:religion_calendar_app/src/widgets/custom_elevated_button.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/molecules/social_login_button.dart';
@@ -14,6 +15,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  Future<void> _loginAnonymously() async {
+    final userCredential = await FirebaseAuth.instance.signInAnonymously();
+    print('loginStart');
+    print('userCredential $userCredential');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               CustomElevatedButton(
                 text: 'Go anonymous',
-                onPressed: () {},
+                onPressed: _loginAnonymously,
                 marginHorizontal: 30,
                 buttonColor: Colors.blue[400],
                 textColor: Colors.white,
@@ -62,7 +69,9 @@ class _LoginPageState extends State<LoginPage> {
                   Spacing.sp12,
                   SocialLoginButton(
                     iconPath: AriesIcons.appleIcon,
-                    onTap: () {},
+                    onTap: () {
+                      print('Hello world');
+                    },
                   ),
                 ],
               )

@@ -45,5 +45,32 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>fb407560882024803</string>
+			<string>com.googleusercontent.apps.453741065442-1fsmn01t6hou181qdhaf9q1ukkf5i83s</string>
+		</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>407560882024803</string>
+	<key>FacebookClientToken</key>
+	<string>faa9bcd427a521aabc225d55c4410dbd</string>
+	<key>FacebookDisplayName</key>
+	<string>Religion Calendar App</string>
+	<key>CLIENT_ID</key>
+	<string>453741065442-1fsmn01t6hou181qdhaf9q1ukkf5i83s.apps.googleusercontent.com</string>
 </dict>
 </plist>
