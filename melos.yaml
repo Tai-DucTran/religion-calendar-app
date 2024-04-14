@@ -16,8 +16,5 @@ scripts:
       dependsOn: build_runner
       flutter: true
 
-  generate:all:
-    run: melos run generate:nav --no-select && melos run generate:core --no-select && melos run generate:cdd-emp --no-select
-
   analyze:
     exec: dart analyze .

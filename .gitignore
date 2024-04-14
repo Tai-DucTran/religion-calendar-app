@@ -45,3 +45,8 @@ app.*.map.json
 
 # Melos
 pubspec_overrides.yaml
+
+# Generated Code
+*.g.dart
+*.freezed.dart
+*.gen.dart
