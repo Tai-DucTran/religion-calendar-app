@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:religion_calendar_app/src/modules/login/widgets/page/login_page.dart';
+import 'package:religion_calendar_app/src/modules/authentication/widgets/login/page/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 

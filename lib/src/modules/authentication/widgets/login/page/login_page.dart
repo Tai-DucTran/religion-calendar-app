@@ -2,8 +2,8 @@ import 'package:aries/aries.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:religion_calendar_app/src/widgets/custom_elevated_button.dart';
-import 'package:religion_calendar_app/src/modules/login/widgets/molecules/social_login_button.dart';
-import 'package:religion_calendar_app/src/modules/login/widgets/atoms/text_between_dividers.dart';
+import 'package:religion_calendar_app/src/modules/authentication/widgets/login/molecules/social_login_button.dart';
+import 'package:religion_calendar_app/src/modules/authentication/widgets/login/atoms/text_between_dividers.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required this.title});
