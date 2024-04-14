@@ -1,33 +1,23 @@
 import 'package:aries/aries.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:religion_calendar_app/src/modules/authentication/controllers/auth_state_controller.dart';
 import 'package:religion_calendar_app/src/widgets/custom_elevated_button.dart';
 import 'package:religion_calendar_app/src/modules/authentication/widgets/login/molecules/social_login_button.dart';
 import 'package:religion_calendar_app/src/modules/authentication/widgets/login/atoms/text_between_dividers.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, required this.title});
-
+class LoginPage extends HookConsumerWidget {
+  const LoginPage(this.title, {super.key});
   final String title;
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  Future<void> _loginAnonymously() async {
-    final userCredential = await FirebaseAuth.instance.signInAnonymously();
-    print('loginStart');
-    print('userCredential $userCredential');
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.watch(authStateControllerProvider.notifier);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(
-          widget.title,
+          title,
         ),
       ),
       body: Padding(
@@ -39,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               CustomElevatedButton(
                 text: 'Go anonymous',
-                onPressed: _loginAnonymously,
+                onPressed: () {},
                 marginHorizontal: 30,
                 buttonColor: Colors.blue[400],
                 textColor: Colors.white,
@@ -59,19 +49,19 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   SocialLoginButton(
                     iconPath: AriesIcons.googleIcon,
-                    onTap: () {},
+                    onTap: () async {
+                      controller.loginWithGoogle();
+                    },
                   ),
                   Spacing.sp12,
                   SocialLoginButton(
                     iconPath: AriesIcons.facebookIcon,
-                    onTap: () {},
+                    onTap: () async {},
                   ),
                   Spacing.sp12,
                   SocialLoginButton(
                     iconPath: AriesIcons.appleIcon,
-                    onTap: () {
-                      print('Hello world');
-                    },
+                    onTap: () {},
                   ),
                 ],
               )
