@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:religion_calendar_app/src/modules/authentication/models/auth_results.dart';
-import 'package:religion_calendar_app/src/modules/authentication/state/auth/auth_constants.dart';
-import 'package:religion_calendar_app/src/modules/authentication/typedefs/user_id.dart';
+import 'package:religion_calendar_app/src/modules/authentication/constants/auth_constants.dart';
+import 'package:religion_calendar_app/src/modules/users/models/user_id.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'authenticator_repo.g.dart';

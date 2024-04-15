@@ -1,7 +1,6 @@
 import 'package:religion_calendar_app/src/modules/authentication/models/auth_results.dart';
 import 'package:religion_calendar_app/src/modules/authentication/models/auth_state.dart';
 import 'package:religion_calendar_app/src/modules/authentication/repositories/authenticator_repo.dart';
-import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_state_controller.g.dart';
@@ -33,9 +32,8 @@ class AuthStateController extends _$AuthStateController {
     final repo = ref.read(authenticatorRepositoryProvider);
     state = const AsyncLoading();
     final result = await repo.loginWithGoogle();
-    final userId = repo.userId ?? '';
+    final userId = repo.userId;
 
-    result.log();
-    userId.log();
+    if (result == AuthResults.success && userId != null) {}
   }
 }
