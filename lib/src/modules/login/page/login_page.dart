@@ -1,10 +1,10 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:religion_calendar_app/src/modules/authentication/controllers/auth_state_controller.dart';
+import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/widgets/custom_elevated_button.dart';
-import 'package:religion_calendar_app/src/modules/authentication/widgets/login/molecules/social_login_button.dart';
-import 'package:religion_calendar_app/src/modules/authentication/widgets/login/atoms/text_between_dividers.dart';
+import 'package:religion_calendar_app/src/modules/login/molecules/social_login_button.dart';
+import 'package:religion_calendar_app/src/modules/login/atoms/text_between_dividers.dart';
 
 class LoginPage extends HookConsumerWidget {
   const LoginPage(this.title, {super.key});
