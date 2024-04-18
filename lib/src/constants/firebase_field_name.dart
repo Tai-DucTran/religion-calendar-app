@@ -11,6 +11,8 @@ class FirebaseFieldName {
   static const eventId = 'eventId';
   static const eventName = 'eventName';
   static const eventDescription = 'eventDescription';
+  static const markedEvent = '';
+  static const notedEvent = '';
   static const sharedEventWithMember = 'sharedEventWithMember';
 
   const FirebaseFieldName._();
