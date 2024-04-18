@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:religion_calendar_app/src/modules/authentication/models/auth_results.dart';
-import 'package:religion_calendar_app/src/modules/users/models/user_id.dart';
+import 'package:religion_calendar_app/src/modules/user/models/user_id.dart';
 import 'package:flutter/foundation.dart';
 
 part 'auth_state.freezed.dart';
