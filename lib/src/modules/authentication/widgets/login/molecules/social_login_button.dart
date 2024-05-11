@@ -10,8 +10,8 @@ class SocialLoginButton extends StatelessWidget {
   const SocialLoginButton({
     super.key,
     required this.iconPath,
-    this.height = 50,
-    this.width = 50,
+    this.height = 44,
+    this.width = 44,
     required this.onTap,
   });
 
