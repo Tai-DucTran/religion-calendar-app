@@ -36,6 +36,7 @@ dependencies:
   url_launcher: ^6.2.6
   riverpod_annotation: ^2.3.5
   riverpod_generator: ^2.4.0
+  full_calender: ^1.2.12
 
 dev_dependencies:
   flutter_test:
