@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:religion_calendar_app/src/modules/login/page/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'src/modules/home/widgets/widgets.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +26,7 @@ class ReligionCalendar extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 56, 90, 128)),
         useMaterial3: true,
       ),
-      home: const LoginPage('Sign In Page'),
+      home: const HomePage(),
     );
   }
 }
