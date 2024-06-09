@@ -2,7 +2,6 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/authentication/controllers/controllers.dart';
-import 'package:religion_calendar_app/src/modules/login/atoms/atoms.dart';
 import 'package:religion_calendar_app/src/modules/login/molecules/molecules.dart';
 
 class SocialLoginButtonsSection extends HookConsumerWidget {
@@ -12,15 +11,6 @@ class SocialLoginButtonsSection extends HookConsumerWidget {
     final controller = ref.read(authStateControllerProvider.notifier);
     return Column(
       children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 80),
-          child: TextBetweenDividers(
-            text: 'or continue with',
-            dividerColor: Colors.grey[400],
-            textColor: Colors.grey[600],
-          ),
-        ),
-        Spacing.sp12,
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -44,6 +34,9 @@ class SocialLoginButtonsSection extends HookConsumerWidget {
             ),
           ],
         ),
+        Spacing.sp24,
+        const Text('or',
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400))
       ],
     );
   }
