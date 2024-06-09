@@ -2,7 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
-import 'package:religion_calendar_app/src/modules/authentication/widgets/login/organisms/organisms.dart';
+import 'package:religion_calendar_app/src/modules/login/organisms/organisms.dart';
 import 'package:religion_calendar_app/src/widgets/custom_elevated_button.dart';
 
 class LoginPage extends HookConsumerWidget {

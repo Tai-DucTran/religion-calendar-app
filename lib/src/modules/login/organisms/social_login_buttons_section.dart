@@ -2,8 +2,8 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/authentication/controllers/controllers.dart';
-import 'package:religion_calendar_app/src/modules/authentication/widgets/login/atoms/atoms.dart';
-import 'package:religion_calendar_app/src/modules/authentication/widgets/login/molecules/molecules.dart';
+import 'package:religion_calendar_app/src/modules/login/atoms/atoms.dart';
+import 'package:religion_calendar_app/src/modules/login/molecules/molecules.dart';
 
 class SocialLoginButtonsSection extends HookConsumerWidget {
   const SocialLoginButtonsSection({super.key});
