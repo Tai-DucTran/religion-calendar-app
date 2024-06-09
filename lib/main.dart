@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'src/modules/home/widgets/widgets.dart';
+import 'src/modules/landing/pages/pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +26,7 @@ class ReligionCalendar extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 56, 90, 128)),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const SplashScreenPage(),
     );
   }
 }
