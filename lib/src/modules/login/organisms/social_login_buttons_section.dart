@@ -9,6 +9,7 @@ class SocialLoginButtonsSection extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.read(authStateControllerProvider.notifier);
+
     return Column(
       children: [
         Row(
@@ -35,8 +36,30 @@ class SocialLoginButtonsSection extends HookConsumerWidget {
           ],
         ),
         Spacing.sp24,
-        const Text('or',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400))
+        const Text(
+          'or',
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 24),
+          width: double.infinity,
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFieldContainer(
+                title: 'Email',
+                keyboardType: TextInputType.emailAddress,
+                hintText: 'Insert your email',
+              ),
+              Spacing.sp16,
+              TextFieldContainer(
+                title: 'Password',
+                hintText: 'Insert your password',
+              ),
+            ],
+          ),
+        )
       ],
     );
   }
