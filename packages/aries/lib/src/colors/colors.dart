@@ -63,4 +63,9 @@ class AriesColor {
   static const neutral700 = Color(0xFF3e3722);
   static const neutral800 = Color(0xFF312913);
   static const neutral900 = Color(0xFF261e07);
+
+  /* Social Color */
+  static const facebookColor = Color(0xFF1877F2);
+
+  static const black = Color(0xFF000000);
 }
