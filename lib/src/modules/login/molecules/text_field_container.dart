@@ -9,9 +9,11 @@ class TextFieldContainer extends StatefulWidget {
     this.hintText,
     this.textCapitalization,
     this.controller,
+    required this.obscureText,
   });
 
   final String title;
+  final bool obscureText;
   final TextInputType? keyboardType;
   final TextCapitalization? textCapitalization;
   final String? hintText;
@@ -41,9 +43,10 @@ class _TextFieldContainerState extends State<TextFieldContainer> {
         Spacing.sp6,
         TextField(
           controller: widget.controller,
+          obscureText: widget.obscureText,
           keyboardType: widget.keyboardType,
           autocorrect: false,
-          cursorColor: AriesColor.neutral300,
+          cursorColor: AriesColor.neutral50,
           textCapitalization:
               widget.textCapitalization ?? TextCapitalization.none,
           style: textInputStyle,
@@ -59,7 +62,7 @@ class _TextFieldContainerState extends State<TextFieldContainer> {
                 Radius.circular(8),
               ),
               borderSide: BorderSide(
-                color: AriesColor.neutral30,
+                color: AriesColor.neutral50,
               ),
             ),
             focusedBorder: const OutlineInputBorder(
