@@ -23,14 +23,18 @@ class SocialLoginButtonsSection extends HookConsumerWidget {
             ),
             Spacing.sp12,
             SocialLoginButton(
-              iconPath: AriesIcons.facebookIcon,
+              iconPath: AriesIcons.facebookWhiteIcon,
+              backgroundColor: AriesColor.facebookColor,
+              borderColor: AriesColor.facebookColor,
               onTap: () async {
                 await controller.loginWithFacebook();
               },
             ),
             Spacing.sp12,
             SocialLoginButton(
-              iconPath: AriesIcons.appleIcon,
+              iconPath: AriesIcons.appleWhiteIcon,
+              backgroundColor: AriesColor.black,
+              borderColor: AriesColor.black,
               onTap: () {},
             ),
           ],
@@ -51,11 +55,13 @@ class SocialLoginButtonsSection extends HookConsumerWidget {
                 title: 'Email',
                 keyboardType: TextInputType.emailAddress,
                 hintText: 'Insert your email',
+                obscureText: false,
               ),
               Spacing.sp16,
               TextFieldContainer(
                 title: 'Password',
                 hintText: 'Insert your password',
+                obscureText: true,
               ),
             ],
           ),
