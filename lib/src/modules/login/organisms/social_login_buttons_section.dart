@@ -2,6 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/authentication/controllers/controllers.dart';
+import 'package:religion_calendar_app/src/modules/login/atoms/social_login_button.dart';
 import 'package:religion_calendar_app/src/modules/login/molecules/molecules.dart';
 
 class SocialLoginButtonsSection extends HookConsumerWidget {
@@ -44,28 +45,7 @@ class SocialLoginButtonsSection extends HookConsumerWidget {
           'or',
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
         ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 24),
-          width: double.infinity,
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFieldContainer(
-                title: 'Email',
-                keyboardType: TextInputType.emailAddress,
-                hintText: 'Insert your email',
-                obscureText: false,
-              ),
-              Spacing.sp16,
-              TextFieldContainer(
-                title: 'Password',
-                hintText: 'Insert your password',
-                obscureText: true,
-              ),
-            ],
-          ),
-        )
+        const LoginForm(),
       ],
     );
   }
