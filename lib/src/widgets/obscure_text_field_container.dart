@@ -1,29 +1,30 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 
-class TextFieldContainer extends StatefulWidget {
-  const TextFieldContainer({
+class ObscureTextFieldContainer extends StatefulWidget {
+  const ObscureTextFieldContainer({
     super.key,
     required this.title,
     this.keyboardType,
     this.hintText,
     this.textCapitalization,
     this.controller,
-    required this.obscureText,
   });
 
   final String title;
-  final bool obscureText;
+
   final TextInputType? keyboardType;
   final TextCapitalization? textCapitalization;
   final String? hintText;
   final TextEditingController? controller;
 
   @override
-  State<TextFieldContainer> createState() => _TextFieldContainerState();
+  State<ObscureTextFieldContainer> createState() =>
+      _ObscureTextFieldContainerState();
 }
 
-class _TextFieldContainerState extends State<TextFieldContainer> {
+class _ObscureTextFieldContainerState extends State<ObscureTextFieldContainer> {
+  bool isObscured = true;
   @override
   Widget build(BuildContext context) {
     final textInputStyle = Theme.of(context)
@@ -37,13 +38,14 @@ class _TextFieldContainerState extends State<TextFieldContainer> {
         Text(
           widget.title,
           style: const TextStyle(
-            fontSize: 16,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
           ),
         ),
         Spacing.sp6,
         TextField(
           controller: widget.controller,
-          obscureText: widget.obscureText,
+          obscureText: isObscured,
           keyboardType: widget.keyboardType,
           autocorrect: false,
           cursorColor: AriesColor.neutral50,
@@ -52,6 +54,17 @@ class _TextFieldContainerState extends State<TextFieldContainer> {
           style: textInputStyle,
           decoration: InputDecoration(
             hintText: widget.hintText,
+            suffixIcon: IconButton(
+              iconSize: 16,
+              icon: isObscured
+                  ? const Icon(Icons.visibility_off_outlined)
+                  : const Icon(Icons.visibility_outlined),
+              onPressed: () {
+                setState(() {
+                  isObscured = !isObscured;
+                });
+              },
+            ),
             hintStyle: textInputStyle,
             contentPadding: const EdgeInsets.symmetric(
               vertical: 8,
