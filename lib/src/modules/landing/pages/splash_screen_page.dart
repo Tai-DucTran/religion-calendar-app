@@ -2,7 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:religion_calendar_app/src/modules/login/login.dart';
+import 'package:religion_calendar_app/src/modules/sign_up/sign_up.dart';
 
 class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({super.key});
@@ -23,7 +23,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
       () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (_) => const LoginPage(),
+            builder: (_) => const SignUpPage(),
           ),
         );
       },

@@ -1,16 +1,18 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:religion_calendar_app/src/modules/login/organisms/organisms.dart';
+import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
-import '../../essential_widgets/essential_widgets.dart';
+class HalfLinearContainer extends StatelessWidget {
+  const HalfLinearContainer({
+    super.key,
+    required this.child,
+  });
 
-class LoginPage extends HookConsumerWidget {
-  const LoginPage({super.key});
+  final Widget child;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: GradientBackground(
         child: Column(
@@ -39,19 +41,7 @@ class LoginPage extends HookConsumerWidget {
                         0.1
                       ]),
                 ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Sign in',
-                      style:
-                          TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
-                    ),
-                    Spacing.sp24,
-                    SocialLoginButtonsSection(),
-                    Spacing.sp24,
-                  ],
-                ),
+                child: child,
               ),
             ),
           ],
