@@ -30,3 +30,9 @@ rm_gen: |
 
 native_splash: |
 	dart run flutter_native_splash:create --path=native_splash.yaml
+
+l10n:
+   dart run lib/l10n/generate_arb.dart
+   dart run intl_translation:extract_to_arb --output-dir=lib/l10n lib/main.dart
+   dart run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/l10n/intl_files/intl_en.arb lib/l10n/intl_files/intl_vi.arb lib/l10n/localizations.dart
+
