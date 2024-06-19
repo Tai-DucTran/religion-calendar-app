@@ -43,6 +43,7 @@ dependencies:
   flutter_native_splash: ^2.4.1
   another_flushbar: ^1.12.30
   flutter_screenutil: ^5.9.3
+  collection: ^1.18.0
 
 dev_dependencies:
   flutter_test:
