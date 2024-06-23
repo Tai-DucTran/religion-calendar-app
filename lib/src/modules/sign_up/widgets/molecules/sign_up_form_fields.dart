@@ -18,22 +18,12 @@ class _SignUpFormFieldsState extends State<SignUpFormFields> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const TextFieldContainer(
-            title: 'Email',
-            keyboardType: TextInputType.emailAddress,
-            hintText: 'Insert your email',
-            obscureText: false,
-          ),
+          const EmailTextField(),
           Spacing.sp16,
-          const ObscureTextFieldContainer(
-            title: 'Password',
-            hintText: 'Insert your password',
-          ),
+          const PasswordTextField(),
           Spacing.sp24,
-          CustomElevatedButton(
-            text: 'Sign Up',
-            width: double.infinity,
-            buttonColor: AriesColor.yellowP300,
+          CtaFullWidthButton(
+            buttonText: 'Sign Up',
             onPressed: () {},
           ),
           Spacing.sp8,

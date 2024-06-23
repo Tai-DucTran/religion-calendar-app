@@ -1,3 +1,3 @@
-export 'atoms/atoms.dart';
-export 'molecules/molecules.dart';
-export 'page/page.dart';
+export 'widgets/atoms/atoms.dart';
+export 'widgets/molecules/molecules.dart';
+export 'widgets/page/page.dart';
