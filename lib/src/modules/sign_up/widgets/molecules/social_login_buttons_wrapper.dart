@@ -2,7 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/authentication/controllers/controllers.dart';
-import 'package:religion_calendar_app/src/modules/sign_up/atoms/atoms.dart';
+import 'package:religion_calendar_app/src/modules/sign_up/widgets/atoms/atoms.dart';
 
 class SocialLoginButtonWrapper extends HookConsumerWidget {
   const SocialLoginButtonWrapper({super.key});

@@ -1,7 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:religion_calendar_app/src/modules/sign_up/organisms/organisms.dart';
+import 'package:religion_calendar_app/src/modules/sign_up/widgets/organisms/organisms.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class SignUpPage extends HookConsumerWidget {
