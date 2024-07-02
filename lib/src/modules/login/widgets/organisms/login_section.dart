@@ -13,7 +13,7 @@ class LoginSection extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        const SocialLoginButtonWrapper(),
+        const SocialLoginButtonsWrapper(),
         Spacing.sp24,
         const Text(
           'or',

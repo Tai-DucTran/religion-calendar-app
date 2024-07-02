@@ -4,18 +4,18 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/authentication/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/sign_up/widgets/atoms/atoms.dart';
 
-class SocialLoginButtonWrapper extends HookConsumerWidget {
-  const SocialLoginButtonWrapper({super.key});
+class SocialLoginButtonsWrapper extends ConsumerWidget {
+  const SocialLoginButtonsWrapper({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.read(authStateControllerProvider.notifier);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SocialLoginButton(
           iconPath: AriesIcons.googleIcon,
           onTap: () async {
+            final controller = ref.read(authStateControllerProvider.notifier);
             await controller.loginWithGoogle();
           },
         ),
@@ -25,6 +25,7 @@ class SocialLoginButtonWrapper extends HookConsumerWidget {
           backgroundColor: AriesColor.facebookColor,
           borderColor: AriesColor.facebookColor,
           onTap: () async {
+            final controller = ref.read(authStateControllerProvider.notifier);
             await controller.loginWithFacebook();
           },
         ),
