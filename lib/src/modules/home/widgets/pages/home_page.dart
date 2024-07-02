@@ -5,7 +5,6 @@ import 'package:full_calender/full_calender_extension.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/authentication/controllers/controllers.dart';
-import 'package:religion_calendar_app/src/modules/sign_up/widgets/page/page.dart';
 
 class HomePage extends HookConsumerWidget {
   const HomePage({super.key});
@@ -26,12 +25,6 @@ class HomePage extends HookConsumerWidget {
         actions: <Widget>[
           TextButton(
             onPressed: () async {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SignUpPage(),
-                ),
-              );
               final authController =
                   ref.read(authStateControllerProvider.notifier);
               await authController.logOut();
