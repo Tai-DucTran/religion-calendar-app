@@ -44,7 +44,7 @@ class UserFirestoreRepository {
             FirebaseCollectionName.users,
           )
           .add(
-            payload,
+            payload.toJson(),
           );
       return true;
     } catch (e) {

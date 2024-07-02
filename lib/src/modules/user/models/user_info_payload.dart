@@ -1,23 +1,22 @@
-import 'dart:collection';
-
-import 'package:flutter/foundation.dart' show immutable;
-import 'package:religion_calendar_app/src/constants/firebase_field_name.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:religion_calendar_app/src/modules/user/models/religion.dart';
 import 'package:religion_calendar_app/src/modules/user/models/user_id.dart';
 
-@immutable
-class UserInfoPayLoad extends MapView<String, dynamic> {
-  UserInfoPayLoad({
+part 'user_info_payload.freezed.dart';
+part 'user_info_payload.g.dart';
+
+@freezed
+class UserInfoPayLoad with _$UserInfoPayLoad {
+  const factory UserInfoPayLoad({
     required UserId userId,
     required String? displayName,
     required String? email,
     DateTime? createdAt,
     Religion? religionReference,
-  }) : super({
-          FirebaseFieldName.userId: userId,
-          FirebaseFieldName.displayName: displayName,
-          FirebaseFieldName.email: email,
-          FirebaseFieldName.createdAt: createdAt,
-          FirebaseFieldName.religionReference: religionReference,
-        });
+  }) = _UserInfoPayLoad;
+
+  const UserInfoPayLoad._();
+
+  factory UserInfoPayLoad.fromJson(Map<String, dynamic> json) =>
+      _$UserInfoPayLoadFromJson(json);
 }
