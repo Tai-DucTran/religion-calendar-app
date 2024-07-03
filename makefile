@@ -19,7 +19,6 @@ l10n:
 
 upgrade: |
 	flutter precache --ios && \
-	melos exec fvm flutter pub upgrade && \
 	cd ios && pod deintegrate && rm -f Podfile.lock && pod install --repo-update
 
 rm_gen: |
