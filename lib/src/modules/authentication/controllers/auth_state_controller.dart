@@ -43,6 +43,18 @@ class AuthStateController extends _$AuthStateController {
     final result = await authenticatorRepo.loginWithGoogle();
     final userId = authenticatorRepo.userId;
 
+    if (result == AuthResults.success && userId != null) {
+      final user = User(
+        userId: userId,
+        displayName: authenticatorRepo.displayName,
+        email: authenticatorRepo.email,
+      );
+      final isSaveUserInfoSuccess = await userFireStoreRepo.saveUserInfo(user);
+      '---'.log();
+      'isSaveuserInfoSuccess'.log();
+      isSaveUserInfoSuccess.log();
+    }
+
     state = AsyncValue.data(
       AuthState(
         result: result,
@@ -50,15 +62,6 @@ class AuthStateController extends _$AuthStateController {
         userId: userId,
       ),
     );
-
-    if (result == AuthResults.success && userId != null) {
-      final user = User(
-        userId: userId,
-        displayName: authenticatorRepo.displayName,
-        email: authenticatorRepo.email,
-      );
-      await userFireStoreRepo.createUserDoc(user);
-    }
   }
 
   Future<void> loginWithFacebook() async {
@@ -75,7 +78,7 @@ class AuthStateController extends _$AuthStateController {
         displayName: authenticatorRepo.displayName,
         email: authenticatorRepo.email,
       );
-      await userFireStoreRepo.createUserDoc(user);
+      await userFireStoreRepo.saveUserInfo(user);
     }
     state = AsyncValue.data(
       AuthState(
