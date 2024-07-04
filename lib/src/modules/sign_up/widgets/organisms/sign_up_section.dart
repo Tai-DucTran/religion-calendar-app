@@ -1,14 +1,13 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/login_page.dart';
 import 'package:religion_calendar_app/src/modules/sign_up/widgets/molecules/molecules.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
-class SignUpSection extends HookConsumerWidget {
+class SignUpSection extends StatelessWidget {
   const SignUpSection({super.key});
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Column(
       children: [
         const SignUpFormFields(),
@@ -21,7 +20,7 @@ class SignUpSection extends HookConsumerWidget {
           ),
         ),
         Spacing.sp24,
-        const SocialLoginButtonWrapper(),
+        const SocialLoginButtonsWrapper(),
         Spacing.sp24,
         LoginOrSignupBottomText(
           initialQuestion: "Already a member? ",

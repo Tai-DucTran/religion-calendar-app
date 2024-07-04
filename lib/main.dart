@@ -1,8 +1,12 @@
+import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
+import 'package:religion_calendar_app/src/modules/home/widgets/pages/home_page.dart';
+import 'package:religion_calendar_app/src/modules/sign_up/widgets/page/page.dart';
+import 'package:religion_calendar_app/src/utils/log.dart';
 import 'firebase_options.dart';
-import 'src/modules/landing/pages/pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,19 +18,35 @@ void main() async {
   ));
 }
 
-class ReligionCalendar extends StatelessWidget {
+class ReligionCalendar extends ConsumerWidget {
   const ReligionCalendar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authStateController = ref.watch(authStateControllerProvider);
+
     return MaterialApp(
       title: 'Religion Calendar App',
       theme: ThemeData(
+        primaryColor: AriesColor.yellowP300,
         colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 56, 90, 128)),
+          seedColor: AriesColor.yellowP300,
+        ),
         useMaterial3: true,
       ),
-      home: const SplashScreenPage(),
+      home: authStateController.when(
+        data: (data) {
+          final authResult = data.result;
+          authResult?.log();
+
+          if (authResult == AuthResults.success) {
+            return const HomePage();
+          }
+          return const SignUpPage();
+        },
+        error: (_, __) => const SignUpPage(),
+        loading: () => const SignUpPage(),
+      ),
     );
   }
 }

@@ -14,10 +14,10 @@ class AuthState with _$AuthState {
     required UserId? userId,
   }) = _AuthState;
 
+  const AuthState._();
+
   factory AuthState.fromJson(Map<String, dynamic> json) =>
       _$AuthStateFromJson(json);
-
-  const AuthState._();
 
   factory AuthState.unknown() => const AuthState(
         result: null,

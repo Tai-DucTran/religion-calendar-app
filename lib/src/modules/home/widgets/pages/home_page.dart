@@ -4,6 +4,7 @@ import 'package:full_calender/full_calender.dart';
 import 'package:full_calender/full_calender_extension.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:religion_calendar_app/src/modules/authentication/controllers/controllers.dart';
 
 class HomePage extends HookConsumerWidget {
   const HomePage({super.key});
@@ -21,6 +22,18 @@ class HomePage extends HookConsumerWidget {
         title: const Text(
           'Home',
         ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () async {
+              final authController =
+                  ref.read(authStateControllerProvider.notifier);
+              await authController.logOut();
+            },
+            child: const Text(
+              'Logout',
+            ),
+          )
+        ],
       ),
       body: Center(
         child: Column(

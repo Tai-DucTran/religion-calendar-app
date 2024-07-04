@@ -6,14 +6,14 @@ import 'package:religion_calendar_app/src/modules/login/widgets/page/forgot_pasw
 import 'package:religion_calendar_app/src/modules/sign_up/sign_up.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
-class LoginSection extends HookConsumerWidget {
+class LoginSection extends ConsumerWidget {
   const LoginSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        const SocialLoginButtonWrapper(),
+        const SocialLoginButtonsWrapper(),
         Spacing.sp24,
         const Text(
           'or',
@@ -50,7 +50,12 @@ class LoginSection extends HookConsumerWidget {
           initialQuestion: "Don't have an account? ",
           textSpan: "Sign Up",
           onTap: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SignUpPage(),
+              ),
+            );
           },
         )
       ],

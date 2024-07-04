@@ -3,6 +3,7 @@ import 'package:religion_calendar_app/src/modules/authentication/models/auth_sta
 import 'package:religion_calendar_app/src/modules/authentication/repositories/authenticator_repo.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 import 'package:religion_calendar_app/src/modules/user/repositories/user_firestore_repo.dart';
+import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_state_controller.g.dart';
@@ -13,7 +14,11 @@ class AuthStateController extends _$AuthStateController {
   FutureOr<AuthState> build() async {
     final authenticatorRepo = ref.watch(authenticatorRepositoryProvider);
 
-    if (authenticatorRepo.isAlreadyLoggedIn) {
+    final isLoggedIn = authenticatorRepo.isAlreadyLoggedIn;
+    'isUserLoggedIn'.log();
+    isLoggedIn.log();
+
+    if (isLoggedIn) {
       return AuthState(
         result: AuthResults.success,
         isLoading: false,
@@ -25,8 +30,8 @@ class AuthStateController extends _$AuthStateController {
 
   Future<void> logOut() async {
     final authenticatorRepo = ref.read(authenticatorRepositoryProvider);
-    state = const AsyncValue.loading();
     await authenticatorRepo.logOut();
+    state = const AsyncValue.loading();
     state = AsyncValue.data(AuthState.unknown());
   }
 
@@ -38,6 +43,18 @@ class AuthStateController extends _$AuthStateController {
     final result = await authenticatorRepo.loginWithGoogle();
     final userId = authenticatorRepo.userId;
 
+    if (result == AuthResults.success && userId != null) {
+      final user = User(
+        userId: userId,
+        displayName: authenticatorRepo.displayName,
+        email: authenticatorRepo.email,
+      );
+      final isSaveUserInfoSuccess = await userFireStoreRepo.saveUserInfo(user);
+      '---'.log();
+      'isSaveuserInfoSuccess'.log();
+      isSaveUserInfoSuccess.log();
+    }
+
     state = AsyncValue.data(
       AuthState(
         result: result,
@@ -45,15 +62,6 @@ class AuthStateController extends _$AuthStateController {
         userId: userId,
       ),
     );
-
-    if (result == AuthResults.success && userId != null) {
-      final user = User(
-        userId: userId,
-        displayName: authenticatorRepo.displayName,
-        email: authenticatorRepo.email,
-      );
-      await userFireStoreRepo.createUserDoc(user);
-    }
   }
 
   Future<void> loginWithFacebook() async {
@@ -70,7 +78,7 @@ class AuthStateController extends _$AuthStateController {
         displayName: authenticatorRepo.displayName,
         email: authenticatorRepo.email,
       );
-      await userFireStoreRepo.createUserDoc(user);
+      await userFireStoreRepo.saveUserInfo(user);
     }
     state = AsyncValue.data(
       AuthState(

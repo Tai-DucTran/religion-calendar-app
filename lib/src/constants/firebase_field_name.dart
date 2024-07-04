@@ -13,7 +13,7 @@ class FirebaseFieldName {
   static const eventDescription = 'eventDescription';
   static const markedEvent = '';
   static const notedEvent = '';
-  static const sharedEventWithMember = 'sharedEventWithMember';
+  static const sharedEventWithMembers = 'sharedEventWithMembers';
 
   const FirebaseFieldName._();
 }
