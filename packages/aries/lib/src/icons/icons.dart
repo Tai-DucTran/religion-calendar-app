@@ -10,6 +10,8 @@ class AriesIcons {
       'packages/aries/assets/images/icons/apple_icon.svg';
   static const appleWhiteIcon =
       'packages/aries/assets/images/icons/apple_icon_white_background.svg';
-  static const accountBoxLine =
+  static const accountBoxLineIcon =
       'packages/aries/assets/images/icons/account-box-line.svg';
+  static const sunAndMoonImageIcon =
+      'packages/aries/assets/images/others/sun_and_moon_logo.svg';
 }

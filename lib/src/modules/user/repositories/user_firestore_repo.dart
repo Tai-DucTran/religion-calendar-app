@@ -66,4 +66,7 @@ class UserFirestoreRepository {
       return false;
     }
   }
+
+  // TODO: Implement onboarding page
+  Future<void> updateUserReligion(User user) async {}
 }

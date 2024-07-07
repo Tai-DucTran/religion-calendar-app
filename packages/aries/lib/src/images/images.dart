@@ -3,5 +3,8 @@ class AriesImages {
   static const splashScreenImage =
       'packages/aries/assets/images/others/welcome_page.svg';
   static const sunAndMoonImage =
-      'packages/aries/assets/images/others/sun_and_moon_logo.svg';
+      'packages/aries/assets/images/religions/sun_and_moon.png';
+  static const buddaImage = 'packages/aries/assets/images/religions/budda.png';
+  static const christImage =
+      'packages/aries/assets/images/religions/christ.png';
 }
