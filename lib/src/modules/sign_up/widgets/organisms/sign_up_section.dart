@@ -22,7 +22,7 @@ class SignUpSection extends StatelessWidget {
         Spacing.sp24,
         const SocialLoginButtonsWrapper(),
         Spacing.sp24,
-        LoginOrSignupBottomText(
+        BottomRichTextWithAction(
           initialQuestion: "Already a member? ",
           textSpan: 'Log In',
           onTap: () {

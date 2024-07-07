@@ -2,8 +2,8 @@ import 'package:aries/aries.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class LoginOrSignupBottomText extends StatelessWidget {
-  const LoginOrSignupBottomText(
+class BottomRichTextWithAction extends StatelessWidget {
+  const BottomRichTextWithAction(
       {super.key,
       required this.initialQuestion,
       required this.textSpan,
