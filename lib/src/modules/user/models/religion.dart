@@ -4,5 +4,7 @@ enum Religion {
   @JsonValue('CATHOLICISM')
   catholicism,
   @JsonValue('BUDDHISM')
-  buddhism
+  buddhism,
+  @JsonValue('UNKNOWN')
+  unknown,
 }
