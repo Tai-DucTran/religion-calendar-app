@@ -23,6 +23,7 @@ class AuthStateController extends _$AuthStateController {
         result: AuthResults.success,
         isLoading: false,
         userId: authenticatorRepo.userId,
+        isLoggedIn: isLoggedIn,
       );
     }
     return AuthState.unknown();
@@ -60,6 +61,7 @@ class AuthStateController extends _$AuthStateController {
         result: result,
         isLoading: false,
         userId: userId,
+        isLoggedIn: result == AuthResults.success ? true : false,
       ),
     );
   }
@@ -85,6 +87,7 @@ class AuthStateController extends _$AuthStateController {
         result: result,
         isLoading: false,
         userId: userId,
+        isLoggedIn: result == AuthResults.success ? true : false,
       ),
     );
   }
