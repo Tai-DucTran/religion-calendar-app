@@ -38,6 +38,9 @@ dependencies:
   riverpod_generator: ^2.4.0
   full_calender: ^1.2.12
   intl_translation: ^0.20.0
+  go_router: ^14.2.1
+  go_router_builder: ^2.7.0
+  flutter_native_splash: ^2.4.1
 
 dev_dependencies:
   flutter_test:
@@ -49,3 +52,5 @@ dev_dependencies:
   json_serializable: ^6.7.1
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/

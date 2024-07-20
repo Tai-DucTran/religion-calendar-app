@@ -1,0 +1,6 @@
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+
+  background_image: "assets/images/splash_screen_light_mode.png"

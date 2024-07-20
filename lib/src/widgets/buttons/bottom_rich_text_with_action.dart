@@ -16,8 +16,6 @@ class BottomRichTextWithAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 18),
-      margin: const EdgeInsets.only(top: 12),
       alignment: Alignment.bottomCenter,
       child: RichText(
         text: TextSpan(
