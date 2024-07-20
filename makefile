@@ -27,3 +27,6 @@ rm_gen: |
 	find . -name "*.g.dart" -delete && \
 	find . -name "custom_lint.log" -delete && \
 	rm -f reports/localized_keys_report.csv
+
+native_splash: |
+	dart run flutter_native_splash:create --path=native_splash.yaml
