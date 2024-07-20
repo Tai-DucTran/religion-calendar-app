@@ -1,0 +1,63 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:religion_calendar_app/src/modules/login/widgets/page/forgot_pasword_page.dart';
+import 'package:religion_calendar_app/src/modules/login/widgets/page/login_page.dart';
+import 'package:religion_calendar_app/src/modules/sign_up/widgets/page/page.dart';
+
+import '../home/widgets/pages/pages.dart';
+
+part 'routes.g.dart';
+
+final rootKey = GlobalKey<NavigatorState>(debugLabel: 'root');
+
+@TypedGoRoute<SignUpRoute>(
+  path: SignUpRoute.path,
+  routes: [
+    TypedGoRoute<LoginRoute>(
+      path: LoginRoute.path,
+      routes: [
+        TypedGoRoute<LoginForgotPasswordRoute>(
+          path: LoginForgotPasswordRoute.path,
+        ),
+      ],
+    ),
+  ],
+)
+class SignUpRoute extends GoRouteData {
+  const SignUpRoute();
+  static const path = '/signup';
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const SignUpPage();
+  }
+}
+
+class LoginRoute extends GoRouteData {
+  const LoginRoute();
+  static const path = 'login';
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const LoginPage();
+  }
+}
+
+class LoginForgotPasswordRoute extends GoRouteData {
+  const LoginForgotPasswordRoute();
+  static const path = 'forgot-password';
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const ForgotPaswordPage();
+  }
+}
+
+@TypedGoRoute<HomeRoute>(
+  path: HomeRoute.path,
+)
+class HomeRoute extends GoRouteData {
+  const HomeRoute();
+  static const path = '/home';
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const HomePage();
+  }
+}
