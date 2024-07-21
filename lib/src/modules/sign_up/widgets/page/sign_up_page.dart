@@ -8,11 +8,14 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const HalfLinearContainer(
+    final isShowKeyboard = MediaQuery.of(context).viewInsets.bottom > 0;
+
+    return HalfLinearContainer(
+      isShowKeyboard: isShowKeyboard,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Sign Up',
             style: TextStyle(
               fontSize: 28,
@@ -20,7 +23,9 @@ class SignUpPage extends StatelessWidget {
             ),
           ),
           Spacing.sp24,
-          SignUpSection(),
+          SignUpSection(
+            isShowKeyboard: isShowKeyboard,
+          ),
         ],
       ),
     );
