@@ -24,7 +24,8 @@ mixin _$User {
   String? get displayName => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
-  Religion? get religionReference => throw _privateConstructorUsedError;
+  ReligionPreference? get religionReference =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +42,7 @@ abstract class $UserCopyWith<$Res> {
       String? displayName,
       String? email,
       DateTime? createdAt,
-      Religion? religionReference});
+      ReligionPreference? religionReference});
 }
 
 /// @nodoc
@@ -83,7 +84,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       religionReference: freezed == religionReference
           ? _value.religionReference
           : religionReference // ignore: cast_nullable_to_non_nullable
-              as Religion?,
+              as ReligionPreference?,
     ) as $Val);
   }
 }
@@ -100,7 +101,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? displayName,
       String? email,
       DateTime? createdAt,
-      Religion? religionReference});
+      ReligionPreference? religionReference});
 }
 
 /// @nodoc
@@ -139,7 +140,7 @@ class __$$UserImplCopyWithImpl<$Res>
       religionReference: freezed == religionReference
           ? _value.religionReference
           : religionReference // ignore: cast_nullable_to_non_nullable
-              as Religion?,
+              as ReligionPreference?,
     ));
   }
 }
@@ -167,7 +168,7 @@ class _$UserImpl extends _User {
   @override
   final DateTime? createdAt;
   @override
-  final Religion? religionReference;
+  final ReligionPreference? religionReference;
 
   @override
   String toString() {
@@ -214,7 +215,7 @@ abstract class _User extends User {
       required final String? displayName,
       required final String? email,
       final DateTime? createdAt,
-      final Religion? religionReference}) = _$UserImpl;
+      final ReligionPreference? religionReference}) = _$UserImpl;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -228,7 +229,7 @@ abstract class _User extends User {
   @override
   DateTime? get createdAt;
   @override
-  Religion? get religionReference;
+  ReligionPreference? get religionReference;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

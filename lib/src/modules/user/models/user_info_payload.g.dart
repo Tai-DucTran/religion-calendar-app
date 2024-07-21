@@ -15,8 +15,8 @@ _$UserInfoPayLoadImpl _$$UserInfoPayLoadImplFromJson(
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
-      religionReference:
-          $enumDecodeNullable(_$ReligionEnumMap, json['religionReference']),
+      religionReference: $enumDecodeNullable(
+          _$ReligionPreferenceEnumMap, json['religionReference']),
     );
 
 Map<String, dynamic> _$$UserInfoPayLoadImplToJson(
@@ -26,11 +26,12 @@ Map<String, dynamic> _$$UserInfoPayLoadImplToJson(
       'displayName': instance.displayName,
       'email': instance.email,
       'createdAt': instance.createdAt?.toIso8601String(),
-      'religionReference': _$ReligionEnumMap[instance.religionReference],
+      'religionReference':
+          _$ReligionPreferenceEnumMap[instance.religionReference],
     };
 
-const _$ReligionEnumMap = {
-  Religion.catholicism: 'CATHOLICISM',
-  Religion.buddhism: 'BUDDHISM',
-  Religion.unknown: 'UNKNOWN',
+const _$ReligionPreferenceEnumMap = {
+  ReligionPreference.catholicism: 'CATHOLICISM',
+  ReligionPreference.buddhism: 'BUDDHISM',
+  ReligionPreference.unknown: 'UNKNOWN',
 };

@@ -41,9 +41,9 @@ class OnboardingPage extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(
                 vertical: 14,
               ),
-              itemCount: Religion.values.length,
+              itemCount: ReligionPreference.values.length,
               itemBuilder: (context, index) {
-                final religion = Religion.values[index];
+                final religion = ReligionPreference.values[index];
                 final isSelected =
                     religion == ref.watch(currentReligionProvider);
                 final color =

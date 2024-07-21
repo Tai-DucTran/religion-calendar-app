@@ -4,20 +4,21 @@ import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 
 typedef ReligionBackgroundImagePath = String;
 
-ReligionBackgroundImagePath getOnboardingBackgroundPath(Religion religion) {
+ReligionBackgroundImagePath getOnboardingBackgroundPath(
+    ReligionPreference religion) {
   switch (religion) {
-    case Religion.buddhism:
+    case ReligionPreference.buddhism:
       return AriesImages.buddaImage;
-    case Religion.catholicism:
+    case ReligionPreference.catholicism:
       return AriesImages.christImage;
-    case Religion.unknown:
+    case ReligionPreference.unknown:
     default:
       return AriesImages.sunAndMoonImage;
   }
 }
 
-final currentReligionProvider = StateProvider<Religion>(
-  (ref) => Religion.unknown,
+final currentReligionProvider = StateProvider<ReligionPreference>(
+  (ref) => ReligionPreference.unknown,
 );
 
 final selectedReligionProvider = StateProvider((ref) {

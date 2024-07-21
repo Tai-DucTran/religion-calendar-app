@@ -24,7 +24,8 @@ mixin _$UserInfoPayLoad {
   String? get displayName => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
-  Religion? get religionReference => throw _privateConstructorUsedError;
+  ReligionPreference? get religionReference =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,7 @@ abstract class $UserInfoPayLoadCopyWith<$Res> {
       String? displayName,
       String? email,
       DateTime? createdAt,
-      Religion? religionReference});
+      ReligionPreference? religionReference});
 }
 
 /// @nodoc
@@ -85,7 +86,7 @@ class _$UserInfoPayLoadCopyWithImpl<$Res, $Val extends UserInfoPayLoad>
       religionReference: freezed == religionReference
           ? _value.religionReference
           : religionReference // ignore: cast_nullable_to_non_nullable
-              as Religion?,
+              as ReligionPreference?,
     ) as $Val);
   }
 }
@@ -103,7 +104,7 @@ abstract class _$$UserInfoPayLoadImplCopyWith<$Res>
       String? displayName,
       String? email,
       DateTime? createdAt,
-      Religion? religionReference});
+      ReligionPreference? religionReference});
 }
 
 /// @nodoc
@@ -143,7 +144,7 @@ class __$$UserInfoPayLoadImplCopyWithImpl<$Res>
       religionReference: freezed == religionReference
           ? _value.religionReference
           : religionReference // ignore: cast_nullable_to_non_nullable
-              as Religion?,
+              as ReligionPreference?,
     ));
   }
 }
@@ -171,7 +172,7 @@ class _$UserInfoPayLoadImpl extends _UserInfoPayLoad {
   @override
   final DateTime? createdAt;
   @override
-  final Religion? religionReference;
+  final ReligionPreference? religionReference;
 
   @override
   String toString() {
@@ -219,7 +220,7 @@ abstract class _UserInfoPayLoad extends UserInfoPayLoad {
       required final String? displayName,
       required final String? email,
       final DateTime? createdAt,
-      final Religion? religionReference}) = _$UserInfoPayLoadImpl;
+      final ReligionPreference? religionReference}) = _$UserInfoPayLoadImpl;
   const _UserInfoPayLoad._() : super._();
 
   factory _UserInfoPayLoad.fromJson(Map<String, dynamic> json) =
@@ -234,7 +235,7 @@ abstract class _UserInfoPayLoad extends UserInfoPayLoad {
   @override
   DateTime? get createdAt;
   @override
-  Religion? get religionReference;
+  ReligionPreference? get religionReference;
   @override
   @JsonKey(ignore: true)
   _$$UserInfoPayLoadImplCopyWith<_$UserInfoPayLoadImpl> get copyWith =>
