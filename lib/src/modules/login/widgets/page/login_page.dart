@@ -10,11 +10,14 @@ class LoginPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const HalfLinearContainer(
+    final isShowKeyboard = MediaQuery.of(context).viewInsets.bottom > 0;
+
+    return HalfLinearContainer(
+      isShowKeyboard: isShowKeyboard,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Login',
             style: TextStyle(
               fontSize: 28,
@@ -22,7 +25,9 @@ class LoginPage extends HookConsumerWidget {
             ),
           ),
           Spacing.sp24,
-          LoginSection(),
+          LoginSection(
+            isShowKeyboard: isShowKeyboard,
+          ),
         ],
       ),
     );

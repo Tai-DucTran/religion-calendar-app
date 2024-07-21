@@ -10,17 +10,21 @@ class HalfLinearContainer extends StatelessWidget {
     required this.child,
     this.firstSectionRatio,
     this.imagePath,
+    this.isShowKeyboard,
   });
 
   final Widget child;
   final LinearFirstSectionRatio? firstSectionRatio;
   final String? imagePath;
+  final bool? isShowKeyboard;
 
   @override
   Widget build(BuildContext context) {
     final isHasImageInput = imagePath != null;
-    final ratio =
-        firstSectionRatio?.ratio ?? LinearFirstSectionRatio.defaultSized.ratio;
+    final ratio = isShowKeyboard ?? false
+        ? 0.1
+        : firstSectionRatio?.ratio ??
+            LinearFirstSectionRatio.defaultSized.ratio;
 
     return Scaffold(
       body: GradientBackground(
@@ -69,7 +73,10 @@ class HalfLinearContainer extends StatelessWidget {
                         stops: const [0, 0.1],
                       ),
                     ),
-                    child: child,
+                    child: SingleChildScrollView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      child: child,
+                    ),
                   ),
                 ),
               ],

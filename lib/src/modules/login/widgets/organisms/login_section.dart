@@ -7,22 +7,29 @@ import 'package:religion_calendar_app/src/modules/sign_up/sign_up.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class LoginSection extends ConsumerWidget {
-  const LoginSection({super.key});
+  const LoginSection({
+    super.key,
+    this.isShowKeyboard = false,
+  });
+
+  final bool isShowKeyboard;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        const SocialLoginButtonsWrapper(),
-        Spacing.sp24,
-        const Text(
-          'or',
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
+        if (!isShowKeyboard) ...[
+          const SocialLoginButtonsWrapper(),
+          Spacing.sp24,
+          const Text(
+            'or',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
           ),
-        ),
-        Spacing.sp24,
+          Spacing.sp24,
+        ],
         const LoginFormFields(),
         Container(
           alignment: Alignment.bottomRight,
