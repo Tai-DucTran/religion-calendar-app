@@ -14,4 +14,6 @@ class AriesIcons {
       'packages/aries/assets/images/icons/account-box-line.svg';
   static const sunAndMoonImageIcon =
       'packages/aries/assets/images/others/sun_and_moon_logo.svg';
+  static const warningCircleOutlineIcon =
+      'packages/aries/assets/images/icons/warning_circle_outline_icon.svg';
 }
