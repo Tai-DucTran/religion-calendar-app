@@ -1,8 +1,8 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 
-class TextFieldContainer extends StatefulWidget {
-  const TextFieldContainer({
+class TextFormFieldContainer extends StatefulWidget {
+  const TextFormFieldContainer({
     super.key,
     required this.title,
     this.keyboardType,
@@ -10,6 +10,8 @@ class TextFieldContainer extends StatefulWidget {
     this.textCapitalization,
     this.controller,
     required this.obscureText,
+    this.validator,
+    this.suffixIcon,
   });
 
   final String title;
@@ -18,12 +20,14 @@ class TextFieldContainer extends StatefulWidget {
   final TextCapitalization? textCapitalization;
   final String? hintText;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
+  final Widget? suffixIcon;
 
   @override
-  State<TextFieldContainer> createState() => _TextFieldContainerState();
+  State<TextFormFieldContainer> createState() => _TextFormFieldContainerState();
 }
 
-class _TextFieldContainerState extends State<TextFieldContainer> {
+class _TextFormFieldContainerState extends State<TextFormFieldContainer> {
   @override
   Widget build(BuildContext context) {
     final textInputStyle = Theme.of(context)
@@ -42,7 +46,7 @@ class _TextFieldContainerState extends State<TextFieldContainer> {
           ),
         ),
         Spacing.sp6,
-        TextField(
+        TextFormField(
           controller: widget.controller,
           obscureText: widget.obscureText,
           keyboardType: widget.keyboardType,
@@ -51,9 +55,15 @@ class _TextFieldContainerState extends State<TextFieldContainer> {
           textCapitalization:
               widget.textCapitalization ?? TextCapitalization.none,
           style: textInputStyle,
+          validator: widget.validator,
           decoration: InputDecoration(
             hintText: widget.hintText,
             hintStyle: textInputStyle,
+            suffixIconConstraints: const BoxConstraints(
+              minHeight: 16,
+              minWidth: 16,
+            ),
+            suffixIcon: widget.suffixIcon,
             contentPadding: const EdgeInsets.symmetric(
               vertical: 8,
               horizontal: 12,
@@ -66,6 +76,26 @@ class _TextFieldContainerState extends State<TextFieldContainer> {
                 color: AriesColor.neutral50,
               ),
             ),
+            errorBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+              borderSide: BorderSide(
+                color: AriesColor.danger300,
+              ),
+            ),
+            focusedErrorBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+              borderSide: BorderSide(
+                color: AriesColor.danger300,
+              ),
+            ),
+            errorStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AriesColor.danger300,
+                ),
+            errorMaxLines: 2,
             focusedBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
