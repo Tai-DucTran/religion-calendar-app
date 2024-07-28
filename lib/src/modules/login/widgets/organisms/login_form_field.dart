@@ -5,7 +5,7 @@ import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 import '../../../authentication/authentication.dart';
 
-class LoginFormFields extends StatefulHookConsumerWidget {
+class LoginFormFields extends ConsumerStatefulWidget {
   const LoginFormFields({super.key});
 
   @override
@@ -16,6 +16,8 @@ class LoginFormFields extends StatefulHookConsumerWidget {
 class _LoginFormFieldsState extends ConsumerState<LoginFormFields> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  bool _isEmailValid = true;
 
   @override
   void dispose() {
@@ -26,32 +28,39 @@ class _LoginFormFieldsState extends ConsumerState<LoginFormFields> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          EmailTextField(
-            controller: _emailController,
-          ),
-          Spacing.sp16,
-          PasswordTextField(
-            controller: _passwordController,
-          ),
-          Spacing.sp24,
-          CtaFullWidthButton(
-            buttonText: 'Login',
-            onPressed: () async {
-              final authController =
-                  ref.read(authStateControllerProvider.notifier);
-              await authController.loginWithEmailAndPassword(
-                email: _emailController.text,
-                password: _passwordController.text,
-              );
-            },
-          ),
-        ],
+    return Form(
+      key: _formKey,
+      child: SizedBox(
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            EmailTextField(
+              controller: _emailController,
+              isValidEmail: _isEmailValid,
+            ),
+            Spacing.sp16,
+            PasswordTextField(
+              controller: _passwordController,
+            ),
+            Spacing.sp24,
+            CtaFullWidthButton(
+              buttonText: 'Login',
+              onPressed: () async {
+                setState(() {
+                  _isEmailValid = _formKey.currentState!.validate();
+                });
+                final authController =
+                    ref.read(authStateControllerProvider.notifier);
+                await authController.loginWithEmailAndPassword(
+                  email: _emailController.text,
+                  password: _passwordController.text,
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
