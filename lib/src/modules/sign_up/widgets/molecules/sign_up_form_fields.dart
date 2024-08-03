@@ -18,85 +18,38 @@ class _SignUpFormFieldsState extends ConsumerState<SignUpFormFields> {
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _isEmailValid = true;
-  OverlayEntry? _overlayEntry;
+  OverlayEntry? overlayEntry;
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _overlayEntry?.remove();
+    cleanOverlayEntry();
     super.dispose();
   }
 
-  void _showAccountExistsMessage() {
-    if (_overlayEntry != null) {
-      _overlayEntry!.remove();
-    }
-    _overlayEntry = _createOverlayEntry();
-    Overlay.of(context).insert(_overlayEntry!);
+  void cleanOverlayEntry() {
+    overlayEntry?.remove();
+    overlayEntry?.dispose();
+    overlayEntry = null;
   }
 
-  OverlayEntry _createOverlayEntry() {
-    return OverlayEntry(
-      builder: (context) => Positioned(
-        top: MediaQuery.of(context).viewInsets.top + 80,
-        left: 20,
-        right: 20,
-        child: Material(
-          color: Colors.transparent,
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.25),
-                  offset: const Offset(0, 4),
-                  blurRadius: 4,
-                ),
-              ],
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Icon(
-                  Icons.error,
-                  color: Colors.white,
-                ),
-                const SizedBox(width: 8),
-                const Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'You have already used this email!',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        'This email is associated with a Google account that has been previously logged in. Please log in with Google to continue.',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.close, color: Colors.white),
-                  onPressed: () {
-                    _overlayEntry?.remove();
-                    _overlayEntry = null;
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
+  void _showErrorOverlay({
+    required String title,
+    required String message,
+    required bool isErrorOverlay,
+  }) {
+    cleanOverlayEntry();
+
+    overlayEntry = OverlayEntry(
+      builder: (context) => ErrorOverlayTopModal(
+        errorTitle: title,
+        errorMessage: message,
+        onClose: cleanOverlayEntry,
+        isErrorOverlay: isErrorOverlay,
       ),
     );
+    Overlay.of(context).insert(overlayEntry!);
   }
 
   @override
@@ -135,9 +88,18 @@ class _SignUpFormFieldsState extends ConsumerState<SignUpFormFields> {
                   } catch (e) {
                     if (!mounted) return;
                     if (e is EmailAlreadyInUseAuthException) {
-                      _showAccountExistsMessage();
+                      _showErrorOverlay(
+                        title: 'Email Already in Use',
+                        message:
+                            'This email is associate d with a Google account that has been previously registered. Please log in with Goolge to continue.',
+                        isErrorOverlay: true,
+                      );
                     } else {
-                      _showAccountExistsMessage();
+                      _showErrorOverlay(
+                        title: 'Error: $e',
+                        message: 'An unexpected error occurred.',
+                        isErrorOverlay: true,
+                      );
                     }
                   }
                 }
