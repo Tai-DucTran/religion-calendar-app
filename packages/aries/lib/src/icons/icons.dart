@@ -16,4 +16,6 @@ class AriesIcons {
       'packages/aries/assets/images/others/sun_and_moon_logo.svg';
   static const warningCircleOutlineIcon =
       'packages/aries/assets/images/icons/warning_circle_outline_icon.svg';
+  static const alertCircleOutlineIcon =
+      'packages/aries/assets/images/icons/alert_circle.svg';
 }
