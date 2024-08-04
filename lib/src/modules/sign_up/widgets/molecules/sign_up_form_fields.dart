@@ -38,6 +38,7 @@ class _SignUpFormFieldsState extends ConsumerState<SignUpFormFields> {
     required String title,
     required String message,
     required bool isErrorOverlay,
+    IconData? icon,
   }) {
     cleanOverlayEntry();
 
@@ -47,6 +48,7 @@ class _SignUpFormFieldsState extends ConsumerState<SignUpFormFields> {
         errorMessage: message,
         onClose: cleanOverlayEntry,
         isErrorOverlay: isErrorOverlay,
+        icon: icon,
       ),
     );
     Overlay.of(context).insert(overlayEntry!);
@@ -88,12 +90,22 @@ class _SignUpFormFieldsState extends ConsumerState<SignUpFormFields> {
                   } catch (e) {
                     if (!mounted) return;
                     if (e is EmailAlreadyInUseAuthException) {
-                      _showErrorOverlay(
-                        title: 'Email Already in Use',
-                        message:
-                            'This email is associate d with a Google account that has been previously registered. Please log in with Goolge to continue.',
-                        isErrorOverlay: true,
-                      );
+                      if (_emailController.text.contains('gmail')) {
+                        _showErrorOverlay(
+                          title: 'Email Already in Use',
+                          message:
+                              'This email is associated with a Google account that has been previously registered. Please log in to continue.',
+                          isErrorOverlay: false,
+                        );
+                      } else {
+                        _showErrorOverlay(
+                          title: 'Email Already in Use',
+                          message:
+                              'This email is associated with an account that has been previously registered. Please log in to continue.',
+                          isErrorOverlay: false,
+                          icon: Icons.mail_outline_rounded,
+                        );
+                      }
                     } else {
                       _showErrorOverlay(
                         title: 'Error: $e',
