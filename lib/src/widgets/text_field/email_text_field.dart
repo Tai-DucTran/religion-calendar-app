@@ -25,7 +25,7 @@ class _EmailTextFieldState extends State<EmailTextField> {
     return TextFormFieldContainer(
       title: 'Email',
       keyboardType: TextInputType.emailAddress,
-      hintText: 'Insert your email',
+      hintText: 'Enter your email',
       obscureText: false,
       controller: widget.controller,
       suffixIcon: widget.isValidEmail == true
