@@ -1,13 +1,19 @@
+import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:religion_calendar_app/src/constants/constants.dart';
+import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class EmailTextField extends StatefulWidget {
   const EmailTextField({
     super.key,
     this.controller,
+    this.isValidEmail,
   });
 
   final TextEditingController? controller;
+  final bool? isValidEmail;
 
   @override
   State<EmailTextField> createState() => _EmailTextFieldState();
@@ -16,12 +22,31 @@ class EmailTextField extends StatefulWidget {
 class _EmailTextFieldState extends State<EmailTextField> {
   @override
   Widget build(BuildContext context) {
-    return TextFieldContainer(
+    return TextFormFieldContainer(
       title: 'Email',
       keyboardType: TextInputType.emailAddress,
       hintText: 'Insert your email',
       obscureText: false,
       controller: widget.controller,
+      suffixIcon: widget.isValidEmail == true
+          ? null
+          : IconButton(
+              iconSize: 16,
+              icon: SvgPicture.asset(
+                AriesIcons.warningCircleOutlineIcon,
+              ),
+              onPressed: () {},
+            ),
+      validator: (value) {
+        value?.log();
+        if (value == null || value.isEmpty) {
+          return 'Please enter your email!';
+        }
+        if (!emailRegex.hasMatch(value)) {
+          return 'Your email is invalid, try again';
+        }
+        return null;
+      },
     );
   }
 }

@@ -29,6 +29,8 @@ class AuthStateController extends _$AuthStateController {
     return AuthState.unknown();
   }
 
+  bool get isAlreadyLoggedIn => state.value?.result == AuthResults.success;
+
   Future<void> logOut() async {
     final authenticatorRepo = ref.read(authenticatorRepositoryProvider);
     await authenticatorRepo.logOut();
@@ -50,10 +52,7 @@ class AuthStateController extends _$AuthStateController {
         displayName: authenticatorRepo.displayName,
         email: authenticatorRepo.email,
       );
-      final isSaveUserInfoSuccess = await userFireStoreRepo.saveUserInfo(user);
-      '---'.log();
-      'isSaveuserInfoSuccess'.log();
-      isSaveUserInfoSuccess.log();
+      await userFireStoreRepo.saveUserInfo(user);
     }
 
     state = AsyncValue.data(
@@ -92,5 +91,58 @@ class AuthStateController extends _$AuthStateController {
     );
   }
 
-  bool get isAlreadyLoggedIn => state.value?.result == AuthResults.success;
+  Future<void> createUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    final authenticatorRepo = ref.read(authenticatorRepositoryProvider);
+    final userFireStoreRepo = ref.read(userFirestoreRepositoryProvider);
+
+    state = const AsyncLoading();
+    final result = await authenticatorRepo.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    final userId = authenticatorRepo.userId;
+
+    if (result == AuthResults.success && userId != null) {
+      final user = User(
+        userId: userId,
+        displayName: email,
+        email: email,
+      );
+      await userFireStoreRepo.saveUserInfo(user);
+    }
+    state = AsyncValue.data(
+      AuthState(
+        result: result,
+        isLoading: false,
+        userId: userId,
+        isLoggedIn: result == AuthResults.success ? true : false,
+      ),
+    );
+  }
+
+  Future<void> loginWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    final authenticatorRepo = ref.read(authenticatorRepositoryProvider);
+
+    state = const AsyncLoading();
+    final result = await authenticatorRepo.loginWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    final userId = authenticatorRepo.userId;
+
+    state = AsyncValue.data(
+      AuthState(
+        result: result,
+        isLoading: false,
+        userId: userId,
+        isLoggedIn: result == AuthResults.success ? true : false,
+      ),
+    );
+  }
 }

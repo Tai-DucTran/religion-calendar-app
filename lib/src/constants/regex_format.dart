@@ -1,0 +1,1 @@
+final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
