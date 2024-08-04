@@ -5,6 +5,7 @@ import 'package:religion_calendar_app/src/modules/authentication/exceptions/auth
 import 'package:religion_calendar_app/src/modules/authentication/models/auth_results.dart';
 import 'package:religion_calendar_app/src/modules/authentication/constants/auth_constants.dart';
 import 'package:religion_calendar_app/src/modules/user/models/user_id.dart';
+import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'authenticator_repo.g.dart';
@@ -104,14 +105,15 @@ class AuthenticatorRepository {
         throw UserNotLoggedInAuthException();
       }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        throw WeakPasswordAuthException();
-      } else if (e.code == 'email-already-in-use') {
-        throw EmailAlreadyInUseAuthException();
-      } else if (e.code == 'invalid-email') {
-        throw InvalidEmailAuthException();
-      } else {
-        throw GenericAuthException();
+      switch (e.code) {
+        case 'weak-password':
+          throw WeakPasswordAuthException();
+        case 'email-already-in-use':
+          throw EmailAlreadyInUseAuthException();
+        case 'invalid-email':
+          throw InvalidEmailAuthException();
+        default:
+          throw GenericAuthException();
       }
     } catch (_) {
       throw GenericAuthException();
@@ -132,15 +134,23 @@ class AuthenticatorRepository {
       if (user != null) {
         return AuthResults.success;
       } else {
-        throw UserNotLoggedInAuthException();
+        return AuthResults.failure;
       }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        throw UserNotFoundAuthException();
-      } else if (e.code == 'wrong-password') {
-        throw WrongPasswordAuthException();
-      } else {
-        throw GenericAuthException();
+      e.code.log();
+      switch (e.code) {
+        case 'user-not-found':
+          throw UserNotFoundAuthException();
+        case 'wrong-password':
+          throw WrongPasswordAuthException();
+        // TODO (Tai): Find the reason why it only throws `invalid-credential` for most of all cases
+        case 'invalid-credential':
+          throw InvalidCredentialAuthException();
+        // TODO (Tai): Handled this case to prevent DOS attack
+        case 'too-many-requests':
+          throw TooManyRequestAuthException();
+        default:
+          throw GenericAuthException();
       }
     } catch (_) {
       throw GenericAuthException();
