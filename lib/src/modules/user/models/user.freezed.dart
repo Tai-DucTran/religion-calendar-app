@@ -24,7 +24,10 @@ mixin _$User {
   String? get displayName => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
-  Religion? get religionReference => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  bool? get hasCompleteOnboarding => throw _privateConstructorUsedError;
+  ReligionPreference? get religionReference =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +44,9 @@ abstract class $UserCopyWith<$Res> {
       String? displayName,
       String? email,
       DateTime? createdAt,
-      Religion? religionReference});
+      DateTime? updatedAt,
+      bool? hasCompleteOnboarding,
+      ReligionPreference? religionReference});
 }
 
 /// @nodoc
@@ -61,6 +66,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? displayName = freezed,
     Object? email = freezed,
     Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? hasCompleteOnboarding = freezed,
     Object? religionReference = freezed,
   }) {
     return _then(_value.copyWith(
@@ -80,10 +87,18 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      hasCompleteOnboarding: freezed == hasCompleteOnboarding
+          ? _value.hasCompleteOnboarding
+          : hasCompleteOnboarding // ignore: cast_nullable_to_non_nullable
+              as bool?,
       religionReference: freezed == religionReference
           ? _value.religionReference
           : religionReference // ignore: cast_nullable_to_non_nullable
-              as Religion?,
+              as ReligionPreference?,
     ) as $Val);
   }
 }
@@ -100,7 +115,9 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? displayName,
       String? email,
       DateTime? createdAt,
-      Religion? religionReference});
+      DateTime? updatedAt,
+      bool? hasCompleteOnboarding,
+      ReligionPreference? religionReference});
 }
 
 /// @nodoc
@@ -117,6 +134,8 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? displayName = freezed,
     Object? email = freezed,
     Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? hasCompleteOnboarding = freezed,
     Object? religionReference = freezed,
   }) {
     return _then(_$UserImpl(
@@ -136,10 +155,18 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      hasCompleteOnboarding: freezed == hasCompleteOnboarding
+          ? _value.hasCompleteOnboarding
+          : hasCompleteOnboarding // ignore: cast_nullable_to_non_nullable
+              as bool?,
       religionReference: freezed == religionReference
           ? _value.religionReference
           : religionReference // ignore: cast_nullable_to_non_nullable
-              as Religion?,
+              as ReligionPreference?,
     ));
   }
 }
@@ -152,6 +179,8 @@ class _$UserImpl extends _User {
       required this.displayName,
       required this.email,
       this.createdAt,
+      this.updatedAt,
+      this.hasCompleteOnboarding = null,
       this.religionReference})
       : super._();
 
@@ -167,11 +196,16 @@ class _$UserImpl extends _User {
   @override
   final DateTime? createdAt;
   @override
-  final Religion? religionReference;
+  final DateTime? updatedAt;
+  @override
+  @JsonKey()
+  final bool? hasCompleteOnboarding;
+  @override
+  final ReligionPreference? religionReference;
 
   @override
   String toString() {
-    return 'User(userId: $userId, displayName: $displayName, email: $email, createdAt: $createdAt, religionReference: $religionReference)';
+    return 'User(userId: $userId, displayName: $displayName, email: $email, createdAt: $createdAt, updatedAt: $updatedAt, hasCompleteOnboarding: $hasCompleteOnboarding, religionReference: $religionReference)';
   }
 
   @override
@@ -185,14 +219,18 @@ class _$UserImpl extends _User {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.hasCompleteOnboarding, hasCompleteOnboarding) ||
+                other.hasCompleteOnboarding == hasCompleteOnboarding) &&
             (identical(other.religionReference, religionReference) ||
                 other.religionReference == religionReference));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, userId, displayName, email, createdAt, religionReference);
+  int get hashCode => Object.hash(runtimeType, userId, displayName, email,
+      createdAt, updatedAt, hasCompleteOnboarding, religionReference);
 
   @JsonKey(ignore: true)
   @override
@@ -214,7 +252,9 @@ abstract class _User extends User {
       required final String? displayName,
       required final String? email,
       final DateTime? createdAt,
-      final Religion? religionReference}) = _$UserImpl;
+      final DateTime? updatedAt,
+      final bool? hasCompleteOnboarding,
+      final ReligionPreference? religionReference}) = _$UserImpl;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -228,7 +268,11 @@ abstract class _User extends User {
   @override
   DateTime? get createdAt;
   @override
-  Religion? get religionReference;
+  DateTime? get updatedAt;
+  @override
+  bool? get hasCompleteOnboarding;
+  @override
+  ReligionPreference? get religionReference;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

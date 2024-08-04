@@ -145,4 +145,23 @@ class AuthStateController extends _$AuthStateController {
       ),
     );
   }
+
+  // Future<void> completeOnboarding(ReligionPreference religionPreference) async {
+  //   final userFireStoreRepo = ref.read(userFirestoreRepositoryProvider);
+  //   final userId = state.value?.userId;
+
+  //   if (userId != null) {
+  //     await userFireStoreRepo.updateReligionPreferenceOnboarding(
+  //       userId: userId,
+  //       religionPreference: religionPreference,
+  //     );
+
+  //     state = AsyncValue.data(
+  //       state.value?.copyWith(
+  //         isLoggedIn: true,
+  //         hasCompletedOnboarding: true,
+  //       ),
+  //     );
+  //   }
+  // }
 }

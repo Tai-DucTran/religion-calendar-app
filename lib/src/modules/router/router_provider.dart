@@ -42,7 +42,6 @@ GoRouter router(RouterRef ref) {
       if (isSignUpPage) {
         return auth ? const HomeRoute().location : const SignUpRoute().location;
       }
-
       if (state.uri.path == const SignUpRoute().location && auth) {
         return const HomeRoute().location;
       }

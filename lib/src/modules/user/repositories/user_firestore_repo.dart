@@ -17,41 +17,41 @@ class UserFirestoreRepository {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<bool> saveUserInfo(User user) async {
-    'check the saveUserInfo process'.log();
-    '---'.log();
-    'user log'.log();
-    user.log();
-
-    final userInfo = await firestore
+  Future<QuerySnapshot<Map<String, dynamic>>> fetchUserInfor(
+      String userId) async {
+    return await firestore
         .collection(FirebaseCollectionName.users)
-        .where(FirebaseFieldName.userId, isEqualTo: user.userId)
+        .where(FirebaseFieldName.userId, isEqualTo: userId)
         .limit(1)
         .get();
-    '---'.log();
-    'userInfo log'.log();
-    userInfo.log();
+  }
+
+  Future<User?> getUserDetailedInfor(String userId) async {
+    final userDoc = await fetchUserInfor(userId);
+
+    return userDoc.docs.first.data() as User;
+  }
+
+  Future<bool> saveUserInfo(User user) async {
+    final userDoc = await fetchUserInfor(user.userId);
 
     try {
-      if (userInfo.docs.isNotEmpty) {
-        'userInfo is not empty'.log();
-        'perform updating userInfo'.log();
-        await userInfo.docs.first.reference.update({
+      if (userDoc.docs.isNotEmpty) {
+        await userDoc.docs.first.reference.update({
           FirebaseFieldName.displayName: user.displayName,
           FirebaseFieldName.email: user.email ?? '',
         });
         return true;
       }
 
-      'userInfor is empty'.log();
-      final payload = UserInfoPayLoad(
+      final payload = User(
         userId: user.userId,
         displayName: user.displayName,
         email: user.email,
         createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
         religionReference: user.religionReference,
       );
-      'perform creating new data....'.log();
       await firestore
           .collection(
             FirebaseCollectionName.users,
@@ -60,7 +60,6 @@ class UserFirestoreRepository {
           .set(
             payload.toJson(),
           );
-      'perform successfull!'.log();
       return true;
     } catch (e) {
       return false;
@@ -68,5 +67,28 @@ class UserFirestoreRepository {
   }
 
   // TODO: Implement onboarding page
-  Future<void> updateUserReligion(User user) async {}
+  Future<void> updateReligionPreferenceOnboarding({
+    required String userId,
+    required ReligionPreference religionPreference,
+  }) async {
+    try {
+      final payload = {
+        'hasCompleteOnboarding': true,
+        'religionReference': religionPreference.toString(),
+      };
+
+      await firestore
+          .collection(
+            FirebaseCollectionName.users,
+          )
+          .doc(userId)
+          .set(
+            payload,
+            SetOptions(merge: true),
+          );
+    } catch (error) {
+      error.log();
+      throw Exception(error);
+    }
+  }
 }

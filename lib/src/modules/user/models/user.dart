@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:religion_calendar_app/src/modules/user/models/religion.dart';
+import 'package:religion_calendar_app/src/modules/user/models/religion_prefernce.dart';
 import 'package:religion_calendar_app/src/modules/user/models/user_id.dart';
 
 part 'user.freezed.dart';
@@ -12,7 +12,9 @@ class User with _$User {
     required String? displayName,
     required String? email,
     DateTime? createdAt,
-    Religion? religionReference,
+    DateTime? updatedAt,
+    @Default(null) bool? hasCompleteOnboarding,
+    ReligionPreference? religionReference,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

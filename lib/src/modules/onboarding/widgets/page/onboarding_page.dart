@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/helper/string_helper.dart';
 import 'package:religion_calendar_app/src/modules/onboarding/controllers/get_religion_onboarding_image_controller.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
-import 'package:religion_calendar_app/src/widgets/models/linear_first_section_ratio.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class OnboardingPage extends ConsumerWidget {
@@ -41,9 +40,9 @@ class OnboardingPage extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(
                 vertical: 14,
               ),
-              itemCount: Religion.values.length,
+              itemCount: ReligionPreference.values.length,
               itemBuilder: (context, index) {
-                final religion = Religion.values[index];
+                final religion = ReligionPreference.values[index];
                 final isSelected =
                     religion == ref.watch(currentReligionProvider);
                 final color =

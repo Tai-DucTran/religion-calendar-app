@@ -17,7 +17,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   Widget build(BuildContext context) {
     return ObscureTextFieldContainer(
       title: 'Password',
-      hintText: 'Insert your password',
+      hintText: 'Enter your password',
       controller: widget.controller,
     );
   }

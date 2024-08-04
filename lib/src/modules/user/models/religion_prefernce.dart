@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-enum Religion {
+enum ReligionPreference {
   @JsonValue('CATHOLICISM')
   catholicism,
   @JsonValue('BUDDHISM')
