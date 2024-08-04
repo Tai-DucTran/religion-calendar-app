@@ -13,6 +13,10 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+      hasCompleteOnboarding: json['hasCompleteOnboarding'] as bool? ?? null,
       religionReference: $enumDecodeNullable(
           _$ReligionPreferenceEnumMap, json['religionReference']),
     );
@@ -23,6 +27,8 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'displayName': instance.displayName,
       'email': instance.email,
       'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'hasCompleteOnboarding': instance.hasCompleteOnboarding,
       'religionReference':
           _$ReligionPreferenceEnumMap[instance.religionReference],
     };

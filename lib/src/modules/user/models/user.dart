@@ -12,6 +12,8 @@ class User with _$User {
     required String? displayName,
     required String? email,
     DateTime? createdAt,
+    DateTime? updatedAt,
+    @Default(null) bool? hasCompleteOnboarding,
     ReligionPreference? religionReference,
   }) = _User;
 
