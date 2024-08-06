@@ -8,17 +8,19 @@ class CtaFullWidthButton extends HookConsumerWidget {
     super.key,
     required this.buttonText,
     required this.onPressed,
+    this.buttonColor,
   });
 
   final String buttonText;
   final VoidCallback onPressed;
+  final Color? buttonColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CustomElevatedButton(
       text: buttonText,
       width: double.infinity,
-      buttonColor: AriesColor.yellowP300,
+      buttonColor: buttonColor ?? AriesColor.yellowP300,
       onPressed: onPressed,
     );
   }

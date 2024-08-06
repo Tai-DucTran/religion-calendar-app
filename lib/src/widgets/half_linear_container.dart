@@ -1,7 +1,6 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:religion_calendar_app/src/widgets/models/linear_first_section_ratio.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class HalfLinearContainer extends StatelessWidget {
