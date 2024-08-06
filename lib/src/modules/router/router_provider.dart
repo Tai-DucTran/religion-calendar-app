@@ -8,47 +8,53 @@ part 'router_provider.g.dart';
 
 @riverpod
 GoRouter router(RouterRef ref) {
-  final isAuth = ValueNotifier<AsyncValue<bool>>(const AsyncLoading());
+  final authState = ValueNotifier<AsyncValue<AuthState>>(const AsyncLoading());
 
   ref
-    ..onDispose(isAuth.dispose)
-    ..listen(
-      authStateControllerProvider
-          .select((value) => value.whenData((data) => data.isLoggedIn)),
-      (_, value) {
-        isAuth.value = value;
-      },
-    );
+    ..onDispose(authState.dispose)
+    ..listen(authStateControllerProvider, (_, value) {
+      authState.value = value;
+    });
 
   final router = GoRouter(
     navigatorKey: rootKey,
-    refreshListenable: Listenable.merge([isAuth]),
+    refreshListenable: Listenable.merge([authState]),
     initialLocation: const SignUpRoute().location,
     debugLogDiagnostics: true,
     routes: $appRoutes,
     redirect: (context, state) {
-      final error = isAuth.value.unwrapPrevious().error;
+      final auth = authState.value;
 
-      if (error != null) {}
-
-      final isSignUpPage = state.uri.path == const SignUpRoute().location;
-
-      if (isAuth.value.isLoading || !isAuth.value.hasValue) {
+      // If the auth state is still loading, don't redirect
+      if (auth is AsyncLoading) {
         return null;
       }
 
-      final auth = isAuth.value.requireValue;
+      final isLoggedIn = auth.value?.isLoggedIn ?? false;
+      final hasCompletedOnboarding = auth.value?.hasCompleteOnboarding ?? false;
 
-      if (isSignUpPage) {
-        return auth ? const HomeRoute().location : const SignUpRoute().location;
-      }
-      if (state.uri.path == const SignUpRoute().location && auth) {
-        return const HomeRoute().location;
-      }
-      if (state.uri.path == const HomeRoute().location && !auth) {
+      final isSignUpPage =
+          state.matchedLocation == const SignUpRoute().location;
+      final isOnboardingPage =
+          state.matchedLocation == const OnboardingRoute().location;
+      final isHomePage = state.matchedLocation == const HomeRoute().location;
+
+      // If not logged in, redirect to sign up page unless already there
+      if (!isLoggedIn && !isSignUpPage) {
         return const SignUpRoute().location;
       }
 
+      // If logged in but hasn't completed onboarding, redirect to onboarding unless already there
+      if (isLoggedIn && !hasCompletedOnboarding && !isOnboardingPage) {
+        return const OnboardingRoute().location;
+      }
+
+      // If logged in and completed onboarding, redirect to home unless already there
+      if (isLoggedIn && hasCompletedOnboarding && !isHomePage) {
+        return const HomeRoute().location;
+      }
+
+      // In all other cases, don't redirect
       return null;
     },
   );

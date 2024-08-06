@@ -24,6 +24,7 @@ mixin _$AuthState {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get userId => throw _privateConstructorUsedError;
   bool get isLoggedIn => throw _privateConstructorUsedError;
+  bool? get hasCompleteOnboarding => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,11 @@ abstract class $AuthStateCopyWith<$Res> {
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
   $Res call(
-      {AuthResults? result, bool isLoading, String? userId, bool isLoggedIn});
+      {AuthResults? result,
+      bool isLoading,
+      String? userId,
+      bool isLoggedIn,
+      bool? hasCompleteOnboarding});
 }
 
 /// @nodoc
@@ -57,6 +62,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
     Object? isLoading = null,
     Object? userId = freezed,
     Object? isLoggedIn = null,
+    Object? hasCompleteOnboarding = freezed,
   }) {
     return _then(_value.copyWith(
       result: freezed == result
@@ -75,6 +81,10 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
           ? _value.isLoggedIn
           : isLoggedIn // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasCompleteOnboarding: freezed == hasCompleteOnboarding
+          ? _value.hasCompleteOnboarding
+          : hasCompleteOnboarding // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -88,7 +98,11 @@ abstract class _$$AuthStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {AuthResults? result, bool isLoading, String? userId, bool isLoggedIn});
+      {AuthResults? result,
+      bool isLoading,
+      String? userId,
+      bool isLoggedIn,
+      bool? hasCompleteOnboarding});
 }
 
 /// @nodoc
@@ -106,6 +120,7 @@ class __$$AuthStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? userId = freezed,
     Object? isLoggedIn = null,
+    Object? hasCompleteOnboarding = freezed,
   }) {
     return _then(_$AuthStateImpl(
       result: freezed == result
@@ -124,6 +139,10 @@ class __$$AuthStateImplCopyWithImpl<$Res>
           ? _value.isLoggedIn
           : isLoggedIn // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasCompleteOnboarding: freezed == hasCompleteOnboarding
+          ? _value.hasCompleteOnboarding
+          : hasCompleteOnboarding // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -135,7 +154,8 @@ class _$AuthStateImpl extends _AuthState with DiagnosticableTreeMixin {
       {required this.result,
       required this.isLoading,
       required this.userId,
-      required this.isLoggedIn})
+      required this.isLoggedIn,
+      required this.hasCompleteOnboarding})
       : super._();
 
   factory _$AuthStateImpl.fromJson(Map<String, dynamic> json) =>
@@ -149,10 +169,12 @@ class _$AuthStateImpl extends _AuthState with DiagnosticableTreeMixin {
   final String? userId;
   @override
   final bool isLoggedIn;
+  @override
+  final bool? hasCompleteOnboarding;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AuthState(result: $result, isLoading: $isLoading, userId: $userId, isLoggedIn: $isLoggedIn)';
+    return 'AuthState(result: $result, isLoading: $isLoading, userId: $userId, isLoggedIn: $isLoggedIn, hasCompleteOnboarding: $hasCompleteOnboarding)';
   }
 
   @override
@@ -163,7 +185,9 @@ class _$AuthStateImpl extends _AuthState with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('result', result))
       ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('userId', userId))
-      ..add(DiagnosticsProperty('isLoggedIn', isLoggedIn));
+      ..add(DiagnosticsProperty('isLoggedIn', isLoggedIn))
+      ..add(
+          DiagnosticsProperty('hasCompleteOnboarding', hasCompleteOnboarding));
   }
 
   @override
@@ -176,13 +200,15 @@ class _$AuthStateImpl extends _AuthState with DiagnosticableTreeMixin {
                 other.isLoading == isLoading) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.isLoggedIn, isLoggedIn) ||
-                other.isLoggedIn == isLoggedIn));
+                other.isLoggedIn == isLoggedIn) &&
+            (identical(other.hasCompleteOnboarding, hasCompleteOnboarding) ||
+                other.hasCompleteOnboarding == hasCompleteOnboarding));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, result, isLoading, userId, isLoggedIn);
+  int get hashCode => Object.hash(runtimeType, result, isLoading, userId,
+      isLoggedIn, hasCompleteOnboarding);
 
   @JsonKey(ignore: true)
   @override
@@ -203,7 +229,8 @@ abstract class _AuthState extends AuthState {
       {required final AuthResults? result,
       required final bool isLoading,
       required final String? userId,
-      required final bool isLoggedIn}) = _$AuthStateImpl;
+      required final bool isLoggedIn,
+      required final bool? hasCompleteOnboarding}) = _$AuthStateImpl;
   const _AuthState._() : super._();
 
   factory _AuthState.fromJson(Map<String, dynamic> json) =
@@ -217,6 +244,8 @@ abstract class _AuthState extends AuthState {
   String? get userId;
   @override
   bool get isLoggedIn;
+  @override
+  bool? get hasCompleteOnboarding;
   @override
   @JsonKey(ignore: true)
   _$$AuthStateImplCopyWith<_$AuthStateImpl> get copyWith =>

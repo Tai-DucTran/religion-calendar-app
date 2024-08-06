@@ -3,7 +3,6 @@ import 'package:religion_calendar_app/src/modules/authentication/models/auth_sta
 import 'package:religion_calendar_app/src/modules/authentication/repositories/authenticator_repo.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 import 'package:religion_calendar_app/src/modules/user/repositories/user_firestore_repo.dart';
-import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_state_controller.g.dart';
@@ -13,23 +12,34 @@ class AuthStateController extends _$AuthStateController {
   @override
   FutureOr<AuthState> build() async {
     final authenticatorRepo = ref.watch(authenticatorRepositoryProvider);
+    final userFireStoreRepo = ref.read(userFirestoreRepositoryProvider);
 
     final isLoggedIn = authenticatorRepo.isAlreadyLoggedIn;
-    'isUserLoggedIn'.log();
-    isLoggedIn.log();
-
+    final userId = authenticatorRepo.userId ?? '';
     if (isLoggedIn) {
+      final hasCompleteOnboarding =
+          await userFireStoreRepo.hasCompleteOnboarding(userId: userId);
+
       return AuthState(
         result: AuthResults.success,
         isLoading: false,
         userId: authenticatorRepo.userId,
         isLoggedIn: isLoggedIn,
+        hasCompleteOnboarding: hasCompleteOnboarding,
       );
     }
     return AuthState.unknown();
   }
 
   bool get isAlreadyLoggedIn => state.value?.result == AuthResults.success;
+  String? get userId => state.value?.userId;
+
+  void updateOnboardingStatus(bool hasCompleted) {
+    if (state.value != null) {
+      state = AsyncValue.data(
+          state.value!.copyWith(hasCompleteOnboarding: hasCompleted));
+    }
+  }
 
   Future<void> logOut() async {
     final authenticatorRepo = ref.read(authenticatorRepositoryProvider);
@@ -56,12 +66,16 @@ class AuthStateController extends _$AuthStateController {
       await userFireStoreRepo.saveUserInfo(user);
     }
 
+    final hasCompleteOnboarding =
+        await userFireStoreRepo.hasCompleteOnboarding(userId: userId ?? '');
+
     state = AsyncValue.data(
       AuthState(
         result: result,
         isLoading: false,
         userId: userId,
         isLoggedIn: result == AuthResults.success ? true : false,
+        hasCompleteOnboarding: hasCompleteOnboarding,
       ),
     );
   }
@@ -83,12 +97,17 @@ class AuthStateController extends _$AuthStateController {
       );
       await userFireStoreRepo.saveUserInfo(user);
     }
+
+    final hasCompleteOnboarding =
+        await userFireStoreRepo.hasCompleteOnboarding(userId: userId ?? '');
+
     state = AsyncValue.data(
       AuthState(
         result: result,
         isLoading: false,
         userId: userId,
         isLoggedIn: result == AuthResults.success ? true : false,
+        hasCompleteOnboarding: hasCompleteOnboarding,
       ),
     );
   }
@@ -115,12 +134,14 @@ class AuthStateController extends _$AuthStateController {
       );
       await userFireStoreRepo.saveUserInfo(user);
     }
+
     state = AsyncValue.data(
       AuthState(
         result: result,
         isLoading: false,
         userId: userId,
         isLoggedIn: result == AuthResults.success ? true : false,
+        hasCompleteOnboarding: false,
       ),
     );
   }
@@ -130,6 +151,7 @@ class AuthStateController extends _$AuthStateController {
     required String password,
   }) async {
     final authenticatorRepo = ref.read(authenticatorRepositoryProvider);
+    final userFireStoreRepo = ref.read(userFirestoreRepositoryProvider);
 
     state = const AsyncLoading();
     final result = await authenticatorRepo.loginWithEmailAndPassword(
@@ -137,6 +159,8 @@ class AuthStateController extends _$AuthStateController {
       password: password,
     );
     final userId = authenticatorRepo.userId;
+    final hasCompleteOnboarding =
+        await userFireStoreRepo.hasCompleteOnboarding(userId: userId ?? '');
 
     state = AsyncValue.data(
       AuthState(
@@ -144,6 +168,7 @@ class AuthStateController extends _$AuthStateController {
         isLoading: false,
         userId: userId,
         isLoggedIn: result == AuthResults.success ? true : false,
+        hasCompleteOnboarding: hasCompleteOnboarding,
       ),
     );
   }

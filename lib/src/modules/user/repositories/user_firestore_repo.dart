@@ -15,12 +15,13 @@ UserFirestoreRepository userFirestoreRepository(
 class UserFirestoreRepository {
   UserFirestoreRepository();
 
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final firestoreUserRef = FirebaseFirestore.instance.collection(
+    FirebaseCollectionName.users,
+  );
 
-  Future<QuerySnapshot<Map<String, dynamic>>> fetchUserInfor(
-      String userId) async {
-    return await firestore
-        .collection(FirebaseCollectionName.users)
+  Future<QuerySnapshot<Map<String, dynamic>?>> fetchUserInfor(
+      UserId userId) async {
+    return await firestoreUserRef
         .where(FirebaseFieldName.userId, isEqualTo: userId)
         .limit(1)
         .get();
@@ -51,14 +52,9 @@ class UserFirestoreRepository {
         isVerified: user.isVerified,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
-        religionReference: user.religionReference,
+        religionPreference: user.religionPreference,
       );
-      await firestore
-          .collection(
-            FirebaseCollectionName.users,
-          )
-          .doc(payload.userId)
-          .set(
+      await firestoreUserRef.doc(payload.userId).set(
             payload.toJson(),
           );
       return true;
@@ -69,24 +65,45 @@ class UserFirestoreRepository {
 
   // TODO: Implement onboarding page
   Future<void> updateReligionPreferenceOnboarding({
-    required String userId,
-    required ReligionPreference religionPreference,
+    required UserId? userId,
+    required String religionPreference,
   }) async {
     try {
       final payload = {
         'hasCompleteOnboarding': true,
-        'religionReference': religionPreference.toString(),
+        'religionPreference': religionPreference.toString(),
       };
 
-      await firestore
-          .collection(
-            FirebaseCollectionName.users,
-          )
-          .doc(userId)
-          .set(
+      firestoreUserRef.doc(userId).set(
             payload,
             SetOptions(merge: true),
           );
+    } catch (error) {
+      error.log();
+      throw Exception(error);
+    }
+  }
+
+  Future<bool> hasCompleteOnboarding({
+    required UserId userId,
+  }) async {
+    try {
+      final result = await fetchUserInfor(userId);
+
+      if (result.docs.isNotEmpty) {
+        final userData = result.docs.first.data();
+
+        if (userData != null &&
+            userData.containsKey(FirebaseFieldName.hasCompleteOnboarding)) {
+          final hasCompleted =
+              userData[FirebaseFieldName.hasCompleteOnboarding] as bool? ??
+                  false;
+          "hasCompleteOnboardingProcess".log();
+          hasCompleted.log();
+          return hasCompleted;
+        }
+      }
+      return false;
     } catch (error) {
       error.log();
       throw Exception(error);

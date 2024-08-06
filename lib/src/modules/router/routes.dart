@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/forgot_pasword_page.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/login_page.dart';
+import 'package:religion_calendar_app/src/modules/onboarding/widgets/page/onboarding_religion_preference_page.dart';
 import 'package:religion_calendar_app/src/modules/sign_up/widgets/page/page.dart';
 
 import '../home/widgets/pages/pages.dart';
@@ -23,7 +24,7 @@ final rootKey = GlobalKey<NavigatorState>(debugLabel: 'root');
     ),
     TypedGoRoute<VerifiedRoute>(
       path: VerifiedRoute.path,
-    )
+    ),
   ],
 )
 class SignUpRoute extends GoRouteData {
@@ -59,6 +60,18 @@ class LoginForgotPasswordRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const ForgotPaswordPage();
+  }
+}
+
+@TypedGoRoute<OnboardingRoute>(
+  path: OnboardingRoute.path,
+)
+class OnboardingRoute extends GoRouteData {
+  const OnboardingRoute();
+  static const path = '/onboarding';
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const OnboardingReligionPreferencePage();
   }
 }
 
