@@ -14,6 +14,7 @@ class User with _$User {
     DateTime? createdAt,
     DateTime? updatedAt,
     @Default(null) bool? hasCompleteOnboarding,
+    @Default(false) bool? isVerified,
     ReligionPreference? religionReference,
   }) = _User;
 

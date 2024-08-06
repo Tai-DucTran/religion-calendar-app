@@ -48,6 +48,7 @@ class UserFirestoreRepository {
         userId: user.userId,
         displayName: user.displayName,
         email: user.email,
+        isVerified: user.isVerified,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
         religionReference: user.religionReference,

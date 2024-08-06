@@ -26,6 +26,7 @@ mixin _$User {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   bool? get hasCompleteOnboarding => throw _privateConstructorUsedError;
+  bool? get isVerified => throw _privateConstructorUsedError;
   ReligionPreference? get religionReference =>
       throw _privateConstructorUsedError;
 
@@ -46,6 +47,7 @@ abstract class $UserCopyWith<$Res> {
       DateTime? createdAt,
       DateTime? updatedAt,
       bool? hasCompleteOnboarding,
+      bool? isVerified,
       ReligionPreference? religionReference});
 }
 
@@ -68,6 +70,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? hasCompleteOnboarding = freezed,
+    Object? isVerified = freezed,
     Object? religionReference = freezed,
   }) {
     return _then(_value.copyWith(
@@ -95,6 +98,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.hasCompleteOnboarding
           : hasCompleteOnboarding // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isVerified: freezed == isVerified
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool?,
       religionReference: freezed == religionReference
           ? _value.religionReference
           : religionReference // ignore: cast_nullable_to_non_nullable
@@ -117,6 +124,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       DateTime? createdAt,
       DateTime? updatedAt,
       bool? hasCompleteOnboarding,
+      bool? isVerified,
       ReligionPreference? religionReference});
 }
 
@@ -136,6 +144,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? hasCompleteOnboarding = freezed,
+    Object? isVerified = freezed,
     Object? religionReference = freezed,
   }) {
     return _then(_$UserImpl(
@@ -163,6 +172,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.hasCompleteOnboarding
           : hasCompleteOnboarding // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isVerified: freezed == isVerified
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool?,
       religionReference: freezed == religionReference
           ? _value.religionReference
           : religionReference // ignore: cast_nullable_to_non_nullable
@@ -181,6 +194,7 @@ class _$UserImpl extends _User {
       this.createdAt,
       this.updatedAt,
       this.hasCompleteOnboarding = null,
+      this.isVerified = false,
       this.religionReference})
       : super._();
 
@@ -201,11 +215,14 @@ class _$UserImpl extends _User {
   @JsonKey()
   final bool? hasCompleteOnboarding;
   @override
+  @JsonKey()
+  final bool? isVerified;
+  @override
   final ReligionPreference? religionReference;
 
   @override
   String toString() {
-    return 'User(userId: $userId, displayName: $displayName, email: $email, createdAt: $createdAt, updatedAt: $updatedAt, hasCompleteOnboarding: $hasCompleteOnboarding, religionReference: $religionReference)';
+    return 'User(userId: $userId, displayName: $displayName, email: $email, createdAt: $createdAt, updatedAt: $updatedAt, hasCompleteOnboarding: $hasCompleteOnboarding, isVerified: $isVerified, religionReference: $religionReference)';
   }
 
   @override
@@ -223,14 +240,24 @@ class _$UserImpl extends _User {
                 other.updatedAt == updatedAt) &&
             (identical(other.hasCompleteOnboarding, hasCompleteOnboarding) ||
                 other.hasCompleteOnboarding == hasCompleteOnboarding) &&
+            (identical(other.isVerified, isVerified) ||
+                other.isVerified == isVerified) &&
             (identical(other.religionReference, religionReference) ||
                 other.religionReference == religionReference));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, displayName, email,
-      createdAt, updatedAt, hasCompleteOnboarding, religionReference);
+  int get hashCode => Object.hash(
+      runtimeType,
+      userId,
+      displayName,
+      email,
+      createdAt,
+      updatedAt,
+      hasCompleteOnboarding,
+      isVerified,
+      religionReference);
 
   @JsonKey(ignore: true)
   @override
@@ -254,6 +281,7 @@ abstract class _User extends User {
       final DateTime? createdAt,
       final DateTime? updatedAt,
       final bool? hasCompleteOnboarding,
+      final bool? isVerified,
       final ReligionPreference? religionReference}) = _$UserImpl;
   const _User._() : super._();
 
@@ -271,6 +299,8 @@ abstract class _User extends User {
   DateTime? get updatedAt;
   @override
   bool? get hasCompleteOnboarding;
+  @override
+  bool? get isVerified;
   @override
   ReligionPreference? get religionReference;
   @override

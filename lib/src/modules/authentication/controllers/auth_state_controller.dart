@@ -51,6 +51,7 @@ class AuthStateController extends _$AuthStateController {
         userId: userId,
         displayName: authenticatorRepo.displayName,
         email: authenticatorRepo.email,
+        isVerified: true,
       );
       await userFireStoreRepo.saveUserInfo(user);
     }
@@ -78,6 +79,7 @@ class AuthStateController extends _$AuthStateController {
         userId: userId,
         displayName: authenticatorRepo.displayName,
         email: authenticatorRepo.email,
+        isVerified: true,
       );
       await userFireStoreRepo.saveUserInfo(user);
     }

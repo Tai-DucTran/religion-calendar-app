@@ -24,6 +24,7 @@ class AuthenticatorRepository {
   bool get isAlreadyLoggedIn => userId != null;
   String get displayName => currentUser?.displayName ?? '';
   String? get email => currentUser?.email;
+  bool? get isVerifiedEmail => currentUser?.emailVerified;
 
   FirebaseAuth get _auth => FirebaseAuth.instance;
 
@@ -100,11 +101,14 @@ class AuthenticatorRepository {
       );
       final user = currentUser;
       if (user != null) {
+        //TODO (Tai): Handle verify flow
+        // await sendEmailVerification(user);
         return AuthResults.success;
       } else {
         throw UserNotLoggedInAuthException();
       }
     } on FirebaseAuthException catch (e) {
+      e.code.log();
       switch (e.code) {
         case 'weak-password':
           throw WeakPasswordAuthException();
@@ -154,6 +158,12 @@ class AuthenticatorRepository {
       }
     } catch (_) {
       throw GenericAuthException();
+    }
+  }
+
+  Future<void> sendEmailVerification(User? user) async {
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
     }
   }
 }
