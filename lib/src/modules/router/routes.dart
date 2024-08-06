@@ -21,6 +21,9 @@ final rootKey = GlobalKey<NavigatorState>(debugLabel: 'root');
         ),
       ],
     ),
+    TypedGoRoute<VerifiedRoute>(
+      path: VerifiedRoute.path,
+    )
   ],
 )
 class SignUpRoute extends GoRouteData {
@@ -38,6 +41,15 @@ class LoginRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const LoginPage();
+  }
+}
+
+class VerifiedRoute extends GoRouteData {
+  const VerifiedRoute();
+  static const path = 'verified';
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const VerifiedPage();
   }
 }
 

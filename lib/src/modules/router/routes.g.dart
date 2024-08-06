@@ -25,6 +25,10 @@ RouteBase get $signUpRoute => GoRouteData.$route(
             ),
           ],
         ),
+        GoRouteData.$route(
+          path: 'verified',
+          factory: $VerifiedRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -68,6 +72,23 @@ extension $LoginForgotPasswordRouteExtension on LoginForgotPasswordRoute {
 
   String get location => GoRouteData.$location(
         '/signup/login/forgot-password',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $VerifiedRouteExtension on VerifiedRoute {
+  static VerifiedRoute _fromState(GoRouterState state) => const VerifiedRoute();
+
+  String get location => GoRouteData.$location(
+        '/signup/verified',
       );
 
   void go(BuildContext context) => context.go(location);
