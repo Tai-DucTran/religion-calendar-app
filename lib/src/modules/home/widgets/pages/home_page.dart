@@ -4,7 +4,8 @@ import 'package:full_calender/full_calender.dart';
 import 'package:full_calender/full_calender_extension.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:religion_calendar_app/src/modules/authentication/controllers/controllers.dart';
+import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
+import 'package:religion_calendar_app/src/utils/log.dart';
 
 class HomePage extends HookConsumerWidget {
   const HomePage({super.key});
@@ -15,6 +16,12 @@ class HomePage extends HookConsumerWidget {
         FullCalender.now(TimeZone.indonesiaUTC8.timezone).lunarDate;
     final solarDate =
         FullCalenderExtension.convertLunarDateToSolarDate(lunarDate);
+
+    final authRepo = ref.watch(authenticatorRepositoryProvider);
+
+    final currentUser = authRepo.currentUser;
+    final isVerifiedEmail = currentUser?.emailVerified;
+    currentUser?.log();
 
     return Scaffold(
       appBar: AppBar(
@@ -39,6 +46,7 @@ class HomePage extends HookConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text('Is verified email? $isVerifiedEmail'),
             Text('This is solar cal $solarDate'),
             Text('This is lunar cal $lunarDate'),
           ],
