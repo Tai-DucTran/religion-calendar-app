@@ -54,7 +54,7 @@ class LoginSection extends ConsumerWidget {
         ),
         Spacing.sp12,
         BottomRichTextWithAction(
-          initialQuestion: "Don't have an account? ",
+          initialQuestion: "Don't have an account?",
           textSpan: "Sign Up",
           onTap: () {
             Navigator.push(
