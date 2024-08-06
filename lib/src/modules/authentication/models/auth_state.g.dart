@@ -12,6 +12,7 @@ _$AuthStateImpl _$$AuthStateImplFromJson(Map<String, dynamic> json) =>
       isLoading: json['isLoading'] as bool,
       userId: json['userId'] as String?,
       isLoggedIn: json['isLoggedIn'] as bool,
+      hasCompleteOnboarding: json['hasCompleteOnboarding'] as bool?,
     );
 
 Map<String, dynamic> _$$AuthStateImplToJson(_$AuthStateImpl instance) =>
@@ -20,6 +21,7 @@ Map<String, dynamic> _$$AuthStateImplToJson(_$AuthStateImpl instance) =>
       'isLoading': instance.isLoading,
       'userId': instance.userId,
       'isLoggedIn': instance.isLoggedIn,
+      'hasCompleteOnboarding': instance.hasCompleteOnboarding,
     };
 
 const _$AuthResultsEnumMap = {

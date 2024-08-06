@@ -27,7 +27,7 @@ mixin _$User {
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   bool? get hasCompleteOnboarding => throw _privateConstructorUsedError;
   bool? get isVerified => throw _privateConstructorUsedError;
-  ReligionPreference? get religionReference =>
+  ReligionPreference? get religionPreference =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ abstract class $UserCopyWith<$Res> {
       DateTime? updatedAt,
       bool? hasCompleteOnboarding,
       bool? isVerified,
-      ReligionPreference? religionReference});
+      ReligionPreference? religionPreference});
 }
 
 /// @nodoc
@@ -71,7 +71,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? updatedAt = freezed,
     Object? hasCompleteOnboarding = freezed,
     Object? isVerified = freezed,
-    Object? religionReference = freezed,
+    Object? religionPreference = freezed,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -102,9 +102,9 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
               as bool?,
-      religionReference: freezed == religionReference
-          ? _value.religionReference
-          : religionReference // ignore: cast_nullable_to_non_nullable
+      religionPreference: freezed == religionPreference
+          ? _value.religionPreference
+          : religionPreference // ignore: cast_nullable_to_non_nullable
               as ReligionPreference?,
     ) as $Val);
   }
@@ -125,7 +125,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       DateTime? updatedAt,
       bool? hasCompleteOnboarding,
       bool? isVerified,
-      ReligionPreference? religionReference});
+      ReligionPreference? religionPreference});
 }
 
 /// @nodoc
@@ -145,7 +145,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? hasCompleteOnboarding = freezed,
     Object? isVerified = freezed,
-    Object? religionReference = freezed,
+    Object? religionPreference = freezed,
   }) {
     return _then(_$UserImpl(
       userId: null == userId
@@ -176,9 +176,9 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
               as bool?,
-      religionReference: freezed == religionReference
-          ? _value.religionReference
-          : religionReference // ignore: cast_nullable_to_non_nullable
+      religionPreference: freezed == religionPreference
+          ? _value.religionPreference
+          : religionPreference // ignore: cast_nullable_to_non_nullable
               as ReligionPreference?,
     ));
   }
@@ -193,9 +193,9 @@ class _$UserImpl extends _User {
       required this.email,
       this.createdAt,
       this.updatedAt,
-      this.hasCompleteOnboarding = null,
+      this.hasCompleteOnboarding = false,
       this.isVerified = false,
-      this.religionReference})
+      this.religionPreference})
       : super._();
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
@@ -218,11 +218,11 @@ class _$UserImpl extends _User {
   @JsonKey()
   final bool? isVerified;
   @override
-  final ReligionPreference? religionReference;
+  final ReligionPreference? religionPreference;
 
   @override
   String toString() {
-    return 'User(userId: $userId, displayName: $displayName, email: $email, createdAt: $createdAt, updatedAt: $updatedAt, hasCompleteOnboarding: $hasCompleteOnboarding, isVerified: $isVerified, religionReference: $religionReference)';
+    return 'User(userId: $userId, displayName: $displayName, email: $email, createdAt: $createdAt, updatedAt: $updatedAt, hasCompleteOnboarding: $hasCompleteOnboarding, isVerified: $isVerified, religionPreference: $religionPreference)';
   }
 
   @override
@@ -242,8 +242,8 @@ class _$UserImpl extends _User {
                 other.hasCompleteOnboarding == hasCompleteOnboarding) &&
             (identical(other.isVerified, isVerified) ||
                 other.isVerified == isVerified) &&
-            (identical(other.religionReference, religionReference) ||
-                other.religionReference == religionReference));
+            (identical(other.religionPreference, religionPreference) ||
+                other.religionPreference == religionPreference));
   }
 
   @JsonKey(ignore: true)
@@ -257,7 +257,7 @@ class _$UserImpl extends _User {
       updatedAt,
       hasCompleteOnboarding,
       isVerified,
-      religionReference);
+      religionPreference);
 
   @JsonKey(ignore: true)
   @override
@@ -282,7 +282,7 @@ abstract class _User extends User {
       final DateTime? updatedAt,
       final bool? hasCompleteOnboarding,
       final bool? isVerified,
-      final ReligionPreference? religionReference}) = _$UserImpl;
+      final ReligionPreference? religionPreference}) = _$UserImpl;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -302,7 +302,7 @@ abstract class _User extends User {
   @override
   bool? get isVerified;
   @override
-  ReligionPreference? get religionReference;
+  ReligionPreference? get religionPreference;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

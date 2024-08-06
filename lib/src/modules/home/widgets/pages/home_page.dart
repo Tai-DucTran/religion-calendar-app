@@ -5,7 +5,6 @@ import 'package:full_calender/full_calender_extension.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
-import 'package:religion_calendar_app/src/utils/log.dart';
 
 class HomePage extends HookConsumerWidget {
   const HomePage({super.key});
@@ -18,10 +17,8 @@ class HomePage extends HookConsumerWidget {
         FullCalenderExtension.convertLunarDateToSolarDate(lunarDate);
 
     final authRepo = ref.watch(authenticatorRepositoryProvider);
-
     final currentUser = authRepo.currentUser;
     final isVerifiedEmail = currentUser?.emailVerified;
-    currentUser?.log();
 
     return Scaffold(
       appBar: AppBar(

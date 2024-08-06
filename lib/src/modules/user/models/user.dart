@@ -13,9 +13,9 @@ class User with _$User {
     required String? email,
     DateTime? createdAt,
     DateTime? updatedAt,
-    @Default(null) bool? hasCompleteOnboarding,
+    @Default(false) bool? hasCompleteOnboarding,
     @Default(false) bool? isVerified,
-    ReligionPreference? religionReference,
+    ReligionPreference? religionPreference,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

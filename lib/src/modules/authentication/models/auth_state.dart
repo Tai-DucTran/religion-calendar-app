@@ -13,6 +13,7 @@ class AuthState with _$AuthState {
     required bool isLoading,
     required UserId? userId,
     required bool isLoggedIn,
+    required bool? hasCompleteOnboarding,
   }) = _AuthState;
 
   const AuthState._();
@@ -25,6 +26,7 @@ class AuthState with _$AuthState {
         isLoading: false,
         userId: null,
         isLoggedIn: false,
+        hasCompleteOnboarding: null,
       );
 
   AuthState copyWithIsLoading(bool isLoading) {
@@ -33,6 +35,7 @@ class AuthState with _$AuthState {
       isLoading: isLoading,
       userId: userId,
       isLoggedIn: false,
+      hasCompleteOnboarding: hasCompleteOnboarding,
     );
   }
 }
