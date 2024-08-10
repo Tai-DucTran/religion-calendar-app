@@ -18,4 +18,12 @@ class AriesIcons {
       'packages/aries/assets/images/icons/warning_circle_outline_icon.svg';
   static const alertCircleOutlineIcon =
       'packages/aries/assets/images/icons/alert_circle.svg';
+  static const calendarOutlineIcon =
+      'packages/aries/assets/images/icons/calendar_outline_icon.svg';
+  static const homeOutlineIcon =
+      'packages/aries/assets/images/icons/home_outline_icon.svg';
+  static const sunOutlineIcon =
+      'packages/aries/assets/images/icons/sun_outline_icon.svg';
+  static const userOutlineIcon =
+      'packages/aries/assets/images/icons/user_outline_icon.svg';
 }
