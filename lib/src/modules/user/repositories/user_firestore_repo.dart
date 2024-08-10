@@ -98,8 +98,6 @@ class UserFirestoreRepository {
           final hasCompleted =
               userData[FirebaseFieldName.hasCompleteOnboarding] as bool? ??
                   false;
-          "hasCompleteOnboardingProcess".log();
-          hasCompleted.log();
           return hasCompleted;
         }
       }
