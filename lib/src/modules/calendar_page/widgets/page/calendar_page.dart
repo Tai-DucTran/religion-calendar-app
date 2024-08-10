@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
@@ -10,9 +11,11 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Calendar Page'),
+    return const Scaffold(
+      body: GradientAppMainBackground(
+        child: Center(
+          child: Text('Calendar'),
+        ),
       ),
     );
   }
