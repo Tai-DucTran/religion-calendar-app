@@ -4,12 +4,54 @@ import 'package:religion_calendar_app/src/modules/login/widgets/page/forgot_pasw
 import 'package:religion_calendar_app/src/modules/login/widgets/page/login_page.dart';
 import 'package:religion_calendar_app/src/modules/onboarding/widgets/page/onboarding_religion_preference_page.dart';
 import 'package:religion_calendar_app/src/modules/sign_up/widgets/page/page.dart';
+import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
+import '../calendar_page/widgets/widgets.dart';
+import '../explore_page/widgets/widgets.dart';
 import '../home/widgets/pages/pages.dart';
+import '../profile_page/widgets/widgets.dart';
 
 part 'routes.g.dart';
 
 final rootKey = GlobalKey<NavigatorState>(debugLabel: 'root');
+final shellNavigationKey = GlobalKey<NavigatorState>(debugLabel: 'root');
+
+@TypedStatefulShellRoute<MainShellRouteData>(
+  branches: <TypedStatefulShellBranch>[
+    TypedStatefulShellBranch(
+      routes: [
+        TypedGoRoute<HomeRoute>(path: HomeRoute.path),
+      ],
+    ),
+    TypedStatefulShellBranch(
+      routes: [
+        TypedGoRoute<CalendarRoute>(path: CalendarRoute.path),
+      ],
+    ),
+    TypedStatefulShellBranch(
+      routes: [
+        TypedGoRoute<ExploreRoute>(path: ExploreRoute.path),
+      ],
+    ),
+    TypedStatefulShellBranch(
+      routes: [
+        TypedGoRoute<ProfileRoute>(path: ProfileRoute.path),
+      ],
+    ),
+  ],
+)
+class MainShellRouteData extends StatefulShellRouteData {
+  const MainShellRouteData();
+
+  @override
+  Widget builder(
+    BuildContext context,
+    GoRouterState state,
+    StatefulNavigationShell navigationShell,
+  ) {
+    return NavigationBottomBar(navigationShell: navigationShell);
+  }
+}
 
 @TypedGoRoute<SignUpRoute>(
   path: SignUpRoute.path,
@@ -84,5 +126,32 @@ class HomeRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const HomePage();
+  }
+}
+
+class CalendarRoute extends GoRouteData {
+  const CalendarRoute();
+  static const path = '/calendar';
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const CalendarPage();
+  }
+}
+
+class ExploreRoute extends GoRouteData {
+  const ExploreRoute();
+  static const path = '/explore';
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const ExplorePage();
+  }
+}
+
+class ProfileRoute extends GoRouteData {
+  const ProfileRoute();
+  static const path = '/profile';
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const ProfilePage();
   }
 }

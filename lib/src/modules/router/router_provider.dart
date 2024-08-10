@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/router/routes.dart';
+import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router_provider.g.dart';
@@ -25,7 +26,6 @@ GoRouter router(RouterRef ref) {
     redirect: (context, state) {
       final auth = authState.value;
 
-      // If the auth state is still loading, don't redirect
       if (auth is AsyncLoading) {
         return null;
       }
@@ -37,24 +37,23 @@ GoRouter router(RouterRef ref) {
           state.matchedLocation == const SignUpRoute().location;
       final isOnboardingPage =
           state.matchedLocation == const OnboardingRoute().location;
-      final isHomePage = state.matchedLocation == const HomeRoute().location;
+      final isInMainShell = state.matchedLocation.startsWith('/home') ||
+          state.matchedLocation.startsWith('/calendar') ||
+          state.matchedLocation.startsWith('/explore') ||
+          state.matchedLocation.startsWith('/profile');
 
-      // If not logged in, redirect to sign up page unless already there
       if (!isLoggedIn && !isSignUpPage) {
         return const SignUpRoute().location;
       }
 
-      // If logged in but hasn't completed onboarding, redirect to onboarding unless already there
       if (isLoggedIn && !hasCompletedOnboarding && !isOnboardingPage) {
         return const OnboardingRoute().location;
       }
 
-      // If logged in and completed onboarding, redirect to home unless already there
-      if (isLoggedIn && hasCompletedOnboarding && !isHomePage) {
+      if (isLoggedIn && hasCompletedOnboarding && !isInMainShell) {
         return const HomeRoute().location;
       }
-
-      // In all other cases, don't redirect
+      "Redirecting. Current location: ${state.matchedLocation}".log();
       return null;
     },
   );
