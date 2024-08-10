@@ -12,7 +12,7 @@ class _ExplorePageState extends State<ExplorePage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: GradientAppMainBackground(
+      body: MainAppBackgroundContainer(
         child: Center(
           child: Text('Explore Page'),
         ),

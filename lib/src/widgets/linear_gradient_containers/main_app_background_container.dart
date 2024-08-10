@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class GradientAppMainBackground extends StatelessWidget {
-  const GradientAppMainBackground({super.key, required this.child});
+class MainAppBackgroundContainer extends StatelessWidget {
+  const MainAppBackgroundContainer({super.key, required this.child});
 
   final Widget child;
 
