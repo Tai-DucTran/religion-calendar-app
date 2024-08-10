@@ -33,6 +33,7 @@ class AuthStateController extends _$AuthStateController {
 
   bool get isAlreadyLoggedIn => state.value?.result == AuthResults.success;
   String? get userId => state.value?.userId;
+  bool? get isLoading => state.value?.isLoading;
 
   void updateOnboardingStatus(bool hasCompleted) {
     if (state.value != null) {

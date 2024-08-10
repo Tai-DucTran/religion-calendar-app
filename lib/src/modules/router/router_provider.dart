@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/router/routes.dart';
 import 'package:religion_calendar_app/src/utils/log.dart';
+import 'package:religion_calendar_app/src/widgets/loading_overlay/loading_overlay_container.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router_provider.g.dart';
@@ -26,8 +27,16 @@ GoRouter router(RouterRef ref) {
     redirect: (context, state) {
       final auth = authState.value;
 
+      // Display LoadingOverlayContainer if auth is AsyncLoading
       if (auth is AsyncLoading) {
+        LoadingOverlayContainer.instance().show(
+          context: context,
+          text: 'Loading...', // Optional: Customize the loading text
+        );
         return null;
+      } else {
+        // Hide the overlay if auth is no longer loading
+        LoadingOverlayContainer.instance().hide();
       }
 
       final isLoggedIn = auth.value?.isLoggedIn ?? false;
