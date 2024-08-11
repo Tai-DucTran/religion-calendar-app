@@ -54,31 +54,34 @@ class AuthStateController extends _$AuthStateController {
     final userFireStoreRepo = ref.read(userFirestoreRepositoryProvider);
 
     state = const AsyncLoading();
-    final result = await authenticatorRepo.loginWithGoogle();
-    final userId = authenticatorRepo.userId;
 
-    if (result == AuthResults.success && userId != null) {
-      final user = User(
-        userId: userId,
-        displayName: authenticatorRepo.displayName,
-        email: authenticatorRepo.email,
-        isVerified: true,
-      );
-      await userFireStoreRepo.saveUserInfo(user);
-    }
+    try {
+      final result = await authenticatorRepo.loginWithGoogle();
+      final userId = authenticatorRepo.userId;
 
-    final hasCompleteOnboarding =
-        await userFireStoreRepo.hasCompleteOnboarding(userId: userId ?? '');
+      if (result == AuthResults.success && userId != null) {
+        final user = User(
+          userId: userId,
+          displayName: authenticatorRepo.displayName,
+          email: authenticatorRepo.email,
+          isVerified: true,
+        );
+        await userFireStoreRepo.saveUserInfo(user);
+      }
 
-    state = AsyncValue.data(
-      AuthState(
+      final hasCompleteOnboarding =
+          await userFireStoreRepo.hasCompleteOnboarding(userId: userId ?? '');
+
+      state = AsyncData(AuthState(
         result: result,
         isLoading: false,
         userId: userId,
-        isLoggedIn: result == AuthResults.success ? true : false,
+        isLoggedIn: result == AuthResults.success,
         hasCompleteOnboarding: hasCompleteOnboarding,
-      ),
-    );
+      ));
+    } catch (e, stackTrace) {
+      state = AsyncError(e, stackTrace);
+    }
   }
 
   Future<void> loginWithFacebook() async {
