@@ -20,7 +20,7 @@ class LoginSection extends ConsumerWidget {
       children: [
         if (!isShowKeyboard) ...[
           const SocialLoginButtonsWrapper(),
-          Spacing.sp24,
+          Spacing.sp20,
           const Text(
             'or',
             style: TextStyle(
@@ -28,7 +28,7 @@ class LoginSection extends ConsumerWidget {
               fontWeight: FontWeight.w400,
             ),
           ),
-          Spacing.sp24,
+          Spacing.sp20,
         ],
         const LoginFormFields(),
         Container(

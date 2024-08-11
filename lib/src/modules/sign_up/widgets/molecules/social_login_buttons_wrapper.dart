@@ -9,34 +9,37 @@ class SocialLoginButtonsWrapper extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SocialLoginButton(
-          iconPath: AriesIcons.googleIcon,
-          onTap: () async {
-            final controller = ref.read(authStateControllerProvider.notifier);
-            await controller.loginWithGoogle();
-          },
-        ),
-        Spacing.sp12,
-        SocialLoginButton(
-          iconPath: AriesIcons.facebookWhiteIcon,
-          backgroundColor: AriesColor.facebookColor,
-          borderColor: AriesColor.facebookColor,
-          onTap: () async {
-            final controller = ref.read(authStateControllerProvider.notifier);
-            await controller.loginWithFacebook();
-          },
-        ),
-        Spacing.sp12,
-        SocialLoginButton(
-          iconPath: AriesIcons.appleWhiteIcon,
-          backgroundColor: AriesColor.black,
-          borderColor: AriesColor.black,
-          onTap: () {},
-        ),
-      ],
+    return FittedBox(
+      fit: BoxFit.contain,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SocialLoginButton(
+            iconPath: AriesIcons.googleIcon,
+            onTap: () async {
+              final controller = ref.read(authStateControllerProvider.notifier);
+              await controller.loginWithGoogle();
+            },
+          ),
+          Spacing.sp12,
+          SocialLoginButton(
+            iconPath: AriesIcons.facebookWhiteIcon,
+            backgroundColor: AriesColor.facebookColor,
+            borderColor: AriesColor.facebookColor,
+            onTap: () async {
+              final controller = ref.read(authStateControllerProvider.notifier);
+              await controller.loginWithFacebook();
+            },
+          ),
+          Spacing.sp12,
+          SocialLoginButton(
+            iconPath: AriesIcons.appleWhiteIcon,
+            backgroundColor: AriesColor.black,
+            borderColor: AriesColor.black,
+            onTap: () {},
+          ),
+        ],
+      ),
     );
   }
 }
