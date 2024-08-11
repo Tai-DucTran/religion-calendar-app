@@ -8,7 +8,7 @@ class HomePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return const Scaffold(
-      body: GradientAppMainBackground(
+      body: MainAppBackgroundContainer(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

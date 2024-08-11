@@ -1,8 +1,8 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 
-class GradientBackground extends StatelessWidget {
-  const GradientBackground({super.key, required this.child});
+class AuthenticationBackgroundContainer extends StatelessWidget {
+  const AuthenticationBackgroundContainer({super.key, required this.child});
 
   final Widget child;
 

@@ -26,7 +26,7 @@ class HalfLinearContainer extends StatelessWidget {
             LinearFirstSectionRatio.defaultSized.ratio;
 
     return Scaffold(
-      body: GradientBackground(
+      body: AuthenticationBackgroundContainer(
         child: LayoutBuilder(
           builder: (
             context,

@@ -20,3 +20,8 @@ final userIdProvider = Provider<String?>(
     return provider.userId;
   },
 );
+
+final isLoadingProvider = Provider<bool>((ref) {
+  final provider = ref.watch(authStateProvider);
+  return provider.isLoading ?? false;
+});
