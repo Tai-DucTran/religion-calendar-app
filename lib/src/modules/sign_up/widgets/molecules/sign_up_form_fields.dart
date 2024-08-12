@@ -79,9 +79,9 @@ class _SignUpFormFieldsState extends ConsumerState<SignUpFormFields> {
                 setState(() {
                   _isEmailValid = _formKey.currentState!.validate();
                 });
+                final authController =
+                    ref.read(authStateControllerProvider.notifier);
                 if (_isEmailValid) {
-                  final authController =
-                      ref.read(authStateControllerProvider.notifier);
                   try {
                     await authController.createUserWithEmailAndPassword(
                       email: _emailController.text,

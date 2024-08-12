@@ -20,7 +20,7 @@ class LoadingOverlayContainer extends StatelessWidget {
           height: screenWidth * 0.5,
           child: Center(
             child: Lottie.asset(
-              Animations.calendarAnimation,
+              Animations.sunRaiseAnimation,
             ),
           ),
         ),

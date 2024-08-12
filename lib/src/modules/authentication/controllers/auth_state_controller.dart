@@ -124,30 +124,43 @@ class AuthStateController extends _$AuthStateController {
     final userFireStoreRepo = ref.read(userFirestoreRepositoryProvider);
 
     state = const AsyncLoading();
-    final result = await authenticatorRepo.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    final userId = authenticatorRepo.userId;
-
-    if (result == AuthResults.success && userId != null) {
-      final user = User(
-        userId: userId,
-        displayName: email,
+    try {
+      final result = await authenticatorRepo.createUserWithEmailAndPassword(
         email: email,
+        password: password,
       );
-      await userFireStoreRepo.saveUserInfo(user);
-    }
+      final userId = authenticatorRepo.userId;
 
-    state = AsyncValue.data(
-      AuthState(
-        result: result,
-        isLoading: false,
-        userId: userId,
-        isLoggedIn: result == AuthResults.success ? true : false,
-        hasCompleteOnboarding: false,
-      ),
-    );
+      if (result == AuthResults.success && userId != null) {
+        final user = User(
+          userId: userId,
+          displayName: email,
+          email: email,
+        );
+        await userFireStoreRepo.saveUserInfo(user);
+      }
+
+      state = AsyncValue.data(
+        AuthState(
+          result: result,
+          isLoading: false,
+          userId: userId,
+          isLoggedIn: result == AuthResults.success ? true : false,
+          hasCompleteOnboarding: false,
+        ),
+      );
+    } catch (e) {
+      state = const AsyncValue.data(
+        AuthState(
+          result: AuthResults.failure,
+          isLoading: false,
+          userId: null,
+          isLoggedIn: false,
+          hasCompleteOnboarding: false,
+        ),
+      );
+      rethrow;
+    }
   }
 
   Future<void> loginWithEmailAndPassword({
