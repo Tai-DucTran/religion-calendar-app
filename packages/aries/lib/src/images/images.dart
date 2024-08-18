@@ -7,6 +7,11 @@ class AriesImages {
   static const buddaImage = 'packages/aries/assets/images/religions/budda.png';
   static const christImage =
       'packages/aries/assets/images/religions/christ.png';
+  /* Event Images **/
   static const defaultEventImage =
       'packages/aries/assets/images/others/default_event_image.svg';
+  static const defaultCatholicismEvent =
+      'packages/aries/assets/images/others/catholicism_default_event.svg';
+  static const defaultFamilyEvent =
+      'packages/aries/assets/images/others/family_event.svg';
 }
