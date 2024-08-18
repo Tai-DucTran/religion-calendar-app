@@ -26,4 +26,6 @@ class AriesIcons {
       'packages/aries/assets/images/icons/sun_outline_icon.svg';
   static const userOutlineIcon =
       'packages/aries/assets/images/icons/user_outline_icon.svg';
+  static const moonStartOutlineIcon =
+      'packages/aries/assets/images/icons/moon_star_outline.svg';
 }

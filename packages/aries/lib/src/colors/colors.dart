@@ -9,11 +9,15 @@ class AriesColor {
   static const yellowP300 = Color(0xFFe2b227);
   // Additional Yellow Colors (Adjust as needed)
   static const yellowP50 = Color(0xFFfcf7e9);
+  static const yellowP75 = Color(0xFFF3DFA6);
   static const yellowP100 = Color(0xFFf3dfa6);
   static const yellowP200 = Color(0xFFeed282);
   static const yellowP400 = Color(0xFFe7bf4c);
   static const yellowP500 = Color(0xFF9e7d1b);
   static const yellowP600 = Color(0xFF8a6d18);
+
+  /* Brown */
+  static const brown = Color(0xFF261E07);
 
   /* Success */
   static const success300 = Color(0xFF2aea54);
