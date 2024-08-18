@@ -19,9 +19,7 @@ class WeeklyCalendarSection extends ConsumerWidget {
           children: [
             Text(
               currentMonthText,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: AriesColor.black,
-                  ),
+              style: AriesTextStyles.textHeading5,
             ),
             Spacing.sp8,
           ],
