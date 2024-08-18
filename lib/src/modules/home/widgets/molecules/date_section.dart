@@ -38,12 +38,11 @@ class DateSection extends ConsumerWidget {
           children: [
             Text(
               weekdayName,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: isNotInCurrentMonth
-                        ? Colors.grey
-                        : AriesColor.neutral400,
-                    fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
-                  ),
+              style: AriesTextStyles.textBodySmall.copyWith(
+                color:
+                    isNotInCurrentMonth ? Colors.grey : AriesColor.neutral400,
+                fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+              ),
             ),
             Container(
               padding: const EdgeInsets.only(
@@ -67,26 +66,23 @@ class DateSection extends ConsumerWidget {
                 children: [
                   Text(
                     date,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color:
-                              isNotInCurrentMonth ? Colors.grey : Colors.black,
-                          fontWeight:
-                              isToday ? FontWeight.bold : FontWeight.normal,
-                        ),
+                    style: AriesTextStyles.textBodySmall.copyWith(
+                      color: isNotInCurrentMonth ? Colors.grey : Colors.black,
+                      fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+                    ),
                   ),
                   Text(
                     textAlign: TextAlign.right,
                     lunarDate,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: isNotInCurrentMonth
-                              ? Colors.grey
-                              : isToday
-                                  ? AriesColor.yellowP500
-                                  : Colors.black,
-                          fontSize: 10,
-                          fontWeight:
-                              isToday ? FontWeight.bold : FontWeight.normal,
-                        ),
+                    style: AriesTextStyles.textBodySmall.copyWith(
+                      color: isNotInCurrentMonth
+                          ? Colors.grey
+                          : isToday
+                              ? AriesColor.yellowP500
+                              : Colors.black,
+                      fontSize: 10,
+                      fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+                    ),
                   ),
                 ],
               ),

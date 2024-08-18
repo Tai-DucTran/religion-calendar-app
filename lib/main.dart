@@ -1,5 +1,6 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -12,6 +13,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await ScreenUtil.ensureScreenSize();
   runApp(const ProviderScope(
     child: ReligionCalendar(),
   ));
@@ -35,7 +37,8 @@ class ReligionCalendar extends HookConsumerWidget {
         ),
         useMaterial3: true,
       ),
-      builder: (context, child) {
+      builder: (ctx, child) {
+        ScreenUtil.init(ctx);
         return Stack(
           children: [
             if (child != null) child,
