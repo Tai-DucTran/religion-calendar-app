@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'firebase_options.dart';
 import 'src/modules/authentication/authentication.dart';
 import 'src/modules/router/router_provider.dart';
 import 'src/widgets/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +39,10 @@ class ReligionCalendar extends HookConsumerWidget {
         ),
         useMaterial3: true,
       ),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       builder: (ctx, child) {
+        LocalizedKeys.setContext(ctx);
         ScreenUtil.init(ctx);
         return Stack(
           children: [

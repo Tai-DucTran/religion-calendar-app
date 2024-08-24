@@ -1,0 +1,21 @@
+{
+  "helloWorld": "Xin chào!",
+  "signUp": "Đăng ký",
+  "email": "Email",
+  "enterYourEmail": "Nhập email của bạn",
+  "enterYourEmailHint": "Hãy nhập email của bạn!",
+  "invalidEmailText": "Email không phù hợp, hãy thử lại",
+  "emailAlreadyInUseTitle": "Email đã được đăng ký",
+  "googleEmailAlreadyInUseMessage": "Email Google này đã được đăng ký trước đó, hãy đăng nhập để sử dụng",
+  "emailAlreadyInUseMessage": "Email Google này đã được đăng ký trước đó, hãy đăng nhập để sử dụng",
+  "passWord": "Mật khẩu",
+  "enterYourPassword": "Nhập mật khẩu của bạn",
+  "or": "hoặc",
+  "alreadyAMember": "Bạn đã có tài khoản?",
+  "login": "Đăng nhập",
+  "homeNavItemText": "Trang Chủ",
+  "calendarNavItemText": "Lịch",
+  "exploreNavItemText": "Khám Phá",
+  "profileNavItemText": "Hồ Sơ",
+  "@@locale": "vi"
+}

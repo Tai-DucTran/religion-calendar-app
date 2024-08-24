@@ -1,0 +1,21 @@
+{
+  "helloWorld": "Hello World!",
+  "signUp": "Sign up",
+  "email": "Email",
+  "enterYourEmail": "Enter your email",
+  "enterYourEmailHint": "Please enter your email!",
+  "invalidEmailText": "Your email is invalid, try again",
+  "emailAlreadyInUseTitle": "Email Already in Use",
+  "googleEmailAlreadyInUseMessage": "This email is associated with a Google account that has been previously registered. Please log in to continue.",
+  "emailAlreadyInUseMessage": "This email is associated with an account that has been previously registered. Please log in to continue.",
+  "passWord": "Password",
+  "enterYourPassword": "Enter your password",
+  "or": "or",
+  "alreadyAMember": "Already a member?",
+  "login": "Log in",
+  "homeNavItemText": "Home",
+  "calendarNavItemText": "Calendar",
+  "exploreNavItemText": "Explore",
+  "profileNavItemText": "Profile",
+  "@@locale": "en"
+}
