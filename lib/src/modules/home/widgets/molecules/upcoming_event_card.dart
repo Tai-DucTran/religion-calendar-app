@@ -24,11 +24,16 @@ class UpcomingEventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String currentLocale = Localizations.localeOf(context).toString();
     final solarDate = getFullSolarDateText(
       inputDate: eventDate,
       isIncludingWeekdayName: true,
+      locale: currentLocale,
     );
-    final lunarDate = getFullLunarDateText(inputDate: eventDate);
+    final lunarDate = getFullLunarDateText(
+      inputDate: eventDate,
+      locale: currentLocale,
+    );
     final isToday = isDateToday(eventDate);
 
     return Padding(

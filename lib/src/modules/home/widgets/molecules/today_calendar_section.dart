@@ -14,8 +14,13 @@ class TodayCalendarSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentDate = getFullSolarDateText();
-    final currentLunarDate = getFullLunarDateText();
+    final String currentLocale = Localizations.localeOf(context).toString();
+    final currentDate = getFullSolarDateText(
+      locale: currentLocale,
+    );
+    final currentLunarDate = getFullLunarDateText(
+      locale: currentLocale,
+    );
 
     return Row(
       children: [

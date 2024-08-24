@@ -20,10 +20,14 @@ class DateSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final String currentLocale = Localizations.localeOf(context).toString();
     final String weekdayName = getWeekdayName(
       inputDate: inputDate,
+      locale: currentLocale,
     );
-    final String date = DateFormat.d().format(inputDate);
+    final String date = DateFormat.d(currentLocale).format(
+      inputDate,
+    );
     final lunarDate = getLunarDateNumberText(inputDate: inputDate);
 
     return Material(

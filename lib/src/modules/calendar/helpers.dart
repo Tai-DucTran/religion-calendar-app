@@ -21,8 +21,12 @@ List<DateTime> getCurrentWeekDates() {
 String getWeekdayName({
   required DateTime inputDate,
   bool isGetFullWeekdayName = false,
+  String? locale,
 }) {
-  return DateFormat(isGetFullWeekdayName ? 'EEEE' : 'E').format(inputDate);
+  return DateFormat(
+    isGetFullWeekdayName ? 'EEEE' : 'E',
+    locale,
+  ).format(inputDate);
 }
 
 bool isDateToday(DateTime date) {
@@ -50,10 +54,13 @@ String getFullSolarDateText({
   int? timeZone,
   bool isIncludingWeekdayName = false,
   DateTime? inputDate,
+  String? locale,
 }) {
   final date = inputDate ?? getCurrentSolarDate(timeZone: timeZone);
   final formatter = DateFormat(
-      isIncludingWeekdayName ? 'EEEE, dd MMMM, yyyy' : 'dd MMMM, yyyy');
+    isIncludingWeekdayName ? 'EEEE, dd MMMM, yyyy' : 'dd MMMM, yyyy',
+    locale,
+  );
 
   return formatter.format(date);
 }
@@ -62,6 +69,7 @@ String getFullLunarDateText({
   int? timeZone,
   bool isIncludingWeekdayName = false,
   DateTime? inputDate,
+  String? locale,
 }) {
   final LunarDateTime lunarDate = inputDate != null
       ? FullCalender(
@@ -72,6 +80,7 @@ String getFullLunarDateText({
 
   final formatter = DateFormat(
     isIncludingWeekdayName ? 'dd MMMM, yyyy' : 'dd MMM, yyyy',
+    locale,
   );
 
   final solarDate = inputDate ?? DateTime.now();
