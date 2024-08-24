@@ -1,4 +1,5 @@
 import 'package:aries/aries.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
 
 class NavigationBottomItem {
   final String iconPath;
@@ -23,22 +24,22 @@ extension NavigationBottomItemExtension on NavigationBottomItemTypes {
       case NavigationBottomItemTypes.home:
         return NavigationBottomItem(
           iconPath: AriesIcons.homeOutlineIcon,
-          name: 'Home',
+          name: LocalizedKeys.homeNavItemText,
         );
       case NavigationBottomItemTypes.calendar:
         return NavigationBottomItem(
           iconPath: AriesIcons.calendarOutlineIcon,
-          name: 'Calendar',
+          name: LocalizedKeys.calendarNavItemText,
         );
       case NavigationBottomItemTypes.explore:
         return NavigationBottomItem(
           iconPath: AriesIcons.sunOutlineIcon,
-          name: 'Explore',
+          name: LocalizedKeys.exploreNavItemText,
         );
       case NavigationBottomItemTypes.profile:
         return NavigationBottomItem(
           iconPath: AriesIcons.userOutlineIcon,
-          name: 'Profile',
+          name: LocalizedKeys.profileNavItemText,
         );
     }
   }
