@@ -24,7 +24,6 @@ class DashDivider extends StatelessWidget {
       padding: EdgeInsets.only(left: indent, right: endIndent),
       child: LayoutBuilder(
         builder: (context, constraints) {
-          // Calculate the number of dashes that will fit in the available width
           final dashCount =
               (constraints.constrainWidth() / (dashWidth + dashSpacing))
                   .floor();
