@@ -1,68 +1,69 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Spacing {
   Spacing._();
 
-  static const Widget shrink = SizedBox.shrink();
+  static Widget shrink = const SizedBox.shrink();
 
-  static const SizedBox sp2 = SizedBox(
-    width: 2,
-    height: 2,
+  static SizedBox sp2 = SizedBox(
+    width: 2.w,
+    height: 2.h,
   );
-  static const SizedBox sp4 = SizedBox(
-    width: 4,
-    height: 4,
+  static SizedBox sp4 = SizedBox(
+    width: 4.w,
+    height: 4.h,
   );
-  static const SizedBox sp6 = SizedBox(
-    width: 6,
-    height: 6,
+  static SizedBox sp6 = SizedBox(
+    width: 6.w,
+    height: 6.h,
   );
-  static const SizedBox sp8 = SizedBox(
-    width: 8,
-    height: 8,
+  static SizedBox sp8 = SizedBox(
+    width: 8.w,
+    height: 8.h,
   );
-  static const SizedBox sp12 = SizedBox(
-    width: 12,
-    height: 12,
+  static SizedBox sp12 = SizedBox(
+    width: 12.w,
+    height: 12.h,
   );
-  static const SizedBox sp14 = SizedBox(
-    width: 14,
-    height: 14,
+  static SizedBox sp14 = SizedBox(
+    width: 14.w,
+    height: 14.h,
   );
-  static const SizedBox sp16 = SizedBox(
-    width: 16,
-    height: 16,
+  static SizedBox sp16 = SizedBox(
+    width: 16.w,
+    height: 16.h,
   );
-  static const SizedBox sp18 = SizedBox(
-    width: 18,
-    height: 18,
+  static SizedBox sp18 = SizedBox(
+    width: 18.w,
+    height: 18.h,
   );
-  static const SizedBox sp20 = SizedBox(
-    width: 20,
-    height: 20,
+  static SizedBox sp20 = SizedBox(
+    width: 20.w,
+    height: 20.h,
   );
-  static const SizedBox sp24 = SizedBox(
-    width: 24,
-    height: 24,
+  static SizedBox sp24 = SizedBox(
+    width: 24.w,
+    height: 24.h,
   );
-  static const SizedBox sp28 = SizedBox(
-    width: 28,
-    height: 28,
+  static SizedBox sp28 = SizedBox(
+    width: 28.w,
+    height: 28.h,
   );
-  static const SizedBox sp32 = SizedBox(
-    width: 32,
-    height: 32,
+  static SizedBox sp32 = SizedBox(
+    width: 32.w,
+    height: 32.h,
   );
-  static const SizedBox sp40 = SizedBox(
-    width: 40,
-    height: 40,
+  static SizedBox sp40 = SizedBox(
+    width: 40.w,
+    height: 40.h,
   );
-  static const SizedBox sp48 = SizedBox(
-    width: 48,
-    height: 48,
+  static SizedBox sp48 = SizedBox(
+    width: 48.w,
+    height: 48.h,
   );
 
-  static const Widget expand = Expanded(
+  static Widget expand = const Expanded(
     child: SizedBox(),
   );
 }
