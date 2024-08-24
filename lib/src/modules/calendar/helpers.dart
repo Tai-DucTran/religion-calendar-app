@@ -18,6 +18,13 @@ List<DateTime> getCurrentWeekDates() {
   );
 }
 
+String getWeekdayName({
+  required DateTime inputDate,
+  bool isGetFullWeekdayName = false,
+}) {
+  return DateFormat(isGetFullWeekdayName ? 'EEEE' : 'E').format(inputDate);
+}
+
 bool isDateToday(DateTime date) {
   final DateTime now = getCurrentSolarDate();
 
@@ -26,32 +33,56 @@ bool isDateToday(DateTime date) {
       date.year == now.year;
 }
 
-String getLunarDate({required DateTime date, int? timeZone}) {
-  return FullCalender(
-    date: date,
-    timeZone: timeZone ?? TimeZone.indonesiaUTC8.timezone,
-  ).lunarDate.day.toString();
-}
-
 bool isDateInCurrentMonth(DateTime date) {
   final DateTime now = getCurrentSolarDate();
 
   return date.month == now.month;
 }
 
-String getCurrentSolarDateText({int? timeZone}) {
-  final DateTime now =
-      FullCalender.now(timeZone ?? TimeZone.indonesiaUTC8.timezone).date;
-  final DateFormat formatter = DateFormat('dd MMMM, yyyy');
-
-  return formatter.format(now);
+String getLunarDateNumberText({required DateTime inputDate, int? timeZone}) {
+  return FullCalender(
+    date: inputDate,
+    timeZone: timeZone ?? TimeZone.indonesiaUTC8.timezone,
+  ).lunarDate.day.toString();
 }
 
-String getCurrentLunarDateText({int? timeZone}) {
-  final LunarDateTime now =
-      FullCalender.now(timeZone ?? TimeZone.indonesiaUTC8.timezone).lunarDate;
-  final DateFormat formatter = DateFormat('dd MMMM, yyyy');
-  final date = DateTime(now.year, now.month, now.day);
+String getFullSolarDateText({
+  int? timeZone,
+  bool isIncludingWeekdayName = false,
+  DateTime? inputDate,
+}) {
+  final date = inputDate ?? getCurrentSolarDate(timeZone: timeZone);
+  final formatter = DateFormat(
+      isIncludingWeekdayName ? 'EEEE, dd MMMM, yyyy' : 'dd MMMM, yyyy');
 
   return formatter.format(date);
+}
+
+String getFullLunarDateText({
+  int? timeZone,
+  bool isIncludingWeekdayName = false,
+  DateTime? inputDate,
+}) {
+  final LunarDateTime lunarDate = inputDate != null
+      ? FullCalender(
+          date: inputDate,
+          timeZone: timeZone ?? TimeZone.indonesiaUTC8.timezone,
+        ).lunarDate
+      : FullCalender.now(timeZone ?? TimeZone.indonesiaUTC8.timezone).lunarDate;
+
+  final formatter = DateFormat(
+    isIncludingWeekdayName ? 'dd MMMM, yyyy' : 'dd MMM, yyyy',
+  );
+
+  final solarDate = inputDate ?? DateTime.now();
+  final weekDayName =
+      getWeekdayName(inputDate: solarDate, isGetFullWeekdayName: true);
+
+  final basedLunarDateText = formatter.format(
+    DateTime(lunarDate.year, lunarDate.month, lunarDate.day),
+  );
+
+  return isIncludingWeekdayName
+      ? '$weekDayName, $basedLunarDateText'
+      : basedLunarDateText;
 }

@@ -9,15 +9,23 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Scaffold(
+    return Scaffold(
       body: MainAppBackgroundContainer(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          WeeklyCalendarSection(),
-          Spacing.sp24,
-          CurrentDateCard(),
-          Spacing.sp24,
+          child: CustomScrollView(
+        slivers: [
+          SliverList(
+              delegate: SliverChildListDelegate([
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const WeeklyCalendarSection(),
+                Spacing.sp24,
+                const CurrentDateCard(),
+                const UpComingEventsSection(),
+                const WordOfWisdomSection(),
+              ],
+            ),
+          ]))
         ],
       )),
     );

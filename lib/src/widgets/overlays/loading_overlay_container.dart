@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
@@ -12,8 +13,8 @@ class LoadingOverlayContainer extends StatelessWidget {
       color: Colors.black38,
       child: Center(
         child: Container(
-          padding: const EdgeInsets.only(
-            top: 50,
+          padding: EdgeInsets.only(
+            top: 50.h,
           ),
           alignment: Alignment.center,
           width: screenWidth * 0.5,

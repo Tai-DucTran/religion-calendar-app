@@ -25,3 +25,5 @@ flutter:
     - assets/images/icons/
     - assets/images/others/
     - assets/images/religions/
+    - assets/images/events/
+    - assets/images/background_wallpapers/

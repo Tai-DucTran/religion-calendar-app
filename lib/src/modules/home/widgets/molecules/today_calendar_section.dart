@@ -14,8 +14,8 @@ class TodayCalendarSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentDate = getCurrentSolarDateText();
-    final currentLunarDate = getCurrentLunarDateText();
+    final currentDate = getFullSolarDateText();
+    final currentLunarDate = getFullLunarDateText();
 
     return Row(
       children: [
