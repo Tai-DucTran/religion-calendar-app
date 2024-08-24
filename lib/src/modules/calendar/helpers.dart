@@ -18,6 +18,11 @@ List<DateTime> getCurrentWeekDates() {
   );
 }
 
+String getCurrentSolarMonthText({String? locale}) {
+  final DateTime now = DateTime.now();
+  return DateFormat('MMMM', locale).format(now);
+}
+
 String getWeekdayName({
   required DateTime inputDate,
   bool isGetFullWeekdayName = false,

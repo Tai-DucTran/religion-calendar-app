@@ -28,4 +28,7 @@ class LocalizedKeys {
   static String get calendarNavItemText => AppLocalizations.of(_context)!.calendarNavItemText;
   static String get exploreNavItemText => AppLocalizations.of(_context)!.exploreNavItemText;
   static String get profileNavItemText => AppLocalizations.of(_context)!.profileNavItemText;
+  static String get todayText => AppLocalizations.of(_context)!.todayText;
+  static String get yourEventText => AppLocalizations.of(_context)!.yourEventText;
+  static String get viewAllButtonText => AppLocalizations.of(_context)!.viewAllButtonText;
 }

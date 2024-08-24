@@ -17,5 +17,8 @@
   "calendarNavItemText": "Calendar",
   "exploreNavItemText": "Explore",
   "profileNavItemText": "Profile",
+  "todayText": "Today",
+  "yourEventText": "Your events",
+  "viewAllButtonText": "View all",
   "@@locale": "en"
 }

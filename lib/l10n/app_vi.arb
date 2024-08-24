@@ -17,5 +17,8 @@
   "calendarNavItemText": "Lịch",
   "exploreNavItemText": "Khám Phá",
   "profileNavItemText": "Hồ Sơ",
+  "todayText": "Hôm nay",
+  "yourEventText": "Sự kiện của bạn",
+  "viewAllButtonText": "Tất cả",
   "@@locale": "vi"
 }

@@ -10,8 +10,12 @@ class WeeklyCalendarSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final locale = Localizations.localeOf(context).toString();
     final currentWeekDates = ref.watch(getCurrentWeekProvider);
-    final currentMonthText = ref.watch(getCurrentMonthProvider);
+    final currentMonthText = getCurrentSolarMonthText(
+      locale: locale,
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
