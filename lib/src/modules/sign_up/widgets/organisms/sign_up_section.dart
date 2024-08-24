@@ -32,7 +32,6 @@ class SignUpSection extends StatelessWidget {
         if (!isShowKeyboard) ...[
           Spacing.sp12,
         ],
-        Spacing.sp12,
         const SocialLoginButtonsWrapper(),
         Spacing.sp24,
         BottomRichTextWithAction(

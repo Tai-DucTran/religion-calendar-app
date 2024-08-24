@@ -1,5 +1,6 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
@@ -45,7 +46,7 @@ class HalfLinearContainer extends StatelessWidget {
                 SizedBox(
                   height: firstSectionHeight,
                   child: Container(
-                    margin: const EdgeInsets.only(top: 60),
+                    margin: EdgeInsets.only(top: 60.h),
                     child: isHasImageInput
                         ? Image.asset(imagePath!)
                         : SvgPicture.asset(
@@ -57,9 +58,9 @@ class HalfLinearContainer extends StatelessWidget {
                   height: secondSectionHeight,
                   child: Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 24,
-                      horizontal: 16,
+                    padding: EdgeInsets.symmetric(
+                      vertical: 24.h,
+                      horizontal: 16.w,
                     ),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(

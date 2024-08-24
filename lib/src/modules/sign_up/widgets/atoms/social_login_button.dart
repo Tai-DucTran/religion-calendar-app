@@ -1,5 +1,6 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SocialLoginButton extends StatelessWidget {
@@ -8,6 +9,7 @@ class SocialLoginButton extends StatelessWidget {
   final double? width;
   final Color? backgroundColor;
   final Color? borderColor;
+  final bool? isFullWidth;
   final VoidCallback onTap;
 
   const SocialLoginButton({
@@ -18,6 +20,7 @@ class SocialLoginButton extends StatelessWidget {
     required this.onTap,
     this.backgroundColor,
     this.borderColor,
+    this.isFullWidth,
   });
 
   @override
@@ -26,7 +29,8 @@ class SocialLoginButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(10),
-        width: 110,
+        width: isFullWidth ?? false ? double.infinity : 158.w,
+        height: 42.h,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(
             Radius.circular(8),

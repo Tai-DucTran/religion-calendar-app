@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LinearFirstSectionRatio {
   const LinearFirstSectionRatio._(this.ratio, this.alignment);
@@ -6,17 +7,17 @@ class LinearFirstSectionRatio {
   final double ratio;
   final Alignment alignment;
 
-  static const defaultSized = LinearFirstSectionRatio._(
-    3.5 / 10,
-    Alignment(0.0, -0.95),
+  static final defaultSized = LinearFirstSectionRatio._(
+    3 / 10,
+    Alignment(0.0, -0.95.w),
   );
-  static const halfSized = LinearFirstSectionRatio._(
+  static final halfSized = LinearFirstSectionRatio._(
     1 / 2,
-    Alignment(0.0, -0.95),
+    Alignment(0.0, -0.95.w),
   );
-  static const bigSized = LinearFirstSectionRatio._(
+  static final bigSized = LinearFirstSectionRatio._(
     3 / 5,
-    Alignment(0.0, -0.85),
+    Alignment(0.0, -0.85.w),
   );
 
   Alignment get beginAlignment => alignment;
