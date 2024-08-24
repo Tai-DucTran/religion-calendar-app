@@ -1,6 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/authentication/exceptions/authenticator_exceptions.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
@@ -74,7 +75,7 @@ class _SignUpFormFieldsState extends ConsumerState<SignUpFormFields> {
             ),
             Spacing.sp24,
             CtaFullWidthButton(
-              buttonText: 'Sign Up',
+              buttonText: LocalizedKeys.signUp,
               onPressed: () async {
                 setState(() {
                   _isEmailValid = _formKey.currentState!.validate();
@@ -92,16 +93,14 @@ class _SignUpFormFieldsState extends ConsumerState<SignUpFormFields> {
                     if (e is EmailAlreadyInUseAuthException) {
                       if (_emailController.text.contains('gmail')) {
                         _showErrorOverlay(
-                          title: 'Email Already in Use',
-                          message:
-                              'This email is associated with a Google account that has been previously registered. Please log in to continue.',
+                          title: LocalizedKeys.emailAlreadyInUseTitle,
+                          message: LocalizedKeys.googleEmailAlreadyInUseMessage,
                           isErrorOverlay: false,
                         );
                       } else {
                         _showErrorOverlay(
-                          title: 'Email Already in Use',
-                          message:
-                              'This email is associated with an account that has been previously registered. Please log in to continue.',
+                          title: LocalizedKeys.emailAlreadyInUseTitle,
+                          message: LocalizedKeys.emailAlreadyInUseMessage,
                           isErrorOverlay: false,
                           icon: Icons.mail_outline_rounded,
                         );

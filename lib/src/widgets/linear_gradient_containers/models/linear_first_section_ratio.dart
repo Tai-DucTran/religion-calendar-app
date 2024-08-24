@@ -7,7 +7,7 @@ class LinearFirstSectionRatio {
   final Alignment alignment;
 
   static const defaultSized = LinearFirstSectionRatio._(
-    3.5 / 10,
+    3 / 10,
     Alignment(0.0, -0.95),
   );
   static const halfSized = LinearFirstSectionRatio._(

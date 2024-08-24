@@ -14,8 +14,9 @@ gen:
 icons:
 	cd packages/aries && dart run lib/src/icon/generate_icons.dart
 
-l10n:
-	dart run scripts/generate_localized_keys.dart
+l10n: |
+	flutter gen-l10n
+	dart run lib/l10n/generate_localized_keys.dart
 
 upgrade: |
 	flutter precache --ios && \
@@ -30,3 +31,4 @@ rm_gen: |
 
 native_splash: |
 	dart run flutter_native_splash:create --path=native_splash.yaml
+
