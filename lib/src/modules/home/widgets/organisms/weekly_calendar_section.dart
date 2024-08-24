@@ -1,5 +1,6 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/home/widgets/widgets.dart';
@@ -24,18 +25,21 @@ class WeeklyCalendarSection extends ConsumerWidget {
             Spacing.sp8,
           ],
         ),
-        const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: currentWeekDates.map(
-            (date) {
-              return DateSection(
-                inputDate: date,
-                isToday: isDateToday(date),
-                isNotInCurrentMonth: !isDateInCurrentMonth(date),
-              );
-            },
-          ).toList(),
+        SizedBox(height: 8.sp),
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: currentWeekDates.map(
+              (date) {
+                return DateSection(
+                  inputDate: date,
+                  isToday: isDateToday(date),
+                  isNotInCurrentMonth: !isDateInCurrentMonth(date),
+                );
+              },
+            ).toList(),
+          ),
         ),
       ],
     );
