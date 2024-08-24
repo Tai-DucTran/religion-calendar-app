@@ -1,6 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/constants/constants.dart';
 import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
@@ -23,9 +24,9 @@ class _EmailTextFieldState extends State<EmailTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormFieldContainer(
-      title: 'Email',
+      title: LocalizedKeys.email,
       keyboardType: TextInputType.emailAddress,
-      hintText: 'Enter your email',
+      hintText: LocalizedKeys.enterYourEmail,
       obscureText: false,
       controller: widget.controller,
       suffixIcon: widget.isValidEmail == true
@@ -40,10 +41,10 @@ class _EmailTextFieldState extends State<EmailTextField> {
       validator: (value) {
         value?.log();
         if (value == null || value.isEmpty) {
-          return 'Please enter your email!';
+          return LocalizedKeys.enterYourEmailHint;
         }
         if (!emailRegex.hasMatch(value)) {
-          return 'Your email is invalid, try again';
+          return LocalizedKeys.invalidEmailText;
         }
         return null;
       },

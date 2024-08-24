@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/widgets/text_field/text_field.dart';
 
 class PasswordTextField extends StatefulWidget {
@@ -16,8 +17,8 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   @override
   Widget build(BuildContext context) {
     return ObscureTextFieldContainer(
-      title: 'Password',
-      hintText: 'Enter your password',
+      title: LocalizedKeys.passWord,
+      hintText: LocalizedKeys.enterYourEmail,
       controller: widget.controller,
     );
   }
