@@ -21,8 +21,8 @@ class HomePage extends ConsumerWidget {
                 const WeeklyCalendarSection(),
                 Spacing.sp24,
                 const CurrentDateCard(),
-                Spacing.sp24,
                 const UpComingEventsSection(),
+                const WordOfWisdomSection(),
               ],
             ),
           ]))
