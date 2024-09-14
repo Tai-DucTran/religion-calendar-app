@@ -2,6 +2,7 @@ import 'package:full_calender/enums/time_zone.dart';
 import 'package:full_calender/full_calender.dart';
 import 'package:full_calender/models/lunar_date_time.dart';
 import 'package:intl/intl.dart';
+import 'package:religion_calendar_app/src/constants/constants.dart';
 
 DateTime getCurrentSolarDate({int? timeZone}) =>
     FullCalender.now(timeZone ?? TimeZone.indonesiaUTC8.timezone).date;
@@ -20,7 +21,7 @@ List<DateTime> getCurrentWeekDates() {
 
 String getCurrentSolarMonthText({String? locale}) {
   final DateTime now = DateTime.now();
-  return DateFormat('MMMM', locale).format(now);
+  return DateFormat(DateTimeFormat.month, locale).format(now);
 }
 
 String getWeekdayName({
@@ -29,7 +30,7 @@ String getWeekdayName({
   String? locale,
 }) {
   return DateFormat(
-    isGetFullWeekdayName ? 'EEEE' : 'E',
+    isGetFullWeekdayName ? DateTimeFormat.week : DateTimeFormat.weekNumber,
     locale,
   ).format(inputDate);
 }
@@ -63,7 +64,9 @@ String getFullSolarDateText({
 }) {
   final date = inputDate ?? getCurrentSolarDate(timeZone: timeZone);
   final formatter = DateFormat(
-    isIncludingWeekdayName ? 'EEEE, dd MMMM, yyyy' : 'dd MMMM, yyyy',
+    isIncludingWeekdayName
+        ? DateTimeFormat.weekDateMonthYear
+        : DateTimeFormat.dateMonthYear,
     locale,
   );
 
@@ -72,9 +75,9 @@ String getFullSolarDateText({
 
 String getFullLunarDateText({
   int? timeZone,
-  bool isIncludingWeekdayName = false,
   DateTime? inputDate,
   String? locale,
+  String? dateFormat,
 }) {
   final LunarDateTime lunarDate = inputDate != null
       ? FullCalender(
@@ -84,19 +87,11 @@ String getFullLunarDateText({
       : FullCalender.now(timeZone ?? TimeZone.indonesiaUTC8.timezone).lunarDate;
 
   final formatter = DateFormat(
-    isIncludingWeekdayName ? 'dd MMMM, yyyy' : 'dd MMM, yyyy',
+    dateFormat ?? DateTimeFormat.dateMonthYear,
     locale,
   );
 
-  final solarDate = inputDate ?? DateTime.now();
-  final weekDayName =
-      getWeekdayName(inputDate: solarDate, isGetFullWeekdayName: true);
-
-  final basedLunarDateText = formatter.format(
+  return formatter.format(
     DateTime(lunarDate.year, lunarDate.month, lunarDate.day),
   );
-
-  return isIncludingWeekdayName
-      ? '$weekDayName, $basedLunarDateText'
-      : basedLunarDateText;
 }
