@@ -3,9 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/forgot_pasword_page.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/login_page.dart';
+import 'package:religion_calendar_app/src/modules/navigation_bottom_bar/widgets/organisms/navigation_bottom_bar.dart';
 import 'package:religion_calendar_app/src/modules/onboarding/widgets/page/onboarding_religion_preference_page.dart';
 import 'package:religion_calendar_app/src/modules/sign_up/widgets/page/page.dart';
-import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 import '../explore_page/widgets/widgets.dart';
 import '../home/widgets/pages/pages.dart';
@@ -20,28 +20,37 @@ final shellNavigationKey = GlobalKey<NavigatorState>(debugLabel: 'root');
   branches: <TypedStatefulShellBranch>[
     TypedStatefulShellBranch(
       routes: [
-        TypedGoRoute<HomeRoute>(path: HomeRoute.path),
+        TypedGoRoute<HomeRoute>(
+          path: HomeRoute.path,
+        ),
       ],
     ),
     TypedStatefulShellBranch(
       routes: [
-        TypedGoRoute<CalendarRoute>(path: CalendarRoute.path),
+        TypedGoRoute<CalendarRoute>(
+          path: CalendarRoute.path,
+        ),
       ],
     ),
     TypedStatefulShellBranch(
       routes: [
-        TypedGoRoute<ExploreRoute>(path: ExploreRoute.path),
+        TypedGoRoute<ExploreRoute>(
+          path: ExploreRoute.path,
+        ),
       ],
     ),
     TypedStatefulShellBranch(
       routes: [
-        TypedGoRoute<ProfileRoute>(path: ProfileRoute.path),
+        TypedGoRoute<ProfileRoute>(
+          path: ProfileRoute.path,
+        ),
       ],
     ),
   ],
 )
 class MainShellRouteData extends StatefulShellRouteData {
-  const MainShellRouteData();
+  const MainShellRouteData({required this.userId});
+  final String? userId;
 
   @override
   Widget builder(
@@ -49,7 +58,12 @@ class MainShellRouteData extends StatefulShellRouteData {
     GoRouterState state,
     StatefulNavigationShell navigationShell,
   ) {
-    return NavigationBottomBar(navigationShell: navigationShell);
+    final userId = state.uri.queryParameters['userId'];
+
+    return NavigationBottomBar(
+      navigationShell: navigationShell,
+      userId: userId,
+    );
   }
 }
 
@@ -121,37 +135,55 @@ class OnboardingRoute extends GoRouteData {
   path: HomeRoute.path,
 )
 class HomeRoute extends GoRouteData {
-  const HomeRoute();
+  const HomeRoute({
+    required this.userId,
+  });
   static const path = '/home';
+  final String? userId;
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const HomePage();
+    final userId = state.uri.queryParameters['userId'];
+    return HomePage(userId: userId);
   }
 }
 
 class CalendarRoute extends GoRouteData {
-  const CalendarRoute();
+  const CalendarRoute({
+    required this.userId,
+  });
   static const path = '/calendar';
+  final String? userId;
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const CalendarPage();
+    final userId = state.uri.queryParameters['userId'];
+    return CalendarPage(userId: userId);
   }
 }
 
 class ExploreRoute extends GoRouteData {
-  const ExploreRoute();
+  const ExploreRoute({
+    required this.userId,
+  });
   static const path = '/explore';
+  final String? userId;
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const ExplorePage();
+    return ExplorePage(userId: userId);
   }
 }
 
 class ProfileRoute extends GoRouteData {
-  const ProfileRoute();
+  const ProfileRoute({
+    required this.userId,
+  });
   static const path = '/profile';
+  final String? userId;
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const ProfilePage();
+    return ProfilePage(userId: userId);
   }
 }

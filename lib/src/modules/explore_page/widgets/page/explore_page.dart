@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class ExplorePage extends StatefulWidget {
-  const ExplorePage({super.key});
+  const ExplorePage({
+    required this.userId,
+    super.key,
+  });
+
+  final String? userId;
 
   @override
   State<ExplorePage> createState() => _ExplorePageState();
