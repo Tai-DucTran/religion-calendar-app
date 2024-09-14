@@ -2,10 +2,12 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/helper/string_helper.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
-class UpcomingEventCard extends StatelessWidget {
-  const UpcomingEventCard({
+class EventCard extends StatelessWidget {
+  const EventCard({
     super.key,
     required this.eventName,
     required this.eventDate,
@@ -18,7 +20,7 @@ class UpcomingEventCard extends StatelessWidget {
   final String? eventImageUrl;
   final String eventName;
   final DateTime eventDate;
-  final String eventTime;
+  final String? eventTime;
   final String? eventLocation;
   final int eventTimeCountDown;
 
@@ -33,6 +35,7 @@ class UpcomingEventCard extends StatelessWidget {
     final lunarDate = getFullLunarDateText(
       inputDate: eventDate,
       locale: currentLocale,
+      dateFormat: 'dd, MM',
     );
     final isToday = isDateToday(eventDate);
 
@@ -52,6 +55,7 @@ class UpcomingEventCard extends StatelessWidget {
                 lunarDate,
                 style: AriesTextStyles.textBodySmall.copyWith(
                   fontSize: 12.sp,
+                  color: AriesColor.neutral300,
                 ),
               ),
             ],
@@ -62,6 +66,13 @@ class UpcomingEventCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: AriesColor.neutral0,
               borderRadius: BorderRadius.circular(16.r),
+              boxShadow: [
+                BoxShadow(
+                  color: AriesColor.yellowP600.withOpacity(0.1),
+                  offset: const Offset(0, 2),
+                  blurRadius: 13.4,
+                ),
+              ],
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,48 +94,64 @@ class UpcomingEventCard extends StatelessWidget {
                       Text(
                         eventName,
                         style: AriesTextStyles.textHeading6,
+                        maxLines: 2,
                       ),
                       Spacing.sp4,
-                      Row(
-                        children: [
-                          Text(eventTime),
-                          if (eventLocation != null) ...[
-                            const Text(' - '),
-                            Text(eventLocation!),
-                          ]
-                        ],
-                      ),
-                      Spacing.sp4,
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.access_time_outlined,
-                            color: AriesColor.yellowP500,
-                            size: 16,
-                          ),
-                          Spacing.sp4,
-                          Text(
-                            isToday ? 'Today' : '$eventTimeCountDown days left',
-                            style: AriesTextStyles.textBodySmall.copyWith(
-                              fontSize: 12.sp,
-                              color: AriesColor.yellowP500,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Align(
-                        alignment: Alignment.bottomRight,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Icon(
-                              Icons.circle,
-                            ),
-                            Icon(
-                              Icons.circle,
-                            ),
-                          ],
+                      if (eventTime != null || eventLocation != null) ...[
+                        Text(
+                          joinTwoString(
+                                firstString: eventTime,
+                                secondString: eventLocation,
+                              ) ??
+                              '',
+                          maxLines: 2,
                         ),
+                      ],
+                      Spacing.sp4,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.access_time_outlined,
+                                color: AriesColor.yellowP500,
+                                size: 18,
+                              ),
+                              Spacing.sp4,
+                              Text(
+                                isToday
+                                    ? LocalizedKeys.todayText
+                                    : joinTwoString(
+                                          firstString:
+                                              eventTimeCountDown.toString(),
+                                          secondString:
+                                              LocalizedKeys.daysLeftText,
+                                        ) ??
+                                        '',
+                                style: AriesTextStyles.textBodySmall.copyWith(
+                                  fontSize: 12.sp,
+                                  color: AriesColor.yellowP500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Icon(
+                                  Icons.circle,
+                                ),
+                                Icon(
+                                  Icons.circle,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
                       ),
                     ],
                   ),

@@ -17,6 +17,7 @@ class TodayEventQuote extends StatelessWidget {
       style: AriesTextStyles.textBodySmall.copyWith(
         fontWeight: FontWeight.w400,
       ),
+      maxLines: 3,
     );
   }
 }
