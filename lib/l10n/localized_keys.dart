@@ -10,6 +10,12 @@ class LocalizedKeys {
     _context = context;
   }
 
+  static String get religionCatholicismText => AppLocalizations.of(_context)!.religionCatholicismText;
+  static String get religionBuddhismText => AppLocalizations.of(_context)!.religionBuddhismText;
+  static String get religionUnknownText => AppLocalizations.of(_context)!.religionUnknownText;
+  static String get religionText => AppLocalizations.of(_context)!.religionText;
+  static String get whatIsYourReligion => AppLocalizations.of(_context)!.whatIsYourReligion;
+  static String get youWantToHaveYourReligion => AppLocalizations.of(_context)!.youWantToHaveYourReligion;
   static String get helloWorld => AppLocalizations.of(_context)!.helloWorld;
   static String get signUp => AppLocalizations.of(_context)!.signUp;
   static String get email => AppLocalizations.of(_context)!.email;
@@ -30,5 +36,25 @@ class LocalizedKeys {
   static String get profileNavItemText => AppLocalizations.of(_context)!.profileNavItemText;
   static String get todayText => AppLocalizations.of(_context)!.todayText;
   static String get yourEventText => AppLocalizations.of(_context)!.yourEventText;
+  static String get daysLeftText => AppLocalizations.of(_context)!.daysLeftText;
+  static String get eventInputHintText => AppLocalizations.of(_context)!.eventInputHintText;
+  static String get eventCategoryFamilyText => AppLocalizations.of(_context)!.eventCategoryFamilyText;
+  static String get eventCategoryReligionText => AppLocalizations.of(_context)!.eventCategoryReligionText;
+  static String get eventCategoryBusinessText => AppLocalizations.of(_context)!.eventCategoryBusinessText;
+  static String get eventCategoryPersonalText => AppLocalizations.of(_context)!.eventCategoryPersonalText;
+  static String get eventCategoryOtherText => AppLocalizations.of(_context)!.eventCategoryOtherText;
+  static String get custom => AppLocalizations.of(_context)!.custom;
+  static String get allDayToggleText => AppLocalizations.of(_context)!.allDayToggleText;
+  static String get startingEventDateText => AppLocalizations.of(_context)!.startingEventDateText;
+  static String get endingEventDateText => AppLocalizations.of(_context)!.endingEventDateText;
+  static String get eventTimeAt => AppLocalizations.of(_context)!.eventTimeAt;
+  static String get eventLocation => AppLocalizations.of(_context)!.eventLocation;
+  static String get eventFrequentReminder => AppLocalizations.of(_context)!.eventFrequentReminder;
+  static String get eventRemindMeBefore => AppLocalizations.of(_context)!.eventRemindMeBefore;
+  static String get sharingEventButtonText => AppLocalizations.of(_context)!.sharingEventButtonText;
   static String get viewAllButtonText => AppLocalizations.of(_context)!.viewAllButtonText;
+  static String get selectButtonText => AppLocalizations.of(_context)!.selectButtonText;
+  static String get submitHereButtonText => AppLocalizations.of(_context)!.submitHereButtonText;
+  static String get calendarTypeSolarText => AppLocalizations.of(_context)!.calendarTypeSolarText;
+  static String get calendarTypeLunarText => AppLocalizations.of(_context)!.calendarTypeLunarText;
 }
