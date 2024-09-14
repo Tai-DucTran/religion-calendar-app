@@ -44,11 +44,16 @@ class ReligionCalendar extends HookConsumerWidget {
       builder: (ctx, child) {
         LocalizedKeys.setContext(ctx);
         ScreenUtil.init(ctx);
-        return Stack(
-          children: [
-            if (child != null) child,
-            if (authState is AsyncLoading) const LoadingOverlayContainer()
-          ],
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaler: const TextScaler.linear(1.15),
+          ),
+          child: Stack(
+            children: [
+              if (child != null) child,
+              if (authState is AsyncLoading) const LoadingOverlayContainer()
+            ],
+          ),
         );
       },
     );

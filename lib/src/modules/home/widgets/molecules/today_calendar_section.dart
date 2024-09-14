@@ -31,6 +31,7 @@ class TodayCalendarSection extends StatelessWidget {
             Text(
               LocalizedKeys.todayText,
               style: AriesTextStyles.textBodyMedium,
+              textScaler: const TextScaler.linear(1.05),
             ),
             Spacing.sp8,
             Text(

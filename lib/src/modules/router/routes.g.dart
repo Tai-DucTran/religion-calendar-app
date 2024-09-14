@@ -53,14 +53,21 @@ RouteBase get $mainShellRouteData => StatefulShellRouteData.$route(
 
 extension $MainShellRouteDataExtension on MainShellRouteData {
   static MainShellRouteData _fromState(GoRouterState state) =>
-      const MainShellRouteData();
+      MainShellRouteData(
+        userId: state.uri.queryParameters['user-id'],
+      );
 }
 
 extension $HomeRouteExtension on HomeRoute {
-  static HomeRoute _fromState(GoRouterState state) => const HomeRoute();
+  static HomeRoute _fromState(GoRouterState state) => HomeRoute(
+        userId: state.uri.queryParameters['user-id'],
+      );
 
   String get location => GoRouteData.$location(
         '/home',
+        queryParams: {
+          if (userId != null) 'user-id': userId,
+        },
       );
 
   void go(BuildContext context) => context.go(location);
@@ -74,10 +81,15 @@ extension $HomeRouteExtension on HomeRoute {
 }
 
 extension $CalendarRouteExtension on CalendarRoute {
-  static CalendarRoute _fromState(GoRouterState state) => const CalendarRoute();
+  static CalendarRoute _fromState(GoRouterState state) => CalendarRoute(
+        userId: state.uri.queryParameters['user-id'],
+      );
 
   String get location => GoRouteData.$location(
         '/calendar',
+        queryParams: {
+          if (userId != null) 'user-id': userId,
+        },
       );
 
   void go(BuildContext context) => context.go(location);
@@ -91,10 +103,15 @@ extension $CalendarRouteExtension on CalendarRoute {
 }
 
 extension $ExploreRouteExtension on ExploreRoute {
-  static ExploreRoute _fromState(GoRouterState state) => const ExploreRoute();
+  static ExploreRoute _fromState(GoRouterState state) => ExploreRoute(
+        userId: state.uri.queryParameters['user-id'],
+      );
 
   String get location => GoRouteData.$location(
         '/explore',
+        queryParams: {
+          if (userId != null) 'user-id': userId,
+        },
       );
 
   void go(BuildContext context) => context.go(location);
@@ -108,10 +125,15 @@ extension $ExploreRouteExtension on ExploreRoute {
 }
 
 extension $ProfileRouteExtension on ProfileRoute {
-  static ProfileRoute _fromState(GoRouterState state) => const ProfileRoute();
+  static ProfileRoute _fromState(GoRouterState state) => ProfileRoute(
+        userId: state.uri.queryParameters['user-id'],
+      );
 
   String get location => GoRouteData.$location(
         '/profile',
+        queryParams: {
+          if (userId != null) 'user-id': userId,
+        },
       );
 
   void go(BuildContext context) => context.go(location);

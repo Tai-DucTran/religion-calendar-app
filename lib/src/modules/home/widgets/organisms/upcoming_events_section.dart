@@ -17,7 +17,7 @@ class UpComingEventsSection extends StatelessWidget {
         children: [
           const UpComingEventsHeader(),
           // TODO (Tai): Build the list of cards here
-          UpcomingEventCard(
+          EventCard(
             eventName: "Grandfather's death anniversary",
             eventDate: currentDate,
             eventTime: "07:00",
@@ -25,7 +25,7 @@ class UpComingEventsSection extends StatelessWidget {
             eventTimeCountDown: 3,
             eventImageUrl: AriesImages.defaultFamilyEvent,
           ),
-          UpcomingEventCard(
+          EventCard(
             eventName: "Sunday solemnity",
             eventDate: currentDate.add(const Duration(days: 4)),
             eventTime: "09:20",
@@ -33,7 +33,7 @@ class UpComingEventsSection extends StatelessWidget {
             eventTimeCountDown: 4,
             eventImageUrl: AriesImages.defaultCatholicismEvent,
           ),
-          UpcomingEventCard(
+          EventCard(
             eventName: "Sunday solemnity",
             eventDate: currentDate.add(const Duration(days: 7)),
             eventTime: "09:20",

@@ -32,6 +32,7 @@ GoRouter router(RouterRef ref) {
 
       final isLoggedIn = auth.value?.isLoggedIn ?? false;
       final hasCompletedOnboarding = auth.value?.hasCompleteOnboarding ?? false;
+      final userId = auth.value?.userId;
 
       final isSignUpPage =
           state.matchedLocation == const SignUpRoute().location;
@@ -47,13 +48,14 @@ GoRouter router(RouterRef ref) {
       }
 
       if (isLoggedIn && !hasCompletedOnboarding && !isOnboardingPage) {
-        return const OnboardingRoute().location;
+        return '${OnboardingRoute.path}?userId=$userId';
       }
 
       if (isLoggedIn && hasCompletedOnboarding && !isInMainShell) {
-        return const HomeRoute().location;
+        return '${HomeRoute.path}?userId=$userId';
       }
-      "Redirecting. Current location: ${state.matchedLocation}".log();
+
+      "Redirecting. Current location: ${state.fullPath}".log();
       return null;
     },
   );

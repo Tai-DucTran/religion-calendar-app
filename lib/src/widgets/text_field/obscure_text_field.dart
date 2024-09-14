@@ -1,8 +1,8 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 
-class ObscureTextFieldContainer extends StatefulWidget {
-  const ObscureTextFieldContainer({
+class ObscureTextField extends StatefulWidget {
+  const ObscureTextField({
     super.key,
     required this.title,
     this.keyboardType,
@@ -19,11 +19,10 @@ class ObscureTextFieldContainer extends StatefulWidget {
   final TextEditingController? controller;
 
   @override
-  State<ObscureTextFieldContainer> createState() =>
-      _ObscureTextFieldContainerState();
+  State<ObscureTextField> createState() => _ObscureTextFieldState();
 }
 
-class _ObscureTextFieldContainerState extends State<ObscureTextFieldContainer> {
+class _ObscureTextFieldState extends State<ObscureTextField> {
   bool isObscured = true;
   @override
   Widget build(BuildContext context) {

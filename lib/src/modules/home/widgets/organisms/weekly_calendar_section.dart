@@ -32,8 +32,7 @@ class WeeklyCalendarSection extends ConsumerWidget {
         SizedBox(height: 8.sp),
         FittedBox(
           fit: BoxFit.scaleDown,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: Wrap(
             children: currentWeekDates.map(
               (date) {
                 return DateSection(

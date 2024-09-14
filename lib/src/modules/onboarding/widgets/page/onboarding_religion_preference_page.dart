@@ -2,6 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/helper/string_helper.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/onboarding/controllers/get_religion_onboarding_image_controller.dart';
@@ -31,16 +32,16 @@ class OnboardingReligionPreferencePage extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Religion',
-              style: TextStyle(
+            Text(
+              LocalizedKeys.religionText,
+              style: const TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.w700,
               ),
             ),
-            const Text(
-              'What is your religion?',
-              style: TextStyle(
+            Text(
+              LocalizedKeys.whatIsYourReligion,
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w300,
               ),
@@ -61,7 +62,7 @@ class OnboardingReligionPreferencePage extends ConsumerWidget {
                 return ListTile(
                   contentPadding: const EdgeInsets.only(left: 0),
                   title: Text(
-                    religion.name.toCapitalized(),
+                    religion.localized.toCapitalized(),
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -84,7 +85,7 @@ class OnboardingReligionPreferencePage extends ConsumerWidget {
               },
             ),
             CtaFullWidthButton(
-              buttonText: 'Select',
+              buttonText: LocalizedKeys.selectButtonText,
               onPressed: () async {
                 final userFirestoreController =
                     ref.read(userFirestoreRepositoryProvider);
@@ -95,14 +96,14 @@ class OnboardingReligionPreferencePage extends ConsumerWidget {
                 ref
                     .read(authStateControllerProvider.notifier)
                     .updateOnboardingStatus(true);
-                context.go(const HomeRoute().location);
+                context.go(HomeRoute(userId: userId).location);
               },
             ),
             // TODO (Tai): Implement submit request form
             Spacing.sp24,
             BottomRichTextWithAction(
-              initialQuestion: 'You want to have your religion? ',
-              textSpan: 'Submit here',
+              initialQuestion: '${LocalizedKeys.youWantToHaveYourReligion} ',
+              textSpan: LocalizedKeys.submitHereButtonText,
               onTap: () {},
             )
           ],

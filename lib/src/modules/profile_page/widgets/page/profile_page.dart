@@ -3,7 +3,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 
 class ProfilePage extends HookConsumerWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({
+    required this.userId,
+    super.key,
+  });
+
+  final String? userId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

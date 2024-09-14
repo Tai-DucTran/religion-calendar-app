@@ -4,3 +4,16 @@ extension StringCasingExtension on String {
     return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
   }
 }
+
+String? joinTwoString({
+  required String? firstString,
+  required String? secondString,
+  String? separator = ' ',
+}) {
+  final ls = <String>[
+    if (firstString != null && firstString.isNotEmpty) firstString,
+    if (secondString != null && secondString.isNotEmpty) secondString,
+  ];
+
+  return ls.join('$separator');
+}

@@ -16,9 +16,9 @@ class PasswordTextField extends StatefulWidget {
 class _PasswordTextFieldState extends State<PasswordTextField> {
   @override
   Widget build(BuildContext context) {
-    return ObscureTextFieldContainer(
+    return ObscureTextField(
       title: LocalizedKeys.passWord,
-      hintText: LocalizedKeys.enterYourEmail,
+      hintText: LocalizedKeys.enterYourPassword,
       controller: widget.controller,
     );
   }
