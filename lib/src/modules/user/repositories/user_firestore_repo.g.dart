@@ -9,7 +9,12 @@ part of 'user_firestore_repo.dart';
 String _$userFirestoreRepositoryHash() =>
     r'eac533a8fc3bc5f47a676d1e44fb9415f212c615';
 
-/// See also [userFirestoreRepository].
+/// ! Restructure this Firestore implementation
+/// Create a new folder to store everything related to [Firebase] and [Firestore]
+/// lib/core/firebase
+/// lib/core/firebase_provider
+///
+/// Copied from [userFirestoreRepository].
 @ProviderFor(userFirestoreRepository)
 final userFirestoreRepositoryProvider =
     AutoDisposeProvider<UserFirestoreRepository>.internal(

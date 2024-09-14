@@ -6,6 +6,11 @@ import '../models/models.dart';
 
 part 'user_firestore_repo.g.dart';
 
+/// ! Restructure this Firestore implementation
+/// Create a new folder to store everything related to [Firebase] and [Firestore]
+/// lib/core/firebase
+/// lib/core/firebase_provider
+
 @riverpod
 UserFirestoreRepository userFirestoreRepository(
     UserFirestoreRepositoryRef ref) {
