@@ -10,9 +10,13 @@ class CalendarCategoryController extends _$CalendarCategoryController {
     return CalendarCategory.solar;
   }
 
-  CalendarCategory get category => state;
+  void toggleCategory() {
+    state = state == CalendarCategory.solar
+        ? CalendarCategory.lunar
+        : CalendarCategory.solar;
+  }
 
-  void setCategory(CalendarCategory category) {
-    state = category;
+  bool isLunarCalendar() {
+    return state == CalendarCategory.lunar;
   }
 }
