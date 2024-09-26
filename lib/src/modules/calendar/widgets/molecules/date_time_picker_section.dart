@@ -2,162 +2,169 @@ import 'package:aries/aries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/constants/constants.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class DateTimePickerSection extends ConsumerStatefulWidget {
   const DateTimePickerSection({
     super.key,
-    required this.label,
-    required this.initialTime,
     required this.initialDate,
-    required this.onDateSelect,
-    required this.onTimeSelect,
+    required this.isStartDate,
   });
 
-  final String label;
-  final DateTime initialTime;
   final DateTime? initialDate;
-  final Function(DateTime) onDateSelect;
-  final Function(DateTime) onTimeSelect;
+  final bool isStartDate;
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
+  ConsumerState<DateTimePickerSection> createState() =>
       _DateTimePickerSectionState();
 }
 
 class _DateTimePickerSectionState extends ConsumerState<DateTimePickerSection> {
-  late DateTime selectedDate;
-  late DateTime selectedTime;
-
   @override
   void initState() {
     super.initState();
+    _initializeDate();
+  }
 
-    final DateTime initialDate = widget.initialDate ??
-        DateTime(
-          DateTime.now().year,
-          DateTime.now().month,
-          DateTime.now().day,
-        );
-    selectedDate = initialDate;
-    selectedTime = widget.initialTime;
+  void _initializeDate() {
+    if (widget.initialDate != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final controller = ref.read(eventDateTimeControllerProvider.notifier);
+        if (widget.isStartDate) {
+          controller.setStartDate(widget.initialDate!);
+          controller.setStartTime(DateTime(widget.initialDate!.year,
+              widget.initialDate!.month, widget.initialDate!.day, 8, 0));
+        } else {
+          controller.setEndDate(widget.initialDate!);
+          controller.setEndTime(DateTime(widget.initialDate!.year,
+              widget.initialDate!.month, widget.initialDate!.day, 23, 0));
+        }
+      });
+    }
+  }
+
+  @override
+  void didUpdateWidget(DateTimePickerSection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.initialDate != oldWidget.initialDate) {
+      _initializeDate();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final String currentLocale = Localizations.localeOf(context).toString();
+    final eventDateTime = ref.watch(eventDateTimeControllerProvider);
     final isAllDay = ref.watch(isAllDayToggleControllerProvider);
+    final currentLocale = Localizations.localeOf(context).toString();
+
+    final date =
+        widget.isStartDate ? eventDateTime.startDate : eventDateTime.endDate;
+    final time =
+        widget.isStartDate ? eventDateTime.startTime : eventDateTime.endTime;
 
     return ListTile(
       isThreeLine: true,
       dense: true,
       contentPadding: EdgeInsets.zero,
       leading: Padding(
-        padding: EdgeInsets.only(top: 8.h),
+        padding: const EdgeInsets.only(top: 8),
         child: Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(
-            horizontal: 4.w,
-          ),
-          width: 85.w,
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          width: 85,
           height: 30,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
-            border: Border.all(
-              color: AriesColor.neutral50,
-            ),
+            border: Border.all(color: AriesColor.neutral50),
           ),
           child: Text(
-            widget.label,
+            widget.isStartDate
+                ? LocalizedKeys.startingEventDateText
+                : LocalizedKeys.endingEventDateText,
           ),
         ),
       ),
       title: CupertinoButton(
         padding: EdgeInsets.zero,
         alignment: Alignment.centerLeft,
-        onPressed: () {
-          showCupertinoModalPopup(
-            context: context,
-            builder: (BuildContext context) {
-              return Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 250.h,
-                  color: AriesColor.neutral0,
-                  child: CupertinoDatePicker(
-                    mode: CupertinoDatePickerMode.date,
-                    backgroundColor: AriesColor.neutral0,
-                    initialDateTime: selectedDate,
-                    onDateTimeChanged: (DateTime newDate) {
-                      setState(
-                        () {
-                          selectedDate = newDate;
-                          widget.onDateSelect(selectedDate);
-                        },
-                      );
-                    },
-                  ),
-                ),
-              );
-            },
-          );
-        },
+        onPressed: () => _showDatePicker(context, date),
         child: Text(
-          DateFormat(
-            DateTimeFormat.dateShortMonthYear,
-          ).format(
-            selectedDate,
-          ),
+          DateFormat(DateTimeFormat.dateShortMonthYear, currentLocale)
+              .format(date),
         ),
       ),
       subtitle: DateSubtitlePicker(
         locale: currentLocale,
-        selectedDate: selectedDate,
+        selectedDate: date,
       ),
       trailing: !isAllDay
           ? CupertinoButton(
               padding: const EdgeInsets.only(bottom: 0),
-              onPressed: () {
-                showCupertinoModalPopup(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 250.h,
-                        color: AriesColor.neutral0,
-                        child: CupertinoDatePicker(
-                          mode: CupertinoDatePickerMode.time,
-                          backgroundColor: AriesColor.neutral0,
-                          use24hFormat: true,
-                          initialDateTime: selectedTime,
-                          onDateTimeChanged: (DateTime newTime) {
-                            setState(() {
-                              selectedTime = newTime;
-                              widget.onTimeSelect(selectedTime);
-                            });
-                          },
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
+              onPressed: () => _showTimePicker(context, time),
               child: Text(
-                DateFormat(
-                  DateTimeFormat.hourMinute,
-                  currentLocale,
-                ).format(
-                  selectedTime,
-                ),
+                DateFormat(DateTimeFormat.hourMinute, currentLocale)
+                    .format(time!),
               ),
             )
           : const Offstage(),
+    );
+  }
+
+  void _showDatePicker(BuildContext context, DateTime initialDate) {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 250,
+          color: AriesColor.neutral0,
+          child: CupertinoDatePicker(
+            mode: CupertinoDatePickerMode.date,
+            initialDateTime: initialDate,
+            onDateTimeChanged: (DateTime newDate) {
+              if (widget.isStartDate) {
+                ref
+                    .read(eventDateTimeControllerProvider.notifier)
+                    .setStartDate(newDate);
+              } else {
+                ref
+                    .read(eventDateTimeControllerProvider.notifier)
+                    .setEndDate(newDate);
+              }
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  void _showTimePicker(BuildContext context, DateTime initialTime) {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 250,
+          color: AriesColor.neutral0,
+          child: CupertinoDatePicker(
+            mode: CupertinoDatePickerMode.time,
+            use24hFormat: true,
+            initialDateTime: initialTime,
+            onDateTimeChanged: (DateTime newTime) {
+              if (widget.isStartDate) {
+                ref
+                    .read(eventDateTimeControllerProvider.notifier)
+                    .setStartTime(newTime);
+              } else {
+                ref
+                    .read(eventDateTimeControllerProvider.notifier)
+                    .setEndTime(newTime);
+              }
+            },
+          ),
+        );
+      },
     );
   }
 }
