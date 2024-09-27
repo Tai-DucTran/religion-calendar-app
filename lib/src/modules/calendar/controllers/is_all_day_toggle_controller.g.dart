@@ -7,7 +7,7 @@ part of 'is_all_day_toggle_controller.dart';
 // **************************************************************************
 
 String _$isAllDayToggleControllerHash() =>
-    r'9cfcaf34478f20f9aeb80bcf77666aae09602404';
+    r'9c86e3889f93e04ffe203396bc6e6b59a1c04d80';
 
 /// See also [IsAllDayToggleController].
 @ProviderFor(IsAllDayToggleController)

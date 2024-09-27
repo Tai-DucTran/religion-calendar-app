@@ -9,7 +9,5 @@ class IsAllDayToggleController extends _$IsAllDayToggleController {
     return false;
   }
 
-  void toggle(bool value) {
-    state = value;
-  }
+  void toggle() => state = !state;
 }

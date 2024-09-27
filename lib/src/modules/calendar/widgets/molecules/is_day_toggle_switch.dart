@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
-class AllDayToggleSwitch extends ConsumerWidget {
-  const AllDayToggleSwitch({
+class IsAllDayToggleSwitch extends ConsumerWidget {
+  const IsAllDayToggleSwitch({
     super.key,
   });
 
@@ -14,7 +14,6 @@ class AllDayToggleSwitch extends ConsumerWidget {
     final isAllDay = ref.watch(isAllDayToggleControllerProvider);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           LocalizedKeys.allDayToggleText,
@@ -28,12 +27,11 @@ class AllDayToggleSwitch extends ConsumerWidget {
           child: FittedBox(
             child: Switch(
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              autofocus: false,
               value: isAllDay,
               onChanged: (value) {
                 final provider =
                     ref.read(isAllDayToggleControllerProvider.notifier);
-                provider.toggle(value);
+                provider.toggle();
               },
               inactiveTrackColor: AriesColor.neutral0,
               activeTrackColor: AriesColor.yellowP100,

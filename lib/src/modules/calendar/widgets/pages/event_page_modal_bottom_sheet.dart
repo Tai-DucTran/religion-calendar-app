@@ -47,52 +47,6 @@ class _EventPageModalBottomSheetState
   TextEditingController eventNameInputController = TextEditingController();
   TextEditingController locationController = TextEditingController();
 
-  String? selectedOption;
-  DateTime? selectStartedDate;
-  DateTime? selectStartedTime;
-  DateTime? selectEndedDate;
-  DateTime? selectEndedTime;
-
-  void onStartedDateSelect(DateTime value) {
-    setState(() {
-      selectStartedDate = value;
-    });
-  }
-
-  void onStartedTimeSelected(DateTime value) {
-    setState(() {
-      selectStartedTime = value;
-    });
-  }
-
-  void onEndedDateSelect(DateTime value) {
-    setState(() {
-      selectEndedDate = value;
-    });
-  }
-
-  void onEndedTimeSelect(DateTime value) {
-    setState(() {
-      selectEndedTime = value;
-    });
-  }
-
-  DateTime startedTime = DateTime(
-    DateTime.now().year,
-    DateTime.now().month,
-    DateTime.now().day,
-    08,
-    00,
-  );
-
-  DateTime endedTime = DateTime(
-    DateTime.now().year,
-    DateTime.now().month,
-    DateTime.now().day,
-    23,
-    00,
-  );
-
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -120,25 +74,19 @@ class _EventPageModalBottomSheetState
               ),
             ),
             Spacing.sp12,
-            const DropDownEventCategorySelectModal(),
-            Spacing.sp12,
-            const AllDayToggleSwitch(),
-            Spacing.sp12,
             const CalendarCategorySelector(),
             Spacing.sp12,
+            const DropDownEventCategorySelectModal(),
+            Spacing.sp12,
+            const IsAllDayToggleSwitch(),
+            Spacing.sp12,
             DateTimePickerSection(
-              label: LocalizedKeys.startingEventDateText,
               initialDate: widget.selectedDate,
-              initialTime: startedTime,
-              onDateSelect: onStartedDateSelect,
-              onTimeSelect: onStartedTimeSelected,
+              isStartDate: true,
             ),
             DateTimePickerSection(
-              label: LocalizedKeys.endingEventDateText,
               initialDate: widget.selectedDate,
-              initialTime: endedTime,
-              onDateSelect: onEndedDateSelect,
-              onTimeSelect: onEndedTimeSelect,
+              isStartDate: false,
             ),
           ],
         ),
