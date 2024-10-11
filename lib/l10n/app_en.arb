@@ -44,7 +44,7 @@
   "viewAllButtonText": "View all",
   "selectButtonText": "Select",
   "submitHereButtonText": "Submit here",
-  "calendarTypeSolarText": "Solar calendar",
-  "calendarTypeLunarText": "Lunar calendar",
+  "calendarCategorySolarText": "Solar calendar",
+  "calendarCategoryLunarText": "Lunar calendar",
   "@@locale": "en"
 }

@@ -136,6 +136,9 @@ class _DateTimePickerSectionState extends ConsumerState<DateTimePickerSection> {
   Widget build(BuildContext context) {
     final eventDateTime = ref.watch(eventDateTimeControllerProvider);
     final isAllDay = ref.watch(isAllDayToggleControllerProvider);
+    final isLunarCalendar =
+        ref.watch(calendarCategoryControllerProvider) == CalendarCategory.lunar;
+
     final currentLocale = Localizations.localeOf(context).toString();
 
     final date =
@@ -152,6 +155,7 @@ class _DateTimePickerSectionState extends ConsumerState<DateTimePickerSection> {
       subtitle: DateSubtitlePicker(
         locale: currentLocale,
         selectedDate: date,
+        isLunarCalendar: isLunarCalendar,
       ),
       trailing: !isAllDay
           ? _buildTimeButton(context, time!, currentLocale)

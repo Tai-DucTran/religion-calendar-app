@@ -1,5 +1,8 @@
 {
   "cmake.sourceDirectory": "/Volumes/tai-tran/Software-Development/personal-projects/religion_calendar_app/linux",
   "java.configuration.updateBuildConfiguration": "interactive",
-  "editor.codeActionsOnSave": { "source.fixAll": "always" }
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always"
+  },
+  "dart.flutterSdkPath": "~/Development/flutter"
 }

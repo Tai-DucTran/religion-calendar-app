@@ -19,7 +19,7 @@ class CalendarCategorySelector extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          '${LocalizedKeys.calendarTypeLunarText}?',
+          '${LocalizedKeys.calendarCategoryLunarText}?',
           style: AriesTextStyles.textBodyMedium.copyWith(
             fontSize: 12,
           ),

@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:religion_calendar_app/src/constants/constants.dart';
 
 DateTime getCurrentSolarDate({int? timeZone}) =>
-    FullCalender.now(timeZone ?? TimeZone.indonesiaUTC8.timezone).date;
+    FullCalender.now(timeZone ?? TimeZone.vietnamese.timezone).date;
 
 List<DateTime> getCurrentWeekDates() {
   final DateTime now = getCurrentSolarDate();
@@ -52,7 +52,7 @@ bool isDateInCurrentMonth(DateTime date) {
 String getLunarDateNumberText({required DateTime inputDate, int? timeZone}) {
   return FullCalender(
     date: inputDate,
-    timeZone: timeZone ?? TimeZone.indonesiaUTC8.timezone,
+    timeZone: timeZone ?? TimeZone.vietnamese.timezone,
   ).lunarDate.day.toString();
 }
 
@@ -82,9 +82,9 @@ String getFullLunarDateText({
   final LunarDateTime lunarDate = inputDate != null
       ? FullCalender(
           date: inputDate,
-          timeZone: timeZone ?? TimeZone.indonesiaUTC8.timezone,
+          timeZone: timeZone ?? TimeZone.vietnamese.timezone,
         ).lunarDate
-      : FullCalender.now(timeZone ?? TimeZone.indonesiaUTC8.timezone).lunarDate;
+      : FullCalender.now(timeZone ?? TimeZone.vietnamese.timezone).lunarDate;
 
   final formatter = DateFormat(
     dateFormat ?? DateTimeFormat.dateMonthYear,

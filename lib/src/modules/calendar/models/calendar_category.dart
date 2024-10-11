@@ -12,9 +12,9 @@ extension CalendarCategoryExtension on CalendarCategory {
   String get localized {
     switch (this) {
       case CalendarCategory.solar:
-        return LocalizedKeys.calendarTypeSolarText;
+        return LocalizedKeys.calendarCategorySolarText;
       case CalendarCategory.lunar:
-        return LocalizedKeys.calendarTypeLunarText;
+        return LocalizedKeys.calendarCategoryLunarText;
     }
   }
 }

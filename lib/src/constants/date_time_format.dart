@@ -5,6 +5,8 @@ class DateTimeFormat {
   static const dateMonthYear = 'dd MMMM, yyyy';
   static const dateShortMonthYear = 'dd MMM, yyyy';
 
+  static const dateMonth = 'dd MMMM';
+
   static const month = 'MMMM';
   static const week = 'EEEE';
   static const weekNumber = 'E';

@@ -55,6 +55,6 @@ class LocalizedKeys {
   static String get viewAllButtonText => AppLocalizations.of(_context)!.viewAllButtonText;
   static String get selectButtonText => AppLocalizations.of(_context)!.selectButtonText;
   static String get submitHereButtonText => AppLocalizations.of(_context)!.submitHereButtonText;
-  static String get calendarTypeSolarText => AppLocalizations.of(_context)!.calendarTypeSolarText;
-  static String get calendarTypeLunarText => AppLocalizations.of(_context)!.calendarTypeLunarText;
+  static String get calendarCategorySolarText => AppLocalizations.of(_context)!.calendarCategorySolarText;
+  static String get calendarCategoryLunarText => AppLocalizations.of(_context)!.calendarCategoryLunarText;
 }

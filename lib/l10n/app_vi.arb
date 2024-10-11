@@ -44,7 +44,7 @@
   "viewAllButtonText": "Tất cả",
   "selectButtonText": "Chọn",
   "submitHereButtonText": "Gửi yêu cầu!",
-  "calendarTypeSolarText": "Dương lịch",
-  "calendarTypeLunarText": "Âm lịch",
+  "calendarCategorySolarText": "Dương lịch",
+  "calendarCategoryLunarText": "Âm lịch",
   "@@locale": "vi"
 }

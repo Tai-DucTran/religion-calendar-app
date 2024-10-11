@@ -9,18 +9,24 @@ class DateSubtitlePicker extends StatelessWidget {
     super.key,
     required this.locale,
     required this.selectedDate,
+    required this.isLunarCalendar,
   });
 
   final String locale;
   final DateTime selectedDate;
+  final bool isLunarCalendar;
 
   @override
   Widget build(BuildContext context) {
+    final calendarCategoryLabel = isLunarCalendar
+        ? LocalizedKeys.calendarCategorySolarText
+        : LocalizedKeys.calendarCategoryLunarText;
+
     return Text(
-      '${LocalizedKeys.calendarTypeLunarText} ${getFullLunarDateText(
+      '$calendarCategoryLabel ${getFullLunarDateText(
         locale: locale,
         inputDate: selectedDate,
-        dateFormat: (DateTimeFormat.dateShortMonthYear),
+        dateFormat: (DateTimeFormat.dateMonth),
       )}',
       style: AriesTextStyles.textBodySmall,
     );
