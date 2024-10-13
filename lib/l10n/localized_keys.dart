@@ -63,4 +63,5 @@ class LocalizedKeys {
   static String get monthlyText => AppLocalizations.of(_context)!.monthlyText;
   static String get yearlyText => AppLocalizations.of(_context)!.yearlyText;
   static String get doesNotRepeatText => AppLocalizations.of(_context)!.doesNotRepeatText;
+  static String get wordOfWisdom => AppLocalizations.of(_context)!.wordOfWisdom;
 }

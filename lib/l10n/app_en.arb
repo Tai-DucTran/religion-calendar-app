@@ -52,5 +52,6 @@
   "monthlyText": "Monthly",
   "yearlyText": "Yearly",
   "doesNotRepeatText": "Does not repeat",
+  "wordOfWisdom": "Word of wisdom",
   "@@locale": "en"
 }
