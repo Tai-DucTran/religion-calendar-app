@@ -66,7 +66,7 @@ class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
           child: FittedBox(
             fit: BoxFit.scaleDown,
             child: SizedBox(
-              width: 80,
+              width: 100,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -84,6 +84,7 @@ class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
                   ),
                   Spacing.sp4,
                   Text(
+                    textAlign: TextAlign.center,
                     item.name,
                     style: TextStyle(
                       color: isSelected
