@@ -31,7 +31,7 @@ mixin _$UserEvent {
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
   double get remindMeBefore => throw _privateConstructorUsedError;
-  RepeatFrequency get repeatFrequencyAt => throw _privateConstructorUsedError;
+  String get repeatFrequencyAt => throw _privateConstructorUsedError;
 
   /// Serializes this UserEvent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -60,7 +60,7 @@ abstract class $UserEventCopyWith<$Res> {
       DateTime createdAt,
       DateTime updatedAt,
       double remindMeBefore,
-      RepeatFrequency repeatFrequencyAt});
+      String repeatFrequencyAt});
 }
 
 /// @nodoc
@@ -139,7 +139,7 @@ class _$UserEventCopyWithImpl<$Res, $Val extends UserEvent>
       repeatFrequencyAt: null == repeatFrequencyAt
           ? _value.repeatFrequencyAt
           : repeatFrequencyAt // ignore: cast_nullable_to_non_nullable
-              as RepeatFrequency,
+              as String,
     ) as $Val);
   }
 }
@@ -164,7 +164,7 @@ abstract class _$$UserEventImplCopyWith<$Res>
       DateTime createdAt,
       DateTime updatedAt,
       double remindMeBefore,
-      RepeatFrequency repeatFrequencyAt});
+      String repeatFrequencyAt});
 }
 
 /// @nodoc
@@ -241,7 +241,7 @@ class __$$UserEventImplCopyWithImpl<$Res>
       repeatFrequencyAt: null == repeatFrequencyAt
           ? _value.repeatFrequencyAt
           : repeatFrequencyAt // ignore: cast_nullable_to_non_nullable
-              as RepeatFrequency,
+              as String,
     ));
   }
 }
@@ -291,7 +291,7 @@ class _$UserEventImpl extends _UserEvent {
   @override
   final double remindMeBefore;
   @override
-  final RepeatFrequency repeatFrequencyAt;
+  final String repeatFrequencyAt;
 
   @override
   String toString() {
@@ -372,7 +372,7 @@ abstract class _UserEvent extends UserEvent {
       required final DateTime createdAt,
       required final DateTime updatedAt,
       required final double remindMeBefore,
-      required final RepeatFrequency repeatFrequencyAt}) = _$UserEventImpl;
+      required final String repeatFrequencyAt}) = _$UserEventImpl;
   const _UserEvent._() : super._();
 
   factory _UserEvent.fromJson(Map<String, dynamic> json) =
@@ -401,7 +401,7 @@ abstract class _UserEvent extends UserEvent {
   @override
   double get remindMeBefore;
   @override
-  RepeatFrequency get repeatFrequencyAt;
+  String get repeatFrequencyAt;
 
   /// Create a copy of UserEvent
   /// with the given fields replaced by the non-null parameter values.

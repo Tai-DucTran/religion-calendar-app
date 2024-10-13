@@ -20,8 +20,7 @@ _$UserEventImpl _$$UserEventImplFromJson(Map<String, dynamic> json) =>
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       remindMeBefore: (json['remindMeBefore'] as num).toDouble(),
-      repeatFrequencyAt:
-          $enumDecode(_$RepeatFrequencyEnumMap, json['repeatFrequencyAt']),
+      repeatFrequencyAt: json['repeatFrequencyAt'] as String,
     );
 
 Map<String, dynamic> _$$UserEventImplToJson(_$UserEventImpl instance) =>
@@ -37,8 +36,7 @@ Map<String, dynamic> _$$UserEventImplToJson(_$UserEventImpl instance) =>
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
       'remindMeBefore': instance.remindMeBefore,
-      'repeatFrequencyAt':
-          _$RepeatFrequencyEnumMap[instance.repeatFrequencyAt]!,
+      'repeatFrequencyAt': instance.repeatFrequencyAt,
     };
 
 const _$CalendarCategoryEnumMap = {
@@ -52,15 +50,6 @@ const _$EventCategoryEnumMap = {
   EventCategory.businessEvent: 'BUSINESS_EVENT',
   EventCategory.personalEvent: 'PERSONAL_EVENT',
   EventCategory.otherEvent: 'OTHER_EVENT',
-};
-
-const _$RepeatFrequencyEnumMap = {
-  RepeatFrequency.daily: 'DAILY',
-  RepeatFrequency.weekly: 'WEEKLY',
-  RepeatFrequency.biweekly: 'BIWEEKLY',
-  RepeatFrequency.monthly: 'MONTHLY',
-  RepeatFrequency.yearly: 'YEARLY',
-  RepeatFrequency.doesNotRepeat: 'DOES_NOT_REPEAT',
 };
 
 _$ReligionEventImpl _$$ReligionEventImplFromJson(Map<String, dynamic> json) =>

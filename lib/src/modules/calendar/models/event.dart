@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
+import 'package:rrule/rrule.dart';
 
 part 'event.freezed.dart';
 part 'event.g.dart';
@@ -26,7 +27,7 @@ class UserEvent with _$UserEvent implements Event {
     required DateTime createdAt,
     required DateTime updatedAt,
     required double remindMeBefore,
-    required RepeatFrequency repeatFrequencyAt,
+    required String repeatFrequencyAt,
   }) = _UserEvent;
 
   factory UserEvent.fromJson(Map<String, dynamic> json) =>
@@ -70,6 +71,57 @@ enum RepeatFrequency {
   yearly,
   @JsonValue('DOES_NOT_REPEAT')
   doesNotRepeat,
+}
+
+extension RepeatFrequencyExtension on RepeatFrequency {
+  RecurrenceRule? toRecurrenceRule() {
+    switch (this) {
+      case RepeatFrequency.daily:
+        return RecurrenceRule(
+          frequency: Frequency.daily,
+          interval: 1,
+        );
+      case RepeatFrequency.weekly:
+        return RecurrenceRule(
+          frequency: Frequency.weekly,
+          interval: 1,
+        );
+      case RepeatFrequency.biweekly:
+        return RecurrenceRule(
+          frequency: Frequency.weekly,
+          interval: 2,
+        );
+      case RepeatFrequency.monthly:
+        return RecurrenceRule(
+          frequency: Frequency.monthly,
+          interval: 1,
+        );
+      case RepeatFrequency.yearly:
+        return RecurrenceRule(
+          frequency: Frequency.yearly,
+          interval: 1,
+        );
+      case RepeatFrequency.doesNotRepeat:
+        return null;
+    }
+  }
+
+  String get localized {
+    switch (this) {
+      case RepeatFrequency.daily:
+        return LocalizedKeys.dailyText;
+      case RepeatFrequency.weekly:
+        return LocalizedKeys.weeklyText;
+      case RepeatFrequency.biweekly:
+        return LocalizedKeys.biweeklyText;
+      case RepeatFrequency.monthly:
+        return LocalizedKeys.monthlyText;
+      case RepeatFrequency.yearly:
+        return LocalizedKeys.yearlyText;
+      case RepeatFrequency.doesNotRepeat:
+        return LocalizedKeys.doesNotRepeatText;
+    }
+  }
 }
 
 enum ImportantLevel {
@@ -128,6 +180,7 @@ extension EventCategoryExtension on EventCategory {
         return LocalizedKeys.eventCategoryPersonalText;
       case EventCategory.otherEvent:
         return LocalizedKeys.eventCategoryOtherText;
+      // TODO (TAI): Allow user to create a custom field
       // case EventCategory.customEvent:
       //   return LocalizedKeys.custom;
     }
