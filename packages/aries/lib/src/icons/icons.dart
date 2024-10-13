@@ -28,4 +28,6 @@ class AriesIcons {
       'packages/aries/assets/images/icons/user_outline_icon.svg';
   static const moonStartOutlineIcon =
       'packages/aries/assets/images/icons/moon_star_outline.svg';
+  static const wordOfWisdomOutlineIcon =
+      'packages/aries/assets/images/icons/word_of_wisdom_icon.svg';
 }
