@@ -46,5 +46,11 @@
   "submitHereButtonText": "Gửi yêu cầu!",
   "calendarCategorySolarText": "Dương lịch",
   "calendarCategoryLunarText": "Âm lịch",
+  "dailyText": "Mỗi ngày",
+  "weeklyText": "Mỗi tuần",
+  "biweeklyText": "Mỗi hai tuần",
+  "monthlyText": "Mỗi tháng",
+  "yearlyText": "Mỗi năm",
+  "doesNotRepeatText": "Không lặp lại",
   "@@locale": "vi"
 }

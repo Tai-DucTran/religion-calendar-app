@@ -1,7 +1,7 @@
 {
   "religionCatholicismText": "Catholicism",
   "religionBuddhismText": "Buddhism",
-  "religionUnknownText": "I don't have religion",
+  "religionUnknownText": "I don''t have religion",
   "religionText": "Religion",
   "whatIsYourReligion": "What is your religion?",
   "youWantToHaveYourReligion": "You want to have your religion?",
@@ -46,5 +46,11 @@
   "submitHereButtonText": "Submit here",
   "calendarCategorySolarText": "Solar calendar",
   "calendarCategoryLunarText": "Lunar calendar",
+  "dailyText": "Daily",
+  "weeklyText": "Weekly",
+  "biweeklyText": "Biweekly",
+  "monthlyText": "Monthly",
+  "yearlyText": "Yearly",
+  "doesNotRepeatText": "Does not repeat",
   "@@locale": "en"
 }
