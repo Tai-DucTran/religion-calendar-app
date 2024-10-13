@@ -46,6 +46,7 @@ dependencies:
   another_flushbar: ^1.12.30
   flutter_screenutil: ^5.9.3
   collection: ^1.18.0
+  rrule: ^0.2.16
 
 dev_dependencies:
   flutter_test:
