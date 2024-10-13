@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 
 part 'event.freezed.dart';
@@ -15,7 +15,6 @@ abstract class Event {
 @freezed
 class UserEvent with _$UserEvent implements Event {
   const factory UserEvent({
-    required UserId userId,
     required String id,
     required String title,
     required CalendarCategory calendarCategory,
@@ -24,10 +23,10 @@ class UserEvent with _$UserEvent implements Event {
     required DateTime startDate,
     required DateTime endDate,
     required String location,
-    required double remindMeBefore,
-    required RepeatFrequency repeatFrequencyAt,
     required DateTime createdAt,
     required DateTime updatedAt,
+    required double remindMeBefore,
+    required RepeatFrequency repeatFrequencyAt,
   }) = _UserEvent;
 
   factory UserEvent.fromJson(Map<String, dynamic> json) =>
@@ -80,4 +79,57 @@ enum ImportantLevel {
   medium,
   @JsonValue('LOW')
   low,
+}
+
+enum CalendarCategory {
+  @JsonValue('SOLAR')
+  solar,
+  @JsonValue('LUNAR')
+  lunar,
+}
+
+extension CalendarCategoryExtension on CalendarCategory {
+  String get localized {
+    switch (this) {
+      case CalendarCategory.solar:
+        return LocalizedKeys.calendarCategorySolarText;
+      case CalendarCategory.lunar:
+        return LocalizedKeys.calendarCategoryLunarText;
+    }
+  }
+}
+
+enum EventCategory {
+  @JsonValue('RELIGION')
+  religionEvent,
+  @JsonValue('FAMILY_EVENT')
+  familyEvent,
+  @JsonValue('BUSINESS_EVENT')
+  businessEvent,
+  @JsonValue('PERSONAL_EVENT')
+  personalEvent,
+  @JsonValue('OTHER_EVENT')
+  otherEvent,
+  // TODO (TAI): Allow user to create a custom field
+  // @JsonValue('CUSTOM')
+  // customEvent,
+}
+
+extension EventCategoryExtension on EventCategory {
+  String get localized {
+    switch (this) {
+      case EventCategory.religionEvent:
+        return LocalizedKeys.eventCategoryReligionText;
+      case EventCategory.familyEvent:
+        return LocalizedKeys.eventCategoryFamilyText;
+      case EventCategory.businessEvent:
+        return LocalizedKeys.eventCategoryBusinessText;
+      case EventCategory.personalEvent:
+        return LocalizedKeys.eventCategoryPersonalText;
+      case EventCategory.otherEvent:
+        return LocalizedKeys.eventCategoryOtherText;
+      // case EventCategory.customEvent:
+      //   return LocalizedKeys.custom;
+    }
+  }
 }

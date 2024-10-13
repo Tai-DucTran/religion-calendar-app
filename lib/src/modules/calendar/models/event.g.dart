@@ -8,7 +8,6 @@ part of 'event.dart';
 
 _$UserEventImpl _$$UserEventImplFromJson(Map<String, dynamic> json) =>
     _$UserEventImpl(
-      userId: json['userId'] as String,
       id: json['id'] as String,
       title: json['title'] as String,
       calendarCategory:
@@ -18,16 +17,15 @@ _$UserEventImpl _$$UserEventImplFromJson(Map<String, dynamic> json) =>
       startDate: DateTime.parse(json['startDate'] as String),
       endDate: DateTime.parse(json['endDate'] as String),
       location: json['location'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
       remindMeBefore: (json['remindMeBefore'] as num).toDouble(),
       repeatFrequencyAt:
           $enumDecode(_$RepeatFrequencyEnumMap, json['repeatFrequencyAt']),
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$$UserEventImplToJson(_$UserEventImpl instance) =>
     <String, dynamic>{
-      'userId': instance.userId,
       'id': instance.id,
       'title': instance.title,
       'calendarCategory': _$CalendarCategoryEnumMap[instance.calendarCategory]!,
@@ -36,11 +34,11 @@ Map<String, dynamic> _$$UserEventImplToJson(_$UserEventImpl instance) =>
       'startDate': instance.startDate.toIso8601String(),
       'endDate': instance.endDate.toIso8601String(),
       'location': instance.location,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
       'remindMeBefore': instance.remindMeBefore,
       'repeatFrequencyAt':
           _$RepeatFrequencyEnumMap[instance.repeatFrequencyAt]!,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
     };
 
 const _$CalendarCategoryEnumMap = {

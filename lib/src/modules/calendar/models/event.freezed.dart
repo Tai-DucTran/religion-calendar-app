@@ -20,7 +20,6 @@ UserEvent _$UserEventFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserEvent {
-  String get userId => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   CalendarCategory get calendarCategory => throw _privateConstructorUsedError;
@@ -29,10 +28,10 @@ mixin _$UserEvent {
   DateTime get startDate => throw _privateConstructorUsedError;
   DateTime get endDate => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
-  double get remindMeBefore => throw _privateConstructorUsedError;
-  RepeatFrequency get repeatFrequencyAt => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
+  double get remindMeBefore => throw _privateConstructorUsedError;
+  RepeatFrequency get repeatFrequencyAt => throw _privateConstructorUsedError;
 
   /// Serializes this UserEvent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,8 +49,7 @@ abstract class $UserEventCopyWith<$Res> {
       _$UserEventCopyWithImpl<$Res, UserEvent>;
   @useResult
   $Res call(
-      {String userId,
-      String id,
+      {String id,
       String title,
       CalendarCategory calendarCategory,
       EventCategory eventCategory,
@@ -59,10 +57,10 @@ abstract class $UserEventCopyWith<$Res> {
       DateTime startDate,
       DateTime endDate,
       String location,
-      double remindMeBefore,
-      RepeatFrequency repeatFrequencyAt,
       DateTime createdAt,
-      DateTime updatedAt});
+      DateTime updatedAt,
+      double remindMeBefore,
+      RepeatFrequency repeatFrequencyAt});
 }
 
 /// @nodoc
@@ -80,7 +78,6 @@ class _$UserEventCopyWithImpl<$Res, $Val extends UserEvent>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
     Object? id = null,
     Object? title = null,
     Object? calendarCategory = null,
@@ -89,16 +86,12 @@ class _$UserEventCopyWithImpl<$Res, $Val extends UserEvent>
     Object? startDate = null,
     Object? endDate = null,
     Object? location = null,
-    Object? remindMeBefore = null,
-    Object? repeatFrequencyAt = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? remindMeBefore = null,
+    Object? repeatFrequencyAt = null,
   }) {
     return _then(_value.copyWith(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -131,14 +124,6 @@ class _$UserEventCopyWithImpl<$Res, $Val extends UserEvent>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-      remindMeBefore: null == remindMeBefore
-          ? _value.remindMeBefore
-          : remindMeBefore // ignore: cast_nullable_to_non_nullable
-              as double,
-      repeatFrequencyAt: null == repeatFrequencyAt
-          ? _value.repeatFrequencyAt
-          : repeatFrequencyAt // ignore: cast_nullable_to_non_nullable
-              as RepeatFrequency,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -147,6 +132,14 @@ class _$UserEventCopyWithImpl<$Res, $Val extends UserEvent>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      remindMeBefore: null == remindMeBefore
+          ? _value.remindMeBefore
+          : remindMeBefore // ignore: cast_nullable_to_non_nullable
+              as double,
+      repeatFrequencyAt: null == repeatFrequencyAt
+          ? _value.repeatFrequencyAt
+          : repeatFrequencyAt // ignore: cast_nullable_to_non_nullable
+              as RepeatFrequency,
     ) as $Val);
   }
 }
@@ -160,8 +153,7 @@ abstract class _$$UserEventImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String userId,
-      String id,
+      {String id,
       String title,
       CalendarCategory calendarCategory,
       EventCategory eventCategory,
@@ -169,10 +161,10 @@ abstract class _$$UserEventImplCopyWith<$Res>
       DateTime startDate,
       DateTime endDate,
       String location,
-      double remindMeBefore,
-      RepeatFrequency repeatFrequencyAt,
       DateTime createdAt,
-      DateTime updatedAt});
+      DateTime updatedAt,
+      double remindMeBefore,
+      RepeatFrequency repeatFrequencyAt});
 }
 
 /// @nodoc
@@ -188,7 +180,6 @@ class __$$UserEventImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
     Object? id = null,
     Object? title = null,
     Object? calendarCategory = null,
@@ -197,16 +188,12 @@ class __$$UserEventImplCopyWithImpl<$Res>
     Object? startDate = null,
     Object? endDate = null,
     Object? location = null,
-    Object? remindMeBefore = null,
-    Object? repeatFrequencyAt = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? remindMeBefore = null,
+    Object? repeatFrequencyAt = null,
   }) {
     return _then(_$UserEventImpl(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -239,14 +226,6 @@ class __$$UserEventImplCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-      remindMeBefore: null == remindMeBefore
-          ? _value.remindMeBefore
-          : remindMeBefore // ignore: cast_nullable_to_non_nullable
-              as double,
-      repeatFrequencyAt: null == repeatFrequencyAt
-          ? _value.repeatFrequencyAt
-          : repeatFrequencyAt // ignore: cast_nullable_to_non_nullable
-              as RepeatFrequency,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -255,6 +234,14 @@ class __$$UserEventImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      remindMeBefore: null == remindMeBefore
+          ? _value.remindMeBefore
+          : remindMeBefore // ignore: cast_nullable_to_non_nullable
+              as double,
+      repeatFrequencyAt: null == repeatFrequencyAt
+          ? _value.repeatFrequencyAt
+          : repeatFrequencyAt // ignore: cast_nullable_to_non_nullable
+              as RepeatFrequency,
     ));
   }
 }
@@ -263,8 +250,7 @@ class __$$UserEventImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserEventImpl extends _UserEvent {
   const _$UserEventImpl(
-      {required this.userId,
-      required this.id,
+      {required this.id,
       required this.title,
       required this.calendarCategory,
       required this.eventCategory,
@@ -272,17 +258,15 @@ class _$UserEventImpl extends _UserEvent {
       required this.startDate,
       required this.endDate,
       required this.location,
-      required this.remindMeBefore,
-      required this.repeatFrequencyAt,
       required this.createdAt,
-      required this.updatedAt})
+      required this.updatedAt,
+      required this.remindMeBefore,
+      required this.repeatFrequencyAt})
       : super._();
 
   factory _$UserEventImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserEventImplFromJson(json);
 
-  @override
-  final String userId;
   @override
   final String id;
   @override
@@ -301,17 +285,17 @@ class _$UserEventImpl extends _UserEvent {
   @override
   final String location;
   @override
-  final double remindMeBefore;
-  @override
-  final RepeatFrequency repeatFrequencyAt;
-  @override
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
+  @override
+  final double remindMeBefore;
+  @override
+  final RepeatFrequency repeatFrequencyAt;
 
   @override
   String toString() {
-    return 'UserEvent(userId: $userId, id: $id, title: $title, calendarCategory: $calendarCategory, eventCategory: $eventCategory, isAllDay: $isAllDay, startDate: $startDate, endDate: $endDate, location: $location, remindMeBefore: $remindMeBefore, repeatFrequencyAt: $repeatFrequencyAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserEvent(id: $id, title: $title, calendarCategory: $calendarCategory, eventCategory: $eventCategory, isAllDay: $isAllDay, startDate: $startDate, endDate: $endDate, location: $location, createdAt: $createdAt, updatedAt: $updatedAt, remindMeBefore: $remindMeBefore, repeatFrequencyAt: $repeatFrequencyAt)';
   }
 
   @override
@@ -319,7 +303,6 @@ class _$UserEventImpl extends _UserEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserEventImpl &&
-            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.calendarCategory, calendarCategory) ||
@@ -333,21 +316,20 @@ class _$UserEventImpl extends _UserEvent {
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.location, location) ||
                 other.location == location) &&
-            (identical(other.remindMeBefore, remindMeBefore) ||
-                other.remindMeBefore == remindMeBefore) &&
-            (identical(other.repeatFrequencyAt, repeatFrequencyAt) ||
-                other.repeatFrequencyAt == repeatFrequencyAt) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.remindMeBefore, remindMeBefore) ||
+                other.remindMeBefore == remindMeBefore) &&
+            (identical(other.repeatFrequencyAt, repeatFrequencyAt) ||
+                other.repeatFrequencyAt == repeatFrequencyAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      userId,
       id,
       title,
       calendarCategory,
@@ -356,10 +338,10 @@ class _$UserEventImpl extends _UserEvent {
       startDate,
       endDate,
       location,
-      remindMeBefore,
-      repeatFrequencyAt,
       createdAt,
-      updatedAt);
+      updatedAt,
+      remindMeBefore,
+      repeatFrequencyAt);
 
   /// Create a copy of UserEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -379,8 +361,7 @@ class _$UserEventImpl extends _UserEvent {
 
 abstract class _UserEvent extends UserEvent {
   const factory _UserEvent(
-      {required final String userId,
-      required final String id,
+      {required final String id,
       required final String title,
       required final CalendarCategory calendarCategory,
       required final EventCategory eventCategory,
@@ -388,17 +369,15 @@ abstract class _UserEvent extends UserEvent {
       required final DateTime startDate,
       required final DateTime endDate,
       required final String location,
-      required final double remindMeBefore,
-      required final RepeatFrequency repeatFrequencyAt,
       required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$UserEventImpl;
+      required final DateTime updatedAt,
+      required final double remindMeBefore,
+      required final RepeatFrequency repeatFrequencyAt}) = _$UserEventImpl;
   const _UserEvent._() : super._();
 
   factory _UserEvent.fromJson(Map<String, dynamic> json) =
       _$UserEventImpl.fromJson;
 
-  @override
-  String get userId;
   @override
   String get id;
   @override
@@ -416,13 +395,13 @@ abstract class _UserEvent extends UserEvent {
   @override
   String get location;
   @override
-  double get remindMeBefore;
-  @override
-  RepeatFrequency get repeatFrequencyAt;
-  @override
   DateTime get createdAt;
   @override
   DateTime get updatedAt;
+  @override
+  double get remindMeBefore;
+  @override
+  RepeatFrequency get repeatFrequencyAt;
 
   /// Create a copy of UserEvent
   /// with the given fields replaced by the non-null parameter values.
