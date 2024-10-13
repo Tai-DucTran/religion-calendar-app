@@ -12,7 +12,6 @@ class EventCard extends StatelessWidget {
     required this.eventName,
     required this.eventDate,
     required this.eventTime,
-    required this.eventTimeCountDown,
     this.eventImageUrl,
     this.eventLocation,
   });
@@ -22,11 +21,12 @@ class EventCard extends StatelessWidget {
   final DateTime eventDate;
   final String? eventTime;
   final String? eventLocation;
-  final int eventTimeCountDown;
 
   @override
   Widget build(BuildContext context) {
+    final now = DateTime.now();
     final String currentLocale = Localizations.localeOf(context).toString();
+    final countDownFromNow = eventDate.difference(now).inDays;
     final solarDate = getFullSolarDateText(
       inputDate: eventDate,
       isIncludingWeekdayName: true,
@@ -35,7 +35,7 @@ class EventCard extends StatelessWidget {
     final lunarDate = getFullLunarDateText(
       inputDate: eventDate,
       locale: currentLocale,
-      dateFormat: 'dd, MM',
+      dateFormat: 'dd, MMMM',
     );
     final isToday = isDateToday(eventDate);
 
@@ -126,7 +126,7 @@ class EventCard extends StatelessWidget {
                                     ? LocalizedKeys.todayText
                                     : joinTwoString(
                                           firstString:
-                                              eventTimeCountDown.toString(),
+                                              countDownFromNow.toString(),
                                           secondString:
                                               LocalizedKeys.daysLeftText,
                                         ) ??
@@ -138,19 +138,6 @@ class EventCard extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Icon(
-                                  Icons.circle,
-                                ),
-                                Icon(
-                                  Icons.circle,
-                                ),
-                              ],
-                            ),
-                          )
                         ],
                       ),
                     ],
