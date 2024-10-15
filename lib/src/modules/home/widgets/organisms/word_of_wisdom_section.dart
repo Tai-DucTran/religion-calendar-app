@@ -13,6 +13,7 @@ class WordOfWisdomSection extends StatelessWidget {
       padding: EdgeInsets.symmetric(
         horizontal: 8.w,
       ),
+
       decoration: BoxDecoration(
         color: AriesColor.neutral0,
         borderRadius: BorderRadius.circular(16),
@@ -21,7 +22,7 @@ class WordOfWisdomSection extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Positioned(
-            bottom: -1.h,
+            top: -150.h,
             child: Opacity(
               opacity: 0.3,
               child: SvgPicture.asset(
@@ -74,7 +75,7 @@ class WordOfWisdomSection extends StatelessWidget {
       //   alignment: Alignment.center,
       //   children: [
       //     Positioned(
-      //       bottom: -1.h,
+      //       top: -150.h,
       //       child: Opacity(
       //         opacity: 0.4,
       //         child: SvgPicture.asset(
