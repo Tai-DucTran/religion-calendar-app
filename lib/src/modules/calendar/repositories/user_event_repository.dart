@@ -22,30 +22,18 @@ class UserEventRepository {
           .collection(FirebaseCollectionName.userEvents)
           .get();
 
-      print('Tai logs - snapshot length: ${snapshot.docs.length}');
-
       final events = snapshot.docs
           .map((doc) {
-            print('Tai logs - Processing document: ${doc.id}');
-            try {
-              final event = UserEvent.fromJson(doc.data());
-              print(
-                  'Tai logs - Successfully created UserEvent: ${event.title}');
-              return event;
-            } catch (e) {
-              print(
-                  'Tai logs - Error creating UserEvent from doc ${doc.id}: $e');
-              return null;
-            }
+            final event = UserEvent.fromJson(doc.data());
+            return event;
           })
           .whereType<UserEvent>()
           .toList();
-
-      print('Tai logs - Processed events count: ${events.length}');
       return events;
-    } catch (e) {
-      print('Tai logs - Error in fetchUserEvents: $e');
-      return [];
+    } catch (error) {
+      throw Exception(
+        'Error in fetching userEvents: $error',
+      );
     }
   }
 }
