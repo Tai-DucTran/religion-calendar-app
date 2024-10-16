@@ -47,6 +47,7 @@ class UpComingEventsSection extends ConsumerWidget {
                         eventDate: event.startDate,
                         eventTime:
                             '${event.startDate.hour}:${event.startDate.minute}',
+                        eventCategory: event.eventCategory,
                         eventLocation: event.location,
                         eventImageUrl: AriesImages.defaultFamilyEvent,
                       );

@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/helper/string_helper.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
+import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 
 class EventCard extends StatelessWidget {
   const EventCard({
@@ -12,6 +13,8 @@ class EventCard extends StatelessWidget {
     required this.eventName,
     required this.eventDate,
     required this.eventTime,
+    required this.eventCategory,
+    this.religionPreferences,
     this.eventImageUrl,
     this.eventLocation,
   });
@@ -19,8 +22,10 @@ class EventCard extends StatelessWidget {
   final String? eventImageUrl;
   final String eventName;
   final DateTime eventDate;
+  final EventCategory eventCategory;
   final String? eventTime;
   final String? eventLocation;
+  final ReligionPreference? religionPreferences;
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +107,7 @@ class EventCard extends StatelessWidget {
                           joinTwoString(
                                 firstString: eventTime,
                                 secondString: eventLocation,
+                                separator: ' - ',
                               ) ??
                               '',
                           maxLines: 2,
