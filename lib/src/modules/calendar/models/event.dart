@@ -152,7 +152,7 @@ extension CalendarCategoryExtension on CalendarCategory {
 }
 
 enum EventCategory {
-  @JsonValue('RELIGION')
+  @JsonValue('RELIGION_EVENT')
   religionEvent,
   @JsonValue('FAMILY_EVENT')
   familyEvent,
