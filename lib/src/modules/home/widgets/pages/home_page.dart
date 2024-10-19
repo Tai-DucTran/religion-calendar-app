@@ -1,6 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/home/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
@@ -34,6 +35,22 @@ class HomePage extends ConsumerWidget {
               ),
             )
           ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final result = await EventPageModalBottomSheet.show(
+            userId: userId ?? '',
+            context,
+          );
+
+          if (!result) return;
+        },
+        shape: const CircleBorder(),
+        backgroundColor: AriesColor.yellowP300,
+        child: const Icon(
+          Icons.add,
+          color: AriesColor.neutral0,
         ),
       ),
     );

@@ -5,8 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
-import 'package:religion_calendar_app/src/modules/navigation_bottom_bar/providers/bottom_bar_visibility_provider.dart';
-import 'package:religion_calendar_app/src/utils/log.dart';
 
 class DateSection extends ConsumerWidget {
   const DateSection({
@@ -43,17 +41,11 @@ class DateSection extends ConsumerWidget {
       borderRadius: BorderRadius.circular(4.r),
       child: InkWell(
         onTap: () async {
-          ref.read(bottomBarVisibilityProvider.notifier).state = false;
-          'Open modal....'.log();
-
-          userId?.log();
           final result = await EventPageModalBottomSheet.show(
             userId: userId ?? '',
             selectedDate: inputDate,
             context,
           );
-          result.log();
-          ref.read(bottomBarVisibilityProvider.notifier).state = true;
           if (!result) return;
         },
         borderRadius: BorderRadius.circular(4.r),

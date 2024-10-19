@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:religion_calendar_app/src/modules/calendar/widgets/organism/event_page_modal_bottom_sheet.dart';
 import 'package:religion_calendar_app/src/modules/navigation_bottom_bar/navigation_bottom_bar.dart';
 import 'package:religion_calendar_app/src/modules/router/routes.dart';
 
@@ -25,33 +24,20 @@ class NavigationBottomBar extends ConsumerStatefulWidget {
 class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
   @override
   Widget build(BuildContext context) {
-    final isBottomBarVisible = ref.watch(bottomBarVisibilityProvider);
-
     return Scaffold(
-      body: widget.navigationShell,
-      floatingActionButton: isBottomBarVisible
-          ? _buildFloatingActionButton(
-              context,
-              userId: widget.userId ?? '',
-            )
-          : const Offstage(),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterDocked,
-      bottomNavigationBar: isBottomBarVisible
-          ? Container(
-              color: Colors.white,
-              height: 80.h,
-              padding: EdgeInsets.only(
-                bottom: 10.h,
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: _buildNavItems(context),
-              ),
-            )
-          : const Offstage(),
-    );
+        body: widget.navigationShell,
+        bottomNavigationBar: Container(
+          color: Colors.white,
+          height: 80.h,
+          padding: EdgeInsets.only(
+            bottom: 10.h,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: _buildNavItems(context),
+          ),
+        ));
   }
 
   List<Widget> _buildNavItems(BuildContext context) {
@@ -66,7 +52,7 @@ class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
           child: FittedBox(
             fit: BoxFit.scaleDown,
             child: SizedBox(
-              width: 100,
+              width: 90.w,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -100,33 +86,6 @@ class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
         );
       },
     ).toList();
-  }
-
-  Widget _buildFloatingActionButton(BuildContext context,
-      {required String userId}) {
-    return GestureDetector(
-      onTap: () async {
-        final result = await EventPageModalBottomSheet.show(
-          userId: userId,
-          context,
-        );
-
-        if (!result) return;
-      },
-      child: Container(
-        height: 50.h,
-        width: 50.w,
-        alignment: Alignment.center,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: AriesColor.yellowP300,
-        ),
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
-    );
   }
 
   void _onTap(BuildContext context, int index) {

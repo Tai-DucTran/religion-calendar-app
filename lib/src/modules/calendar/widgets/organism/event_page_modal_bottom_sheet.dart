@@ -20,6 +20,7 @@ class EventPageModalBottomSheet extends ConsumerStatefulWidget {
     final result = await showModalBottomSheet<bool>(
       context: context,
       isScrollControlled: true,
+      useRootNavigator: true,
       backgroundColor: AriesColor.neutral0,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
@@ -73,7 +74,7 @@ class _EventPageModalBottomSheetState
             const IsLunarCalendarToggle(),
             Spacing.sp12,
             const DropDownEventCategorySelectModal(),
-            Spacing.sp12,
+            Spacing.sp32,
             const IsAllDayToggle(),
             Spacing.sp12,
             const CustomDateTimePicker(
