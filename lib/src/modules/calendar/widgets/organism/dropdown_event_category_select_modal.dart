@@ -10,67 +10,50 @@ class DropDownEventCategorySelectModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final options = EventCategory.values
-        .map(
-          (e) => e,
-        )
-        .toList();
-
+    final options = EventCategory.values.toList();
     final selectedCategory = ref.watch(eventCategoryControllerProvider);
 
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        minWidth: 160.w,
-        maxWidth: 180.w,
-      ),
+    return IntrinsicWidth(
       child: Container(
-        height: 30.h,
-        padding: EdgeInsets.symmetric(
-          horizontal: 12.w,
-        ),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(
+          color: AriesColor.neutral0,
+          border: Border.all(
+            color: AriesColor.neutral50,
+          ),
+          borderRadius: BorderRadiusDirectional.circular(
             8.r,
           ),
         ),
-        child: DropdownButton<EventCategory>(
-          value: selectedCategory,
-          style: AriesTextStyles.textBodySmall.copyWith(
-            color: AriesColor.black,
-          ),
-          padding: EdgeInsets.only(
-            bottom: 4.h,
-          ),
-          icon: Padding(
-            padding: EdgeInsets.only(
-              top: 4.h,
-            ),
-            child: const Icon(
-              Icons.arrow_drop_down,
-            ),
-          ),
-          enableFeedback: true,
-          isExpanded: true,
-          underline: const SizedBox.shrink(),
-          borderRadius: BorderRadius.circular(8.r),
-          dropdownColor: AriesColor.neutral20,
-          items: options.map(
-            (EventCategory option) {
-              return DropdownMenuItem<EventCategory>(
-                value: option,
-                child: Text(
-                  option.localized,
-                ),
-              );
+        padding: EdgeInsets.symmetric(
+          horizontal: 12.w,
+          vertical: 4.h,
+        ),
+        child: Center(
+          child: DropdownButton<EventCategory>(
+            items: options.map(
+              (option) {
+                return DropdownMenuItem(
+                  value: option,
+                  child: Text(
+                    option.localized,
+                  ),
+                );
+              },
+            ).toList(),
+            onChanged: (EventCategory? newValue) {
+              final controller =
+                  ref.read(eventCategoryControllerProvider.notifier);
+              controller.setCategory(newValue as EventCategory);
             },
-          ).toList(),
-          onChanged: (EventCategory? newValue) {
-            final controller =
-                ref.read(eventCategoryControllerProvider.notifier);
-
-            controller.setCategory(newValue as EventCategory);
-          },
+            value: selectedCategory,
+            underline: const SizedBox.shrink(),
+            borderRadius: BorderRadius.circular(
+              8.r,
+            ),
+            dropdownColor: AriesColor.neutral0,
+            isExpanded: true,
+            isDense: true,
+          ),
         ),
       ),
     );
