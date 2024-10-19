@@ -30,4 +30,6 @@ class AriesIcons {
       'packages/aries/assets/images/icons/moon_star_outline.svg';
   static const wordOfWisdomOutlineIcon =
       'packages/aries/assets/images/icons/word_of_wisdom_icon.svg';
+  // [Design System] Weather
+  static const moon01Icon = 'packages/aries/assets/images/icons/moon-01.svg';
 }
