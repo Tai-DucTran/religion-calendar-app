@@ -33,20 +33,20 @@ class TodayCalendarSection extends StatelessWidget {
               style: AriesTextStyles.textBodyMedium,
               textScaler: const TextScaler.linear(1.05),
             ),
-            Spacing.sp8,
             Text(
               currentDate,
               style: AriesTextStyles.textHeading5,
             ),
-            Spacing.sp8,
             Row(
               children: [
                 Container(
                   width: 24.sp,
                   height: 24.sp,
-                  padding: const EdgeInsets.all(6),
+                  padding: EdgeInsets.all(
+                    6.sp,
+                  ),
                   decoration: const BoxDecoration(
-                    color: AriesColor.neutral0,
+                    color: AriesColor.yellowP200,
                     shape: BoxShape.circle,
                   ),
                   child: SvgPicture.asset(
