@@ -5,10 +5,8 @@ import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
 
-///* Keep the name like this for scalable purpose because in the feature
-/// We might want to add more type of [CalendarCategory]
-class CalendarCategorySelector extends ConsumerWidget {
-  const CalendarCategorySelector({super.key});
+class IsLunarCalendarToggle extends ConsumerWidget {
+  const IsLunarCalendarToggle({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
-class IsAllDayToggleSwitch extends ConsumerWidget {
-  const IsAllDayToggleSwitch({
+class IsAllDayToggle extends ConsumerWidget {
+  const IsAllDayToggle({
     super.key,
   });
 
