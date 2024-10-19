@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
-import 'package:religion_calendar_app/src/modules/calendar/widgets/pages/event_page_modal_bottom_sheet.dart';
 import 'package:religion_calendar_app/src/modules/navigation_bottom_bar/providers/bottom_bar_visibility_provider.dart';
 import 'package:religion_calendar_app/src/utils/log.dart';
 

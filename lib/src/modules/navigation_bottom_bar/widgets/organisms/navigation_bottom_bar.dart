@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:religion_calendar_app/src/modules/calendar/widgets/pages/event_page_modal_bottom_sheet.dart';
+import 'package:religion_calendar_app/src/modules/calendar/widgets/organism/event_page_modal_bottom_sheet.dart';
 import 'package:religion_calendar_app/src/modules/navigation_bottom_bar/navigation_bottom_bar.dart';
 import 'package:religion_calendar_app/src/modules/router/routes.dart';
 

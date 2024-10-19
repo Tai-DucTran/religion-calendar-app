@@ -2,9 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
-import 'package:religion_calendar_app/src/modules/calendar/widgets/molecules/custom_date_time_picker_section.dart';
 import 'package:religion_calendar_app/src/modules/calendar/widgets/molecules/molecules.dart';
-import 'package:religion_calendar_app/src/modules/calendar/widgets/organism/organism.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
@@ -50,12 +48,9 @@ class _EventPageModalBottomSheetState
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return FractionallySizedBox(
       heightFactor: 0.90,
       child: Container(
-        height: screenHeight * 0.90,
         width: double.infinity,
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -75,11 +70,11 @@ class _EventPageModalBottomSheetState
               ),
             ),
             Spacing.sp12,
-            const CalendarCategorySelector(),
+            const IsLunarCalendarToggle(),
             Spacing.sp12,
             const DropDownEventCategorySelectModal(),
             Spacing.sp12,
-            const IsAllDayToggleSwitch(),
+            const IsAllDayToggle(),
             Spacing.sp12,
             const CustomDateTimePicker(
               isStartDate: true,
