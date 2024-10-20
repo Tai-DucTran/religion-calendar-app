@@ -20,7 +20,7 @@ _$UserEventImpl _$$UserEventImplFromJson(Map<String, dynamic> json) =>
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       remindMeBefore: (json['remindMeBefore'] as num).toDouble(),
-      repeatFrequencyAt: json['repeatFrequencyAt'] as String,
+      repeatedFrequencyAt: json['repeatedFrequencyAt'] as String,
     );
 
 Map<String, dynamic> _$$UserEventImplToJson(_$UserEventImpl instance) =>
@@ -36,7 +36,7 @@ Map<String, dynamic> _$$UserEventImplToJson(_$UserEventImpl instance) =>
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
       'remindMeBefore': instance.remindMeBefore,
-      'repeatFrequencyAt': instance.repeatFrequencyAt,
+      'repeatedFrequencyAt': instance.repeatedFrequencyAt,
     };
 
 const _$CalendarCategoryEnumMap = {

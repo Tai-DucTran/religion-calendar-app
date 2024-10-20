@@ -27,7 +27,7 @@ class UserEvent with _$UserEvent implements Event {
     required DateTime createdAt,
     required DateTime updatedAt,
     required double remindMeBefore,
-    required String repeatFrequencyAt,
+    required String repeatedFrequencyAt,
   }) = _UserEvent;
 
   factory UserEvent.fromJson(Map<String, dynamic> json) =>
@@ -58,7 +58,7 @@ class ReligionEvent with _$ReligionEvent implements Event {
   const ReligionEvent._();
 }
 
-enum RepeatFrequency {
+enum RepeatedFrequency {
   @JsonValue('DAILY')
   daily,
   @JsonValue('WEEKLY')
@@ -73,52 +73,52 @@ enum RepeatFrequency {
   doesNotRepeat,
 }
 
-extension RepeatFrequencyExtension on RepeatFrequency {
+extension RepeatedFrequencyExtension on RepeatedFrequency {
   RecurrenceRule? toRecurrenceRule() {
     switch (this) {
-      case RepeatFrequency.daily:
+      case RepeatedFrequency.daily:
         return RecurrenceRule(
           frequency: Frequency.daily,
           interval: 1,
         );
-      case RepeatFrequency.weekly:
+      case RepeatedFrequency.weekly:
         return RecurrenceRule(
           frequency: Frequency.weekly,
           interval: 1,
         );
-      case RepeatFrequency.biweekly:
+      case RepeatedFrequency.biweekly:
         return RecurrenceRule(
           frequency: Frequency.weekly,
           interval: 2,
         );
-      case RepeatFrequency.monthly:
+      case RepeatedFrequency.monthly:
         return RecurrenceRule(
           frequency: Frequency.monthly,
           interval: 1,
         );
-      case RepeatFrequency.yearly:
+      case RepeatedFrequency.yearly:
         return RecurrenceRule(
           frequency: Frequency.yearly,
           interval: 1,
         );
-      case RepeatFrequency.doesNotRepeat:
+      case RepeatedFrequency.doesNotRepeat:
         return null;
     }
   }
 
   String get localized {
     switch (this) {
-      case RepeatFrequency.daily:
+      case RepeatedFrequency.daily:
         return LocalizedKeys.dailyText;
-      case RepeatFrequency.weekly:
+      case RepeatedFrequency.weekly:
         return LocalizedKeys.weeklyText;
-      case RepeatFrequency.biweekly:
+      case RepeatedFrequency.biweekly:
         return LocalizedKeys.biweeklyText;
-      case RepeatFrequency.monthly:
+      case RepeatedFrequency.monthly:
         return LocalizedKeys.monthlyText;
-      case RepeatFrequency.yearly:
+      case RepeatedFrequency.yearly:
         return LocalizedKeys.yearlyText;
-      case RepeatFrequency.doesNotRepeat:
+      case RepeatedFrequency.doesNotRepeat:
         return LocalizedKeys.doesNotRepeatText;
     }
   }
