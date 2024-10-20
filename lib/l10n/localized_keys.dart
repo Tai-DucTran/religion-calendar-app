@@ -48,6 +48,7 @@ class LocalizedKeys {
   static String get fromText => AppLocalizations.of(_context)!.fromText;
   static String get toText => AppLocalizations.of(_context)!.toText;
   static String get eventTimeAt => AppLocalizations.of(_context)!.eventTimeAt;
+  static String get eventLocationHint => AppLocalizations.of(_context)!.eventLocationHint;
   static String get eventLocation => AppLocalizations.of(_context)!.eventLocation;
   static String get eventFrequentReminder => AppLocalizations.of(_context)!.eventFrequentReminder;
   static String get eventRemindMeBefore => AppLocalizations.of(_context)!.eventRemindMeBefore;
