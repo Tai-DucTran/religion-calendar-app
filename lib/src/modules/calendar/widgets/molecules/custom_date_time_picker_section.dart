@@ -2,11 +2,15 @@ import 'package:aries/aries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:full_calender/full_calender_extension.dart';
+import 'package:full_calender/models/lunar_date_time.dart';
 import 'package:intl/intl.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/constants/constants.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'dart:async';
+
+import 'package:religion_calendar_app/src/utils/log.dart';
 
 class CustomDateTimePicker extends ConsumerStatefulWidget {
   const CustomDateTimePicker({
@@ -60,10 +64,13 @@ class _CustomDateTimePickerState extends ConsumerState<CustomDateTimePicker> {
     print('Tai logs - currentEventDateTime $currentEventDateTime');
 
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildLeadingLabel(),
         Spacing.sp4,
         Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             _buildDateButton(
               context,
@@ -82,8 +89,17 @@ class _CustomDateTimePickerState extends ConsumerState<CustomDateTimePicker> {
   }
 
   Widget _buildLeadingLabel() {
-    return Text(
-      widget.isStartDate ? LocalizedKeys.fromText : LocalizedKeys.toText,
+    // A work arround to ensure those component having same padding.
+    return CupertinoButton(
+      padding: EdgeInsets.zero,
+      alignment: Alignment.center,
+      onPressed: () {},
+      child: Text(
+        widget.isStartDate ? LocalizedKeys.fromText : LocalizedKeys.toText,
+        style: AriesTextStyles.textHeading6.copyWith(
+          color: AriesColor.black,
+        ),
+      ),
     );
   }
 
@@ -107,16 +123,33 @@ class _CustomDateTimePickerState extends ConsumerState<CustomDateTimePicker> {
   }
 
   Widget _buildDateSubtitle(String locale, bool isLunarCalendar) {
+    const dateFormat = DateTimeFormat.dateMonth;
     final calendarCategoryLabel = isLunarCalendar
         ? LocalizedKeys.calendarCategorySolarText
         : LocalizedKeys.calendarCategoryLunarText;
 
+    final lunarDate = LunarDateTime(
+        year: _selectedDate.year,
+        month: _selectedDate.month,
+        day: _selectedDate.day);
+    final solarDateFromLunar =
+        FullCalenderExtension.convertLunarDateToSolarDate(lunarDate)!;
+    print('Tai logs - solarDateFromLunar');
+    solarDateFromLunar.log();
+    final subDateLabel = isLunarCalendar
+        ? getFullSolarDateText(
+            locale: locale,
+            inputDate: solarDateFromLunar,
+            dateFormat: dateFormat,
+          )
+        : getFullLunarDateText(
+            locale: locale,
+            inputDate: _selectedDate,
+            dateFormat: dateFormat,
+          );
+
     return Text(
-      '$calendarCategoryLabel ${getFullLunarDateText(
-        locale: locale,
-        inputDate: _selectedDate,
-        dateFormat: (DateTimeFormat.dateMonth),
-      )}',
+      '$calendarCategoryLabel $subDateLabel',
       style: AriesTextStyles.textBodySmall,
     );
   }
@@ -127,6 +160,7 @@ class _CustomDateTimePickerState extends ConsumerState<CustomDateTimePicker> {
       onPressed: () => _showTimePicker(context),
       child: Text(
         _selectedTime.format(context),
+        style: AriesTextStyles.textHeading6,
       ),
     );
   }
