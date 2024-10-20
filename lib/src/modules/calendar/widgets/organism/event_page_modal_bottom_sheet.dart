@@ -1,8 +1,9 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
-import 'package:religion_calendar_app/src/modules/calendar/widgets/molecules/molecules.dart';
+import 'package:religion_calendar_app/src/modules/calendar/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
@@ -45,19 +46,18 @@ class EventPageModalBottomSheet extends ConsumerStatefulWidget {
 class _EventPageModalBottomSheetState
     extends ConsumerState<EventPageModalBottomSheet> {
   TextEditingController eventNameInputController = TextEditingController();
-  TextEditingController locationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
-      heightFactor: 0.90,
+      heightFactor: 0.94,
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
-          top: 16,
-          left: 16,
-          right: 16,
+          top: 16.h,
+          left: 16.w,
+          right: 16.w,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -80,10 +80,13 @@ class _EventPageModalBottomSheetState
             const CustomDateTimePicker(
               isStartDate: true,
             ),
-            Spacing.sp12,
             const CustomDateTimePicker(
               isStartDate: false,
             ),
+            Spacing.sp24,
+            const EventDivider(),
+            Spacing.sp12,
+            const EventLocationInput(),
           ],
         ),
       ),
