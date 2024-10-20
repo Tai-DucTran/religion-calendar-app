@@ -176,9 +176,7 @@ class _DateTimePickerSectionState extends ConsumerState<DateTimePickerSection> {
           border: Border.all(color: AriesColor.neutral50),
         ),
         child: Text(
-          widget.isStartDate
-              ? LocalizedKeys.startingEventDateText
-              : LocalizedKeys.endingEventDateText,
+          widget.isStartDate ? LocalizedKeys.fromText : LocalizedKeys.toText,
         ),
       ),
     );

@@ -59,46 +59,49 @@ class _CustomDateTimePickerState extends ConsumerState<CustomDateTimePicker> {
     final currentEventDateTime = ref.watch(eventDateTimeControllerProvider);
     print('Tai logs - currentEventDateTime $currentEventDateTime');
 
-    return ListTile(
-      isThreeLine: true,
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      leading: _buildLeadingLabel(),
-      title: _buildDateButton(context, currentLocale),
-      subtitle: _buildDateSubtitle(currentLocale, isLunarCalendar),
-      trailing: isAllDay ? null : _buildTimeButton(context, currentLocale),
+    return Row(
+      children: [
+        _buildLeadingLabel(),
+        Spacing.sp4,
+        Column(
+          children: [
+            _buildDateButton(
+              context,
+              currentLocale,
+            ),
+            _buildDateSubtitle(
+              currentLocale,
+              isLunarCalendar,
+            )
+          ],
+        ),
+        Spacing.sp16,
+        if (!isAllDay) _buildTimeButton(context, currentLocale),
+      ],
     );
   }
 
   Widget _buildLeadingLabel() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8),
-      child: Container(
-        alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        width: 85,
-        height: 30,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: AriesColor.neutral50),
-        ),
-        child: Text(
-          widget.isStartDate
-              ? LocalizedKeys.startingEventDateText
-              : LocalizedKeys.endingEventDateText,
-        ),
-      ),
+    return Text(
+      widget.isStartDate ? LocalizedKeys.fromText : LocalizedKeys.toText,
     );
   }
 
   Widget _buildDateButton(BuildContext context, String locale) {
     return CupertinoButton(
       padding: EdgeInsets.zero,
-      alignment: Alignment.centerLeft,
+      alignment: Alignment.center,
       onPressed: () => _showDatePicker(context),
       child: Text(
-        DateFormat(DateTimeFormat.dateShortMonthYear, locale)
-            .format(_selectedDate),
+        DateFormat(
+          DateTimeFormat.dateMonthYear,
+          locale,
+        ).format(
+          _selectedDate,
+        ),
+        style: AriesTextStyles.textHeading6.copyWith(
+          color: AriesColor.yellowP300,
+        ),
       ),
     );
   }
