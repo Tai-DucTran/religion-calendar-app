@@ -58,15 +58,13 @@ String getLunarDateNumberText({required DateTime inputDate, int? timeZone}) {
 
 String getFullSolarDateText({
   int? timeZone,
-  bool isIncludingWeekdayName = false,
+  String? dateFormat,
   DateTime? inputDate,
   String? locale,
 }) {
   final date = inputDate ?? getCurrentSolarDate(timeZone: timeZone);
   final formatter = DateFormat(
-    isIncludingWeekdayName
-        ? DateTimeFormat.weekDateMonthYear
-        : DateTimeFormat.dateMonthYear,
+    dateFormat ?? DateTimeFormat.dateMonthYear,
     locale,
   );
 
