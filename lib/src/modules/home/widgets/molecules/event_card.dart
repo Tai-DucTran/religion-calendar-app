@@ -34,7 +34,6 @@ class EventCard extends StatelessWidget {
     final countDownFromNow = eventDate.difference(now).inDays;
     final solarDate = getFullSolarDateText(
       inputDate: eventDate,
-      isIncludingWeekdayName: true,
       locale: currentLocale,
     );
     final lunarDate = getFullLunarDateText(

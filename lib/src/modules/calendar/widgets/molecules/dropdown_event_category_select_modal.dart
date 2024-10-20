@@ -36,6 +36,7 @@ class DropDownEventCategorySelectModal extends ConsumerWidget {
                   value: option,
                   child: Text(
                     option.localized,
+                    style: AriesTextStyles.textBodySmall,
                   ),
                 );
               },

@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../helpers.dart';
+import '../utils/helpers.dart';
 
 final getCurrentWeekProvider = Provider<List<DateTime>>((ref) {
   return getCurrentWeekDates();

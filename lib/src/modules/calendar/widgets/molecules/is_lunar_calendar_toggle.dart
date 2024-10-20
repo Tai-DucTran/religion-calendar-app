@@ -1,6 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/controllers/controllers.dart';
@@ -19,19 +20,17 @@ class IsLunarCalendarToggle extends ConsumerWidget {
       children: [
         SvgPicture.asset(
           AriesIcons.moon01Icon,
-          width: 16,
-          height: 16,
+          width: 16.w,
+          height: 16.h,
         ),
         Spacing.sp8,
         Text(
           '${LocalizedKeys.calendarCategoryLunarText}?',
-          style: AriesTextStyles.textBodyMedium.copyWith(
-            fontSize: 12,
-          ),
+          style: AriesTextStyles.textBodySmall,
         ),
         Spacing.sp8,
         SizedBox(
-          width: 36,
+          width: 36.w,
           child: FittedBox(
             child: CupertinoSwitch(
               value: isLunarCalendar,
