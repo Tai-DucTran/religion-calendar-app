@@ -73,20 +73,21 @@ class _EventPageModalBottomSheetState
             Spacing.sp12,
             const IsLunarCalendarToggle(),
             Spacing.sp12,
-            const DropDownEventCategorySelectModal(),
+            const EventCategorySelect(),
             Spacing.sp32,
             const IsAllDayToggle(),
             Spacing.sp12,
-            const CustomDateTimePicker(
+            const CustomDateTimeSelect(
               isStartDate: true,
             ),
-            const CustomDateTimePicker(
+            const CustomDateTimeSelect(
               isStartDate: false,
             ),
             Spacing.sp24,
             const EventDivider(),
             Spacing.sp12,
             const EventLocationInput(),
+            Spacing.sp12,
           ],
         ),
       ),

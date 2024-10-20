@@ -12,8 +12,8 @@ import 'dart:async';
 
 import 'package:religion_calendar_app/src/utils/log.dart';
 
-class CustomDateTimePicker extends ConsumerStatefulWidget {
-  const CustomDateTimePicker({
+class CustomDateTimeSelect extends ConsumerStatefulWidget {
+  const CustomDateTimeSelect({
     super.key,
     this.initialDate,
     required this.isStartDate,
@@ -23,11 +23,29 @@ class CustomDateTimePicker extends ConsumerStatefulWidget {
   final bool isStartDate;
 
   @override
-  ConsumerState<CustomDateTimePicker> createState() =>
-      _CustomDateTimePickerState();
+  ConsumerState<CustomDateTimeSelect> createState() =>
+      _CustomDateTimeSelectState();
 }
 
-class _CustomDateTimePickerState extends ConsumerState<CustomDateTimePicker> {
+class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
+  /// [_debounce], [_pendingUpdate], [_isScrolling], [_scrollSettleTime]
+  /// These values helps to resolve the issue
+  ///! ERROR:flutter/impeller/base/validation.cc(59)] Break on 'ImpellerValidationBreak'
+  ///! to inspect point of failure: Could not find font in the atlas.
+  ///
+  /// This happens because the state of rendered time update so frequently along with
+  /// the frequency of updates and the likelihood of race conditions of dateTime
+  ///
+  ///* Solution:
+  /// - introduces a delay before applying updates, which can help prevent rapid.
+  /// - before updating the dateTime value on screen, it need to wait [_scrollSettleTime]
+  ///  to ensure the scrolling behavior in [CupertinoDatePicker] stops completely
+  ///
+  /// TODO (Tai): Refactor this widget, self implementation instead of using [CupertinoDatePicker]
+  /// Consider to refactor if the app reach over 10k users or we want to support different calendar
+  /// categories such as Islamic lunar calendar using [hijri] library
+  /// source: https://pub.dev/packages/hijri
+
   late DateTime _selectedDate;
   late TimeOfDay _selectedTime;
 

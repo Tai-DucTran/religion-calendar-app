@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/src/modules/calendar/controllers/event_category_controller.dart';
 import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
 
-class DropDownEventCategorySelectModal extends ConsumerWidget {
-  const DropDownEventCategorySelectModal({super.key});
+class EventCategorySelect extends ConsumerWidget {
+  const EventCategorySelect({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
