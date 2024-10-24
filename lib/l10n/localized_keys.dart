@@ -52,6 +52,13 @@ class LocalizedKeys {
   static String get eventLocation => AppLocalizations.of(_context)!.eventLocation;
   static String get eventFrequentReminder => AppLocalizations.of(_context)!.eventFrequentReminder;
   static String get eventRemindMeBefore => AppLocalizations.of(_context)!.eventRemindMeBefore;
+  static String get atTimeOfEventText => AppLocalizations.of(_context)!.atTimeOfEventText;
+  static String get tenMinutesText => AppLocalizations.of(_context)!.tenMinutesText;
+  static String get thirtyMinutesText => AppLocalizations.of(_context)!.thirtyMinutesText;
+  static String get oneHourText => AppLocalizations.of(_context)!.oneHourText;
+  static String get oneDayText => AppLocalizations.of(_context)!.oneDayText;
+  static String get threeDaysText => AppLocalizations.of(_context)!.threeDaysText;
+  static String get oneWeekText => AppLocalizations.of(_context)!.oneWeekText;
   static String get sharingEventButtonText => AppLocalizations.of(_context)!.sharingEventButtonText;
   static String get viewAllButtonText => AppLocalizations.of(_context)!.viewAllButtonText;
   static String get selectButtonText => AppLocalizations.of(_context)!.selectButtonText;
