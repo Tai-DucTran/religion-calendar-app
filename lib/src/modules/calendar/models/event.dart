@@ -124,6 +124,63 @@ extension RepeatedFrequencyExtension on RepeatedFrequency {
   }
 }
 
+enum RemindMeBeforeOptions {
+  @JsonValue('AT_TIME')
+  atTime,
+  @JsonValue('TEN_MINUTES')
+  tenMinutes,
+  @JsonValue('THIRTHY_MINUTES')
+  thirtyMinutes,
+  @JsonValue('ONE_HOUR')
+  oneHour,
+  @JsonValue('ONE_DAY')
+  oneDay,
+  @JsonValue('THREE_DAYS')
+  threeDays,
+  @JsonValue('ONE_WEEK')
+  oneWeek,
+}
+
+extension RemindMeBeforeOptionsExtension on RemindMeBeforeOptions {
+  String get localized {
+    switch (this) {
+      case RemindMeBeforeOptions.atTime:
+        return LocalizedKeys.atTimeOfEventText;
+      case RemindMeBeforeOptions.tenMinutes:
+        return LocalizedKeys.tenMinutesText;
+      case RemindMeBeforeOptions.thirtyMinutes:
+        return LocalizedKeys.thirtyMinutesText;
+      case RemindMeBeforeOptions.oneHour:
+        return LocalizedKeys.oneHourText;
+      case RemindMeBeforeOptions.oneDay:
+        return LocalizedKeys.oneDayText;
+      case RemindMeBeforeOptions.threeDays:
+        return LocalizedKeys.threeDaysText;
+      case RemindMeBeforeOptions.oneWeek:
+        return LocalizedKeys.oneWeekText;
+    }
+  }
+
+  double get fromStringToDouble {
+    switch (this) {
+      case RemindMeBeforeOptions.atTime:
+        return 0;
+      case RemindMeBeforeOptions.tenMinutes:
+        return 10 / 60;
+      case RemindMeBeforeOptions.thirtyMinutes:
+        return 0.5;
+      case RemindMeBeforeOptions.oneHour:
+        return 1;
+      case RemindMeBeforeOptions.oneDay:
+        return 24;
+      case RemindMeBeforeOptions.threeDays:
+        return 24 * 3;
+      case RemindMeBeforeOptions.oneWeek:
+        return 24 * 7;
+    }
+  }
+}
+
 enum ImportantLevel {
   @JsonValue('IMPORTANT')
   important,
