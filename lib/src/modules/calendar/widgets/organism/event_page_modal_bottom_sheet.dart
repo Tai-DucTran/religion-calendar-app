@@ -46,53 +46,105 @@ class EventPageModalBottomSheet extends ConsumerStatefulWidget {
 class _EventPageModalBottomSheetState
     extends ConsumerState<EventPageModalBottomSheet> {
   TextEditingController eventNameInputController = TextEditingController();
+  TextEditingController eventDescriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
+
     return FractionallySizedBox(
       heightFactor: 0.94,
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-          top: 16.h,
-          left: 16.w,
-          right: 16.w,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Spacing.sp24,
-            Center(
-              child: IntrinsicWidthTextField(
-                controller: eventNameInputController,
-                hintText: LocalizedKeys.eventInputHintText,
+      child: Padding(
+        padding: EdgeInsets.only(bottom: bottomPadding),
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.only(
+            top: 16.h,
+            left: 16.w,
+            right: 16.w,
+          ),
+          child: ListView(
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Spacing.sp24,
+                  Center(
+                    child: IntrinsicWidthTextField(
+                      controller: eventNameInputController,
+                      hintText: LocalizedKeys.eventInputHintText,
+                    ),
+                  ),
+                  Spacing.sp12,
+                  const IsLunarCalendarToggle(),
+                  Spacing.sp12,
+                  const EventCategorySelect(),
+                  Spacing.sp32,
+                  const IsAllDayToggle(),
+                  Spacing.sp12,
+                  const CustomDateTimeSelect(
+                    isStartDate: true,
+                  ),
+                  const CustomDateTimeSelect(
+                    isStartDate: false,
+                  ),
+                  Spacing.sp24,
+                  const EventDivider(),
+                  Spacing.sp12,
+                  const EventLocationInput(),
+                  Spacing.sp12,
+                  const RepeatedFrequencySelect(),
+                  Spacing.sp12,
+                  const RemindMeBeforeSelect(),
+                  Spacing.sp12,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: const Text('Title'),
+                      ),
+                      Container(
+                        child: const Text('InputSection'),
+                      ),
+                    ],
+                  ),
+                  Spacing.sp12,
+                  Form(
+                    child: TextFormField(
+                      autocorrect: false,
+                      autofocus: true,
+                      minLines: 1,
+                      maxLines: null,
+                      maxLength: 280,
+                      decoration: const InputDecoration(
+                        labelText: 'Add description',
+                        labelStyle: TextStyle(
+                          color: AriesColor.neutral100,
+                        ),
+                        alignLabelWithHint: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: AriesColor.neutral100,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: AriesColor.neutral100,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                ],
               ),
-            ),
-            Spacing.sp12,
-            const IsLunarCalendarToggle(),
-            Spacing.sp12,
-            const EventCategorySelect(),
-            Spacing.sp32,
-            const IsAllDayToggle(),
-            Spacing.sp12,
-            const CustomDateTimeSelect(
-              isStartDate: true,
-            ),
-            const CustomDateTimeSelect(
-              isStartDate: false,
-            ),
-            Spacing.sp24,
-            const EventDivider(),
-            Spacing.sp12,
-            const EventLocationInput(),
-            Spacing.sp12,
-            const RepeatedFrequencySelect(),
-            Spacing.sp12,
-            const RemindMeBeforeSelect(),
-            Spacing.sp12,
-          ],
+            ],
+          ),
         ),
       ),
     );
