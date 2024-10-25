@@ -1,7 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
-import 'package:religion_calendar_app/src/constants/constants.dart';
+import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class DateSubtitlePicker extends StatelessWidget {

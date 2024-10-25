@@ -1,6 +1,6 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
-import 'package:religion_calendar_app/src/constants/constants.dart';
+import 'package:religion_calendar_app/constants/constants.dart';
 
 class TodayEventQuote extends StatelessWidget {
   const TodayEventQuote({

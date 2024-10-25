@@ -6,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'firebase_options.dart';
 import 'src/modules/authentication/authentication.dart';
-import 'src/modules/router/router_provider.dart';
+import 'src/router/router_provider.dart';
 import 'src/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

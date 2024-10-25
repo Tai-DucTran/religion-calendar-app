@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:religion_calendar_app/src/constants/constants.dart';
+import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
-import 'package:religion_calendar_app/src/modules/router/routes.dart';
+import 'package:religion_calendar_app/src/router/routes.dart';
 import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

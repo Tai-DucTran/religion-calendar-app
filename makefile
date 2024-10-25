@@ -11,9 +11,6 @@ bs:
 gen:
 	melos clean && melos bs && melos generate:all
 
-icons:
-	cd packages/aries && dart run lib/src/icon/generate_icons.dart
-
 l10n: |
 	flutter gen-l10n
 	dart run lib/l10n/generate_localized_keys.dart

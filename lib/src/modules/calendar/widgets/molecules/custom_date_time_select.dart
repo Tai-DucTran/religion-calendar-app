@@ -6,7 +6,7 @@ import 'package:full_calender/full_calender_extension.dart';
 import 'package:full_calender/models/lunar_date_time.dart';
 import 'package:intl/intl.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
-import 'package:religion_calendar_app/src/constants/constants.dart';
+import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'dart:async';
 

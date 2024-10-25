@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:religion_calendar_app/src/modules/navigation_bottom_bar/navigation_bottom_bar.dart';
-import 'package:religion_calendar_app/src/modules/router/routes.dart';
+import 'package:religion_calendar_app/src/router/routes.dart';
 
 class NavigationBottomBar extends ConsumerStatefulWidget {
   const NavigationBottomBar({

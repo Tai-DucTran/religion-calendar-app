@@ -7,9 +7,9 @@ import 'package:religion_calendar_app/src/modules/navigation_bottom_bar/widgets/
 import 'package:religion_calendar_app/src/modules/onboarding/widgets/page/onboarding_religion_preference_page.dart';
 import 'package:religion_calendar_app/src/modules/sign_up/widgets/page/page.dart';
 
-import '../explore_page/widgets/widgets.dart';
-import '../home/widgets/pages/pages.dart';
-import '../profile_page/widgets/widgets.dart';
+import '../modules/explore_page/widgets/widgets.dart';
+import '../modules/home/widgets/pages/pages.dart';
+import '../modules/profile_page/widgets/widgets.dart';
 
 part 'routes.g.dart';
 

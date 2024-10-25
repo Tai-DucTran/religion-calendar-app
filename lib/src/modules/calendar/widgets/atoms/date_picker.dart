@@ -2,7 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:religion_calendar_app/src/constants/constants.dart';
+import 'package:religion_calendar_app/constants/constants.dart';
 
 class DatePicker extends StatefulWidget {
   const DatePicker({

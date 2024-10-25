@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
-import 'package:religion_calendar_app/src/helper/string_helper.dart';
+import 'package:religion_calendar_app/src/utils/string_helper.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 

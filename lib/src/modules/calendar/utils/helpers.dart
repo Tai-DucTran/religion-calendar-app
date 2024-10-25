@@ -2,7 +2,7 @@ import 'package:full_calender/enums/time_zone.dart';
 import 'package:full_calender/full_calender.dart';
 import 'package:full_calender/models/lunar_date_time.dart';
 import 'package:intl/intl.dart';
-import 'package:religion_calendar_app/src/constants/constants.dart';
+import 'package:religion_calendar_app/constants/constants.dart';
 
 DateTime getCurrentSolarDate({int? timeZone}) =>
     FullCalender.now(timeZone ?? TimeZone.vietnamese.timezone).date;

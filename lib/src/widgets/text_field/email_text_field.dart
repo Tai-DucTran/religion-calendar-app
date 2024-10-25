@@ -2,7 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
-import 'package:religion_calendar_app/src/constants/constants.dart';
+import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
