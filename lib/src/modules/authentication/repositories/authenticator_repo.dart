@@ -101,8 +101,9 @@ class AuthenticatorRepository {
       );
       final user = currentUser;
       if (user != null) {
-        //TODO (Tai): Handle verify flow
-        // await sendEmailVerification(user);
+        /// TODO (Tai): Handle verify flow
+        /// https://taisidehustle.atlassian.net/browse/KAN-11
+        /// await sendEmailVerification(user);
         return AuthResults.success;
       } else {
         throw UserNotLoggedInAuthException();
@@ -148,9 +149,11 @@ class AuthenticatorRepository {
         case 'wrong-password':
           throw WrongPasswordAuthException();
         // TODO (Tai): Find the reason why it only throws `invalid-credential` for most of all cases
+        // https://taisidehustle.atlassian.net/browse/KAN-66
         case 'invalid-credential':
           throw InvalidCredentialAuthException();
         // TODO (Tai): Handled this case to prevent DOS attack
+        // https://taisidehustle.atlassian.net/browse/KAN-66
         case 'too-many-requests':
           throw TooManyRequestAuthException();
         default:

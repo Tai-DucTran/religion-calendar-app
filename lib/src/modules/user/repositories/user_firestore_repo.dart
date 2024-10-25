@@ -68,7 +68,6 @@ class UserFirestoreRepository {
     }
   }
 
-  // TODO: Implement onboarding page
   Future<void> updateReligionPreferenceOnboarding({
     required UserId? userId,
     required String religionPreference,

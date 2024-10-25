@@ -219,9 +219,6 @@ enum EventCategory {
   personalEvent,
   @JsonValue('OTHER_EVENT')
   otherEvent,
-  // TODO (TAI): Allow user to create a custom field
-  // @JsonValue('CUSTOM')
-  // customEvent,
 }
 
 extension EventCategoryExtension on EventCategory {
@@ -237,9 +234,6 @@ extension EventCategoryExtension on EventCategory {
         return LocalizedKeys.eventCategoryPersonalText;
       case EventCategory.otherEvent:
         return LocalizedKeys.eventCategoryOtherText;
-      // TODO (TAI): Allow user to create a custom field
-      // case EventCategory.customEvent:
-      //   return LocalizedKeys.custom;
     }
   }
 }

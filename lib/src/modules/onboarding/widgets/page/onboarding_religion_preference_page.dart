@@ -77,7 +77,6 @@ class OnboardingReligionPreferencePage extends ConsumerWidget {
                           color: color,
                         )
                       : null,
-                  // TODO (Tai): Implement save user religion on fir
                   onTap: () {
                     ref.read(currentReligionProvider.notifier).state = religion;
                   },
@@ -100,6 +99,7 @@ class OnboardingReligionPreferencePage extends ConsumerWidget {
               },
             ),
             // TODO (Tai): Implement submit request form
+            // https://taisidehustle.atlassian.net/browse/KAN-67
             Spacing.sp24,
             BottomRichTextWithAction(
               initialQuestion: '${LocalizedKeys.youWantToHaveYourReligion} ',
