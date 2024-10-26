@@ -137,10 +137,6 @@ How to add an asset to Aries such images, icons:
 - Always create a new jira card task and add it below the comment
 
 Example:
-<<<<<<< HEAD
-`/// TODO (Tai): Handle verify flow
-        /// https://taisidehustle.atlassian.net/browse/KAN-11`
-=======
 `/// TODO (Tai): Handle verify flow
         /// https://taisidehustle.atlassian.net/browse/KAN-11`
 
@@ -164,4 +160,5 @@ To name the branch follows these convention
 - This is the 3rd conflict line.
 - This is the 4th conflict line.
 - This is the 5th conflict line.
+- This is the 6th conflict line.
 - This is the last conflict line.
