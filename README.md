@@ -156,9 +156,6 @@ To name the branch follows these convention
 - To update or changes something nits: `Housekeeping: commit message`
 
 - This is the first conflict line.
-- This is the 2nd conflict line.
-- This is the 3rd conflict line.
-- This is the 4th conflict line.
 - This is the 5th conflict line.
 - This is the 6th conflict line.
 - This is the last conflict line.
