@@ -1,1 +1,1 @@
-export 'event_page_modal_bottom_sheet.dart';
+export 'event_detail_modal_bottom_sheet.dart';

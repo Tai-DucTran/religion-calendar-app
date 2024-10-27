@@ -6,8 +6,9 @@ import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 
-class EventPageModalBottomSheet extends ConsumerStatefulWidget {
-  const EventPageModalBottomSheet(this.userId, this.selectedDate, {super.key});
+class EventDetailModalBottomSheet extends ConsumerStatefulWidget {
+  const EventDetailModalBottomSheet(this.userId, this.selectedDate,
+      {super.key});
 
   final UserId userId;
   final DateTime? selectedDate;
@@ -29,7 +30,7 @@ class EventPageModalBottomSheet extends ConsumerStatefulWidget {
           ),
         ),
       ),
-      builder: (context) => EventPageModalBottomSheet(
+      builder: (context) => EventDetailModalBottomSheet(
         userId,
         selectedDate,
       ),
@@ -39,11 +40,11 @@ class EventPageModalBottomSheet extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _EventPageModalBottomSheetState();
+      _EventDetailModalBottomSheetState();
 }
 
-class _EventPageModalBottomSheetState
-    extends ConsumerState<EventPageModalBottomSheet> {
+class _EventDetailModalBottomSheetState
+    extends ConsumerState<EventDetailModalBottomSheet> {
   TextEditingController eventNameInputController = TextEditingController();
   TextEditingController eventDescriptionController = TextEditingController();
 

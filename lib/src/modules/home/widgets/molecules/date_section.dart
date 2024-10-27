@@ -41,7 +41,7 @@ class DateSection extends ConsumerWidget {
       borderRadius: BorderRadius.circular(4.r),
       child: InkWell(
         onTap: () async {
-          final result = await EventPageModalBottomSheet.show(
+          final result = await EventDetailModalBottomSheet.show(
             userId: userId ?? '',
             selectedDate: inputDate,
             context,

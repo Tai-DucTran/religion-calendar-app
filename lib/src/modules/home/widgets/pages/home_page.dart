@@ -39,7 +39,7 @@ class HomePage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final result = await EventPageModalBottomSheet.show(
+          final result = await EventDetailModalBottomSheet.show(
             userId: userId ?? '',
             context,
           );
