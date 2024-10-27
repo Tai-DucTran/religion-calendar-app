@@ -1,3 +1,4 @@
+import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -94,5 +95,22 @@ class AriesTextStyles {
         fontWeight: FontWeight.normal, // Switch to FontWeight.w600 for Semibold
         fontSize: 12.sp,
         overflow: TextOverflow.ellipsis,
+      );
+
+  /// This textStyle formats are used in [EventPageModalBottomSheet] widget
+  //* Hint Text Field style:
+  static TextStyle get textHintTextField => TextStyle(
+        overflow: TextOverflow.ellipsis,
+        color: AriesColor.neutral60,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w600,
+      );
+
+  //* Text Input Field style:
+  static TextStyle get textInputField => TextStyle(
+        overflow: TextOverflow.ellipsis,
+        color: AriesColor.yellowP300,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w600,
       );
 }
