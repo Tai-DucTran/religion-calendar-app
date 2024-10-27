@@ -6,8 +6,8 @@ import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
-class EmailTextField extends StatefulWidget {
-  const EmailTextField({
+class EmailTextFormField extends StatefulWidget {
+  const EmailTextFormField({
     super.key,
     this.controller,
     this.isValidEmail,
@@ -17,10 +17,10 @@ class EmailTextField extends StatefulWidget {
   final bool? isValidEmail;
 
   @override
-  State<EmailTextField> createState() => _EmailTextFieldState();
+  State<EmailTextFormField> createState() => _EmailTextFormFieldState();
 }
 
-class _EmailTextFieldState extends State<EmailTextField> {
+class _EmailTextFormFieldState extends State<EmailTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormFieldContainer(

@@ -20,7 +20,7 @@ class ForgotPaswordPage extends HookConsumerWidget {
             ),
           ),
           Spacing.sp24,
-          const EmailTextField(),
+          const EmailTextFormField(),
           Spacing.sp24,
           CtaFullWidthButton(
             buttonText: 'Reset Password',

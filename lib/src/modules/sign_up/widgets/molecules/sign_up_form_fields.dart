@@ -65,7 +65,7 @@ class _SignUpFormFieldsState extends ConsumerState<SignUpFormFields> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            EmailTextField(
+            EmailTextFormField(
               controller: _emailController,
               isValidEmail: _isEmailValid,
             ),
