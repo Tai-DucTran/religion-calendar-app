@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
-import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class EventPageModalBottomSheet extends ConsumerStatefulWidget {
   const EventPageModalBottomSheet(this.userId, this.selectedDate, {super.key});
@@ -98,46 +97,8 @@ class _EventPageModalBottomSheetState
                   Spacing.sp12,
                   const RemindMeBeforeSelect(),
                   Spacing.sp12,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        child: const Text('Title'),
-                      ),
-                      Container(
-                        child: const Text('InputSection'),
-                      ),
-                    ],
-                  ),
+                  const EventDescriptionInput(),
                   Spacing.sp12,
-                  Form(
-                    child: TextFormField(
-                      autocorrect: false,
-                      autofocus: true,
-                      minLines: 1,
-                      maxLines: null,
-                      maxLength: 280,
-                      decoration: const InputDecoration(
-                        labelText: 'Add description',
-                        labelStyle: TextStyle(
-                          color: AriesColor.neutral100,
-                        ),
-                        alignLabelWithHint: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 1,
-                            color: AriesColor.neutral100,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 1,
-                            color: AriesColor.neutral100,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                   SizedBox(
                     height: 20.h,
                   ),

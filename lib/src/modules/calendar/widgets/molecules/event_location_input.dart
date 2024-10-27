@@ -1,7 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
-import 'package:religion_calendar_app/src/widgets/widgets.dart';
+import 'package:religion_calendar_app/src/modules/calendar/widgets/widgets.dart';
 
 class EventLocationInput extends StatefulWidget {
   const EventLocationInput({super.key});
