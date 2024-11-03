@@ -54,6 +54,7 @@
   "submitHereButtonText": "Submit here",
   "calendarCategorySolarText": "Solar calendar",
   "calendarCategoryLunarText": "Lunar calendar",
+  "calendarCategoryLunarAcronymText": "Lunar",
   "dailyText": "Daily",
   "weeklyText": "Weekly",
   "biweeklyText": "Biweekly",
