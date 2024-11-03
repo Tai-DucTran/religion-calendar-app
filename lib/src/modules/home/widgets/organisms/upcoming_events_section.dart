@@ -2,6 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/home/widgets/widgets.dart';
@@ -35,11 +36,13 @@ class UpComingEventsSection extends ConsumerWidget {
                 children: [
                   ...displayedEvents.map(
                     (event) {
+                      final eventTime = DateFormat(DateTimeFormat.hourMinute)
+                          .format(event.startDate);
+
                       return EventCard(
                         eventName: event.title,
                         eventDate: event.startDate,
-                        eventTime:
-                            '${event.startDate.hour}:${event.startDate.minute}',
+                        eventTime: eventTime,
                         eventCategory: event.eventCategory,
                         eventLocation: event.location,
                         eventImageUrl: AriesImages.defaultFamilyEvent,
