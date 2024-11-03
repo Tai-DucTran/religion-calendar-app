@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'firebase_options.dart';
 import 'src/modules/authentication/authentication.dart';
+import 'src/modules/geoip_and_locales/controllers/controllers.dart';
 import 'src/router/router_provider.dart';
 import 'src/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -28,6 +29,7 @@ class ReligionCalendar extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authStateControllerProvider);
     final router = ref.watch(routerProvider);
+    final currentLocale = ref.watch(localeControllerProvider);
 
     return MaterialApp.router(
       routerConfig: router,
@@ -41,6 +43,7 @@ class ReligionCalendar extends HookConsumerWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      locale: currentLocale,
       builder: (ctx, child) {
         LocalizedKeys.setContext(ctx);
         ScreenUtil.init(ctx);

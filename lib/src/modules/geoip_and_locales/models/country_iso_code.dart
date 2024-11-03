@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:religion_calendar_app/src/modules/geoip/models/supported_locales.dart';
+import 'package:religion_calendar_app/src/modules/geoip_and_locales/models/supported_locales.dart';
 
 @JsonEnum(fieldRename: FieldRename.screamingSnake)
 enum CountryIsoCode {
