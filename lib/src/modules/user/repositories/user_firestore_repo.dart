@@ -34,8 +34,13 @@ class UserFirestoreRepository {
 
   Future<User?> getUserDetailedInfor(String userId) async {
     final userDoc = await fetchUserInfor(userId);
+    final userDataJson = userDoc.docs.first.data();
 
-    return userDoc.docs.first.data() as User;
+    if (userDataJson != null) {
+      return User.fromJson(userDataJson);
+    }
+
+    return null;
   }
 
   Future<bool> saveUserInfo(User user) async {
