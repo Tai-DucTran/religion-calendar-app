@@ -19,7 +19,7 @@ class UserEventRepository {
     try {
       final snapshot = await firestoreUserRef
           .doc(userId)
-          .collection(FirebaseCollectionName.userEvents)
+          .collection(FirebaseCollectionName.events)
           .get();
 
       final events = snapshot.docs
