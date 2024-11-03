@@ -35,8 +35,6 @@ class ReligionEventRepository {
           })
           .whereType<ReligionEvent>()
           .toList();
-
-      print('Tai logs - events in Repo: ${events.length}');
       return events;
     } catch (error) {
       throw Exception(
