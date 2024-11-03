@@ -7,7 +7,8 @@ The religion mobile app.
 1. Follow the instructions in [Flutter Version Management](#Flutter-Version-Management)
 2. Install [Melos](#Melos) as a global package via pub.dev so it can be used from anywhere on your system. `dart pub global activate melos`
 3. Bootstrap the repository with `melos bs`
-4. Generate the necessary files with `melos run generate` or check out [makefile]
+4. Generate the necessary files with `melos run generate` or check out [makefile].
+   **_Small Note_**: [router.g.dart] will be fail after running this command. so you only need to discard its changes.
 
 ## Flutter Version Management
 
@@ -24,6 +25,8 @@ Melos is a CLI tool used to help manage Dart projects with multiple packages.
 All Melos scripts can be run using `melos run {script name}`
 
 1. `Generate`: Build all generated files for Dart & Flutter packages in this project.
+   **_Small Note_**: [router.g.dart] will be fail after running this command. so you only need to discard its changes.
+
 2. `Test`: Runs all test for Dart & Flutter packages in this project.
 3. Common CLI commands: https://melos.invertase.dev/commands/analyze
 
