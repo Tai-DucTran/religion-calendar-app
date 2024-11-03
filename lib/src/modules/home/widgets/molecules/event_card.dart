@@ -42,9 +42,15 @@ class EventCard extends StatelessWidget {
       dateFormat: 'dd, MMMM',
     );
     final isToday = isDateToday(eventDate);
+    final isReligionEvent = eventCategory == EventCategory.religionEvent;
+    final selectedDefaultImage = isReligionEvent
+        ? AriesImages.defaultCatholicismEvent
+        : AriesImages.defaultFamilyEvent;
 
     return Padding(
-      padding: EdgeInsets.only(top: 16.h),
+      padding: EdgeInsets.only(
+        top: 16.h,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -56,7 +62,13 @@ class EventCard extends StatelessWidget {
                 style: AriesTextStyles.textBodySmall,
               ),
               Text(
-                lunarDate,
+                joinTwoString(
+                      firstString: lunarDate,
+                      secondString:
+                          LocalizedKeys.calendarCategoryLunarAcronymText,
+                      separator: ', ',
+                    ) ??
+                    '',
                 style: AriesTextStyles.textBodySmall.copyWith(
                   fontSize: 12.sp,
                   color: AriesColor.neutral300,
@@ -87,7 +99,7 @@ class EventCard extends StatelessWidget {
                     maxWidth: 80.w,
                   ),
                   child: SvgPicture.asset(
-                    eventImageUrl ?? AriesImages.defaultEventImage,
+                    eventImageUrl ?? selectedDefaultImage,
                   ),
                 ),
                 SizedBox(width: 16.w),
@@ -101,7 +113,8 @@ class EventCard extends StatelessWidget {
                         maxLines: 2,
                       ),
                       Spacing.sp4,
-                      if (eventTime != null || eventLocation != null) ...[
+                      if ((eventTime != null || eventLocation != null) &&
+                          !isReligionEvent) ...[
                         Text(
                           joinTwoString(
                                 firstString: eventTime,
