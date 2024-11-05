@@ -1,4 +1,3 @@
-import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,7 +44,6 @@ class UpComingEventsSection extends ConsumerWidget {
                         eventTime: eventTime,
                         eventCategory: event.eventCategory,
                         eventLocation: event.location,
-                        eventImageUrl: AriesImages.defaultFamilyEvent,
                       );
                     },
                   ),
