@@ -1,5 +1,6 @@
 import 'package:full_calender/enums/time_zone.dart';
 import 'package:full_calender/full_calender.dart';
+import 'package:full_calender/full_calender_extension.dart';
 import 'package:full_calender/models/lunar_date_time.dart';
 import 'package:intl/intl.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
@@ -124,4 +125,51 @@ class LunarDateFormatter {
     return DateFormat(pattern, locale)
         .format(DateTime(lunarDate.year, lunarDate.month, lunarDate.day));
   }
+}
+
+List<String> getWeekDayNames({
+  String? locale,
+  bool isShortName = false,
+  bool startWithMonday = true,
+}) {
+  final dateFormat = DateFormat(isShortName ? 'EEE' : 'EEEE', locale);
+  final weekdays = isShortName && locale == 'vi'
+      ? dateFormat.dateSymbols.NARROWWEEKDAYS
+      : dateFormat.dateSymbols.WEEKDAYS;
+
+  if (startWithMonday) {
+    return [...weekdays.sublist(1), weekdays.first];
+  }
+  return weekdays;
+}
+
+List<Map<int, int?>> getNumberOfDaysInLunarMonths(
+  int year,
+) {
+  final List<Map<int, int?>> numberOfDaysInMonths = [];
+  for (int i = 0; i <= 12; i++) {
+    final numberOfDays = FullCalenderExtension.getLunarDateNext(
+      fromDate: LunarDateTime(
+        year: year,
+        month: i + 1,
+        day: 1,
+      ),
+      rangeDays: -1,
+    )?.day;
+
+    final daysInMonth = {i: numberOfDays};
+    numberOfDaysInMonths.add(daysInMonth);
+  }
+
+  return numberOfDaysInMonths;
+}
+
+bool isImportantDay(LunarDateTime lunarDate) {
+  final numberOfDaysInMonths = getNumberOfDaysInLunarMonths(lunarDate.year);
+  final lastDayInMonths =
+      numberOfDaysInMonths[lunarDate.month].entries.first.value;
+
+  final lunarDay = lunarDate.day;
+
+  return importantLunarDays.contains(lunarDay) || lunarDay == lastDayInMonths;
 }
