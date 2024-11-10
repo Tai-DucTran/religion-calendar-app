@@ -228,12 +228,44 @@ String getFullLunarDateText({
         ).lunarDate
       : FullCalender.now(timeZone ?? TimeZone.vietnamese.timezone).lunarDate;
 
-  final formatter = DateFormat(
+  return LunarDateFormatter.format(
+    lunarDate,
     dateFormat ?? DateTimeFormat.dateMonthYear,
     locale,
   );
+}
 
-  return formatter.format(
-    DateTime(lunarDate.year, lunarDate.month, lunarDate.day),
-  );
+class LunarDateFormatter {
+  static String format(LunarDateTime lunarDate, String pattern,
+      [String? locale]) {
+    // For February dates > 28, use January as proxy month
+    if (lunarDate.month == 2 && lunarDate.day > 28) {
+      // Use January as proxy month
+      final proxyDate = DateTime(lunarDate.year, 1, lunarDate.day);
+      final formatter = DateFormat(pattern, locale);
+      String formatted = formatter.format(proxyDate);
+
+      // Get February's localized representations
+      final febDate = DateTime(lunarDate.year, 2, 1);
+
+      // Replace month representations
+      final monthNumericFormatter = DateFormat('M', locale);
+      final monthNameFormatter = DateFormat('MMMM', locale);
+      final monthShortFormatter = DateFormat('MMM', locale);
+
+      formatted = formatted
+          .replaceAll(monthNumericFormatter.format(proxyDate),
+              monthNumericFormatter.format(febDate))
+          .replaceAll(monthNameFormatter.format(proxyDate),
+              monthNameFormatter.format(febDate))
+          .replaceAll(monthShortFormatter.format(proxyDate),
+              monthShortFormatter.format(febDate));
+
+      return formatted;
+    }
+
+    // For all other months
+    return DateFormat(pattern, locale)
+        .format(DateTime(lunarDate.year, lunarDate.month, lunarDate.day));
+  }
 }
