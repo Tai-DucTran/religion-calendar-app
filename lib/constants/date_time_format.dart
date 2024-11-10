@@ -12,4 +12,6 @@ class DateTimeFormat {
   static const weekNumber = 'E';
 
   static const hourMinute = 'HH:mm';
+  
+  static const weekDateMonth = 'EEEE, dd MMMM';
 }

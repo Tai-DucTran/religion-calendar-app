@@ -7,6 +7,44 @@ import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
 
+// class IsLunarCalendarToggle extends ConsumerWidget {
+//   const IsLunarCalendarToggle({super.key});
+
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     final isLunarCalendar =
+//         ref.watch(calendarCategoryControllerProvider) == CalendarCategory.lunar;
+
+//     return Row(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: [
+//         SvgPicture.asset(
+//           AriesIcons.moon01Icon,
+//           width: 16.w,
+//           height: 16.h,
+//         ),
+//         Spacing.sp8,
+//         Text(
+//           '${LocalizedKeys.calendarCategoryLunarText}?',
+//           style: AriesTextStyles.textBodySmall,
+//         ),
+//         Spacing.sp8,
+//         SizedBox(
+//           width: 36.w,
+//           child: FittedBox(
+//             child: CupertinoSwitch(
+//               value: isLunarCalendar,
+//               onChanged: (value) => ref
+//                   .read(calendarCategoryControllerProvider.notifier)
+//                   .toggleCategory(),
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
+
 class IsLunarCalendarToggle extends ConsumerWidget {
   const IsLunarCalendarToggle({super.key});
 
@@ -22,13 +60,14 @@ class IsLunarCalendarToggle extends ConsumerWidget {
           AriesIcons.moon01Icon,
           width: 16.w,
           height: 16.h,
+          color: AriesColor.neutral100,
         ),
         Spacing.sp8,
         Text(
           '${LocalizedKeys.calendarCategoryLunarText}?',
           style: AriesTextStyles.textBodySmall,
         ),
-        Spacing.sp8,
+        const Spacer(),
         SizedBox(
           width: 36.w,
           child: FittedBox(
@@ -37,6 +76,7 @@ class IsLunarCalendarToggle extends ConsumerWidget {
               onChanged: (value) => ref
                   .read(calendarCategoryControllerProvider.notifier)
                   .toggleCategory(),
+              activeColor: AriesColor.yellowP200,
             ),
           ),
         ),
