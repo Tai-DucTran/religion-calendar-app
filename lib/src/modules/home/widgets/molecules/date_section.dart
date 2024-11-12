@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class DateSection extends ConsumerWidget {
@@ -20,8 +19,6 @@ class DateSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userId = ref.watch(authenticatorRepositoryProvider).userId;
-
     final String currentLocale = Localizations.localeOf(context).toString();
     final String weekdayName = getWeekdayName(
       inputDate: inputDate,
@@ -42,7 +39,6 @@ class DateSection extends ConsumerWidget {
       child: InkWell(
         onTap: () async {
           final result = await EventDetailModalBottomSheet.show(
-            userId: userId ?? '',
             selectedDate: inputDate,
             context,
           );
