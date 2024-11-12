@@ -2,6 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:religion_calendar_app/constants/constant_values.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
@@ -53,9 +54,11 @@ class _EventDetailModalBottomSheetState
     final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
 
     return FractionallySizedBox(
-      heightFactor: 0.94,
+      heightFactor: bottomSheetHeightFactorMax,
       child: Padding(
-        padding: EdgeInsets.only(bottom: bottomPadding),
+        padding: EdgeInsets.only(
+          bottom: bottomPadding,
+        ),
         child: Container(
           width: double.infinity,
           padding: EdgeInsets.only(
@@ -76,6 +79,7 @@ class _EventDetailModalBottomSheetState
                       hintText: LocalizedKeys.eventInputHintText,
                     ),
                   ),
+                  Spacing.sp12,
                   Spacing.sp12,
                   const IsLunarCalendarToggle(),
                   Spacing.sp12,
