@@ -26,7 +26,22 @@ class WeeklyCalendarSection extends ConsumerWidget {
               currentMonthText,
               style: AriesTextStyles.textHeading5,
             ),
-            Spacing.sp8,
+            IconButton(
+              visualDensity: const VisualDensity(
+                horizontal: -2,
+                vertical: -2,
+              ),
+              padding: EdgeInsets.zero,
+              onPressed: () async {
+                final result = await FullCalendarModalBottomSheet.show(context);
+                if (!result) return;
+              },
+              icon: Icon(
+                Icons.arrow_drop_down_rounded,
+                size: 30.h,
+                color: AriesColor.yellowP300,
+              ),
+            )
           ],
         ),
         SizedBox(height: 8.sp),

@@ -13,16 +13,9 @@ class MainAppBackgroundContainer extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFFFFFFFF),
-            Color(0xFFFAF5E9),
-            Color(0xFFF1E6C7),
-          ],
-          stops: [0.0, 0.695, 1.0],
+      decoration: BoxDecoration(
+        color: const Color(0xFFfcf7e9).withOpacity(
+          0.8,
         ),
       ),
       child: SafeArea(

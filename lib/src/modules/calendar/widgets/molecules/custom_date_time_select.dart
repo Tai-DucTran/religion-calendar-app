@@ -10,8 +10,6 @@ import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'dart:async';
 
-import 'package:religion_calendar_app/src/utils/log.dart';
-
 class CustomDateTimeSelect extends ConsumerStatefulWidget {
   const CustomDateTimeSelect({
     super.key,
@@ -78,8 +76,6 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
     final isLunarCalendar =
         ref.watch(calendarCategoryControllerProvider) == CalendarCategory.lunar;
     final isAllDay = ref.watch(isAllDayToggleControllerProvider);
-    final currentEventDateTime = ref.watch(eventDateTimeControllerProvider);
-    print('Tai logs - currentEventDateTime $currentEventDateTime');
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,8 +148,7 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
         day: _selectedDate.day);
     final solarDateFromLunar =
         FullCalenderExtension.convertLunarDateToSolarDate(lunarDate)!;
-    print('Tai logs - solarDateFromLunar');
-    solarDateFromLunar.log();
+
     final subDateLabel = isLunarCalendar
         ? getFullSolarDateText(
             locale: locale,
