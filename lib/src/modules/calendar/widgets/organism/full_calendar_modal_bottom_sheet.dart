@@ -74,18 +74,8 @@ class _FullCalendarModalBottomSheetState
               left: 12.w,
               right: 12.w,
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  height: 500,
-                  child: FullCalendarSection(
-                    markedDates: markedDates,
-                  ),
-                ),
-                Spacing.sp12,
-                const Divider()
-              ],
+            child: FullCalendarSection(
+              markedDates: markedDates,
             ),
           );
         }),
