@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/geoip_and_locales/models/supported_locales.dart';
@@ -320,6 +321,21 @@ extension EventCategoryExtension on EventCategory {
         return LocalizedKeys.eventCategoryPersonalText;
       case EventCategory.otherEvent:
         return LocalizedKeys.eventCategoryOtherText;
+    }
+  }
+
+  IconData? get icon {
+    switch (this) {
+      case EventCategory.familyEvent:
+        return Icons.family_restroom;
+      case EventCategory.businessEvent:
+        return Icons.work_outline_sharp;
+      case EventCategory.personalEvent:
+        return Icons.person_outline_rounded;
+      case EventCategory.otherEvent:
+        return Icons.messenger_outline_sharp;
+      case EventCategory.religionEvent:
+        return null;
     }
   }
 }
