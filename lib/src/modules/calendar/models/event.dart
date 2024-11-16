@@ -327,11 +327,11 @@ extension EventCategoryExtension on EventCategory {
   IconData? get icon {
     switch (this) {
       case EventCategory.familyEvent:
-        return Icons.family_restroom;
+        return Icons.family_restroom_sharp;
       case EventCategory.businessEvent:
-        return Icons.work_outline_sharp;
+        return Icons.work_history_outlined;
       case EventCategory.personalEvent:
-        return Icons.person_outline_rounded;
+        return Icons.perm_contact_cal_outlined;
       case EventCategory.otherEvent:
         return Icons.messenger_outline_sharp;
       case EventCategory.religionEvent:

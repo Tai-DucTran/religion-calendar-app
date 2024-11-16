@@ -57,25 +57,24 @@ class FullCalendarEventCard extends ConsumerWidget {
           children: [
             Row(
               children: [
-                Stack(
-                  alignment: Alignment.bottomCenter,
+                Column(
                   children: [
-                    Container(
-                      height: 16.r,
-                      width: 16.r,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: isReligionEvent
-                            ? AriesColor.danger75
-                            : AriesColor.yellowP75,
-                      ),
-                    ),
                     Icon(
                       size: 24.r,
                       isReligionEvent
                           ? Icons.church_outlined
                           : eventCategory?.icon,
                       color: AriesColor.neutral300,
+                    ),
+                    Container(
+                      height: 2.h,
+                      width: 20.r,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(2.r),
+                        color: isReligionEvent
+                            ? const Color.fromARGB(255, 61, 203, 250)
+                            : AriesColor.yellowP400,
+                      ),
                     ),
                   ],
                 ),
