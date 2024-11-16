@@ -45,6 +45,7 @@ class LocalizedKeys {
   static String get eventCategoryOtherText => AppLocalizations.of(_context)!.eventCategoryOtherText;
   static String get custom => AppLocalizations.of(_context)!.custom;
   static String get allDayToggleText => AppLocalizations.of(_context)!.allDayToggleText;
+  static String get allDayText => AppLocalizations.of(_context)!.allDayText;
   static String get fromText => AppLocalizations.of(_context)!.fromText;
   static String get toText => AppLocalizations.of(_context)!.toText;
   static String get eventTimeAt => AppLocalizations.of(_context)!.eventTimeAt;

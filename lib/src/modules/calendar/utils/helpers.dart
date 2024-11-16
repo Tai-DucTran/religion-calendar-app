@@ -173,3 +173,8 @@ bool isImportantDay(LunarDateTime lunarDate) {
 
   return importantLunarDays.contains(lunarDay) || lunarDay == lastDayInMonths;
 }
+
+bool isHasSixWeeksInMonth(DateTime month) {
+  final firstDayOfMonth = DateTime(month.year, month.month, 1);
+  return (firstDayOfMonth.weekday == 7) && month.day <= 30;
+}

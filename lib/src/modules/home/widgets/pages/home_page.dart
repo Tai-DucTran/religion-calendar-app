@@ -40,10 +40,8 @@ class HomePage extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final result = await EventDetailModalBottomSheet.show(
-            userId: userId ?? '',
             context,
           );
-
           if (!result) return;
         },
         shape: const CircleBorder(),

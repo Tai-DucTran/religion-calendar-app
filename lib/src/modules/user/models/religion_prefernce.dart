@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 
@@ -20,6 +21,18 @@ extension ReligionPrefernceExtension on ReligionPreference {
       case ReligionPreference.unknown:
       default:
         return LocalizedKeys.religionUnknownText;
+    }
+  }
+
+  IconData? get icon {
+    switch (this) {
+      case ReligionPreference.catholicism:
+        return Icons.church_outlined;
+      case ReligionPreference.buddhism:
+        return Icons.temple_buddhist_outlined;
+      case ReligionPreference.unknown:
+      default:
+        return Icons.wb_sunny_outlined;
     }
   }
 }

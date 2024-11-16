@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
+import 'package:religion_calendar_app/src/modules/daily_activities/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/forgot_pasword_page.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/login_page.dart';
 import 'package:religion_calendar_app/src/modules/navigation_bottom_bar/widgets/organisms/navigation_bottom_bar.dart';
@@ -27,8 +27,8 @@ final shellNavigationKey = GlobalKey<NavigatorState>(debugLabel: 'root');
     ),
     TypedStatefulShellBranch(
       routes: [
-        TypedGoRoute<CalendarRoute>(
-          path: CalendarRoute.path,
+        TypedGoRoute<DailyActivitiesRoute>(
+          path: DailyActivitiesRoute.path,
         ),
       ],
     ),
@@ -148,17 +148,17 @@ class HomeRoute extends GoRouteData {
   }
 }
 
-class CalendarRoute extends GoRouteData {
-  const CalendarRoute({
+class DailyActivitiesRoute extends GoRouteData {
+  const DailyActivitiesRoute({
     required this.userId,
   });
-  static const path = '/calendar';
+  static const path = '/daily-activies';
   final String? userId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     final userId = state.uri.queryParameters['userId'];
-    return CalendarPage(userId: userId);
+    return DailyActivitiesPage(userId: userId);
   }
 }
 

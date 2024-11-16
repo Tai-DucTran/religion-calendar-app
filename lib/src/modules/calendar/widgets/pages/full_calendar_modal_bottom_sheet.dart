@@ -1,9 +1,8 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/constants/constant_values.dart';
-import 'package:religion_calendar_app/src/modules/calendar/widgets/molecules/molecules.dart';
+import 'package:religion_calendar_app/src/modules/calendar/widgets/organism/organism.dart';
 
 class FullCalendarModalBottomSheet extends ConsumerStatefulWidget {
   const FullCalendarModalBottomSheet({super.key});
@@ -15,7 +14,7 @@ class FullCalendarModalBottomSheet extends ConsumerStatefulWidget {
       context: context,
       isScrollControlled: true,
       useRootNavigator: true,
-      backgroundColor: AriesColor.neutral0,
+      backgroundColor: AriesColor.yellowP50,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(
@@ -40,12 +39,6 @@ class _FullCalendarModalBottomSheetState
     final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    final markedDates = {
-      DateTime(2024, 11, 5): Colors.red,
-      DateTime(2024, 11, 10): Colors.blue,
-      DateTime(2024, 11, 15): Colors.green,
-    };
-
     return FractionallySizedBox(
       heightFactor: bottomSheetHeightFactorMax,
       child: Padding(
@@ -69,24 +62,7 @@ class _FullCalendarModalBottomSheetState
               ),
             ),
             width: double.infinity,
-            padding: EdgeInsets.only(
-              top: 12.h,
-              left: 12.w,
-              right: 12.w,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  height: 500,
-                  child: FullCalendarSection(
-                    markedDates: markedDates,
-                  ),
-                ),
-                Spacing.sp12,
-                const Divider()
-              ],
-            ),
+            child: const FullCalendarSection(),
           );
         }),
       ),

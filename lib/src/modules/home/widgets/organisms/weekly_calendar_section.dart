@@ -34,7 +34,11 @@ class WeeklyCalendarSection extends ConsumerWidget {
               padding: EdgeInsets.zero,
               onPressed: () async {
                 final result = await FullCalendarModalBottomSheet.show(context);
-                if (!result) return;
+                if (!result) {
+                  ref.read(displayedMonthProvider.notifier).state =
+                      DateTime.now();
+                  return;
+                }
               },
               icon: Icon(
                 Icons.arrow_drop_down_rounded,

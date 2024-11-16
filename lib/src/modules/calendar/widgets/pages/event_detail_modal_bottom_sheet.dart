@@ -5,18 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/constants/constant_values.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/widgets/widgets.dart';
-import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 
 class EventDetailModalBottomSheet extends ConsumerStatefulWidget {
-  const EventDetailModalBottomSheet(this.userId, this.selectedDate,
-      {super.key});
+  const EventDetailModalBottomSheet(this.selectedDate, {super.key});
 
-  final UserId userId;
   final DateTime? selectedDate;
 
   static Future<bool> show(
     BuildContext context, {
-    required String userId,
     DateTime? selectedDate,
   }) async {
     final result = await showModalBottomSheet<bool>(
@@ -32,7 +28,6 @@ class EventDetailModalBottomSheet extends ConsumerStatefulWidget {
         ),
       ),
       builder: (context) => EventDetailModalBottomSheet(
-        userId,
         selectedDate,
       ),
     );

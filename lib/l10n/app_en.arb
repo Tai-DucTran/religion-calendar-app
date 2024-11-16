@@ -34,6 +34,7 @@
   "eventCategoryOtherText": "Other event",
   "custom": "custom",
   "allDayToggleText": "All day?",
+  "allDayText": "All day",
   "fromText": "From",
   "toText": "To",
   "eventTimeAt": "at",
