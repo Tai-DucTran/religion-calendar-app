@@ -2,4 +2,8 @@ export 'calendar_text_field.dart';
 export 'date_picker.dart';
 export 'date_subtitle_picker.dart';
 export 'event_divider.dart';
+export 'full_calendar_data_cell.dart';
+export 'full_calendar_month_header.dart';
+export 'full_calendar_util_buttons.dart';
+export 'full_calendar_weekday_header.dart';
 export 'intrinsic_width_text_field.dart';
