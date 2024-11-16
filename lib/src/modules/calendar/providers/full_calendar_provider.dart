@@ -1,4 +1,3 @@
-// Provider to manage the selected date
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/calendar/utils/helpers.dart';
 

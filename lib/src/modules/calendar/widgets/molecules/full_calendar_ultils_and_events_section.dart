@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class FullCalendarUltilsAndEventsSection extends ConsumerWidget {
-  const FullCalendarUltilsAndEventsSection({super.key});
+  const FullCalendarUltilsAndEventsSection({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

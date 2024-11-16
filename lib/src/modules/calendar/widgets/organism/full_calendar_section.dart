@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/geoip_and_locales/controllers/controllers.dart';
 
-class FullCalendarSection extends ConsumerStatefulWidget {
+class FullCalendarSection extends ConsumerWidget {
   const FullCalendarSection({
     super.key,
     this.onDateSelected,
@@ -13,45 +13,14 @@ class FullCalendarSection extends ConsumerStatefulWidget {
   final Function(DateTime)? onDateSelected;
 
   @override
-  ConsumerState<FullCalendarSection> createState() =>
-      _FullCalendarSectionState();
-}
-
-class _FullCalendarSectionState extends ConsumerState<FullCalendarSection> {
-  late PageController _pageController;
-  late DateTime _currentMonth;
-
-  @override
-  void initState() {
-    super.initState();
-    _currentMonth = DateTime.now();
-    // Start at a large index to allow scrolling backwards
-    _pageController = PageController(initialPage: 1000);
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
-  void _onPageChanged(int page) {
-    final monthDiff = page - 1000;
-    _currentMonth = DateTime(
-      DateTime.now().year,
-      DateTime.now().month + monthDiff,
-    );
-    ref.read(displayedMonthProvider.notifier).state = _currentMonth;
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final currentLocale = ref.watch(localeControllerProvider).languageCode;
+    final pageController = ref.watch(fullCalendarControllerProvider);
 
     return Column(
       children: [
         FullMonthCalendarHeader(
-          controller: _pageController,
+          controller: pageController,
           currentLocale: currentLocale,
         ),
         Spacing.sp16,
@@ -61,8 +30,9 @@ class _FullCalendarSectionState extends ConsumerState<FullCalendarSection> {
         Spacing.sp4,
         Expanded(
           child: FullCalendarDaysInMonth(
-            controller: _pageController,
-            onPageChanged: _onPageChanged,
+            controller: pageController,
+            onPageChanged:
+                ref.read(fullCalendarControllerProvider.notifier).onPageChanged,
           ),
         ),
         const FullCalendarUltilsAndEventsSection()
@@ -72,13 +42,13 @@ class _FullCalendarSectionState extends ConsumerState<FullCalendarSection> {
 }
 
 /// Features in this pages:
-/// 1. Display full month calendar
-/// 1.1. including lunar calendar
+/// 1. Display full month calendar -> done
+/// 1.1. including lunar calendar -> done
 /// 1.2. including userEvents
 /// 1.3. including religionEvents
 /// 1.4. setting icon to turn on/off lunar/religionEvents based on Levels
-/// 2. navigate back to currentDate (button)
-/// 3. create userEvent (button)
+/// 2. navigate back to currentDate (button) -> done
+/// 3. create userEvent (button) -> done
 /// 4. display selected events cards
 ///
 
