@@ -27,8 +27,8 @@ RouteBase get $mainShellRouteData => StatefulShellRouteData.$route(
         StatefulShellBranchData.$branch(
           routes: [
             GoRouteData.$route(
-              path: '/calendar',
-              factory: $CalendarRouteExtension._fromState,
+              path: '/daily-activies',
+              factory: $DailyActivitiesRouteExtension._fromState,
             ),
           ],
         ),
@@ -80,13 +80,14 @@ extension $HomeRouteExtension on HomeRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $CalendarRouteExtension on CalendarRoute {
-  static CalendarRoute _fromState(GoRouterState state) => CalendarRoute(
+extension $DailyActivitiesRouteExtension on DailyActivitiesRoute {
+  static DailyActivitiesRoute _fromState(GoRouterState state) =>
+      DailyActivitiesRoute(
         userId: state.uri.queryParameters['user-id'],
       );
 
   String get location => GoRouteData.$location(
-        '/calendar',
+        '/daily-activies',
         queryParams: {
           if (userId != null) 'user-id': userId,
         },

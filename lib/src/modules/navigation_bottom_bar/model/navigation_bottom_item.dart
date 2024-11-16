@@ -29,7 +29,7 @@ extension NavigationBottomItemExtension on NavigationBottomItemTypes {
       case NavigationBottomItemTypes.calendar:
         return NavigationBottomItem(
           iconPath: AriesIcons.calendarOutlineIcon,
-          name: LocalizedKeys.calendarNavItemText,
+          name: 'Daily',
         );
       case NavigationBottomItemTypes.explore:
         return NavigationBottomItem(

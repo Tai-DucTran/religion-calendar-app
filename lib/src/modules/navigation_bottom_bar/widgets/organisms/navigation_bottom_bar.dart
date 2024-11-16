@@ -97,7 +97,7 @@ class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
         path = '${HomeRoute.path}?userId=$userId';
         break;
       case 1:
-        path = '${CalendarRoute.path}?userId=$userId';
+        path = '${DailyActivitiesRoute.path}?userId=$userId';
         break;
       case 2:
         path = '${ExploreRoute.path}?userId=$userId';

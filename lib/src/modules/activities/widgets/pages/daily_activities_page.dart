@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
-class CalendarPage extends StatefulWidget {
-  const CalendarPage({
+class DailyActivitiesPage extends StatefulWidget {
+  const DailyActivitiesPage({
     required this.userId,
     super.key,
   });
@@ -10,16 +10,16 @@ class CalendarPage extends StatefulWidget {
   final String? userId;
 
   @override
-  State<CalendarPage> createState() => _CalendarPageState();
+  State<DailyActivitiesPage> createState() => _DailyActivitiesPageState();
 }
 
-class _CalendarPageState extends State<CalendarPage> {
+class _DailyActivitiesPageState extends State<DailyActivitiesPage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: MainAppBackgroundContainer(
         child: Center(
-          child: Text('Calendar'),
+          child: Text('Daily Activies'),
         ),
       ),
     );
