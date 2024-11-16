@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class FullCalendarUtilButtons extends ConsumerWidget {
@@ -13,7 +14,9 @@ class FullCalendarUtilButtons extends ConsumerWidget {
         TextButton(
           onPressed: () =>
               ref.read(fullCalendarControllerProvider.notifier).goToToday(),
-          child: const Text('Today'),
+          child: Text(
+            LocalizedKeys.todayText,
+          ),
         ),
         IconButton(
           onPressed: () {},

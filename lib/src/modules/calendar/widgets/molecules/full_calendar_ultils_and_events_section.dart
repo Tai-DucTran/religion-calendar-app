@@ -63,7 +63,7 @@ class _EventSectionContent extends StatelessWidget {
                 const FullCalendarEventCard(
                   eventName: 'Sự kiện này rất rất dài và là một sự kiện mẫu',
                   eventTime: null,
-                  eventCategory: EventCategory.personalEvent,
+                  eventCategory: EventCategory.familyEvent,
                 ),
                 FullCalendarEventCard(
                   eventName: 'Đám giỗ ông A',
@@ -73,7 +73,7 @@ class _EventSectionContent extends StatelessWidget {
                 FullCalendarEventCard(
                   eventName: 'Sự kiện này rất rất dài và là một sự kiện mẫu',
                   eventTime: DateTime.now(),
-                  eventCategory: EventCategory.religionEvent,
+                  eventCategory: EventCategory.businessEvent,
                 ),
               ],
             ),
