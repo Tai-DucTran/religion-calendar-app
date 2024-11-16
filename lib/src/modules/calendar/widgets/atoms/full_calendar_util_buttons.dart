@@ -4,13 +4,15 @@ import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class FullCalendarUtilButtons extends ConsumerWidget {
   const FullCalendarUtilButtons({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: () =>
+              ref.read(fullCalendarControllerProvider.notifier).goToToday(),
           child: const Text('Today'),
         ),
         IconButton(
