@@ -7,12 +7,12 @@ part of 'auth_state_controller.dart';
 // **************************************************************************
 
 String _$authStateControllerHash() =>
-    r'68d0b5fb9ce6a9ce052c3aa6a0bf7397e74a2841';
+    r'13f981e7d2462cbf5d546065d4e7dc3f2e29cd65';
 
 /// See also [AuthStateController].
 @ProviderFor(AuthStateController)
 final authStateControllerProvider =
-    AutoDisposeAsyncNotifierProvider<AuthStateController, AuthState>.internal(
+    AsyncNotifierProvider<AuthStateController, AuthState>.internal(
   AuthStateController.new,
   name: r'authStateControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final authStateControllerProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$AuthStateController = AutoDisposeAsyncNotifier<AuthState>;
+typedef _$AuthStateController = AsyncNotifier<AuthState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
