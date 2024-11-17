@@ -1,3 +1,4 @@
+export 'religion_prefernce.dart';
 export 'user.dart';
 export 'user_id.dart';
-export 'religion_prefernce.dart';
+export 'user_state.dart';
