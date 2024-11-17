@@ -7,6 +7,7 @@ import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'firebase_options.dart';
 import 'src/modules/authentication/authentication.dart';
 import 'src/modules/geoip_and_locales/controllers/controllers.dart';
+import 'src/modules/user/user.dart';
 import 'src/router/router_provider.dart';
 import 'src/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -28,6 +29,7 @@ class ReligionCalendar extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authStateControllerProvider);
+    final userState = ref.watch(userControllerProvider);
     final router = ref.watch(routerProvider);
     final currentLocale = ref.watch(localeControllerProvider);
 
@@ -54,7 +56,8 @@ class ReligionCalendar extends HookConsumerWidget {
           child: Stack(
             children: [
               if (child != null) child,
-              if (authState is AsyncLoading) const LoadingOverlayContainer()
+              if (authState is AsyncLoading || userState is AsyncLoading)
+                const LoadingOverlayContainer()
             ],
           ),
         );
