@@ -5,6 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
+import 'package:religion_calendar_app/src/modules/user/controllers/controllers.dart';
+import 'package:religion_calendar_app/src/modules/user/models/religion_prefernce.dart';
+import 'package:religion_calendar_app/src/utils/log.dart';
 
 class FullCalendarEventCard extends ConsumerWidget {
   const FullCalendarEventCard({
@@ -21,6 +24,9 @@ class FullCalendarEventCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isReligionEvent = eventCategory == EventCategory.religionEvent;
+    final userInfor = ref.watch(userControllerProvider);
+    final religionPreference = userInfor.value?.user?.religionPreference;
+    religionPreference?.log();
 
     return SizedBox(
       child: Container(
@@ -62,7 +68,7 @@ class FullCalendarEventCard extends ConsumerWidget {
                     Icon(
                       size: 24.r,
                       isReligionEvent
-                          ? Icons.church_outlined
+                          ? religionPreference?.icon
                           : eventCategory?.icon,
                       color: AriesColor.neutral300,
                     ),
