@@ -74,4 +74,5 @@ class LocalizedKeys {
   static String get yearlyText => AppLocalizations.of(_context)!.yearlyText;
   static String get doesNotRepeatText => AppLocalizations.of(_context)!.doesNotRepeatText;
   static String get wordOfWisdom => AppLocalizations.of(_context)!.wordOfWisdom;
+  static String get emptyEventText => AppLocalizations.of(_context)!.emptyEventText;
 }

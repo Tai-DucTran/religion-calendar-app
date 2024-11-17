@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/home/widgets/widgets.dart';
 
@@ -26,7 +27,7 @@ class UpComingEventsSection extends ConsumerWidget {
             orElse: () => const Offstage(),
             data: (listOfEvents) {
               if (listOfEvents.isEmpty) {
-                return const Text('There are no events');
+                return Text(LocalizedKeys.emptyEventText);
               }
               final displayedEvents =
                   listOfEvents.take(maxEventsHomePage).toList();

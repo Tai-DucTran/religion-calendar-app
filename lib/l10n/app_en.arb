@@ -63,5 +63,6 @@
   "yearlyText": "Yearly",
   "doesNotRepeatText": "Does not repeat",
   "wordOfWisdom": "Word of wisdom",
+  "emptyEventText": "You haven't had any events yet!",
   "@@locale": "en"
 }

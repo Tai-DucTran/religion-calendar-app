@@ -63,5 +63,6 @@
   "yearlyText": "Mỗi năm",
   "doesNotRepeatText": "Không lặp lại",
   "wordOfWisdom": "Lời thông thái",
+  "emptyEventText": "Bạn chưa có sự kiện nào!",
   "@@locale": "vi"
 }
