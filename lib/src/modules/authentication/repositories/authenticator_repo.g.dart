@@ -7,12 +7,12 @@ part of 'authenticator_repo.dart';
 // **************************************************************************
 
 String _$authenticatorRepositoryHash() =>
-    r'e9f30c9f68a1f4e09bb5e659c77505b8bb16196a';
+    r'92110e0f1ea8e435e5376b402a02c73a3316c9f6';
 
 /// See also [authenticatorRepository].
 @ProviderFor(authenticatorRepository)
 final authenticatorRepositoryProvider =
-    AutoDisposeProvider<AuthenticatorRepository>.internal(
+    Provider<AuthenticatorRepository>.internal(
   authenticatorRepository,
   name: r'authenticatorRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,7 +22,6 @@ final authenticatorRepositoryProvider =
   allTransitiveDependencies: null,
 );
 
-typedef AuthenticatorRepositoryRef
-    = AutoDisposeProviderRef<AuthenticatorRepository>;
+typedef AuthenticatorRepositoryRef = ProviderRef<AuthenticatorRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

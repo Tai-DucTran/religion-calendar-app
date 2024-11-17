@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_state_controller.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class AuthStateController extends _$AuthStateController {
   @override
   FutureOr<AuthState> build() async {

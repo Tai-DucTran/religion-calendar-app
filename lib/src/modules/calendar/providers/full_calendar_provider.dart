@@ -9,5 +9,6 @@ final displayedMonthProvider = StateProvider<DateTime>((ref) => DateTime.now());
 final calendarLayoutProvider =
     Provider.family<double, DateTime>((ref, currentMonth) {
   final hasSixWeeks = isHasSixWeeksInMonth(currentMonth);
-  return hasSixWeeks ? 0.39 : 0.46;
+  // return hasSixWeeks ? 0.39 : 0.46;
+  return 0.4;
 });

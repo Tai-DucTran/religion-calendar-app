@@ -25,12 +25,12 @@ class _HeightAdjustedSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentMonth = ref.watch(displayedMonthProvider);
-    final heightFactor = ref.watch(calendarLayoutProvider(currentMonth));
+    // final currentMonth = ref.watch(displayedMonthProvider);
+    // final heightFactor = ref.watch(calendarLayoutProvider(currentMonth));
     final screenHeight = MediaQuery.of(context).size.height;
 
     return SizedBox(
-      height: screenHeight * heightFactor,
+      height: screenHeight * 0.40,
       child: child,
     );
   }
@@ -44,10 +44,6 @@ class _EventSectionContent extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Divider(
-          color: AriesColor.neutral30,
-        ),
-        Spacing.sp8,
         const FullCalendarUtilButtons(),
         Spacing.sp8,
         Expanded(

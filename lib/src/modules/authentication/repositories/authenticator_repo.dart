@@ -10,7 +10,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'authenticator_repo.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 AuthenticatorRepository authenticatorRepository(
     AuthenticatorRepositoryRef ref) {
   return const AuthenticatorRepository();

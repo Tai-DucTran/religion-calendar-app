@@ -1,27 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_state_controller.dart';
+part of 'user_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authStateControllerHash() =>
-    r'13f981e7d2462cbf5d546065d4e7dc3f2e29cd65';
+String _$userControllerHash() => r'0b7360e73755348eb5cf1451eae44ba64b590a88';
 
-/// See also [AuthStateController].
-@ProviderFor(AuthStateController)
-final authStateControllerProvider =
-    AsyncNotifierProvider<AuthStateController, AuthState>.internal(
-  AuthStateController.new,
-  name: r'authStateControllerProvider',
+/// See also [UserController].
+@ProviderFor(UserController)
+final userControllerProvider =
+    AsyncNotifierProvider<UserController, UserState>.internal(
+  UserController.new,
+  name: r'userControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$authStateControllerHash,
+      : _$userControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$AuthStateController = AsyncNotifier<AuthState>;
+typedef _$UserController = AsyncNotifier<UserState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
