@@ -58,7 +58,8 @@ import 'package:religion_calendar_app/src/modules/calendar/widgets/widgets.dart'
 // }
 
 class EventDescriptionInput extends StatefulWidget {
-  const EventDescriptionInput({super.key});
+  const EventDescriptionInput({super.key, this.controller});
+  final TextEditingController? controller;
 
   @override
   State<EventDescriptionInput> createState() => _EventDescriptionInputState();
@@ -92,15 +93,16 @@ class _EventDescriptionInputState extends State<EventDescriptionInput> {
           color: AriesColor.neutral100,
         ),
         Spacing.sp8,
-        const Flexible(
+        Flexible(
           child: TextField(
+            controller: widget.controller,
             maxLines: null,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Description',
               border: InputBorder.none,
               hintStyle: TextStyle(color: Colors.grey),
             ),
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.normal, // Set the font weight to normal
               color: Colors.black,
               fontSize: 14,

@@ -58,6 +58,10 @@ class _CustomDateTimeSelectThangState
 
   late DateTime currentLunarDate;
 
+  late FixedExtentScrollController scrollDayController,
+      scrollMonthController,
+      scrollYearController;
+
   @override
   void initState() {
     super.initState();
@@ -68,6 +72,9 @@ class _CustomDateTimeSelectThangState
   @override
   void dispose() {
     _debounce?.cancel();
+    scrollDayController.dispose();
+    scrollMonthController.dispose();
+    scrollYearController.dispose();
     super.dispose();
   }
 
@@ -121,18 +128,24 @@ class _CustomDateTimeSelectThangState
 
   Widget _buildDateButton(
       BuildContext context, String locale, bool isLunarCalendar) {
+    const dateFormat = DateTimeFormat.dateMonthYear;
     return CupertinoButton(
       padding: EdgeInsets.zero,
       onPressed: () => isLunarCalendar
           ? _showLunarDatePicker(context)
           : _showSolarDatePicker(context),
       child: Text(
-        DateFormat(
-          DateTimeFormat.dateMonthYear,
-          locale,
-        ).format(isLunarCalendar
-            ? convertToLunarDate(inputDate: _selectedDate)
-            : _selectedDate),
+        isLunarCalendar
+            ? getFullLunarDateText(
+                locale: locale,
+                inputDate: _selectedDate,
+                dateFormat: dateFormat,
+              )
+            : getFullSolarDateText(
+                locale: locale,
+                inputDate: _selectedDate,
+                dateFormat: dateFormat,
+              ),
         style: AriesTextStyles.textBodyNormal.copyWith(
           color: AriesColor.yellowP300,
         ),
@@ -185,129 +198,210 @@ class _CustomDateTimeSelectThangState
 
   void _showLunarDatePicker(BuildContext context) {
     late int selectedYear, selectedMonth, selectedDay;
-    late FixedExtentScrollController scrollDayController,
-        scrollMonthController,
-        scrollYearController;
+    late bool isLeap;
+    late int timeZone;
 
-    DateTime currentLunarDate = convertToLunarDate(inputDate: _selectedDate);
+    LunarDateTime currentLunarDate =
+        convertSolarDateToLunarDate(inputDate: _selectedDate);
     selectedDay = currentLunarDate.day;
     selectedMonth = currentLunarDate.month;
     selectedYear = currentLunarDate.year;
+    isLeap = currentLunarDate.isLeap;
+    timeZone = currentLunarDate.timeZone;
+
+    final List<Year> listAllLunarDaysOfYear =
+        getNumberOfDaysInLunarMonths(selectedYear);
 
     scrollDayController =
         FixedExtentScrollController(initialItem: selectedDay - 1);
-    scrollMonthController =
-        FixedExtentScrollController(initialItem: selectedMonth - 1);
+
+    for (int i = 0; i < listAllLunarDaysOfYear.length; i++) {
+      if (selectedMonth == listAllLunarDaysOfYear[i].month &&
+          isLeap == listAllLunarDaysOfYear[i].isLeap) {
+        scrollMonthController = FixedExtentScrollController(initialItem: i);
+      }
+    }
+
     scrollYearController =
         FixedExtentScrollController(initialItem: selectedYear);
 
-    List<int> getDays(DateTime selectedDate) {
-      List<int> allDays = [];
-      List<DateTime> days = getListDaysOfAMonthLunarYear(
-          month: selectedMonth, year: selectedYear);
-      for (DateTime day in days) {
-        allDays.add(day.day);
-      }
-      //print('Day: $selectedDay, month: $selectedMonth, year: $selectedYear, days: $allDays');
-      return allDays;
-    }
+    List<int> listDays = getDaysInMonth(selectedMonth, selectedYear);
 
-    List<int> getMonths(DateTime selectedDate) {
-      return List.generate(12, (index) => index + 1);
-    }
+    List<String> listMonths = getMonthsInYear(selectedYear);
 
-    List<int> getYears() {
-      getAllDaysOfALunarYear(year: selectedYear);
-      return List.generate(100, (index) => 2000 + index);
-    }
+    List<int> listYears = List.generate(100, (index) => 2000 + index);
 
     showCupertinoModalPopup(
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          height: 250,
-          color: AriesColor.neutral0,
-          child: NotificationListener<ScrollNotification>(
-            onNotification: _handleScrollNotification,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 60.w,
-                  height: 250,
-                  child: CupertinoPicker(
-                    scrollController: scrollDayController,
-                    looping: true,
-                    itemExtent: 40,
-                    onSelectedItemChanged: (index) {
-                      setState(() {
-                        selectedDay = getDays(_selectedDate)[index];
-                        _selectedDate = convertToSolarDate(
-                            inputDate: DateTime(
-                                selectedYear, selectedMonth, selectedDay));
-                      });
-                    },
-                    children: getDays(_selectedDate)
-                        .map(
-                          (day) => Center(
-                            child: Text(
-                              day.toString(),
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ),
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return Container(
+              height: 250,
+              color: AriesColor.neutral0,
+              child: NotificationListener<ScrollNotification>(
+                onNotification: _handleScrollNotification,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 60.w,
+                      height: 250,
+                      child: CupertinoPicker(
+                        scrollController: scrollDayController,
+                        looping: true,
+                        itemExtent: 40,
+                        onSelectedItemChanged: (index) {
+                          setModalState(() {
+                            selectedDay = listDays[index];
+                            final newSelectedDate = FullCalenderExtension
+                                .convertLunarDateToSolarDate(LunarDateTime(
+                                    year: selectedYear,
+                                    month: selectedMonth,
+                                    day: selectedDay,
+                                    isLeap: isLeap,
+                                    timeZone: timeZone))!;
+                            setState(() {
+                              _selectedDate = newSelectedDate;
+                            });
+                          });
+                        },
+                        children: listDays
+                            .map(
+                              (day) => Center(
+                                child: Text(
+                                  day.toString(),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 120.w,
+                      height: 250,
+                      child: CupertinoPicker(
+                        scrollController: scrollMonthController,
+                        looping: true,
+                        itemExtent: 40,
+                        onSelectedItemChanged: (index) {
+                          setModalState(() {
+                            final getMonth = listMonths[index];
+                            isLeap = getMonth.endsWith('+');
+                            selectedMonth =
+                                int.parse(getMonth.replaceAll('+', ''));
+                            listDays =
+                                getDaysInMonth(selectedMonth, selectedYear);
+                            for (var all in listAllLunarDaysOfYear) {
+                              if (all.month == selectedMonth &&
+                                  selectedDay > all.days) {
+                                selectedDay--;
+                              }
+                            }
+                            final newSelectedDate = FullCalenderExtension
+                                .convertLunarDateToSolarDate(LunarDateTime(
+                                    year: selectedYear,
+                                    month: selectedMonth,
+                                    day: selectedDay,
+                                    isLeap: isLeap,
+                                    timeZone: timeZone))!;
+
+                            scrollDayController.jumpToItem(selectedDay - 1);
+                            setState(() {
+                              _selectedDate = newSelectedDate;
+                            });
+                          });
+                        },
+                        children: listMonths
+                            .map(
+                              (month) => Center(
+                                child: Text('tháng $month'),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 100.w,
+                      height: 250,
+                      child: CupertinoPicker(
+                        scrollController: scrollYearController,
+                        looping: true,
+                        itemExtent: 40,
+                        onSelectedItemChanged: (index) {
+                          setModalState(() {
+                            selectedYear = listYears[index];
+                            listDays =
+                                getDaysInMonth(selectedMonth, selectedYear);
+                            listMonths = getMonthsInYear(selectedYear);
+                            final newSelectedDate = FullCalenderExtension
+                                .convertLunarDateToSolarDate(LunarDateTime(
+                                    year: selectedYear,
+                                    month: selectedMonth,
+                                    day: selectedDay,
+                                    isLeap: isLeap,
+                                    timeZone: timeZone))!;
+                            final List<Year> listAllLunarDaysOfYear =
+                                getNumberOfDaysInLunarMonths(selectedYear);
+                            for (int i = 0;
+                                i < listAllLunarDaysOfYear.length;
+                                i++) {
+                              if (convertSolarDateToLunarDate(
+                                              inputDate: newSelectedDate)
+                                          .month ==
+                                      listAllLunarDaysOfYear[i].month &&
+                                  convertSolarDateToLunarDate(
+                                              inputDate: newSelectedDate)
+                                          .isLeap ==
+                                      listAllLunarDaysOfYear[i].isLeap) {
+                                scrollMonthController.jumpToItem(i);
+                              }
+                            }
+                            scrollDayController.jumpToItem(selectedDay - 1);
+                            setState(() {
+                              _selectedDate = newSelectedDate;
+                            });
+                          });
+                        },
+                        children: listYears
+                            .map(
+                              (year) => Center(
+                                child: Text(
+                                  year.toString(),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: 120.w,
-                  height: 250,
-                  child: CupertinoPicker(
-                    scrollController: scrollMonthController,
-                    looping: true,
-                    itemExtent: 40,
-                    onSelectedItemChanged: (index) {
-                      setState(() {
-                        selectedMonth = getMonths(_selectedDate)[index];
-                      });
-                    },
-                    children: getMonths(_selectedDate)
-                        .map(
-                          (month) => Center(
-                            child: Text('tháng $month'),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-                SizedBox(
-                  width: 100.w,
-                  height: 250,
-                  child: CupertinoPicker(
-                    scrollController: scrollYearController,
-                    looping: true,
-                    itemExtent: 40,
-                    onSelectedItemChanged: (index) {
-                      setState(() {
-                        selectedYear = getYears()[index];
-                      });
-                    },
-                    children: getYears()
-                        .map(
-                          (year) => Center(
-                            child: Text(
-                              year.toString(),
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         );
       },
     );
+  }
+
+  List<String> getMonthsInYear(int year) {
+    final listAllLunarDaysOfYear = getNumberOfDaysInLunarMonths(year);
+    List<String> listMonths = [];
+    for (var all in listAllLunarDaysOfYear) {
+      listMonths.add('${all.month}${all.isLeap ? '+' : ''}');
+    }
+    return listMonths;
+  }
+
+  List<int> getDaysInMonth(int month, int year) {
+    final listAllLunarDaysOfYear = getNumberOfDaysInLunarMonths(year);
+    int days = 0;
+    for (var all in listAllLunarDaysOfYear) {
+      if (month == all.month) {
+        days = all.days;
+      }
+    }
+    return List.generate(days, (index) => 1 + index);
   }
 
   void _showSolarDatePicker(BuildContext context) {

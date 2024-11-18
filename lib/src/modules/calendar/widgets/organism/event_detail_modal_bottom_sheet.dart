@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/modules/calendar/widgets/molecules/create_event_button.dart';
 import 'package:religion_calendar_app/src/modules/calendar/widgets/molecules/custom_date_time_select_thang.dart';
 import 'package:religion_calendar_app/src/modules/calendar/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
@@ -134,7 +135,9 @@ class _EventDetailModalBottomSheetState
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Spacing.sp18,
-                  const EventNameInput(),
+                  EventNameInput(
+                    controller: eventNameInputController,
+                  ),
                   const Divider(),
                   Spacing.sp18,
                   const IsLunarCalendarToggle(),
@@ -166,7 +169,14 @@ class _EventDetailModalBottomSheetState
                   Spacing.sp12,
                   const Divider(),
                   Spacing.sp12,
-                  const EventDescriptionInput(),
+                  EventDescriptionInput(
+                    controller: eventDescriptionController,
+                  ),
+                  Spacing.sp12,
+                  CreateEventButton(
+                    eventNameInputController: eventNameInputController,
+                    eventDescriptionController: eventDescriptionController,
+                  ),
                   Spacing.sp12,
                 ],
               ),
@@ -365,35 +375,3 @@ class _TimePickerState extends State<timePicker> {
     );
   }
 }
-
-// class toDatePick extends StatelessWidget {
-//   const toDatePick({
-//     super.key,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return FastDatePicker(
-//       name: 'from_date_picker',
-//       labelText: 'To',
-//       firstDate: DateTime(1970),
-//       lastDate: DateTime(2040),
-//     );
-//   }
-// }
-
-// class fromDatePick extends StatelessWidget {
-//   const fromDatePick({
-//     super.key,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return FastDatePicker(
-//       name: 'from_date_picker',
-//       labelText: 'From',
-//       firstDate: DateTime(1970),
-//       lastDate: DateTime(2040),
-//     );
-//   }
-// }

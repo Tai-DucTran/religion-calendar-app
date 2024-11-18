@@ -62,11 +62,26 @@ DateTime convertToLunarDate({
   required DateTime inputDate,
   int? timeZone,
 }) {
-  final LunarDateTime lunarDate = FullCalender(
-    date: inputDate,
-    timeZone: timeZone ?? TimeZone.vietnamese.timezone,
-  ).lunarDate;
+  final lunarDate = convertSolarDateToLunarDate(inputDate: inputDate);
+  // final LunarDateTime lunarDate = FullCalender(
+  //   date: inputDate,
+  //   timeZone: timeZone ?? TimeZone.vietnamese.timezone,
+  // ).lunarDate;
+  print('LunarDate: $lunarDate');
+
   return DateTime(lunarDate.year, lunarDate.month, lunarDate.day);
+}
+
+LunarDateTime convertSolarDateToLunarDate(
+    {DateTime? inputDate, int? timeZone}) {
+  final LunarDateTime lunarDate = inputDate != null
+      ? FullCalender(
+          date: inputDate,
+          timeZone: timeZone ?? TimeZone.vietnamese.timezone,
+        ).lunarDate
+      : FullCalender.now(timeZone ?? TimeZone.vietnamese.timezone).lunarDate;
+
+  return lunarDate;
 }
 
 DateTime convertToSolarDate({
@@ -87,117 +102,6 @@ class Month {
   List<int> days;
 
   Month({required this.month, required this.days});
-}
-
-List<Month> getAllDaysOfALunarYear({required int year}) {
-  List<Month> months = [];
-  int month = 1;
-  DateTime lastDate, nextDate, nextThreeDate;
-  bool leapYear = false;
-  DateTime lunarDate;
-  DateTime solarDate = convertToSolarDate(inputDate: DateTime(year, 1, 1));
-
-  do {
-    List<int> daysInMonth = [];
-    solarDate = solarDate.add(const Duration(days: 28));
-    List.generate(29, (index) => daysInMonth.add(index + 1));
-
-    lastDate = DateTime(year, month, 29);
-    //print('LastDate: $lastDate');
-    nextDate = convertToNextLunarDate(inputDate: lastDate, days: 1);
-    //print('NextDate: $nextDate');
-
-    if (nextDate.compareTo(DateTime(year, month, 30)) == 0) {
-      daysInMonth.add(30);
-      solarDate = solarDate.add(const Duration(days: 1));
-      lastDate = nextDate;
-      //print('Compared lastDate: $nextDate');
-    }
-
-    nextThreeDate = convertToNextLunarDate(inputDate: lastDate, days: 3);
-
-    months
-        .add(Month(month: leapYear ? "$month+" : month.toString(), days: daysInMonth));
-    print('Month: $month, days: $daysInMonth');
-
-    print('LastDate: $lastDate, nextDate: $nextDate, nextThreeDate: $nextThreeDate');
-
-    if (nextThreeDate.month == lastDate.month) {
-      leapYear = true;
-    } else {
-      month++;
-    }
-
-    solarDate = solarDate.add(const Duration(days: 1));
-    lunarDate = convertToLunarDate(inputDate: solarDate);
-
-    //----------
-
-    // lastDate = DateTime(year, month, 29);
-    // nextDate = convertToNextLunarDate(inputDate: lastDate, days: 1);
-
-    // final day30 = DateTime(year, month, 30);
-
-    // if (nextDate.compareTo(day30) == 0) {
-    //   nextThreeDate =
-    //       convertToNextLunarDate(inputDate: DateTime(year, month, 30), days: 3);
-    //   days.add(30);
-    // }
-
-    // months
-    //     .add(Month(month: leapYear ? "$month+" : month.toString(), days: days));
-    // print('Month: $month, days: $days');
-
-    // if (nextThreeDate.month > month) {
-    //   months.add(
-    //       Month(month: leapYear ? "$month+" : month.toString(), days: days));
-    //   month = nextDate.month;
-    // } else if (nextThreeDate.month == month) {
-    //   months.add(
-    //       Month(month: leapYear ? "$month+" : month.toString(), days: days));
-    // } else {
-    //   break;
-    // }
-  } while (lunarDate.year == year);
-
-  return months;
-}
-
-DateTime convertToNextLunarDate(
-    {required DateTime inputDate, required int days}) {
-  DateTime convertedLastDay, theNextDay, convertedNextDay;
-
-  convertedLastDay = convertToSolarDate(inputDate: inputDate);
-  theNextDay = convertedLastDay.add(Duration(days: days));
-  convertedNextDay = convertToLunarDate(inputDate: theNextDay);
-  print('convertedLastDay: $convertedLastDay, theNextDay: $theNextDay, convertedNextDay: $convertedNextDay');
-  return convertedNextDay;
-}
-
-List<DateTime> getListDaysOfAMonthLunarYear(
-    {required int month, required int year}) {
-  List<DateTime> days = [];
-
-  for (int day = 1; day < 30; day++) {
-    DateTime date = DateTime(year, month, day);
-    //print('Day: $day; date: $date');
-    days.add(date);
-  }
-
-  DateTime convertedLastDay, theNextDay, convertedNextDay;
-
-  convertedLastDay = convertToSolarDate(inputDate: DateTime(year, month, 29));
-  theNextDay = convertedLastDay.add(const Duration(days: 1));
-  convertedNextDay = convertToLunarDate(inputDate: theNextDay);
-
-  final day30 = DateTime(year, month, 30);
-
-  if (convertedNextDay.compareTo(day30) == 0) {
-    days.add(DateTime(year, month, 30));
-  }
-
-  //print('Helpers: $days');
-  return days;
 }
 
 String getFullSolarDateText({
@@ -228,11 +132,31 @@ String getFullLunarDateText({
         ).lunarDate
       : FullCalender.now(timeZone ?? TimeZone.vietnamese.timezone).lunarDate;
 
-  return LunarDateFormatter.format(
+  String lunarDateText = LunarDateFormatter.format(
     lunarDate,
     dateFormat ?? DateTimeFormat.dateMonthYear,
     locale,
   );
+
+  if (lunarDate.isLeap) {
+    final tempDate = DateTime(lunarDate.year, lunarDate.month, 1);
+    final febDate = DateTime(lunarDate.year, lunarDate.month, lunarDate.day);
+
+    // Replace month representations
+    final monthNumericFormatter = DateFormat('M', locale);
+    final monthNameFormatter = DateFormat('MMMM', locale);
+    final monthShortFormatter = DateFormat('MMM', locale);
+
+    lunarDateText = lunarDateText
+        .replaceAll(monthNumericFormatter.format(tempDate),
+            '${monthNumericFormatter.format(febDate)}+')
+        .replaceAll(monthNameFormatter.format(tempDate),
+            '${monthNameFormatter.format(febDate)}+')
+        .replaceAll(monthShortFormatter.format(tempDate),
+            '${monthShortFormatter.format(febDate)}+');
+  }
+
+  return lunarDateText;
 }
 
 class LunarDateFormatter {
@@ -244,6 +168,7 @@ class LunarDateFormatter {
       final proxyDate = DateTime(lunarDate.year, 1, lunarDate.day);
       final formatter = DateFormat(pattern, locale);
       String formatted = formatter.format(proxyDate);
+      
 
       // Get February's localized representations
       final febDate = DateTime(lunarDate.year, 2, 1);
@@ -252,6 +177,7 @@ class LunarDateFormatter {
       final monthNumericFormatter = DateFormat('M', locale);
       final monthNameFormatter = DateFormat('MMMM', locale);
       final monthShortFormatter = DateFormat('MMM', locale);
+      print('Hello: ${monthNameFormatter.format(proxyDate)}');
 
       formatted = formatted
           .replaceAll(monthNumericFormatter.format(proxyDate),
@@ -268,4 +194,46 @@ class LunarDateFormatter {
     return DateFormat(pattern, locale)
         .format(DateTime(lunarDate.year, lunarDate.month, lunarDate.day));
   }
+}
+
+class Year {
+  int month;
+  int days;
+  bool isLeap;
+
+  Year({required this.month, required this.days, required this.isLeap});
+}
+
+List<Year> getNumberOfDaysInLunarMonths(int year) {
+  final List<Year> listAllLunarDaysOfYear = [];
+
+  LunarDateTime lunarDate = LunarDateTime(
+    year: year,
+    month: 1,
+    day: 1,
+  );
+
+  int days = 1;
+  bool isLeap = false;
+
+  do {
+    LunarDateTime? nextLunarDate = FullCalenderExtension.getLunarDateNext(
+        fromDate: lunarDate, rangeDays: 1);
+    if (nextLunarDate!.day < lunarDate.day) {
+      listAllLunarDaysOfYear.add(
+        Year(
+          month: lunarDate.month,
+          days: days,
+          isLeap: isLeap,
+        ),
+      );
+      days = 1;
+      isLeap = nextLunarDate.isLeap ? true : false;
+    } else {
+      days++;
+    }
+    lunarDate = nextLunarDate;
+  } while (lunarDate.year == year);
+
+  return listAllLunarDaysOfYear;
 }
