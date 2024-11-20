@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/calendar/controllers/controllers.dart';
+import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
 
 class CreateEventButton extends ConsumerWidget {
   const CreateEventButton({
@@ -13,41 +14,40 @@ class CreateEventButton extends ConsumerWidget {
   final TextEditingController eventNameInputController,
       eventDescriptionController;
 
-  void addEvent() async {
+  Future<void> addEvent(BuildContext context) async {
     try {
-      FirebaseFirestore.instance.collection('events').add({
-        'id': '',
-        'title': eventNameInputController.text,
-        'description': eventDescriptionController.text,
-      });
+      CollectionReference events = FirebaseFirestore.instance
+          .collection('religions')
+          .doc('catholicism')
+          .collection('events');
 
-      // CollectionReference events = FirebaseFirestore.instance
-      //     .collection('religions') // Collection 'religions'
-      //     .doc('catholicism') // Document 'catholicism'
-      //     .collection('events'); // Collection 'events' trong 'catholicism'
+      DocumentReference docRef = events.doc();
 
-      // UserEvent userEvent = UserEvent(
-      //   id: '',
-      //   title: eventNameInputController.text,
-      //   calendarCategory: CalendarCategory.solar,
-      //   eventCategory: EventCategory.religionEvent,
-      //   isAllDay: true,
-      //   startDate: DateTime(2024, 12, 25),
-      //   endDate: DateTime(2024, 12, 25, 23, 59),
-      //   location: "Church",
-      //   createdAt: DateTime.now(),
-      //   updatedAt: DateTime.now(),
-      //   remindMeBefore: 1.0,
-      //   repeatedFrequencyAt: "DOES_NOT_REPEAT",
-      // );
+      UserEvent userEvent = UserEvent(
+        id: docRef.id,
+        title: eventNameInputController.text,
+        calendarCategory: CalendarCategory.solar,
+        eventCategory: EventCategory.religionEvent,
+        isAllDay: true,
+        startDate: DateTime.now(),
+        endDate: DateTime.now(),
+        location: "Church",
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        remindMeBefore: 0.0,
+        repeatedFrequencyAt: "DOES_NOT_REPEAT",
+      );
 
-      // Map<String, dynamic> eventData = userEvent.toJson();
+      await docRef.set(userEvent.toJson());
+      print('Add event success with ID: ${docRef.id}');
 
-      // await events.add({
-      //   'id': '',
-      //   'title': eventNameInputController.text,
-      // });
-      print('Add event success!');
+      if (context.mounted) {
+        Navigator.of(context).pop(true); // Close modal and return true
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Event created successfully!')),
+        );
+      }
+
     } catch (e) {
       print('Can not add event: $e');
     }
@@ -55,21 +55,8 @@ class CreateEventButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final calendarCategory = ref.watch(calendarCategoryControllerProvider);
     return ElevatedButton(
-      onPressed: () {
-        try {
-          FirebaseFirestore.instance.collection('events').add({
-            'id': '',
-            'title': eventNameInputController.text,
-            'description': eventDescriptionController.text,
-            'calendarCategory': calendarCategory,
-          });
-          print('Add event success!');
-        } catch (e) {
-          print('Can not add event: $e');
-        }
-      },
+      onPressed: () => addEvent(context),
       child: const Text("Create event"),
     );
   }

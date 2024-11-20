@@ -84,7 +84,11 @@ class _CustomDateTimeSelectThangState
     _selectedTime = const TimeOfDay(hour: 08, minute: 08);
   }
 
-  void _initialLunarDatetime() {}
+  void _initialLunarDatetime() {
+    scrollDayController = FixedExtentScrollController(initialItem: 0);
+    scrollMonthController = FixedExtentScrollController(initialItem: 0);
+    scrollYearController = FixedExtentScrollController(initialItem: 0);
+  }
 
   @override
   Widget build(BuildContext context) {
