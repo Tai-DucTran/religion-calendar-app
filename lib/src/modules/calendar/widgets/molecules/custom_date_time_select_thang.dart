@@ -267,6 +267,17 @@ class _CustomDateTimeSelectThangState
                                     timeZone: timeZone))!;
                             setState(() {
                               _selectedDate = newSelectedDate;
+                              if (widget.isStartDate) {
+                                ref
+                                    .read(eventDateTimeControllerProvider
+                                        .notifier)
+                                    .setStartDate(_selectedDate);
+                              } else {
+                                ref
+                                    .read(eventDateTimeControllerProvider
+                                        .notifier)
+                                    .setEndDate(_selectedDate);
+                              }
                             });
                           });
                         },
@@ -313,6 +324,17 @@ class _CustomDateTimeSelectThangState
                             scrollDayController.jumpToItem(selectedDay - 1);
                             setState(() {
                               _selectedDate = newSelectedDate;
+                              if (widget.isStartDate) {
+                                ref
+                                    .read(eventDateTimeControllerProvider
+                                        .notifier)
+                                    .setStartDate(_selectedDate);
+                              } else {
+                                ref
+                                    .read(eventDateTimeControllerProvider
+                                        .notifier)
+                                    .setEndDate(_selectedDate);
+                              }
                             });
                           });
                         },
@@ -364,6 +386,17 @@ class _CustomDateTimeSelectThangState
                             scrollDayController.jumpToItem(selectedDay - 1);
                             setState(() {
                               _selectedDate = newSelectedDate;
+                              if (widget.isStartDate) {
+                                ref
+                                    .read(eventDateTimeControllerProvider
+                                        .notifier)
+                                    .setStartDate(_selectedDate);
+                              } else {
+                                ref
+                                    .read(eventDateTimeControllerProvider
+                                        .notifier)
+                                    .setEndDate(_selectedDate);
+                              }
                             });
                           });
                         },

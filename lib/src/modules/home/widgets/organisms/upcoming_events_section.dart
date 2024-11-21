@@ -38,6 +38,8 @@ class UpComingEventsSection extends ConsumerWidget {
                       final eventTime = DateFormat(DateTimeFormat.hourMinute)
                           .format(event.startDate);
 
+                      //print(event);
+
                       return EventCard(
                         eventName: event.title,
                         eventDate: event.startDate,

@@ -2,6 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:religion_calendar_app/src/modules/calendar/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
 
 // class RepeatedFrequencySelect extends ConsumerWidget {
@@ -59,7 +60,8 @@ class RepeatedFrequencySelect extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final options = RepeatedFrequency.values.toList();
-    const selectedFrequency = RepeatedFrequency.doesNotRepeat;
+    final selectedFrequency = ref.watch(repeatedFrequencyControllerProvider);
+
     return IntrinsicWidth(
       child: Container(
         decoration: BoxDecoration(
@@ -88,7 +90,11 @@ class RepeatedFrequencySelect extends ConsumerWidget {
                 );
               },
             ).toList(),
-            onChanged: (newValue) {},
+            onChanged: (RepeatedFrequency? newValue) {
+              final controller =
+                  ref.read(repeatedFrequencyControllerProvider.notifier);
+              controller.setFrequency(newValue as RepeatedFrequency);
+            },
             value: selectedFrequency,
             underline: const SizedBox.shrink(),
             borderRadius: BorderRadius.circular(

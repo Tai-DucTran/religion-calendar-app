@@ -22,6 +22,7 @@ class UserEvent with _$UserEvent {
     required DateTime updatedAt,
     required double remindMeBefore,
     required String repeatedFrequencyAt,
+    String? description,
   }) = _UserEvent;
 
   factory UserEvent.fromJson(Map<String, dynamic> json) =>
@@ -140,6 +141,7 @@ class BasedEvent with _$BasedEvent {
       updatedAt: event.updatedAt,
       remindMeBefore: event.remindMeBefore,
       repeatedFrequencyAt: event.repeatedFrequencyAt,
+      description: event.description,
     );
   }
 }

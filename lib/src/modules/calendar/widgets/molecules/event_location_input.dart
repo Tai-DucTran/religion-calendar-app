@@ -56,41 +56,42 @@ import 'package:religion_calendar_app/src/modules/calendar/widgets/widgets.dart'
 // }
 
 class EventLocationInput extends StatefulWidget {
-  const EventLocationInput({super.key});
+  const EventLocationInput({super.key, this.controller});
+  final TextEditingController? controller;
 
   @override
   State<EventLocationInput> createState() => _EventLocationInputState();
 }
 
 class _EventLocationInputState extends State<EventLocationInput> {
-  TextEditingController locationController = TextEditingController();
-  void onTextChanged() {
-    setState(() {});
-  }
+  // TextEditingController controller = TextEditingController();
+  // void onTextChanged() {
+  //   setState(() {});
+  // }
 
-  @override
-  void initState() {
-    super.initState();
-    locationController.addListener(onTextChanged);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   locationController.addListener(onTextChanged);
+  // }
 
-  @override
-  void dispose() {
-    locationController.removeListener(onTextChanged);
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   locationController.removeListener(onTextChanged);
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (locationController.text.isNotEmpty) ...[
-          Text(
-            LocalizedKeys.eventLocation,
-            style: AriesTextStyles.textBodySmall,
-          ),
-        ],
+        // if (locationController.text.isNotEmpty) ...[
+        //   Text(
+        //     LocalizedKeys.eventLocation,
+        //     style: AriesTextStyles.textBodySmall,
+        //   ),
+        // ],
         const Icon(
           Icons.location_on_outlined,
           color: AriesColor.neutral100,
@@ -99,6 +100,7 @@ class _EventLocationInputState extends State<EventLocationInput> {
         Flexible(
           child: TextField(
             maxLines: null,
+            controller: widget.controller,
             decoration: InputDecoration(
               hintText: LocalizedKeys.eventLocationHint,
               border: InputBorder.none,
