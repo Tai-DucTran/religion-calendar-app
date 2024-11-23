@@ -48,6 +48,7 @@ dependencies:
   collection: ^1.18.0
   rrule: ^0.2.16
   skeletonizer: ^1.4.2
+  firebase_app_check: ^0.2.1+18
 
 dev_dependencies:
   flutter_test:
