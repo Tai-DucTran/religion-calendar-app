@@ -6,6 +6,7 @@ import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/home/widgets/widgets.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class UpComingEventsSection extends ConsumerWidget {
   const UpComingEventsSection({super.key});
@@ -22,7 +23,16 @@ class UpComingEventsSection extends ConsumerWidget {
         children: [
           const UpComingEventsHeader(),
           events.maybeWhen(
-            loading: () => const CircularProgressIndicator(),
+            loading: () => Skeletonizer(
+              child: EventCard(
+                eventName: isLoadingText,
+                eventDate: DateTime.now(),
+                eventTime: isLoadingText,
+                eventCategory: EventCategory.businessEvent,
+                eventLocation: isLoadingText,
+                isLoading: true,
+              ),
+            ),
             error: (error, stacktrace) => Text('Error: $error'),
             orElse: () => const Offstage(),
             data: (listOfEvents) {

@@ -1,3 +1,4 @@
+import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
@@ -334,6 +335,21 @@ extension EventCategoryExtension on EventCategory {
         return Icons.perm_contact_cal_outlined;
       case EventCategory.otherEvent:
         return Icons.messenger_outline_sharp;
+      case EventCategory.religionEvent:
+        return null;
+    }
+  }
+
+  String? get image {
+    switch (this) {
+      case EventCategory.familyEvent:
+        return AriesImages.defaultFamilyEvent;
+      case EventCategory.businessEvent:
+        return AriesImages.defaultEventImage;
+      case EventCategory.personalEvent:
+        return AriesImages.defaultEventImage;
+      case EventCategory.otherEvent:
+        return AriesImages.defaultEventImage;
       case EventCategory.religionEvent:
         return null;
     }

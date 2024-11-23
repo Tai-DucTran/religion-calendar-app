@@ -17,6 +17,7 @@ class EventCard extends StatelessWidget {
     this.religionPreferences,
     this.eventImageUrl,
     this.eventLocation,
+    this.isLoading = false, // Add isLoading parameter
   });
 
   final String? eventImageUrl;
@@ -26,6 +27,7 @@ class EventCard extends StatelessWidget {
   final String? eventTime;
   final String? eventLocation;
   final ReligionPreference? religionPreferences;
+  final bool isLoading; // Add isLoading field
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +50,7 @@ class EventCard extends StatelessWidget {
         : AriesImages.defaultFamilyEvent;
 
     return Padding(
-      padding: EdgeInsets.only(
-        top: 16.h,
-      ),
+      padding: EdgeInsets.only(top: 16.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -98,9 +98,16 @@ class EventCard extends StatelessWidget {
                     maxHeight: 96.h,
                     maxWidth: 80.w,
                   ),
-                  child: SvgPicture.asset(
-                    eventImageUrl ?? selectedDefaultImage,
-                  ),
+                  child: isLoading
+                      ? Container(
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(200, 235, 235, 244),
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                        )
+                      : SvgPicture.asset(
+                          eventImageUrl ?? selectedDefaultImage,
+                        ),
                 ),
                 SizedBox(width: 16.w),
                 Expanded(
