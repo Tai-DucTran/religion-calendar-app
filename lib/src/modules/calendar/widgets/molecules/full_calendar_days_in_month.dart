@@ -15,9 +15,11 @@ class FullCalendarDaysInMonth extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final markedDates = {
-      DateTime(2024, 11, 5): AriesColor.danger100,
+      DateTime(2024, 11, 5): AriesColor.success400,
       DateTime(2024, 11, 10): Colors.blue,
-      DateTime(2024, 11, 15): AriesColor.success100,
+      DateTime(2024, 11, 10): Colors.blue,
+      DateTime(2024, 11, 10): AriesColor.success400,
+      DateTime(2024, 11, 15): AriesColor.success400,
     };
 
     return LayoutBuilder(

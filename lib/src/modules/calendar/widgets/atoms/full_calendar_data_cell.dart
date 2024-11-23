@@ -89,11 +89,11 @@ class FullCalendarDataCell extends StatelessWidget {
               Positioned(
                 bottom: 6,
                 child: Container(
-                  width: 4,
-                  height: 4,
+                  width: 8.w,
+                  height: 4.h,
                   decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(2.r),
                     color: markerColor ?? Colors.blue,
-                    shape: BoxShape.circle,
                   ),
                 ),
               ),

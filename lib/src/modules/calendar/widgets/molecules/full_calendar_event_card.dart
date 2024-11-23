@@ -26,7 +26,7 @@ class FullCalendarEventCard extends ConsumerWidget {
     final isReligionEvent = eventCategory == EventCategory.religionEvent;
     final userInfor = ref.watch(userControllerProvider);
     final religionPreference = userInfor.value?.user?.religionPreference;
-    religionPreference?.log();
+    userInfor.value?.user?.log();
 
     return SizedBox(
       child: Container(
@@ -74,12 +74,12 @@ class FullCalendarEventCard extends ConsumerWidget {
                     ),
                     Container(
                       height: 2.h,
-                      width: 20.r,
+                      width: 20.w,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(2.r),
                         color: isReligionEvent
                             ? const Color.fromARGB(255, 61, 203, 250)
-                            : AriesColor.yellowP400,
+                            : AriesColor.success400,
                       ),
                     ),
                   ],
