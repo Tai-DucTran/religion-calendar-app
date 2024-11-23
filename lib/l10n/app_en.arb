@@ -64,5 +64,7 @@
   "doesNotRepeatText": "Does not repeat",
   "wordOfWisdom": "Word of wisdom",
   "emptyEventText": "You haven't had any events yet!",
+  "descriptionHint": "Description",
+  "descriptionButtonText": "Create event",
   "@@locale": "en"
 }

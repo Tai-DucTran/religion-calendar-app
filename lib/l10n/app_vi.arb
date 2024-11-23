@@ -64,5 +64,7 @@
   "doesNotRepeatText": "Không lặp lại",
   "wordOfWisdom": "Lời thông thái",
   "emptyEventText": "Bạn chưa có sự kiện nào!",
+  "descriptionHint": "Thêm nội dung mô tả",
+  "descriptionButtonText": "Thêm sự kiện",
   "@@locale": "vi"
 }
