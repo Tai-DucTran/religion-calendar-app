@@ -43,6 +43,7 @@ class _EventDetailModalBottomSheetState
     extends ConsumerState<EventDetailModalBottomSheet> {
   TextEditingController eventNameInputController = TextEditingController();
   TextEditingController eventDescriptionController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -65,43 +66,48 @@ class _EventDetailModalBottomSheetState
             children: [
               Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Spacing.sp24,
-                  Center(
-                    child: IntrinsicWidthTextField(
-                      controller: eventNameInputController,
-                      hintText: LocalizedKeys.eventInputHintText,
-                    ),
+                  Spacing.sp18,
+                  EventNameInput(
+                    controller: eventNameInputController,
                   ),
-                  Spacing.sp12,
-                  Spacing.sp12,
+                  const Divider(),
+                  Spacing.sp18,
                   const IsLunarCalendarToggle(),
-                  Spacing.sp12,
+                  Spacing.sp18,
                   const EventCategorySelect(),
-                  Spacing.sp32,
+                  Spacing.sp18,
                   const IsAllDayToggle(),
-                  Spacing.sp12,
+                  Spacing.sp18,
                   const CustomDateTimeSelect(
                     isStartDate: true,
                   ),
+                  Spacing.sp18,
                   const CustomDateTimeSelect(
                     isStartDate: false,
                   ),
-                  Spacing.sp24,
-                  const EventDivider(),
+                  Spacing.sp18,
+                  const Divider(),
                   Spacing.sp12,
                   const EventLocationInput(),
                   Spacing.sp12,
+                  const Divider(),
+                  Spacing.sp18,
                   const RepeatedFrequencySelect(),
                   Spacing.sp12,
                   const RemindMeBeforeSelect(),
                   Spacing.sp12,
-                  const EventDescriptionInput(),
+                  const Divider(),
                   Spacing.sp12,
-                  SizedBox(
-                    height: 20.h,
+                  EventDescriptionInput(
+                    controller: eventDescriptionController,
                   ),
+                  Spacing.sp12,
+                  CreateEventButton(
+                    eventNameInputController: eventNameInputController,
+                    eventDescriptionController: eventDescriptionController,
+                  ),
+                  Spacing.sp12,
                 ],
               ),
             ],
