@@ -75,4 +75,6 @@ class LocalizedKeys {
   static String get doesNotRepeatText => AppLocalizations.of(_context)!.doesNotRepeatText;
   static String get wordOfWisdom => AppLocalizations.of(_context)!.wordOfWisdom;
   static String get emptyEventText => AppLocalizations.of(_context)!.emptyEventText;
+  static String get descriptionHint => AppLocalizations.of(_context)!.descriptionHint;
+  static String get descriptionButtonText => AppLocalizations.of(_context)!.descriptionButtonText;
 }

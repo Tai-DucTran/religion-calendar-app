@@ -15,4 +15,6 @@ class DateTimeFormat {
   static const dayMonth = 'dd/MM';
 
   static const hourMinute = 'HH:mm';
+  
+  static const fullWeekDateMonth = 'EEEE, dd MMMM';
 }

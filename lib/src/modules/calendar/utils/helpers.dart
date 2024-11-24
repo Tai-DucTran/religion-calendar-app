@@ -57,6 +57,48 @@ String getLunarDateNumberText({required DateTime inputDate, int? timeZone}) {
   ).lunarDate.day.toString();
 }
 
+DateTime convertToLunarDate({
+  required DateTime inputDate,
+  int? timeZone,
+}) {
+  final lunarDate = convertSolarDateToLunarDate(inputDate: inputDate);
+  print('LunarDate: $lunarDate');
+
+  return DateTime(lunarDate.year, lunarDate.month, lunarDate.day);
+}
+
+LunarDateTime convertSolarDateToLunarDate(
+    {DateTime? inputDate, int? timeZone}) {
+  final LunarDateTime lunarDate = inputDate != null
+      ? FullCalender(
+          date: inputDate,
+          timeZone: timeZone ?? TimeZone.vietnamese.timezone,
+        ).lunarDate
+      : FullCalender.now(timeZone ?? TimeZone.vietnamese.timezone).lunarDate;
+
+  return lunarDate;
+}
+
+DateTime convertToSolarDate({
+  required DateTime inputDate,
+  int? timeZone,
+}) {
+  final lunarDate = LunarDateTime(
+      year: inputDate.year, month: inputDate.month, day: inputDate.day);
+
+  // Convert to Solar Date
+  DateTime? solarDate =
+      FullCalenderExtension.convertLunarDateToSolarDate(lunarDate);
+  return DateTime(solarDate!.year, solarDate.month, solarDate.day);
+}
+
+class Month {
+  String month;
+  List<int> days;
+
+  Month({required this.month, required this.days});
+}
+
 String getFullSolarDateText({
   int? timeZone,
   String? dateFormat,
@@ -85,11 +127,31 @@ String getFullLunarDateText({
         ).lunarDate
       : FullCalender.now(timeZone ?? TimeZone.vietnamese.timezone).lunarDate;
 
-  return LunarDateFormatter.format(
+  String lunarDateText = LunarDateFormatter.format(
     lunarDate,
     dateFormat ?? DateTimeFormat.dateMonthYear,
     locale,
   );
+
+  if (lunarDate.isLeap) {
+    final tempDate = DateTime(lunarDate.year, lunarDate.month, 1);
+    final febDate = DateTime(lunarDate.year, lunarDate.month, lunarDate.day);
+
+    // Replace month representations
+    final monthNumericFormatter = DateFormat('M', locale);
+    final monthNameFormatter = DateFormat('MMMM', locale);
+    final monthShortFormatter = DateFormat('MMM', locale);
+
+    lunarDateText = lunarDateText
+        .replaceAll(monthNumericFormatter.format(tempDate),
+            '${monthNumericFormatter.format(febDate)}+')
+        .replaceAll(monthNameFormatter.format(tempDate),
+            '${monthNameFormatter.format(febDate)}+')
+        .replaceAll(monthShortFormatter.format(tempDate),
+            '${monthShortFormatter.format(febDate)}+');
+  }
+
+  return lunarDateText;
 }
 
 class LunarDateFormatter {
@@ -143,31 +205,61 @@ List<String> getWeekDayNames({
   return weekdays;
 }
 
-List<Map<int, int?>> getNumberOfDaysInLunarMonths(
-  int year,
-) {
-  final List<Map<int, int?>> numberOfDaysInMonths = [];
-  for (int i = 0; i <= 12; i++) {
-    final numberOfDays = FullCalenderExtension.getLunarDateNext(
-      fromDate: LunarDateTime(
-        year: year,
-        month: i + 1,
-        day: 1,
-      ),
-      rangeDays: -1,
-    )?.day;
+class LunarMonth {
+  int month;
+  int days;
+  bool isLeap;
 
-    final daysInMonth = {i: numberOfDays};
-    numberOfDaysInMonths.add(daysInMonth);
-  }
+  LunarMonth({
+    required this.month,
+    required this.days,
+    required this.isLeap,
+  });
+}
 
-  return numberOfDaysInMonths;
+List<LunarMonth> getNumberOfDaysInLunarMonths(int year) {
+  final List<LunarMonth> listAllLunarDaysOfYear = [];
+
+  LunarDateTime lunarDate = LunarDateTime(
+    year: year,
+    month: 1,
+    day: 1,
+  );
+
+  int days = 1;
+  bool isLeap = false;
+
+  do {
+    LunarDateTime? nextLunarDate = FullCalenderExtension.getLunarDateNext(
+        fromDate: lunarDate, rangeDays: 1);
+    if (nextLunarDate!.day < lunarDate.day) {
+      listAllLunarDaysOfYear.add(
+        LunarMonth(
+          month: lunarDate.month,
+          days: days,
+          isLeap: isLeap,
+        ),
+      );
+      days = 1;
+      isLeap = nextLunarDate.isLeap ? true : false;
+    } else {
+      days++;
+    }
+    lunarDate = nextLunarDate;
+  } while (lunarDate.year == year);
+
+  return listAllLunarDaysOfYear;
 }
 
 bool isImportantDay(LunarDateTime lunarDate) {
   final numberOfDaysInMonths = getNumberOfDaysInLunarMonths(lunarDate.year);
-  final lastDayInMonths =
-      numberOfDaysInMonths[lunarDate.month].entries.first.value;
+  late int lastDayInMonths;
+
+  for (var eachMonth in numberOfDaysInMonths) {
+    if (eachMonth.month == lunarDate.month && eachMonth.isLeap == lunarDate.isLeap) {
+      lastDayInMonths = eachMonth.days;
+    }
+  }
 
   final lunarDay = lunarDate.day;
 

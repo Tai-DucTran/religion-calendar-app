@@ -29,6 +29,13 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+            <!-- Add this meta-data -->
+        <meta-data
+            android:name="google_analytics_adid_collection_enabled"
+            android:value="false" />
+        <meta-data
+            android:name="google_analytics_default_allow_analytics_storage"
+            android:value="true" />
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility?hl=en and

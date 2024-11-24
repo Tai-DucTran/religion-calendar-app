@@ -1,5 +1,6 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
@@ -14,23 +15,32 @@ class IsAllDayToggle extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isAllDay = ref.watch(isAllDayToggleControllerProvider);
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          LocalizedKeys.allDayToggleText,
-          style: AriesTextStyles.textBodySmall,
+        Row(
+          children: [
+            const Icon(
+              Icons.access_time_outlined,
+              color: AriesColor.neutral100,
+            ),
+            Spacing.sp6,
+            Text(
+              LocalizedKeys.allDayToggleText,
+              style: AriesTextStyles.textBodySmall,
+            ),
+          ],
         ),
-        Spacing.sp8,
         SizedBox(
           width: 36.w,
           child: FittedBox(
             child: CupertinoSwitch(
               value: isAllDay,
               onChanged: (value) {
-                final provider =
+                final controller =
                     ref.read(isAllDayToggleControllerProvider.notifier);
-                provider.toggle();
+                controller.toggle();
               },
+              activeColor: AriesColor.yellowP200,
             ),
           ),
         ),

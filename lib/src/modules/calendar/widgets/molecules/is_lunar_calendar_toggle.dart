@@ -16,19 +16,23 @@ class IsLunarCalendarToggle extends ConsumerWidget {
         ref.watch(calendarCategoryControllerProvider) == CalendarCategory.lunar;
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SvgPicture.asset(
-          AriesIcons.moon01Icon,
-          width: 16.w,
-          height: 16.h,
+        Row(
+          children: [
+            SvgPicture.asset(
+              AriesIcons.moon01Icon,
+              width: 16.w,
+              height: 16.h,
+              color: AriesColor.neutral100,
+            ),
+            Spacing.sp8,
+            Text(
+              '${LocalizedKeys.calendarCategoryLunarText}?',
+              style: AriesTextStyles.textBodySmall,
+            ),
+          ],
         ),
-        Spacing.sp8,
-        Text(
-          '${LocalizedKeys.calendarCategoryLunarText}?',
-          style: AriesTextStyles.textBodySmall,
-        ),
-        Spacing.sp8,
         SizedBox(
           width: 36.w,
           child: FittedBox(
@@ -37,6 +41,7 @@ class IsLunarCalendarToggle extends ConsumerWidget {
               onChanged: (value) => ref
                   .read(calendarCategoryControllerProvider.notifier)
                   .toggleCategory(),
+              activeColor: AriesColor.yellowP200,
             ),
           ),
         ),

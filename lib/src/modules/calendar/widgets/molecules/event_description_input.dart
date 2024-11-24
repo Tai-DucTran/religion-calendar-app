@@ -1,10 +1,14 @@
 import 'package:aries/aries.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:religion_calendar_app/src/modules/calendar/widgets/widgets.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
 
 class EventDescriptionInput extends StatefulWidget {
-  const EventDescriptionInput({super.key});
+  const EventDescriptionInput({
+    super.key,
+    this.controller,
+  });
+  final TextEditingController? controller;
 
   @override
   State<EventDescriptionInput> createState() => _EventDescriptionInputState();
@@ -31,24 +35,24 @@ class _EventDescriptionInputState extends State<EventDescriptionInput> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          margin: EdgeInsets.only(
-            right: 8.sp,
-          ),
-          child: Text(
-            'Description:',
-            style: AriesTextStyles.textHeading6.copyWith(
-              color: AriesColor.neutral800,
-            ),
-          ),
+        const Icon(
+          CupertinoIcons.text_justifyleft,
+          color: AriesColor.neutral100,
         ),
+        Spacing.sp8,
         Flexible(
-          child: CalendarTextField(
-            controller: eventDescriptionController,
-            hintText: 'Add event description...',
+          child: TextField(
+            controller: widget.controller,
+            maxLines: null,
+            decoration: InputDecoration(
+              hintText: LocalizedKeys.descriptionHint,
+              border: InputBorder.none,
+              hintStyle: const TextStyle(
+                color: AriesColor.neutral50,
+              ),
+            ),
           ),
         ),
       ],

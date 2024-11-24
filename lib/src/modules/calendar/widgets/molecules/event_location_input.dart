@@ -1,7 +1,6 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
-import 'package:religion_calendar_app/src/modules/calendar/widgets/widgets.dart';
 
 class EventLocationInput extends StatefulWidget {
   const EventLocationInput({super.key});
@@ -36,18 +35,24 @@ class _EventLocationInputState extends State<EventLocationInput> {
         if (locationController.text.isNotEmpty) ...[
           Text(
             LocalizedKeys.eventLocation,
-            style: AriesTextStyles.textBodySmall,
+            style: AriesTextStyles.textHeading1,
           ),
         ],
         const Icon(
           Icons.location_on_outlined,
           color: AriesColor.neutral100,
         ),
-        IntrinsicWidthTextField(
-          controller: locationController,
-          hintText: LocalizedKeys.eventLocationHint,
-          textFieldStyle: AriesTextStyles.textHeading6.copyWith(
-            color: AriesColor.yellowP300,
+        Spacing.sp8,
+        Flexible(
+          child: TextField(
+            maxLines: null,
+            decoration: InputDecoration(
+              hintText: LocalizedKeys.eventLocationHint,
+              border: InputBorder.none,
+              hintStyle: const TextStyle(
+                color: AriesColor.neutral50,
+              ),
+            ),
           ),
         ),
       ],
