@@ -1,13 +1,16 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/modules/home/widgets/utils/helpers.dart';
+import 'package:religion_calendar_app/src/modules/user/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/utils/string_helper.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 
-class EventCard extends StatelessWidget {
+class EventCard extends ConsumerWidget {
   const EventCard({
     super.key,
     required this.eventName,
@@ -17,7 +20,7 @@ class EventCard extends StatelessWidget {
     this.religionPreferences,
     this.eventImageUrl,
     this.eventLocation,
-    this.isLoading = false, // Add isLoading parameter
+    this.isLoading = false,
   });
 
   final String? eventImageUrl;
@@ -27,10 +30,10 @@ class EventCard extends StatelessWidget {
   final String? eventTime;
   final String? eventLocation;
   final ReligionPreference? religionPreferences;
-  final bool isLoading; // Add isLoading field
+  final bool isLoading;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final now = DateTime.now();
     final String currentLocale = Localizations.localeOf(context).toString();
     final countDownFromNow = eventDate.difference(now).inDays;
@@ -45,9 +48,17 @@ class EventCard extends StatelessWidget {
     );
     final isToday = isDateToday(eventDate);
     final isReligionEvent = eventCategory == EventCategory.religionEvent;
-    final selectedDefaultImage = isReligionEvent
-        ? AriesImages.defaultCatholicismEvent
-        : AriesImages.defaultFamilyEvent;
+
+    final userReligionPreference =
+        ref.watch(userControllerProvider).value?.user?.religionPreference;
+
+    print('userReligionPreference: $userReligionPreference');
+
+    final selectedDefaultImage = getEventImageCard(
+      userReligionPreference,
+      eventCategory,
+    );
+    print('selectedDefaultImage: $selectedDefaultImage');
 
     return Padding(
       padding: EdgeInsets.only(top: 16.h),
@@ -101,7 +112,7 @@ class EventCard extends StatelessWidget {
                   child: isLoading
                       ? Container(
                           decoration: BoxDecoration(
-                            color: const Color.fromARGB(200, 235, 235, 244),
+                            color: AriesColor.neutral30,
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                         )

@@ -40,12 +40,12 @@ extension ReligionPrefernceExtension on ReligionPreference {
   String get image {
     switch (this) {
       case ReligionPreference.catholicism:
-        return AriesImages.christImage;
+        return AriesImages.defaultCatholicismEvent;
       case ReligionPreference.buddhism:
-        return AriesImages.buddaImage;
+        return AriesImages.defaultBuddismEvent;
       case ReligionPreference.unknown:
       default:
-        return AriesImages.sunAndMoonImage;
+        return AriesImages.defaultOtherEvent;
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,6 +25,10 @@ class UpComingEventsSection extends ConsumerWidget {
           const UpComingEventsHeader(),
           events.maybeWhen(
             loading: () => Skeletonizer(
+              effect: const ShimmerEffect(
+                baseColor: AriesColor.neutral30,
+              ),
+              enableSwitchAnimation: true,
               child: EventCard(
                 eventName: isLoadingText,
                 eventDate: DateTime.now(),
@@ -33,7 +38,7 @@ class UpComingEventsSection extends ConsumerWidget {
                 isLoading: true,
               ),
             ),
-            error: (error, stacktrace) => Text('Error: $error'),
+            error: (error, stacktrace) => const Offstage(),
             orElse: () => const Offstage(),
             data: (listOfEvents) {
               if (listOfEvents.isEmpty) {

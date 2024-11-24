@@ -345,11 +345,11 @@ extension EventCategoryExtension on EventCategory {
       case EventCategory.familyEvent:
         return AriesImages.defaultFamilyEvent;
       case EventCategory.businessEvent:
-        return AriesImages.defaultEventImage;
+        return AriesImages.defaultBusinessEvent;
       case EventCategory.personalEvent:
-        return AriesImages.defaultEventImage;
+        return AriesImages.defaultPersonalEvent;
       case EventCategory.otherEvent:
-        return AriesImages.defaultEventImage;
+        return AriesImages.defaultOtherEvent;
       case EventCategory.religionEvent:
         return null;
     }
