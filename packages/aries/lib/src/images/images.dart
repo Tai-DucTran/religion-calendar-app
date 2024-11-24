@@ -14,6 +14,14 @@ class AriesImages {
       'packages/aries/assets/images/events/catholicism_default_event.svg';
   static const defaultFamilyEvent =
       'packages/aries/assets/images/events/family_event.svg';
+  static const defaultBuddismEvent =
+      'packages/aries/assets/images/events/buddlism_event.svg';
+  static const defaultBusinessEvent =
+      'packages/aries/assets/images/events/business_event.svg';
+  static const defaultOtherEvent =
+      'packages/aries/assets/images/events/other_event.svg';
+  static const defaultPersonalEvent =
+      'packages/aries/assets/images/events/personal_event.svg';
   /* Background Images for Quotes **/
   static const defaultQuoteBackgroundImages =
       'packages/aries/assets/images/background_wallpapers/image_sample.jpg';
