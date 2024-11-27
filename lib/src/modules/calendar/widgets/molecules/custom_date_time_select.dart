@@ -22,10 +22,10 @@ class CustomDateTimeSelect extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<CustomDateTimeSelect> createState() =>
-      _CustomDateTimeSelectThangState();
+      _CustomDateTimeSelectState();
 }
 
-class _CustomDateTimeSelectThangState
+class _CustomDateTimeSelectState
     extends ConsumerState<CustomDateTimeSelect> {
   /// [_debounce], [_pendingUpdate], [_isScrolling], [_scrollSettleTime]
   /// These values helps to resolve the issue
@@ -93,6 +93,7 @@ class _CustomDateTimeSelectThangState
     final isLunarCalendar =
         ref.watch(calendarCategoryControllerProvider) == CalendarCategory.lunar;
     final isAllDay = ref.watch(isAllDayToggleControllerProvider);
+    ref.watch(eventDateTimeControllerProvider);
 
     return Column(
       children: [
@@ -158,12 +159,6 @@ class _CustomDateTimeSelectThangState
         ? LocalizedKeys.calendarCategorySolarText
         : LocalizedKeys.calendarCategoryLunarText;
 
-    final lunarDate = LunarDateTime(
-        year: _selectedDate.year,
-        month: _selectedDate.month,
-        day: _selectedDate.day);
-    final solarDateFromLunar =
-        FullCalenderExtension.convertLunarDateToSolarDate(lunarDate)!;
     final subDateLabel = isLunarCalendar
         ? getFullSolarDateText(
             locale: locale,
@@ -260,6 +255,17 @@ class _CustomDateTimeSelectThangState
                                     timeZone: timeZone))!;
                             setState(() {
                               _selectedDate = newSelectedDate;
+                              if (widget.isStartDate) {
+                                ref
+                                    .read(eventDateTimeControllerProvider
+                                        .notifier)
+                                    .setStartDate(_selectedDate);
+                              } else {
+                                ref
+                                    .read(eventDateTimeControllerProvider
+                                        .notifier)
+                                    .setEndDate(_selectedDate);
+                              }
                             });
                           });
                         },
@@ -306,6 +312,17 @@ class _CustomDateTimeSelectThangState
                             scrollDayController.jumpToItem(selectedDay - 1);
                             setState(() {
                               _selectedDate = newSelectedDate;
+                              if (widget.isStartDate) {
+                                ref
+                                    .read(eventDateTimeControllerProvider
+                                        .notifier)
+                                    .setStartDate(_selectedDate);
+                              } else {
+                                ref
+                                    .read(eventDateTimeControllerProvider
+                                        .notifier)
+                                    .setEndDate(_selectedDate);
+                              }
                             });
                           });
                         },
@@ -357,6 +374,17 @@ class _CustomDateTimeSelectThangState
                             scrollDayController.jumpToItem(selectedDay - 1);
                             setState(() {
                               _selectedDate = newSelectedDate;
+                              if (widget.isStartDate) {
+                                ref
+                                    .read(eventDateTimeControllerProvider
+                                        .notifier)
+                                    .setStartDate(_selectedDate);
+                              } else {
+                                ref
+                                    .read(eventDateTimeControllerProvider
+                                        .notifier)
+                                    .setEndDate(_selectedDate);
+                              }
                             });
                           });
                         },
