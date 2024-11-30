@@ -39,7 +39,7 @@ class AuthenticatorRepository {
 
     // To check if the user aborts the login process or not
     // We will check the returned token from [loginResult]
-    final token = loginResult.accessToken?.token;
+    final token = loginResult.accessToken?.tokenString;
     if (token == null) {
       return AuthResults.aborted;
     }
