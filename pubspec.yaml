@@ -14,15 +14,15 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   cupertino_icons: ^1.0.6
-  cloud_firestore: ^4.15.10
-  firebase_core: ^2.27.2
-  firebase_auth: ^4.18.0
-  firebase_analytics: ^10.9.0
-  firebase_storage: ^11.7.1
+  cloud_firestore: ^5.5.0
+  firebase_core: ^3.8.0
+  firebase_auth: ^5.3.3
+  firebase_analytics: ^11.3.5
+  firebase_storage: ^12.3.6
   flutter_svg: ^2.0.10+1
   flutter_riverpod: ^2.5.1
   freezed: ^2.5.2
-  flutter_facebook_auth: ^6.2.0
+  flutter_facebook_auth: ^7.1.1
   freezed_annotation: ^2.4.1
   google_sign_in: ^6.2.1
   json_annotation: ^4.8.1
@@ -34,7 +34,7 @@ dependencies:
   flutter_hooks: ^0.20.5
   intl: any
   lottie: ^3.1.0
-  share_plus: ^8.0.3
+  share_plus: ^10.1.2
   url_launcher: ^6.2.6
   riverpod_annotation: ^2.3.5
   riverpod_generator: ^2.4.0
@@ -48,14 +48,14 @@ dependencies:
   collection: ^1.18.0
   rrule: ^0.2.16
   skeletonizer: ^1.4.2
-  firebase_app_check: ^0.2.1+18
+  firebase_app_check: ^0.3.1+6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^3.0.0
-  melos: ^5.2.2
+  flutter_lints: ^5.0.0
+  melos: ^6.2.0
   build_runner: ^2.4.9
   json_serializable: ^6.7.1
 flutter:
