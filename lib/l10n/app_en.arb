@@ -82,5 +82,6 @@
   "termsOfUseTitleText": "Terms of Use",
   "privacyPolicySettingTitleText": "Privacy Policy",
   "deleteUserAccountButtonText": "Delete your account",
+  "logoutButtonText": "Logout",
   "@@locale": "en"
 }

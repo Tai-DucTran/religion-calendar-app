@@ -92,4 +92,6 @@ class LocalizedKeys {
   static String get helpAndFAQsSettingTitleText => AppLocalizations.of(_context)!.helpAndFAQsSettingTitleText;
   static String get termsOfUseTitleText => AppLocalizations.of(_context)!.termsOfUseTitleText;
   static String get privacyPolicySettingTitleText => AppLocalizations.of(_context)!.privacyPolicySettingTitleText;
+  static String get deleteUserAccountButtonText => AppLocalizations.of(_context)!.deleteUserAccountButtonText;
+  static String get logoutButtonText => AppLocalizations.of(_context)!.logoutButtonText;
 }

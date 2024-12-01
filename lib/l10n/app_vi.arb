@@ -82,5 +82,6 @@
   "termsOfUseTitleText": "Điều khoản sử dụng",
   "privacyPolicySettingTitleText": "Chính sách bảo mật",
   "deleteUserAccountButtonText": "Xóa tài khoản",
+  "logoutButtonText": "Đăng xuất",
   "@@locale": "vi"
 }
