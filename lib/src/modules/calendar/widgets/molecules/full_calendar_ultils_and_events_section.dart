@@ -25,8 +25,6 @@ class _HeightAdjustedSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final currentMonth = ref.watch(displayedMonthProvider);
-    // final heightFactor = ref.watch(calendarLayoutProvider(currentMonth));
     final screenHeight = MediaQuery.of(context).size.height;
 
     return SizedBox(
