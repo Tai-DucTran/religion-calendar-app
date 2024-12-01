@@ -29,7 +29,7 @@ class BottomRichTextWithAction extends StatelessWidget {
             TextSpan(
               text: " $textSpan",
               style: const TextStyle(
-                color: AriesColor.yellowP300,
+                color: AriesColor.yellowP600,
                 fontWeight: FontWeight.w600,
                 fontSize: 14,
               ),

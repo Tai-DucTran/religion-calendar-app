@@ -67,7 +67,7 @@ class HalfLinearContainer extends StatelessWidget {
                         end: Alignment.bottomCenter,
                         colors: [
                           AriesColor.neutral0.withOpacity(0),
-                          AriesColor.neutral0,
+                          AriesColor.yellowP50,
                         ],
                         stops: const [0, 0.1],
                       ),
