@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/router/routes.dart';
@@ -8,7 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'router_provider.g.dart';
 
 @riverpod
-GoRouter router(RouterRef ref) {
+GoRouter router(Ref ref) {
   final authState = ValueNotifier<AsyncValue<AuthState>>(const AsyncLoading());
 
   ref
@@ -32,7 +33,6 @@ GoRouter router(RouterRef ref) {
 
       final isLoggedIn = auth.value?.isLoggedIn ?? false;
       final hasCompletedOnboarding = auth.value?.hasCompleteOnboarding ?? false;
-      final userId = auth.value?.userId;
 
       final isSignUpPage =
           state.matchedLocation == const SignUpRoute().location;
@@ -41,18 +41,19 @@ GoRouter router(RouterRef ref) {
       final isInMainShell = state.matchedLocation.startsWith('/home') ||
           state.matchedLocation.startsWith('/calendar') ||
           state.matchedLocation.startsWith('/explore') ||
-          state.matchedLocation.startsWith('/profile');
+          state.matchedLocation.startsWith('/profile') ||
+          state.matchedLocation.startsWith('/basic-info-setting');
 
       if (!isLoggedIn && !isSignUpPage) {
         return const SignUpRoute().location;
       }
 
       if (isLoggedIn && !hasCompletedOnboarding && !isOnboardingPage) {
-        return '${OnboardingRoute.path}?userId=$userId';
+        return OnboardingRoute.path;
       }
 
       if (isLoggedIn && hasCompletedOnboarding && !isInMainShell) {
-        return '${HomeRoute.path}?userId=$userId';
+        return HomeRoute.path;
       }
 
       "Redirecting. Current location: ${state.fullPath}".log();

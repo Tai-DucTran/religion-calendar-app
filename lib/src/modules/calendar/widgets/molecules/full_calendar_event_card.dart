@@ -6,8 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/user/controllers/controllers.dart';
-import 'package:religion_calendar_app/src/modules/user/models/religion_prefernce.dart';
-import 'package:religion_calendar_app/src/utils/log.dart';
+import 'package:religion_calendar_app/src/modules/user/models/religion_preference.dart';
 
 class FullCalendarEventCard extends ConsumerWidget {
   const FullCalendarEventCard({
@@ -26,7 +25,6 @@ class FullCalendarEventCard extends ConsumerWidget {
     final isReligionEvent = eventCategory == EventCategory.religionEvent;
     final userInfor = ref.watch(userControllerProvider);
     final religionPreference = userInfor.value?.user?.religionPreference;
-    userInfor.value?.user?.log();
 
     return SizedBox(
       child: Container(

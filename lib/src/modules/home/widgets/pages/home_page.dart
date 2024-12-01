@@ -7,10 +7,8 @@ import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({
-    required this.userId,
     super.key,
   });
-  final String? userId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

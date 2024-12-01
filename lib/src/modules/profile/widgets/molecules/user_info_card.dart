@@ -1,0 +1,75 @@
+import 'package:aries/aries.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:religion_calendar_app/constants/screen_config.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/modules/user/controllers/controllers.dart';
+import 'package:religion_calendar_app/src/router/routes.dart';
+
+class UserInfoCard extends ConsumerWidget {
+  const UserInfoCard({super.key});
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userInfor = ref.watch(userControllerProvider).value?.user;
+    final userName = userInfor?.displayName;
+    final userEmail = userInfor?.email;
+
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: ScreenConfig.defaultHorizontalScreenPadding,
+      ),
+      constraints: BoxConstraints(
+        maxHeight: 90.h,
+      ),
+      padding: EdgeInsets.symmetric(
+        vertical: 12.h,
+        horizontal: 16.w,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(
+          12.r,
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            radius: 32.r,
+            backgroundColor: AriesColor.yellowP400,
+            backgroundImage: AssetImage(AriesImages.christImage),
+          ),
+          Spacing.sp12,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                userName ?? userEmail ?? LocalizedKeys.userDefaultNameText,
+                style: AriesTextStyles.textHeading5,
+              ),
+              Spacing.sp4,
+              GestureDetector(
+                onTap: () {
+                  context.push(
+                    BasicInfoSettingRoute().location,
+                  );
+                },
+                child: Text(
+                  LocalizedKeys.editUserInfoButtonText,
+                  style: AriesTextStyles.textBodyNormal.copyWith(
+                    color: AriesColor.yellowP600,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}

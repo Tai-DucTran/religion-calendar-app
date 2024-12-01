@@ -11,10 +11,8 @@ class NavigationBottomBar extends ConsumerStatefulWidget {
   const NavigationBottomBar({
     super.key,
     required this.navigationShell,
-    required this.userId,
   });
   final StatefulNavigationShell navigationShell;
-  final String? userId;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -25,19 +23,20 @@ class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: widget.navigationShell,
-        bottomNavigationBar: Container(
-          color: Colors.white,
-          height: 80.h,
-          padding: EdgeInsets.only(
-            bottom: 10.h,
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: _buildNavItems(context),
-          ),
-        ));
+      body: widget.navigationShell,
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        height: 80.h,
+        padding: EdgeInsets.only(
+          bottom: 10.h,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: _buildNavItems(context),
+        ),
+      ),
+    );
   }
 
   List<Widget> _buildNavItems(BuildContext context) {
@@ -89,24 +88,22 @@ class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
   }
 
   void _onTap(BuildContext context, int index) {
-    final userId = widget.userId;
-
     String path;
     switch (index) {
       case 0:
-        path = '${HomeRoute.path}?userId=$userId';
+        path = HomeRoute.path;
         break;
       case 1:
-        path = '${DailyActivitiesRoute.path}?userId=$userId';
+        path = DailyActivitiesRoute.path;
         break;
       case 2:
-        path = '${ExploreRoute.path}?userId=$userId';
+        path = ExploreRoute.path;
         break;
       case 3:
-        path = '${ProfileRoute.path}?userId=$userId';
+        path = ProfileRoute.path;
         break;
       default:
-        path = '${HomeRoute.path}?userId=$userId';
+        path = HomeRoute.path;
     }
     context.go(path);
   }

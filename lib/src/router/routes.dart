@@ -9,7 +9,7 @@ import 'package:religion_calendar_app/src/modules/sign_up/widgets/page/page.dart
 
 import '../modules/explore_page/widgets/widgets.dart';
 import '../modules/home/widgets/pages/pages.dart';
-import '../modules/profile_page/widgets/widgets.dart';
+import '../modules/profile/widgets/widgets.dart';
 
 part 'routes.g.dart';
 
@@ -49,8 +49,7 @@ final shellNavigationKey = GlobalKey<NavigatorState>(debugLabel: 'root');
   ],
 )
 class MainShellRouteData extends StatefulShellRouteData {
-  const MainShellRouteData({required this.userId});
-  final String? userId;
+  const MainShellRouteData();
 
   @override
   Widget builder(
@@ -58,11 +57,8 @@ class MainShellRouteData extends StatefulShellRouteData {
     GoRouterState state,
     StatefulNavigationShell navigationShell,
   ) {
-    final userId = state.uri.queryParameters['userId'];
-
     return NavigationBottomBar(
       navigationShell: navigationShell,
-      userId: userId,
     );
   }
 }
@@ -125,6 +121,7 @@ class LoginForgotPasswordRoute extends GoRouteData {
 class OnboardingRoute extends GoRouteData {
   const OnboardingRoute();
   static const path = '/onboarding';
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const OnboardingReligionPreferencePage();
@@ -135,55 +132,152 @@ class OnboardingRoute extends GoRouteData {
   path: HomeRoute.path,
 )
 class HomeRoute extends GoRouteData {
-  const HomeRoute({
-    required this.userId,
-  });
+  const HomeRoute();
   static const path = '/home';
-  final String? userId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    final userId = state.uri.queryParameters['userId'];
-    return HomePage(userId: userId);
+    return HomePage();
   }
 }
 
 class DailyActivitiesRoute extends GoRouteData {
-  const DailyActivitiesRoute({
-    required this.userId,
-  });
+  const DailyActivitiesRoute();
   static const path = '/daily-activies';
-  final String? userId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    final userId = state.uri.queryParameters['userId'];
-    return DailyActivitiesPage(userId: userId);
+    return DailyActivitiesPage();
   }
 }
 
 class ExploreRoute extends GoRouteData {
-  const ExploreRoute({
-    required this.userId,
-  });
+  const ExploreRoute();
   static const path = '/explore';
-  final String? userId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return ExplorePage(userId: userId);
+    return ExplorePage();
   }
 }
 
+/// [ProfileRoute] configuration:
+
+@TypedGoRoute<ProfileRoute>(
+  path: ProfileRoute.path,
+  routes: [
+    TypedGoRoute<BasicInfoSettingRoute>(
+      path: BasicInfoSettingRoute.path,
+    ),
+    TypedGoRoute<ReligionPreferencesSettingRoute>(
+      path: ReligionPreferencesSettingRoute.path,
+    ),
+    TypedGoRoute<ThemeSettingRoute>(
+      path: ThemeSettingRoute.path,
+    ),
+    TypedGoRoute<NotificationSettingRoute>(
+      path: NotificationSettingRoute.path,
+    ),
+    TypedGoRoute<FeedbackAndReportSettingRoute>(
+      path: FeedbackAndReportSettingRoute.path,
+    ),
+    TypedGoRoute<HelpAndFAQsSettingRoute>(
+      path: HelpAndFAQsSettingRoute.path,
+    ),
+    TypedGoRoute<TermsOfUseSettingRoute>(
+      path: TermsOfUseSettingRoute.path,
+    ),
+    TypedGoRoute<PrivacyPolicySettingRoute>(
+      path: PrivacyPolicySettingRoute.path,
+    ),
+  ],
+)
 class ProfileRoute extends GoRouteData {
-  const ProfileRoute({
-    required this.userId,
-  });
+  const ProfileRoute();
   static const path = '/profile';
-  final String? userId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return ProfilePage(userId: userId);
+    return ProfilePage();
+  }
+}
+
+class BasicInfoSettingRoute extends GoRouteData {
+  const BasicInfoSettingRoute();
+  static const path = 'basic-info-setting';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const BasicInfoSettingPage();
+  }
+}
+
+class ReligionPreferencesSettingRoute extends GoRouteData {
+  const ReligionPreferencesSettingRoute();
+  static const path = 'religion-preference-setting';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const ReligionPreferencesSettingPage();
+  }
+}
+
+class ThemeSettingRoute extends GoRouteData {
+  const ThemeSettingRoute();
+  static const path = 'theme-setting';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const ThemeSettingPage();
+  }
+}
+
+class NotificationSettingRoute extends GoRouteData {
+  const NotificationSettingRoute();
+  static const path = 'notification-setting';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const NotificationSettingPage();
+  }
+}
+
+class FeedbackAndReportSettingRoute extends GoRouteData {
+  const FeedbackAndReportSettingRoute();
+  static const path = 'feedback-and-report';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const FeedbackAndReportSettingPage();
+  }
+}
+
+class HelpAndFAQsSettingRoute extends GoRouteData {
+  const HelpAndFAQsSettingRoute();
+  static const path = 'help-and-faqs';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const HelpAndFAQsSettingPage();
+  }
+}
+
+class TermsOfUseSettingRoute extends GoRouteData {
+  const TermsOfUseSettingRoute();
+  static const path = 'terms-of-use';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const TermsOsUseSettingPage();
+  }
+}
+
+class PrivacyPolicySettingRoute extends GoRouteData {
+  const PrivacyPolicySettingRoute();
+  static const path = 'privacy-policy';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const PrivacyPolicySettingPage();
   }
 }

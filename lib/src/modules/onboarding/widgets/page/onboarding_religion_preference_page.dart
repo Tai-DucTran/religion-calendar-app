@@ -9,7 +9,6 @@ import 'package:religion_calendar_app/src/modules/onboarding/controllers/get_rel
 import 'package:religion_calendar_app/src/router/routes.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 import 'package:religion_calendar_app/src/modules/user/repositories/user_firestore_repo.dart';
-import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class OnboardingReligionPreferencePage extends ConsumerWidget {
@@ -21,9 +20,6 @@ class OnboardingReligionPreferencePage extends ConsumerWidget {
     final currentReligionPref =
         ref.watch(currentReligionProvider.notifier).state.name.toUpperCase();
     final userId = ref.watch(authenticatorRepositoryProvider).currentUser?.uid;
-
-    currentReligionPref.log();
-    userId?.log();
 
     return HalfLinearContainer(
       imagePath: imagePath,
@@ -95,7 +91,7 @@ class OnboardingReligionPreferencePage extends ConsumerWidget {
                 ref
                     .read(authStateControllerProvider.notifier)
                     .updateOnboardingStatus(true);
-                context.go(HomeRoute(userId: userId).location);
+                context.go(HomeRoute().location);
               },
             ),
             // TODO (Tai): Implement submit request form
