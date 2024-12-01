@@ -51,14 +51,10 @@ class EventCard extends ConsumerWidget {
 
     final userReligionPreference =
         ref.watch(userControllerProvider).value?.user?.religionPreference;
-
-    print('userReligionPreference: $userReligionPreference');
-
     final selectedDefaultImage = getEventImageCard(
       userReligionPreference,
       eventCategory,
     );
-    print('selectedDefaultImage: $selectedDefaultImage');
 
     return Padding(
       padding: EdgeInsets.only(top: 16.h),
