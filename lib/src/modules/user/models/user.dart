@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:religion_calendar_app/src/modules/user/models/religion_prefernce.dart';
+import 'package:religion_calendar_app/src/modules/user/models/religion_preference.dart';
 import 'package:religion_calendar_app/src/modules/user/models/user_id.dart';
 
 part 'user.freezed.dart';
