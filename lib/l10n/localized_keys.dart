@@ -77,4 +77,19 @@ class LocalizedKeys {
   static String get emptyEventText => AppLocalizations.of(_context)!.emptyEventText;
   static String get descriptionHint => AppLocalizations.of(_context)!.descriptionHint;
   static String get descriptionButtonText => AppLocalizations.of(_context)!.descriptionButtonText;
+  static String get userInfoHeaderText => AppLocalizations.of(_context)!.userInfoHeaderText;
+  static String get editUserInfoButtonText => AppLocalizations.of(_context)!.editUserInfoButtonText;
+  static String get userDefaultNameText => AppLocalizations.of(_context)!.userDefaultNameText;
+  static String get preferencesHeaderText => AppLocalizations.of(_context)!.preferencesHeaderText;
+  static String get religionPreferencesSettingTitleText => AppLocalizations.of(_context)!.religionPreferencesSettingTitleText;
+  static String get firstNameAndLastName => AppLocalizations.of(_context)!.firstNameAndLastName;
+  static String get updateButtonText => AppLocalizations.of(_context)!.updateButtonText;
+  static String get generalSettingsHeaderText => AppLocalizations.of(_context)!.generalSettingsHeaderText;
+  static String get themeSettingTitleText => AppLocalizations.of(_context)!.themeSettingTitleText;
+  static String get notificationSettingTitleText => AppLocalizations.of(_context)!.notificationSettingTitleText;
+  static String get contactSettingHeaderText => AppLocalizations.of(_context)!.contactSettingHeaderText;
+  static String get feebackAndReportSettingTitlText => AppLocalizations.of(_context)!.feebackAndReportSettingTitlText;
+  static String get helpAndFAQsSettingTitleText => AppLocalizations.of(_context)!.helpAndFAQsSettingTitleText;
+  static String get termsOfUseTitleText => AppLocalizations.of(_context)!.termsOfUseTitleText;
+  static String get privacyPolicySettingTitleText => AppLocalizations.of(_context)!.privacyPolicySettingTitleText;
 }
