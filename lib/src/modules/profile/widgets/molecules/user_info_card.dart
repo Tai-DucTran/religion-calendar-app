@@ -39,7 +39,8 @@ class UserInfoCard extends ConsumerWidget {
         children: [
           CircleAvatar(
             radius: 32.r,
-            backgroundColor: AriesColor.facebookColor,
+            backgroundColor: AriesColor.yellowP400,
+            backgroundImage: AssetImage(AriesImages.christImage),
           ),
           Spacing.sp12,
           Column(
