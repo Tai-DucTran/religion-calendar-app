@@ -91,7 +91,7 @@ class OnboardingReligionPreferencePage extends ConsumerWidget {
                 ref
                     .read(authStateControllerProvider.notifier)
                     .updateOnboardingStatus(true);
-                context.go(HomeRoute(userId: userId).location);
+                context.go(HomeRoute().location);
               },
             ),
             // TODO (Tai): Implement submit request form

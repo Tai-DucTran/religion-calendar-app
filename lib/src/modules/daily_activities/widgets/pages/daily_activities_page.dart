@@ -3,11 +3,8 @@ import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class DailyActivitiesPage extends StatefulWidget {
   const DailyActivitiesPage({
-    required this.userId,
     super.key,
   });
-
-  final String? userId;
 
   @override
   State<DailyActivitiesPage> createState() => _DailyActivitiesPageState();
