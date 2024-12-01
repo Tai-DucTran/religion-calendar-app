@@ -50,6 +50,10 @@ class Spacing {
     width: 28.w,
     height: 28.h,
   );
+  static SizedBox sp30 = SizedBox(
+    width: 30.w,
+    height: 30.h,
+  );
   static SizedBox sp32 = SizedBox(
     width: 32.w,
     height: 32.h,

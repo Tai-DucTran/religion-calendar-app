@@ -22,43 +22,49 @@ class AriesTextStyles {
   // Heading 1: Bold, 44px, 1.3 x font size
   static TextStyle get textHeading1 => TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 44.sp,
+        fontSize: 42.sp,
         overflow: TextOverflow.ellipsis,
+        color: AriesColor.neutral800,
       );
 
   // Heading 2: Bold, 36px, 1.3 x font size
   static TextStyle get textHeading2 => TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 36.sp,
+        fontSize: 34.sp,
         overflow: TextOverflow.ellipsis,
+        color: AriesColor.neutral800,
       );
 
   // Heading 3: Bold, 28px, 1.3 x font size
   static TextStyle get textHeading3 => TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 28.sp,
+        fontSize: 26.sp,
         overflow: TextOverflow.ellipsis,
+        color: AriesColor.neutral800,
       );
 
   // Heading 4: Bold, 24px, 1.3 x font size
   static TextStyle get textHeading4 => TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 24.sp,
+        fontSize: 22.sp,
         overflow: TextOverflow.ellipsis,
+        color: AriesColor.neutral800,
       );
 
   // Heading 5: Bold, 20px, 1.3 x font size
   static TextStyle get textHeading5 => TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 20.sp,
+        fontSize: 18.sp,
         overflow: TextOverflow.ellipsis,
+        color: AriesColor.neutral700,
       );
 
   // Heading 6: Bold, 16px, 1.3 x font size
   static TextStyle get textHeading6 => TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 16.sp,
+        fontSize: 14.sp,
         overflow: TextOverflow.ellipsis,
+        color: AriesColor.neutral700,
       );
 
   // Lead Paragraph: Regular, 22px, 1.5 x font size
@@ -88,6 +94,7 @@ class AriesTextStyles {
         fontWeight: FontWeight.normal, // Switch to FontWeight.w600 for Semibold
         fontSize: 14.sp,
         overflow: TextOverflow.ellipsis,
+        color: AriesColor.neutral700,
       );
 
   // Body Small: Regular / Semibold, 14px, 1.7 x font size
