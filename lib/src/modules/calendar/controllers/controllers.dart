@@ -4,6 +4,8 @@ export 'event_category_controller.dart';
 export 'event_date_time_controller.dart';
 export 'full_calendar_controller.dart';
 export 'is_all_day_toggle_controller.dart';
+export 'is_start_day_change_controller.dart';
+export 'previous_selected_date_controller.dart';
 export 'religion_event_controller.dart';
 export 'remind_me_before_controller.dart';
 export 'repeated_frequency_controller.dart';
