@@ -43,7 +43,7 @@ android {
 
     defaultConfig {
         applicationId "com.gmaildeve.taitran.religion_calendar_app"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
