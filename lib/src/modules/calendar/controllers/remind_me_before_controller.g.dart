@@ -7,7 +7,7 @@ part of 'remind_me_before_controller.dart';
 // **************************************************************************
 
 String _$remindMeBeforeControllerHash() =>
-    r'5cdb400801a84611c9b4681d5a9a7699c48f0b82';
+    r'd149c1c3feeaa42841c0b4d01068349a52b9867e';
 
 /// See also [RemindMeBeforeController].
 @ProviderFor(RemindMeBeforeController)

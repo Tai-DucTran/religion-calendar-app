@@ -7,7 +7,7 @@ part of 'repeated_frequency_controller.dart';
 // **************************************************************************
 
 String _$repeatedFrequencyControllerHash() =>
-    r'af78e90b11268a99bf4add7cc3cfc02c66e76905';
+    r'94158b7af38b9cc368dcf015ca5285ed427cc9ad';
 
 /// See also [RepeatedFrequencyController].
 @ProviderFor(RepeatedFrequencyController)
