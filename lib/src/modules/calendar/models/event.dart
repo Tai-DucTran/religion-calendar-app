@@ -37,7 +37,7 @@ class ReligionEvent with _$ReligionEvent {
   const factory ReligionEvent({
     required String id,
     required LocalizedDescription localizedDescription,
-    required ImportantLevel importantLevel,
+    required int importantLevel,
     required DateTime startDate,
     required DateTime endDate,
     required EventCategory eventCategory,
@@ -46,6 +46,7 @@ class ReligionEvent with _$ReligionEvent {
     required ReligionPreference religion,
     required DateTime createdAt,
     required DateTime updatedAt,
+    @Default("") String img,
   }) = _ReligionEvent;
 
   factory ReligionEvent.fromJson(Map<String, dynamic> json) =>
@@ -90,8 +91,9 @@ class BasedEvent with _$BasedEvent {
     required DateTime createdAt,
     required DateTime updatedAt,
     required double remindMeBefore,
+    String? img,
     String? description,
-    ImportantLevel? importantLevel,
+    int? importantLevel,
     String? location,
     String? repeatedFrequencyAt,
   }) = _BasedEvent;
@@ -269,13 +271,49 @@ extension RemindMeBeforeOptionsExtension on RemindMeBeforeOptions {
   }
 }
 
-enum ImportantLevel {
-  @JsonValue('IMPORTANT')
-  important,
-  @JsonValue('MEDIUM')
-  medium,
-  @JsonValue('LOW')
-  low,
+extension ImportantLevelFunction on int {
+  String? get localized {
+    switch (this) {
+      case 1:
+        return LocalizedKeys.calendarCategorySolarText;
+      case 2:
+        return LocalizedKeys.calendarCategorySolarText;
+      case 3:
+        return LocalizedKeys.calendarCategorySolarText;
+      case 4:
+        return LocalizedKeys.calendarCategorySolarText;
+      default:
+        return LocalizedKeys.calendarCategorySolarText;
+    }
+  }
+
+  IconData? get icon {
+    switch (this) {
+      case 1:
+        return Icons.family_restroom_sharp;
+      case 2:
+        return Icons.work_history_outlined;
+      case 3:
+        return Icons.perm_contact_cal_outlined;
+      case 4:
+        return Icons.messenger_outline_sharp;
+    }
+    return null;
+  }
+
+  String? get image {
+    switch (this) {
+      case 1:
+        return AriesImages.defaultFamilyEvent;
+      case 2:
+        return AriesImages.defaultBusinessEvent;
+      case 3:
+        return AriesImages.defaultPersonalEvent;
+      case 4:
+        return AriesImages.defaultOtherEvent;
+    }
+    return null;
+  }
 }
 
 enum CalendarCategory {
