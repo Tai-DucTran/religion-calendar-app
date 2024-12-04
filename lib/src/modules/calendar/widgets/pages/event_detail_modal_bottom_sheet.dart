@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/constants/constant_values.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/widgets/widgets.dart';
 
 class EventDetailModalBottomSheet extends ConsumerStatefulWidget {
@@ -88,17 +87,15 @@ class _EventDetailModalBottomSheetState
                     isStartDate: false,
                   ),
                   Spacing.sp18,
+                  const RemindMeBeforeSelect(),
+                  Spacing.sp18,
+                  const RepeatedFrequencySelect(),
+                  Spacing.sp12,
                   const Divider(),
                   Spacing.sp12,
                   EventLocationInput(
                     controller: eventLocationInputController,
                   ),
-                  Spacing.sp12,
-                  const Divider(),
-                  Spacing.sp18,
-                  const RepeatedFrequencySelect(),
-                  Spacing.sp12,
-                  const RemindMeBeforeSelect(),
                   Spacing.sp12,
                   const Divider(),
                   Spacing.sp12,
