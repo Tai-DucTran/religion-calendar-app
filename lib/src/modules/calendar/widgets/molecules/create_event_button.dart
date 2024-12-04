@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/calendar/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
@@ -54,9 +55,8 @@ class CreateEventButton extends ConsumerWidget {
       );
 
       await docRef.set(userEvent.toJson());
-      print('Add event success with ID: ${docRef.id}');
       if (context.mounted) {
-        Navigator.of(context).pop(true); // Close modal and return true
+        Navigator.of(context).pop(true);
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Event created successfully!')),
         );
@@ -69,7 +69,7 @@ class CreateEventButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
       onPressed: () => addEvent(context, ref),
-      child: const Text("Create event"),
+      child: Text(LocalizedKeys.descriptionButtonText),
     );
   }
 }
