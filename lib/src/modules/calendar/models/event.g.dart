@@ -57,8 +57,7 @@ _$ReligionEventImpl _$$ReligionEventImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       localizedDescription: LocalizedDescription.fromJson(
           json['localizedDescription'] as Map<String, dynamic>),
-      importantLevel:
-          $enumDecode(_$ImportantLevelEnumMap, json['importantLevel']),
+      importantLevel: (json['importantLevel'] as num).toInt(),
       startDate: DateTime.parse(json['startDate'] as String),
       endDate: DateTime.parse(json['endDate'] as String),
       eventCategory: $enumDecode(_$EventCategoryEnumMap, json['eventCategory']),
@@ -68,13 +67,14 @@ _$ReligionEventImpl _$$ReligionEventImplFromJson(Map<String, dynamic> json) =>
       religion: $enumDecode(_$ReligionPreferenceEnumMap, json['religion']),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
+      img: json['img'] as String? ?? "",
     );
 
 Map<String, dynamic> _$$ReligionEventImplToJson(_$ReligionEventImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'localizedDescription': instance.localizedDescription,
-      'importantLevel': _$ImportantLevelEnumMap[instance.importantLevel]!,
+      'importantLevel': instance.importantLevel,
       'startDate': instance.startDate.toIso8601String(),
       'endDate': instance.endDate.toIso8601String(),
       'eventCategory': _$EventCategoryEnumMap[instance.eventCategory]!,
@@ -83,13 +83,8 @@ Map<String, dynamic> _$$ReligionEventImplToJson(_$ReligionEventImpl instance) =>
       'religion': _$ReligionPreferenceEnumMap[instance.religion]!,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
+      'img': instance.img,
     };
-
-const _$ImportantLevelEnumMap = {
-  ImportantLevel.important: 'IMPORTANT',
-  ImportantLevel.medium: 'MEDIUM',
-  ImportantLevel.low: 'LOW',
-};
 
 const _$ReligionPreferenceEnumMap = {
   ReligionPreference.catholicism: 'CATHOLICISM',
@@ -143,9 +138,9 @@ _$BasedEventImpl _$$BasedEventImplFromJson(Map<String, dynamic> json) =>
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       remindMeBefore: (json['remindMeBefore'] as num).toDouble(),
+      img: json['img'] as String?,
       description: json['description'] as String?,
-      importantLevel:
-          $enumDecodeNullable(_$ImportantLevelEnumMap, json['importantLevel']),
+      importantLevel: (json['importantLevel'] as num?)?.toInt(),
       location: json['location'] as String?,
       repeatedFrequencyAt: json['repeatedFrequencyAt'] as String?,
     );
@@ -162,8 +157,9 @@ Map<String, dynamic> _$$BasedEventImplToJson(_$BasedEventImpl instance) =>
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
       'remindMeBefore': instance.remindMeBefore,
+      'img': instance.img,
       'description': instance.description,
-      'importantLevel': _$ImportantLevelEnumMap[instance.importantLevel],
+      'importantLevel': instance.importantLevel,
       'location': instance.location,
       'repeatedFrequencyAt': instance.repeatedFrequencyAt,
     };

@@ -420,7 +420,7 @@ mixin _$ReligionEvent {
   String get id => throw _privateConstructorUsedError;
   LocalizedDescription get localizedDescription =>
       throw _privateConstructorUsedError;
-  ImportantLevel get importantLevel => throw _privateConstructorUsedError;
+  int get importantLevel => throw _privateConstructorUsedError;
   DateTime get startDate => throw _privateConstructorUsedError;
   DateTime get endDate => throw _privateConstructorUsedError;
   EventCategory get eventCategory => throw _privateConstructorUsedError;
@@ -429,6 +429,7 @@ mixin _$ReligionEvent {
   ReligionPreference get religion => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
+  String get img => throw _privateConstructorUsedError;
 
   /// Serializes this ReligionEvent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -449,7 +450,7 @@ abstract class $ReligionEventCopyWith<$Res> {
   $Res call(
       {String id,
       LocalizedDescription localizedDescription,
-      ImportantLevel importantLevel,
+      int importantLevel,
       DateTime startDate,
       DateTime endDate,
       EventCategory eventCategory,
@@ -457,7 +458,8 @@ abstract class $ReligionEventCopyWith<$Res> {
       double remindMeBefore,
       ReligionPreference religion,
       DateTime createdAt,
-      DateTime updatedAt});
+      DateTime updatedAt,
+      String img});
 
   $LocalizedDescriptionCopyWith<$Res> get localizedDescription;
 }
@@ -488,6 +490,7 @@ class _$ReligionEventCopyWithImpl<$Res, $Val extends ReligionEvent>
     Object? religion = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? img = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -501,7 +504,7 @@ class _$ReligionEventCopyWithImpl<$Res, $Val extends ReligionEvent>
       importantLevel: null == importantLevel
           ? _value.importantLevel
           : importantLevel // ignore: cast_nullable_to_non_nullable
-              as ImportantLevel,
+              as int,
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -534,6 +537,10 @@ class _$ReligionEventCopyWithImpl<$Res, $Val extends ReligionEvent>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      img: null == img
+          ? _value.img
+          : img // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -560,7 +567,7 @@ abstract class _$$ReligionEventImplCopyWith<$Res>
   $Res call(
       {String id,
       LocalizedDescription localizedDescription,
-      ImportantLevel importantLevel,
+      int importantLevel,
       DateTime startDate,
       DateTime endDate,
       EventCategory eventCategory,
@@ -568,7 +575,8 @@ abstract class _$$ReligionEventImplCopyWith<$Res>
       double remindMeBefore,
       ReligionPreference religion,
       DateTime createdAt,
-      DateTime updatedAt});
+      DateTime updatedAt,
+      String img});
 
   @override
   $LocalizedDescriptionCopyWith<$Res> get localizedDescription;
@@ -598,6 +606,7 @@ class __$$ReligionEventImplCopyWithImpl<$Res>
     Object? religion = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? img = null,
   }) {
     return _then(_$ReligionEventImpl(
       id: null == id
@@ -611,7 +620,7 @@ class __$$ReligionEventImplCopyWithImpl<$Res>
       importantLevel: null == importantLevel
           ? _value.importantLevel
           : importantLevel // ignore: cast_nullable_to_non_nullable
-              as ImportantLevel,
+              as int,
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -644,6 +653,10 @@ class __$$ReligionEventImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      img: null == img
+          ? _value.img
+          : img // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -662,7 +675,8 @@ class _$ReligionEventImpl implements _ReligionEvent {
       required this.remindMeBefore,
       required this.religion,
       required this.createdAt,
-      required this.updatedAt});
+      required this.updatedAt,
+      this.img = ""});
 
   factory _$ReligionEventImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReligionEventImplFromJson(json);
@@ -672,7 +686,7 @@ class _$ReligionEventImpl implements _ReligionEvent {
   @override
   final LocalizedDescription localizedDescription;
   @override
-  final ImportantLevel importantLevel;
+  final int importantLevel;
   @override
   final DateTime startDate;
   @override
@@ -689,10 +703,13 @@ class _$ReligionEventImpl implements _ReligionEvent {
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
+  @override
+  @JsonKey()
+  final String img;
 
   @override
   String toString() {
-    return 'ReligionEvent(id: $id, localizedDescription: $localizedDescription, importantLevel: $importantLevel, startDate: $startDate, endDate: $endDate, eventCategory: $eventCategory, calendarCategory: $calendarCategory, remindMeBefore: $remindMeBefore, religion: $religion, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ReligionEvent(id: $id, localizedDescription: $localizedDescription, importantLevel: $importantLevel, startDate: $startDate, endDate: $endDate, eventCategory: $eventCategory, calendarCategory: $calendarCategory, remindMeBefore: $remindMeBefore, religion: $religion, createdAt: $createdAt, updatedAt: $updatedAt, img: $img)';
   }
 
   @override
@@ -719,7 +736,8 @@ class _$ReligionEventImpl implements _ReligionEvent {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.img, img) || other.img == img));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -736,7 +754,8 @@ class _$ReligionEventImpl implements _ReligionEvent {
       remindMeBefore,
       religion,
       createdAt,
-      updatedAt);
+      updatedAt,
+      img);
 
   /// Create a copy of ReligionEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -758,7 +777,7 @@ abstract class _ReligionEvent implements ReligionEvent {
   const factory _ReligionEvent(
       {required final String id,
       required final LocalizedDescription localizedDescription,
-      required final ImportantLevel importantLevel,
+      required final int importantLevel,
       required final DateTime startDate,
       required final DateTime endDate,
       required final EventCategory eventCategory,
@@ -766,7 +785,8 @@ abstract class _ReligionEvent implements ReligionEvent {
       required final double remindMeBefore,
       required final ReligionPreference religion,
       required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$ReligionEventImpl;
+      required final DateTime updatedAt,
+      final String img}) = _$ReligionEventImpl;
 
   factory _ReligionEvent.fromJson(Map<String, dynamic> json) =
       _$ReligionEventImpl.fromJson;
@@ -776,7 +796,7 @@ abstract class _ReligionEvent implements ReligionEvent {
   @override
   LocalizedDescription get localizedDescription;
   @override
-  ImportantLevel get importantLevel;
+  int get importantLevel;
   @override
   DateTime get startDate;
   @override
@@ -793,6 +813,8 @@ abstract class _ReligionEvent implements ReligionEvent {
   DateTime get createdAt;
   @override
   DateTime get updatedAt;
+  @override
+  String get img;
 
   /// Create a copy of ReligionEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1224,8 +1246,9 @@ mixin _$BasedEvent {
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
   double get remindMeBefore => throw _privateConstructorUsedError;
+  String? get img => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  ImportantLevel? get importantLevel => throw _privateConstructorUsedError;
+  int? get importantLevel => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
   String? get repeatedFrequencyAt => throw _privateConstructorUsedError;
 
@@ -1256,8 +1279,9 @@ abstract class $BasedEventCopyWith<$Res> {
       DateTime createdAt,
       DateTime updatedAt,
       double remindMeBefore,
+      String? img,
       String? description,
-      ImportantLevel? importantLevel,
+      int? importantLevel,
       String? location,
       String? repeatedFrequencyAt});
 }
@@ -1287,6 +1311,7 @@ class _$BasedEventCopyWithImpl<$Res, $Val extends BasedEvent>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? remindMeBefore = null,
+    Object? img = freezed,
     Object? description = freezed,
     Object? importantLevel = freezed,
     Object? location = freezed,
@@ -1333,6 +1358,10 @@ class _$BasedEventCopyWithImpl<$Res, $Val extends BasedEvent>
           ? _value.remindMeBefore
           : remindMeBefore // ignore: cast_nullable_to_non_nullable
               as double,
+      img: freezed == img
+          ? _value.img
+          : img // ignore: cast_nullable_to_non_nullable
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -1340,7 +1369,7 @@ class _$BasedEventCopyWithImpl<$Res, $Val extends BasedEvent>
       importantLevel: freezed == importantLevel
           ? _value.importantLevel
           : importantLevel // ignore: cast_nullable_to_non_nullable
-              as ImportantLevel?,
+              as int?,
       location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -1372,8 +1401,9 @@ abstract class _$$BasedEventImplCopyWith<$Res>
       DateTime createdAt,
       DateTime updatedAt,
       double remindMeBefore,
+      String? img,
       String? description,
-      ImportantLevel? importantLevel,
+      int? importantLevel,
       String? location,
       String? repeatedFrequencyAt});
 }
@@ -1401,6 +1431,7 @@ class __$$BasedEventImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? remindMeBefore = null,
+    Object? img = freezed,
     Object? description = freezed,
     Object? importantLevel = freezed,
     Object? location = freezed,
@@ -1447,6 +1478,10 @@ class __$$BasedEventImplCopyWithImpl<$Res>
           ? _value.remindMeBefore
           : remindMeBefore // ignore: cast_nullable_to_non_nullable
               as double,
+      img: freezed == img
+          ? _value.img
+          : img // ignore: cast_nullable_to_non_nullable
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -1454,7 +1489,7 @@ class __$$BasedEventImplCopyWithImpl<$Res>
       importantLevel: freezed == importantLevel
           ? _value.importantLevel
           : importantLevel // ignore: cast_nullable_to_non_nullable
-              as ImportantLevel?,
+              as int?,
       location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -1481,6 +1516,7 @@ class _$BasedEventImpl extends _BasedEvent {
       required this.createdAt,
       required this.updatedAt,
       required this.remindMeBefore,
+      this.img,
       this.description,
       this.importantLevel,
       this.location,
@@ -1512,9 +1548,11 @@ class _$BasedEventImpl extends _BasedEvent {
   @override
   final double remindMeBefore;
   @override
+  final String? img;
+  @override
   final String? description;
   @override
-  final ImportantLevel? importantLevel;
+  final int? importantLevel;
   @override
   final String? location;
   @override
@@ -1522,7 +1560,7 @@ class _$BasedEventImpl extends _BasedEvent {
 
   @override
   String toString() {
-    return 'BasedEvent(id: $id, title: $title, calendarCategory: $calendarCategory, eventCategory: $eventCategory, isAllDay: $isAllDay, startDate: $startDate, endDate: $endDate, createdAt: $createdAt, updatedAt: $updatedAt, remindMeBefore: $remindMeBefore, description: $description, importantLevel: $importantLevel, location: $location, repeatedFrequencyAt: $repeatedFrequencyAt)';
+    return 'BasedEvent(id: $id, title: $title, calendarCategory: $calendarCategory, eventCategory: $eventCategory, isAllDay: $isAllDay, startDate: $startDate, endDate: $endDate, createdAt: $createdAt, updatedAt: $updatedAt, remindMeBefore: $remindMeBefore, img: $img, description: $description, importantLevel: $importantLevel, location: $location, repeatedFrequencyAt: $repeatedFrequencyAt)';
   }
 
   @override
@@ -1547,6 +1585,7 @@ class _$BasedEventImpl extends _BasedEvent {
                 other.updatedAt == updatedAt) &&
             (identical(other.remindMeBefore, remindMeBefore) ||
                 other.remindMeBefore == remindMeBefore) &&
+            (identical(other.img, img) || other.img == img) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.importantLevel, importantLevel) ||
@@ -1571,6 +1610,7 @@ class _$BasedEventImpl extends _BasedEvent {
       createdAt,
       updatedAt,
       remindMeBefore,
+      img,
       description,
       importantLevel,
       location,
@@ -1604,8 +1644,9 @@ abstract class _BasedEvent extends BasedEvent {
       required final DateTime createdAt,
       required final DateTime updatedAt,
       required final double remindMeBefore,
+      final String? img,
       final String? description,
-      final ImportantLevel? importantLevel,
+      final int? importantLevel,
       final String? location,
       final String? repeatedFrequencyAt}) = _$BasedEventImpl;
   const _BasedEvent._() : super._();
@@ -1634,9 +1675,11 @@ abstract class _BasedEvent extends BasedEvent {
   @override
   double get remindMeBefore;
   @override
+  String? get img;
+  @override
   String? get description;
   @override
-  ImportantLevel? get importantLevel;
+  int? get importantLevel;
   @override
   String? get location;
   @override
