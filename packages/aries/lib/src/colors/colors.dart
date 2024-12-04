@@ -72,4 +72,6 @@ class AriesColor {
   static const facebookColor = Color(0xFF1877F2);
 
   static const black = Color(0xFF000000);
+
+  static const transparent = Color(0x00000000);
 }
