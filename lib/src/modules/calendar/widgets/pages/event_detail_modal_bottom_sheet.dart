@@ -40,8 +40,9 @@ class EventDetailModalBottomSheet extends ConsumerStatefulWidget {
 
 class _EventDetailModalBottomSheetState
     extends ConsumerState<EventDetailModalBottomSheet> {
-  TextEditingController eventNameInputController = TextEditingController();
-  TextEditingController eventDescriptionController = TextEditingController();
+  TextEditingController eventNameInputController = TextEditingController(),
+      eventDescriptionController = TextEditingController(),
+      eventLocationInputController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -86,15 +87,15 @@ class _EventDetailModalBottomSheetState
                     isStartDate: false,
                   ),
                   Spacing.sp18,
-                  const Divider(),
-                  Spacing.sp12,
-                  const EventLocationInput(),
-                  Spacing.sp12,
-                  const Divider(),
+                  const RemindMeBeforeSelect(),
                   Spacing.sp18,
                   const RepeatedFrequencySelect(),
                   Spacing.sp12,
-                  const RemindMeBeforeSelect(),
+                  const Divider(),
+                  Spacing.sp12,
+                  EventLocationInput(
+                    controller: eventLocationInputController,
+                  ),
                   Spacing.sp12,
                   const Divider(),
                   Spacing.sp12,
@@ -104,6 +105,7 @@ class _EventDetailModalBottomSheetState
                   Spacing.sp12,
                   CreateEventButton(
                     eventNameInputController: eventNameInputController,
+                    eventLocationInputController: eventLocationInputController,
                     eventDescriptionController: eventDescriptionController,
                   ),
                   Spacing.sp12,

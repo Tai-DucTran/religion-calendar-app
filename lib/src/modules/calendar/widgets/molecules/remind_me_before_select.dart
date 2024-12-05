@@ -2,6 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:religion_calendar_app/src/modules/calendar/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
 
 class RemindMeBeforeSelect extends ConsumerWidget {
@@ -10,7 +11,7 @@ class RemindMeBeforeSelect extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final options = RemindMeBeforeOptions.values.toList();
-    const selectedOption = RemindMeBeforeOptions.atTime;
+    final selectedOption = ref.watch(remindMeBeforeControllerProvider);
     final TextStyle textStyle = AriesTextStyles.textBodySmall;
     
     return Row(
@@ -22,7 +23,6 @@ class RemindMeBeforeSelect extends ConsumerWidget {
         Spacing.sp8,
         Flexible(
           child: DropdownButtonFormField<RemindMeBeforeOptions>(
-            value: selectedOption,
             items: options.map(
               (option) {
                 return DropdownMenuItem(
@@ -35,7 +35,12 @@ class RemindMeBeforeSelect extends ConsumerWidget {
                 );
               },
             ).toList(),
-            onChanged: (newValue) {},
+            onChanged: (RemindMeBeforeOptions? newValue) {
+              final controller =
+                  ref.read(remindMeBeforeControllerProvider.notifier);
+              controller.setOption(newValue as RemindMeBeforeOptions);
+            },
+            value: selectedOption,
             decoration: const InputDecoration(
               border: InputBorder.none,
             ),

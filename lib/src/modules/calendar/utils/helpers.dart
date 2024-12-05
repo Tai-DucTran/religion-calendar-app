@@ -205,6 +205,17 @@ List<String> getWeekDayNames({
   return weekdays;
 }
 
+Map<int, int> getNumberOfDaysInSolarMonths(int year) {
+  final Map<int, int> listAllLunarDaysOfYear = {};
+  
+  for (int month = 1; month <= 12; month++) {
+    final lastDayOfMonth = DateTime(year, month + 1, 0).day;
+    listAllLunarDaysOfYear[month] = lastDayOfMonth;
+  }
+  
+  return listAllLunarDaysOfYear;
+}
+
 class LunarMonth {
   int month;
   int days;
