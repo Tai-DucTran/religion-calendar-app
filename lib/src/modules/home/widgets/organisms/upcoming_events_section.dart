@@ -54,12 +54,21 @@ class UpComingEventsSection extends ConsumerWidget {
                       final eventTime = DateFormat(DateTimeFormat.hourMinute)
                           .format(event.startDate);
 
-                      return EventCard(
-                        eventName: event.title,
-                        eventDate: event.startDate,
-                        eventTime: eventTime,
-                        eventCategory: event.eventCategory,
-                        eventLocation: event.location,
+                      return GestureDetector(
+                        onTap: () async {
+                          final result = await ViewEventModalBottomSheet.show(
+                            context,
+                            event: event,
+                          );
+                          if (!result) return;
+                        },
+                        child: EventCard(
+                          eventName: event.title,
+                          eventDate: event.startDate,
+                          eventTime: eventTime,
+                          eventCategory: event.eventCategory,
+                          eventLocation: event.location,
+                        ),
                       );
                     },
                   ),
