@@ -1,5 +1,6 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextFormFieldContainer extends StatefulWidget {
   const TextFormFieldContainer({
@@ -9,19 +10,25 @@ class TextFormFieldContainer extends StatefulWidget {
     this.hintText,
     this.textCapitalization,
     this.controller,
-    required this.obscureText,
+    this.obscureText,
     this.validator,
     this.suffixIcon,
+    this.titleStyle,
+    this.textFieldColors,
+    this.enable,
   });
 
   final String title;
-  final bool obscureText;
+  final TextStyle? titleStyle;
+  final bool? obscureText;
   final TextInputType? keyboardType;
   final TextCapitalization? textCapitalization;
   final String? hintText;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final Widget? suffixIcon;
+  final Color? textFieldColors;
+  final bool? enable;
 
   @override
   State<TextFormFieldContainer> createState() => _TextFormFieldContainerState();
@@ -34,74 +41,94 @@ class _TextFormFieldContainerState extends State<TextFormFieldContainer> {
         .textTheme
         .bodyMedium
         ?.copyWith(color: AriesColor.neutral300);
+    final isEnabled = widget.enable ?? true;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           widget.title,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
+          style: widget.titleStyle ??
+              TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
         ),
         Spacing.sp6,
-        TextFormField(
-          controller: widget.controller,
-          obscureText: widget.obscureText,
-          keyboardType: widget.keyboardType,
-          autocorrect: false,
-          cursorColor: AriesColor.neutral50,
-          textCapitalization:
-              widget.textCapitalization ?? TextCapitalization.none,
-          style: textInputStyle,
-          validator: widget.validator,
-          decoration: InputDecoration(
-            hintText: widget.hintText,
-            hintStyle: textInputStyle,
-            suffixIconConstraints: const BoxConstraints(
-              minHeight: 16,
-              minWidth: 16,
+        Container(
+          decoration: BoxDecoration(
+            color: isEnabled ? widget.textFieldColors : AriesColor.neutral30,
+            borderRadius: BorderRadius.circular(
+              8.r,
             ),
-            suffixIcon: widget.suffixIcon,
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 12,
-            ),
-            enabledBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
+          ),
+          child: TextFormField(
+            controller: widget.controller,
+            obscureText: widget.obscureText ?? false,
+            keyboardType: widget.keyboardType,
+            autocorrect: false,
+            cursorColor: AriesColor.neutral50,
+            textCapitalization:
+                widget.textCapitalization ?? TextCapitalization.none,
+            style: textInputStyle,
+            validator: widget.validator,
+            enabled: isEnabled,
+            decoration: InputDecoration(
+              enabled: isEnabled,
+              hintText: widget.hintText,
+              hintStyle: textInputStyle,
+              suffixIconConstraints: const BoxConstraints(
+                minHeight: 16,
+                minWidth: 16,
               ),
-              borderSide: BorderSide(
-                color: AriesColor.neutral50,
+              suffixIcon: widget.suffixIcon,
+              contentPadding: EdgeInsets.symmetric(
+                vertical: 8.h,
+                horizontal: 12.w,
               ),
-            ),
-            errorBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8.r),
+                ),
+                borderSide: BorderSide(
+                  color: AriesColor.neutral50,
+                ),
               ),
-              borderSide: BorderSide(
-                color: AriesColor.danger300,
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8.r),
+                ),
+                borderSide: BorderSide(
+                  color: AriesColor.neutral50,
+                ),
               ),
-            ),
-            focusedErrorBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
-              borderSide: BorderSide(
-                color: AriesColor.danger300,
-              ),
-            ),
-            errorStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8.r),
+                ),
+                borderSide: BorderSide(
                   color: AriesColor.danger300,
                 ),
-            errorMaxLines: 2,
-            focusedBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
               ),
-              borderSide: BorderSide(
-                color: AriesColor.yellowP300,
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8.r),
+                ),
+                borderSide: BorderSide(
+                  color: AriesColor.danger300,
+                ),
+              ),
+              errorStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AriesColor.danger300,
+                  ),
+              errorMaxLines: 2,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8.r),
+                ),
+                borderSide: BorderSide(
+                  color: AriesColor.yellowP300,
+                ),
               ),
             ),
           ),

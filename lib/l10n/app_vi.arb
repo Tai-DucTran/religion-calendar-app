@@ -71,7 +71,7 @@
   "userDefaultNameText": "Bạn",
   "preferencesHeaderText": "Tùy chọn của bạn",
   "religionPreferencesSettingTitleText": "Tôn giáo của bạn",
-  "firstNameAndLastName": "Họ và Tên",
+  "userNameText": "Tên tài khoản",
   "updateButtonText": "Cập nhật",
   "generalSettingsHeaderText": "Cài đặt chung",
   "themeSettingTitleText": "Giao diện",
@@ -87,5 +87,10 @@
   "grantAccessToPhotosText": "Cho phép truy cập vào thư viện và ảnh",
   "cancelButtonText": "Hủy",
   "openSettingsButtonText": "Mở cài đặt",
+  "saveButtonText": "Lưu",
+  "profileUpdatedSuccessfullyText": "Đã cập nhật hồ sơ!",
+  "profileUpdatedFailedText": "Cập nhật hồ sơ thất bại!",
+  "eventCreatedSuccessfullyText": "Đã thêm sự kiện!",
+  "eventCreatedFailedText": "Thêm sự kiện thất bại!",
   "@@locale": "vi"
 }

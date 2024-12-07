@@ -79,17 +79,40 @@ class UserFirestoreRepository {
   }) async {
     try {
       final payload = {
-        'hasCompleteOnboarding': true,
-        'religionPreference': religionPreference.toString(),
+        FirebaseFieldName.hasCompleteOnboarding: true,
+        FirebaseFieldName.religionPreference: religionPreference.toString(),
       };
 
       firestoreUserRef.doc(userId).set(
             payload,
-            SetOptions(merge: true),
+            SetOptions(
+              merge: true,
+            ),
           );
     } catch (error) {
       error.log();
       throw Exception(error);
+    }
+  }
+
+  Future<void> updateBasicUserInfo({
+    required UserId? userId,
+    required String newUserName,
+  }) async {
+    try {
+      final payload = {
+        FirebaseFieldName.displayName: newUserName,
+      };
+
+      firestoreUserRef.doc(userId).set(
+            payload,
+            SetOptions(
+              merge: true,
+            ),
+          );
+    } catch (error) {
+      error.log();
+      throw Exception('Update user name failed: $error');
     }
   }
 

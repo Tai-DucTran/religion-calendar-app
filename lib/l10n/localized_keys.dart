@@ -82,7 +82,7 @@ class LocalizedKeys {
   static String get userDefaultNameText => AppLocalizations.of(_context)!.userDefaultNameText;
   static String get preferencesHeaderText => AppLocalizations.of(_context)!.preferencesHeaderText;
   static String get religionPreferencesSettingTitleText => AppLocalizations.of(_context)!.religionPreferencesSettingTitleText;
-  static String get firstNameAndLastName => AppLocalizations.of(_context)!.firstNameAndLastName;
+  static String get userNameText => AppLocalizations.of(_context)!.userNameText;
   static String get updateButtonText => AppLocalizations.of(_context)!.updateButtonText;
   static String get generalSettingsHeaderText => AppLocalizations.of(_context)!.generalSettingsHeaderText;
   static String get themeSettingTitleText => AppLocalizations.of(_context)!.themeSettingTitleText;
@@ -98,4 +98,9 @@ class LocalizedKeys {
   static String get grantAccessToPhotosText => AppLocalizations.of(_context)!.grantAccessToPhotosText;
   static String get cancelButtonText => AppLocalizations.of(_context)!.cancelButtonText;
   static String get openSettingsButtonText => AppLocalizations.of(_context)!.openSettingsButtonText;
+  static String get saveButtonText => AppLocalizations.of(_context)!.saveButtonText;
+  static String get profileUpdatedSuccessfullyText => AppLocalizations.of(_context)!.profileUpdatedSuccessfullyText;
+  static String get profileUpdatedFailedText => AppLocalizations.of(_context)!.profileUpdatedFailedText;
+  static String get eventCreatedSuccessfullyText => AppLocalizations.of(_context)!.eventCreatedSuccessfullyText;
+  static String get eventCreatedFailedText => AppLocalizations.of(_context)!.eventCreatedFailedText;
 }

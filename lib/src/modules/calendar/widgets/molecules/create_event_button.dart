@@ -6,6 +6,7 @@ import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/calendar/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
+import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class CreateEventButton extends ConsumerWidget {
   const CreateEventButton({
@@ -25,7 +26,8 @@ class CreateEventButton extends ConsumerWidget {
       final selectedCategory = ref.watch(eventCategoryControllerProvider);
       final isAllDay = ref.watch(isAllDayToggleControllerProvider);
       final currentEventDateTime = ref.watch(eventDateTimeControllerProvider);
-      final repeatedFrequencyAt = ref.watch(repeatedFrequencyControllerProvider);
+      final repeatedFrequencyAt =
+          ref.watch(repeatedFrequencyControllerProvider);
       final remindMeBefore = ref.watch(remindMeBeforeControllerProvider);
 
       final authenticatorRepo = ref.watch(authenticatorRepositoryProvider);
@@ -48,8 +50,7 @@ class CreateEventButton extends ConsumerWidget {
         location: eventLocationInputController.text,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
-        repeatedFrequencyAt:
-            repeatedFrequencyAt.toRecurrenceRule().toString(),
+        repeatedFrequencyAt: repeatedFrequencyAt.toRecurrenceRule().toString(),
         remindMeBefore: remindMeBefore.fromStringToDouble,
         description: eventDescriptionController.text,
       );
@@ -58,13 +59,26 @@ class CreateEventButton extends ConsumerWidget {
       if (context.mounted) {
         Navigator.of(context).pop(true);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Event created successfully!')),
+          getCustomSnackbar(
+            context: context,
+            message: LocalizedKeys.eventCreatedSuccessfullyText,
+            snackbarType: SnackbarType.success,
+          ),
         );
       }
     } catch (e) {
-      print('Can not add event: $e');
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          getCustomSnackbar(
+            context: context,
+            message: LocalizedKeys.eventCreatedFailedText,
+            snackbarType: SnackbarType.error,
+          ),
+        );
+      }
     }
   }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
