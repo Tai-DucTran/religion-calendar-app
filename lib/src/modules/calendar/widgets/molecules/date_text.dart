@@ -6,10 +6,10 @@ import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 class DateText extends StatelessWidget {
   const DateText({
     super.key,
-    required this.event,
+    required this.eventStartDate,
   });
 
-  final BasedEvent event;
+  final DateTime eventStartDate;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class DateText extends StatelessWidget {
             Text(
               getFullSolarDateText(
                 locale: Localizations.localeOf(context).toString(),
-                inputDate: event.startDate,
+                inputDate: eventStartDate,
                 dateFormat: DateTimeFormat.weekDateMonthYear,
               ),
               style: AriesTextStyles.textBodySmall.copyWith(

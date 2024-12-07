@@ -1,17 +1,15 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
-import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class DeleteEventButton extends StatelessWidget {
   const DeleteEventButton({
     super.key,
-    required this.deleteButtonHeight,
-    required this.event,
+    required this.eventId,
   });
 
-  final double deleteButtonHeight;
-  final BasedEvent event;
+  final String eventId;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +18,7 @@ class DeleteEventButton extends StatelessWidget {
       left: 0,
       right: 0,
       child: Container(
-        height: deleteButtonHeight,
+        height: 75.h,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,

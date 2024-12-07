@@ -1,19 +1,17 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class EventLocationText extends StatelessWidget {
   const EventLocationText({
     super.key,
-    required this.event,
+    required this.location,
   });
 
-  final BasedEvent event;
+  final String location;
 
   @override
   Widget build(BuildContext context) {
-    final location = event.location ?? '';
 
     return Column(
       children: [

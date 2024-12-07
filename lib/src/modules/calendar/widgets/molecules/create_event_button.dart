@@ -58,18 +58,28 @@ class CreateEventButton extends ConsumerWidget {
       if (context.mounted) {
         Navigator.of(context).pop(true);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Event created successfully!')),
+          SnackBar(
+            content: Text(
+              LocalizedKeys.eventCreatedMessageText,
+            ),
+            duration: Duration(
+              seconds: 3,
+            ),
+          ),
         );
       }
     } catch (e) {
       print('Can not add event: $e');
     }
   }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
       onPressed: () => addEvent(context, ref),
-      child: Text(LocalizedKeys.createEventButtonText),
+      child: Text(
+        LocalizedKeys.createEventButtonText,
+      ),
     );
   }
 }

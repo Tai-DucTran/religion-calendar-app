@@ -36,9 +36,7 @@ class _ViewEventModalBottomSheetState
   @override
   Widget build(BuildContext context) {
     BasedEvent event = widget.event;
-    
-    String imageURL =
-        'https://cdn-cjhkj.nitrocdn.com/krXSsXVqwzhduXLVuGLToUwHLNnSxUxO/assets/images/optimized/rev-b135bb1/spotme.com/wp-content/uploads/2020/07/Hero-1.jpg';
+
     final screenHeight = MediaQuery.of(context).size.height;
     final bottomSheetHeight = screenHeight * bottomSheetHeightFactorMax;
     final deleteButtonHeight = 75.h;
@@ -61,7 +59,6 @@ class _ViewEventModalBottomSheetState
                 TopBanner(
                   event: event,
                   bannerHeight: bannerHeight,
-                  imageURL: imageURL,
                 ),
                 Expanded(
                   child: SingleChildScrollView(
@@ -75,18 +72,30 @@ class _ViewEventModalBottomSheetState
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          EventCategoryText(event: event),
-                          EventTitleText(event: event),
-                          DateText(event: event),
+                          EventCategoryText(
+                            eventCategory: event.eventCategory,
+                          ),
+                          EventTitleText(
+                            title: event.title,
+                          ),
+                          DateText(
+                            eventStartDate: event.startDate,
+                          ),
                           if (event.repeatedFrequencyAt != null &&
                               event.repeatedFrequencyAt!.isNotEmpty)
-                            RepeatedFrequencyText(event: event),
+                            RepeatedFrequencyText(
+                              repeatedFrequencyAt: event.repeatedFrequencyAt!,
+                            ),
                           if (event.location != null &&
                               event.location!.isNotEmpty)
-                            EventLocationText(event: event),
+                            EventLocationText(
+                              location: event.location!,
+                            ),
                           if (event.description != null &&
                               event.description!.isNotEmpty)
-                            EventDescriptionText(event: event),
+                            EventDescriptionText(
+                              event: event,
+                            ),
                         ],
                       ),
                     ),
@@ -100,8 +109,7 @@ class _ViewEventModalBottomSheetState
                     deleteButtonHeight: deleteButtonHeight,
                   )
                 : DeleteEventButton(
-                    event: event,
-                    deleteButtonHeight: deleteButtonHeight,
+                    eventId: event.id,
                   )
           ],
         ),

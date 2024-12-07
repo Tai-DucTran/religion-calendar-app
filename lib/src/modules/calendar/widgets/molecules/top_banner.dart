@@ -5,23 +5,28 @@ class TopBanner extends StatelessWidget {
   const TopBanner({
     super.key,
     required this.event,
-    required this.imageURL,
     required this.bannerHeight,
   });
 
   final BasedEvent event;
-  final String imageURL;
   final double bannerHeight;
 
   @override
   Widget build(BuildContext context) {
+    bool isReligionEvent = event.eventCategory == EventCategory.religionEvent;
+
     return SizedBox(
       height: bannerHeight,
       child: Stack(
         children: [
-          BannerImage(imageURL: imageURL),
+          BannerImage(
+            img: event.img,
+          ),
           BannerLine(),
-          EditEventButton(event: event),
+          if (!isReligionEvent)
+            EditEventButton(
+              eventId: event.id,
+            ),
         ],
       ),
     );

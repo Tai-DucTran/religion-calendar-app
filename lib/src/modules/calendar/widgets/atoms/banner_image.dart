@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:religion_calendar_app/constants/constants.dart';
 
 class BannerImage extends StatelessWidget {
   const BannerImage({
     super.key,
-    required this.imageURL,
+    this.img,
   });
 
-  final String imageURL;
+  final String? img;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class BannerImage extends StatelessWidget {
         ),
       ),
       child: Image.network(
-        imageURL,
+        img ?? FirebaseImage.defaultBannerImage,
         width: double.infinity,
         fit: BoxFit.cover,
         height: 150.w,

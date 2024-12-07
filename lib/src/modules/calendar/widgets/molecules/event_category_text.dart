@@ -6,10 +6,10 @@ import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 class EventCategoryText extends StatelessWidget {
   const EventCategoryText({
     super.key,
-    required this.event,
+    required this.eventCategory,
   });
 
-  final BasedEvent event;
+  final EventCategory eventCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +34,15 @@ class EventCategoryText extends StatelessWidget {
             ),
             child: Row(
               children: [
-                EventCategoryDot(event: event),
+                EventCategoryDot(
+                  eventCategory: eventCategory,
+                ),
                 Spacing.sp4,
                 Text(
-                    event.eventCategory.localized,
-                    maxLines: null,
-                    style: AriesTextStyles.textBodySmall,
-                  ),
+                  eventCategory.localized,
+                  maxLines: null,
+                  style: AriesTextStyles.textBodySmall,
+                ),
               ],
             ),
           ),
