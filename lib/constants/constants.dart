@@ -3,6 +3,7 @@ export 'date_time_format.dart';
 export 'default_quotes.dart';
 export 'firebase_collection_name.dart';
 export 'firebase_field_name.dart';
+export 'firebase_image.dart';
 export 'regex_format.dart';
 export 'route_names.dart';
 export 'screen_config.dart';
