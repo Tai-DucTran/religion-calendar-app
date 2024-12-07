@@ -22,11 +22,7 @@ class BasicInfoSettingPage extends StatelessWidget {
           children: [
             UploadProfileImageSection(),
             Spacing.sp30,
-            Text(
-              LocalizedKeys.firstNameAndLastName,
-              style: AriesTextStyles.textBodyNormal,
-            ),
-            Divider()
+            UserNameTextField(),
           ],
         ),
       ),
