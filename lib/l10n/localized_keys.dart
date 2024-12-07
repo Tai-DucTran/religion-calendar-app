@@ -73,10 +73,15 @@ class LocalizedKeys {
   static String get monthlyText => AppLocalizations.of(_context)!.monthlyText;
   static String get yearlyText => AppLocalizations.of(_context)!.yearlyText;
   static String get doesNotRepeatText => AppLocalizations.of(_context)!.doesNotRepeatText;
+  static String get dailyRepeatedText => AppLocalizations.of(_context)!.dailyRepeatedText;
+  static String get weeklyRepeatedText => AppLocalizations.of(_context)!.weeklyRepeatedText;
+  static String get biweeklyRepeatedText => AppLocalizations.of(_context)!.biweeklyRepeatedText;
+  static String get monthlyRepeatedText => AppLocalizations.of(_context)!.monthlyRepeatedText;
+  static String get yearlyRepeatedText => AppLocalizations.of(_context)!.yearlyRepeatedText;
   static String get wordOfWisdom => AppLocalizations.of(_context)!.wordOfWisdom;
   static String get emptyEventText => AppLocalizations.of(_context)!.emptyEventText;
   static String get descriptionHint => AppLocalizations.of(_context)!.descriptionHint;
-  static String get descriptionButtonText => AppLocalizations.of(_context)!.descriptionButtonText;
+  static String get createEventButtonText => AppLocalizations.of(_context)!.createEventButtonText;
   static String get userInfoHeaderText => AppLocalizations.of(_context)!.userInfoHeaderText;
   static String get editUserInfoButtonText => AppLocalizations.of(_context)!.editUserInfoButtonText;
   static String get userDefaultNameText => AppLocalizations.of(_context)!.userDefaultNameText;
@@ -103,4 +108,8 @@ class LocalizedKeys {
   static String get profileUpdatedFailedText => AppLocalizations.of(_context)!.profileUpdatedFailedText;
   static String get eventCreatedSuccessfullyText => AppLocalizations.of(_context)!.eventCreatedSuccessfullyText;
   static String get eventCreatedFailedText => AppLocalizations.of(_context)!.eventCreatedFailedText;
+  static String get deleteEventButtonText => AppLocalizations.of(_context)!.deleteEventButtonText;
+  static String get moreDetailsButtonText => AppLocalizations.of(_context)!.moreDetailsButtonText;
+  static String get eventCreatedMessageText => AppLocalizations.of(_context)!.eventCreatedMessageText;
+  static String get eventDeletedMessageText => AppLocalizations.of(_context)!.eventDeletedMessageText;
 }
