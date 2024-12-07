@@ -34,6 +34,7 @@ class AriesIcons {
   static const bell01Icon = 'packages/aries/assets/images/icons/bell-01.svg';
   static const checkHearIcon =
       'packages/aries/assets/images/icons/check-heart.svg';
+  static const edit01Icon = 'packages/aries/assets/images/icons/edit-01.svg';
   static const file05Icon = 'packages/aries/assets/images/icons/file-05.svg';
   static const lock02Icon = 'packages/aries/assets/images/icons/lock-02.svg';
   static const messageQuestionCircleIcon =
