@@ -101,4 +101,6 @@ class LocalizedKeys {
   static String get logoutButtonText => AppLocalizations.of(_context)!.logoutButtonText;
   static String get deleteEventButtonText => AppLocalizations.of(_context)!.deleteEventButtonText;
   static String get moreDetailsButtonText => AppLocalizations.of(_context)!.moreDetailsButtonText;
+  static String get eventCreatedMessageText => AppLocalizations.of(_context)!.eventCreatedMessageText;
+  static String get eventDeletedMessageText => AppLocalizations.of(_context)!.eventDeletedMessageText;
 }
