@@ -13,7 +13,7 @@ class NavigationBottomItem {
 
 enum NavigationBottomItemTypes {
   home,
-  calendar,
+  dailyActivities,
   explore,
   profile,
 }
@@ -26,7 +26,7 @@ extension NavigationBottomItemExtension on NavigationBottomItemTypes {
           iconPath: AriesIcons.homeOutlineIcon,
           name: LocalizedKeys.homeNavItemText,
         );
-      case NavigationBottomItemTypes.calendar:
+      case NavigationBottomItemTypes.dailyActivities:
         return NavigationBottomItem(
           iconPath: AriesIcons.calendarOutlineIcon,
           name: 'Daily',

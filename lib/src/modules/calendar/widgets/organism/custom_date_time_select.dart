@@ -237,54 +237,75 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
     List<int> listYears = getYears();
 
     showCupertinoModalPopup(
-    context: context,
-    builder: (BuildContext context) {
-      return StatefulBuilder(
-        builder: (context, setModalState) {
-          return DatePickerModal(
-            scrollDayController: scrollDayController,
-            scrollMonthController: scrollMonthController,
-            scrollYearController: scrollYearController,
-            listDays: listDays,
-            listMonths: listMonths,
-            listYears: listYears,
-            isProgrammaticScroll: isProgrammaticScroll,
-            handleScrollNotification: _handleScrollNotification,
-            onDayChanged: (index) {
-              if (!isProgrammaticScroll) {
-                setModalState(() {
-                  isStartDayChange();
-                  selectedDay = listDays[index];
-                });
-                (listDays, listMonths, selectedDay, selectedMonth, selectedYear, isLeap) = 
-                    processSelectedDay(selectedDay, selectedMonth, selectedYear, false, isLeap, 0, 1);
-              }
-            },
-            onMonthChanged: (index) {
-              if (!isProgrammaticScroll) {
-                setModalState(() {
-                  isStartDayChange();
-                  selectedMonth = int.parse(listMonths[index]);
-                });
-                (listDays, listMonths, selectedDay, selectedMonth, selectedYear, isLeap) = 
-                    processSelectedDay(selectedDay, selectedMonth, selectedYear, false, isLeap, 0, 2);
-              }
-            },
-            onYearChanged: (index) {
-              if (!isProgrammaticScroll) {
-                setModalState(() {
-                  isStartDayChange();
-                  selectedYear = listYears[index];
-                });
-                (listDays, listMonths, selectedDay, selectedMonth, selectedYear, isLeap) = 
-                    processSelectedDay(selectedDay, selectedMonth, selectedYear, false, isLeap, 0, 3);
-              }
-            },
-          );
-        },
-      );
-    },
-  );
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return DatePickerModal(
+              scrollDayController: scrollDayController,
+              scrollMonthController: scrollMonthController,
+              scrollYearController: scrollYearController,
+              listDays: listDays,
+              listMonths: listMonths,
+              listYears: listYears,
+              isProgrammaticScroll: isProgrammaticScroll,
+              handleScrollNotification: _handleScrollNotification,
+              onDayChanged: (index) {
+                if (!isProgrammaticScroll) {
+                  setModalState(() {
+                    isStartDayChange();
+                    selectedDay = listDays[index];
+                  });
+                  (
+                    listDays,
+                    listMonths,
+                    selectedDay,
+                    selectedMonth,
+                    selectedYear,
+                    isLeap
+                  ) = processSelectedDay(selectedDay, selectedMonth,
+                      selectedYear, false, isLeap, 0, 1);
+                }
+              },
+              onMonthChanged: (index) {
+                if (!isProgrammaticScroll) {
+                  setModalState(() {
+                    isStartDayChange();
+                    selectedMonth = int.parse(listMonths[index]);
+                  });
+                  (
+                    listDays,
+                    listMonths,
+                    selectedDay,
+                    selectedMonth,
+                    selectedYear,
+                    isLeap
+                  ) = processSelectedDay(selectedDay, selectedMonth,
+                      selectedYear, false, isLeap, 0, 2);
+                }
+              },
+              onYearChanged: (index) {
+                if (!isProgrammaticScroll) {
+                  setModalState(() {
+                    isStartDayChange();
+                    selectedYear = listYears[index];
+                  });
+                  (
+                    listDays,
+                    listMonths,
+                    selectedDay,
+                    selectedMonth,
+                    selectedYear,
+                    isLeap
+                  ) = processSelectedDay(selectedDay, selectedMonth,
+                      selectedYear, false, isLeap, 0, 3);
+                }
+              },
+            );
+          },
+        );
+      },
+    );
   }
 
   void _showLunarDatePicker(BuildContext context) {
@@ -347,56 +368,77 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
     List<int> listYears = getYears();
 
     showCupertinoModalPopup(
-    context: context,
-    builder: (BuildContext context) {
-      return StatefulBuilder(
-        builder: (context, setModalState) {
-          return DatePickerModal(
-            scrollDayController: scrollDayController,
-            scrollMonthController: scrollMonthController,
-            scrollYearController: scrollYearController,
-            listDays: listDays,
-            listMonths: listMonths,
-            listYears: listYears,
-            isProgrammaticScroll: isProgrammaticScroll,
-            handleScrollNotification: _handleScrollNotification,
-            onDayChanged: (index) {
-              if (!isProgrammaticScroll) {
-                setModalState(() {
-                  isStartDayChange();
-                  selectedDay = listDays[index];
-                });
-                (listDays, listMonths, selectedDay, selectedMonth, selectedYear, isLeap) = 
-                    processSelectedDay(selectedDay, selectedMonth, selectedYear, true, isLeap, timeZone, 1);
-              }
-            },
-            onMonthChanged: (index) {
-              if (!isProgrammaticScroll) {
-                setModalState(() {
-                  isStartDayChange();
-                  final getMonth = listMonths[index];
-                  isLeap = getMonth.endsWith('+');
-                  selectedMonth = int.parse(getMonth.replaceAll('+', ''));
-                });
-                (listDays, listMonths, selectedDay, selectedMonth, selectedYear, isLeap) = 
-                    processSelectedDay(selectedDay, selectedMonth, selectedYear, true, isLeap, timeZone, 2);
-              }
-            },
-            onYearChanged: (index) {
-              if (!isProgrammaticScroll) {
-                setModalState(() {
-                  isStartDayChange();
-                  selectedYear = listYears[index];
-                });
-                (listDays, listMonths, selectedDay, selectedMonth, selectedYear, isLeap) = 
-                    processSelectedDay(selectedDay, selectedMonth, selectedYear, true, isLeap, timeZone, 3);
-              }
-            },
-          );
-        },
-      );
-    },
-  );
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return DatePickerModal(
+              scrollDayController: scrollDayController,
+              scrollMonthController: scrollMonthController,
+              scrollYearController: scrollYearController,
+              listDays: listDays,
+              listMonths: listMonths,
+              listYears: listYears,
+              isProgrammaticScroll: isProgrammaticScroll,
+              handleScrollNotification: _handleScrollNotification,
+              onDayChanged: (index) {
+                if (!isProgrammaticScroll) {
+                  setModalState(() {
+                    isStartDayChange();
+                    selectedDay = listDays[index];
+                  });
+                  (
+                    listDays,
+                    listMonths,
+                    selectedDay,
+                    selectedMonth,
+                    selectedYear,
+                    isLeap
+                  ) = processSelectedDay(selectedDay, selectedMonth,
+                      selectedYear, true, isLeap, timeZone, 1);
+                }
+              },
+              onMonthChanged: (index) {
+                if (!isProgrammaticScroll) {
+                  setModalState(() {
+                    isStartDayChange();
+                    final getMonth = listMonths[index];
+                    isLeap = getMonth.endsWith('+');
+                    selectedMonth = int.parse(getMonth.replaceAll('+', ''));
+                  });
+                  (
+                    listDays,
+                    listMonths,
+                    selectedDay,
+                    selectedMonth,
+                    selectedYear,
+                    isLeap
+                  ) = processSelectedDay(selectedDay, selectedMonth,
+                      selectedYear, true, isLeap, timeZone, 2);
+                }
+              },
+              onYearChanged: (index) {
+                if (!isProgrammaticScroll) {
+                  setModalState(() {
+                    isStartDayChange();
+                    selectedYear = listYears[index];
+                  });
+                  (
+                    listDays,
+                    listMonths,
+                    selectedDay,
+                    selectedMonth,
+                    selectedYear,
+                    isLeap
+                  ) = processSelectedDay(selectedDay, selectedMonth,
+                      selectedYear, true, isLeap, timeZone, 3);
+                }
+              },
+            );
+          },
+        );
+      },
+    );
   }
 
   void setSelectedDay(DateTime selectedDate) {
@@ -635,7 +677,6 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
       ref.read(isStartDayChangeControllerProvider.notifier).unChanged();
     }
   }
-
 
   void _showTimePicker(BuildContext context) {
     showCupertinoModalPopup(

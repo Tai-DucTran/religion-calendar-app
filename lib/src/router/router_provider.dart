@@ -39,7 +39,7 @@ GoRouter router(Ref ref) {
       final isOnboardingPage =
           state.matchedLocation == const OnboardingRoute().location;
       final isInMainShell = state.matchedLocation.startsWith('/home') ||
-          state.matchedLocation.startsWith('/calendar') ||
+          state.matchedLocation.startsWith('/daily-activities') ||
           state.matchedLocation.startsWith('/explore') ||
           state.matchedLocation.startsWith('/profile') ||
           state.matchedLocation.startsWith('/basic-info-setting');

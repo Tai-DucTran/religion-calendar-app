@@ -143,7 +143,7 @@ class HomeRoute extends GoRouteData {
 
 class DailyActivitiesRoute extends GoRouteData {
   const DailyActivitiesRoute();
-  static const path = '/daily-activies';
+  static const path = '/daily-activities';
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

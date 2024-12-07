@@ -16,7 +16,9 @@ class _DailyActivitiesPageState extends State<DailyActivitiesPage> {
     return const Scaffold(
       body: MainAppBackgroundContainer(
         child: Center(
-          child: Text('Daily Activies'),
+          child: Text(
+            'Daily Activities',
+          ),
         ),
       ),
     );

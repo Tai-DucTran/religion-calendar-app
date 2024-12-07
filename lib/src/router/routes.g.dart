@@ -28,7 +28,7 @@ RouteBase get $mainShellRouteData => StatefulShellRouteData.$route(
         StatefulShellBranchData.$branch(
           routes: [
             GoRouteData.$route(
-              path: '/daily-activies',
+              path: '/daily-activities',
               factory: $DailyActivitiesRouteExtension._fromState,
             ),
           ],
@@ -79,7 +79,7 @@ extension $DailyActivitiesRouteExtension on DailyActivitiesRoute {
       const DailyActivitiesRoute();
 
   String get location => GoRouteData.$location(
-        '/daily-activies',
+        '/daily-activities',
       );
 
   void go(BuildContext context) => context.go(location);
