@@ -108,4 +108,8 @@ class LocalizedKeys {
   static String get profileUpdatedFailedText => AppLocalizations.of(_context)!.profileUpdatedFailedText;
   static String get eventCreatedSuccessfullyText => AppLocalizations.of(_context)!.eventCreatedSuccessfullyText;
   static String get eventCreatedFailedText => AppLocalizations.of(_context)!.eventCreatedFailedText;
+  static String get deleteEventButtonText => AppLocalizations.of(_context)!.deleteEventButtonText;
+  static String get moreDetailsButtonText => AppLocalizations.of(_context)!.moreDetailsButtonText;
+  static String get eventCreatedMessageText => AppLocalizations.of(_context)!.eventCreatedMessageText;
+  static String get eventDeletedMessageText => AppLocalizations.of(_context)!.eventDeletedMessageText;
 }
