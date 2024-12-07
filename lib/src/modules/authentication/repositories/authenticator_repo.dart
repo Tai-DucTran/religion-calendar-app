@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:religion_calendar_app/src/modules/authentication/exceptions/authenticator_exceptions.dart';
 import 'package:religion_calendar_app/src/modules/authentication/models/auth_results.dart';
@@ -11,8 +12,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'authenticator_repo.g.dart';
 
 @Riverpod(keepAlive: true)
-AuthenticatorRepository authenticatorRepository(
-    AuthenticatorRepositoryRef ref) {
+AuthenticatorRepository authenticatorRepository(Ref ref) {
   return const AuthenticatorRepository();
 }
 

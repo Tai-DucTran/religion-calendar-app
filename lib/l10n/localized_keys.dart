@@ -94,4 +94,8 @@ class LocalizedKeys {
   static String get privacyPolicySettingTitleText => AppLocalizations.of(_context)!.privacyPolicySettingTitleText;
   static String get deleteUserAccountButtonText => AppLocalizations.of(_context)!.deleteUserAccountButtonText;
   static String get logoutButtonText => AppLocalizations.of(_context)!.logoutButtonText;
+  static String get permissionDeninedText => AppLocalizations.of(_context)!.permissionDeninedText;
+  static String get grantAccessToPhotosText => AppLocalizations.of(_context)!.grantAccessToPhotosText;
+  static String get cancelButtonText => AppLocalizations.of(_context)!.cancelButtonText;
+  static String get openSettingsButtonText => AppLocalizations.of(_context)!.openSettingsButtonText;
 }

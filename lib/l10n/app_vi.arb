@@ -83,5 +83,9 @@
   "privacyPolicySettingTitleText": "Chính sách bảo mật",
   "deleteUserAccountButtonText": "Xóa tài khoản",
   "logoutButtonText": "Đăng xuất",
+  "permissionDeninedText": "Quyền truy cập bị từ chối",
+  "grantAccessToPhotosText": "Cho phép truy cập vào thư viện và ảnh",
+  "cancelButtonText": "Hủy",
+  "openSettingsButtonText": "Mở cài đặt",
   "@@locale": "vi"
 }

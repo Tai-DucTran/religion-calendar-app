@@ -1,6 +1,6 @@
 {
   "cmake.sourceDirectory": "/Volumes/tai-tran/Software-Development/personal-projects/religion_calendar_app/linux",
-  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.configuration.updateBuildConfiguration": "automatic",
   "editor.codeActionsOnSave": {
     "source.fixAll": "always"
   },

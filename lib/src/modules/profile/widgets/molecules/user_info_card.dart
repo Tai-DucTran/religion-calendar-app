@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:religion_calendar_app/constants/screen_config.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/modules/profile/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/modules/user/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/router/routes.dart';
 
@@ -37,10 +38,8 @@ class UserInfoCard extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CircleAvatar(
-            radius: 32.r,
-            backgroundColor: AriesColor.yellowP400,
-            backgroundImage: AssetImage(AriesImages.christImage),
+          ProfileImage(
+            imageSize: 32.r,
           ),
           Spacing.sp12,
           Column(
