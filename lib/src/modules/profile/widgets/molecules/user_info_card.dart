@@ -42,30 +42,32 @@ class UserInfoCard extends ConsumerWidget {
             imageSize: 32.r,
           ),
           Spacing.sp12,
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                userName ?? userEmail ?? LocalizedKeys.userDefaultNameText,
-                style: AriesTextStyles.textHeading5,
-              ),
-              Spacing.sp4,
-              GestureDetector(
-                onTap: () {
-                  context.push(
-                    BasicInfoSettingRoute().location,
-                  );
-                },
-                child: Text(
-                  LocalizedKeys.editUserInfoButtonText,
-                  style: AriesTextStyles.textBodyNormal.copyWith(
-                    color: AriesColor.yellowP600,
-                    fontWeight: FontWeight.w600,
-                  ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  userName ?? userEmail ?? LocalizedKeys.userDefaultNameText,
+                  style: AriesTextStyles.textHeading5,
                 ),
-              )
-            ],
+                Spacing.sp4,
+                GestureDetector(
+                  onTap: () {
+                    context.push(
+                      BasicInfoSettingRoute().location,
+                    );
+                  },
+                  child: Text(
+                    LocalizedKeys.editUserInfoButtonText,
+                    style: AriesTextStyles.textBodyNormal.copyWith(
+                      color: AriesColor.yellowP600,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                )
+              ],
+            ),
           )
         ],
       ),
