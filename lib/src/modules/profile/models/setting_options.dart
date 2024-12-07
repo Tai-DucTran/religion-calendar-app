@@ -85,5 +85,4 @@ const contactAndOtherSettingOptionsList = [
   SettingOptions.feedbackAndReportSetting,
   SettingOptions.helpAndFAQsSetting,
   SettingOptions.privacyPolicySetting,
-  SettingOptions.privacyPolicySetting
 ];
