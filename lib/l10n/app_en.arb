@@ -83,5 +83,9 @@
   "privacyPolicySettingTitleText": "Privacy Policy",
   "deleteUserAccountButtonText": "Delete your account",
   "logoutButtonText": "Logout",
+  "permissionDeninedText": "Permission denined",
+  "grantAccessToPhotosText": "Allow access to galery and photos",
+  "cancelButtonText": "Cancel",
+  "openSettingsButtonText": "Open Settings",
   "@@locale": "en"
 }
