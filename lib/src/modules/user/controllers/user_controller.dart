@@ -55,4 +55,37 @@ class UserController extends _$UserController {
       return null;
     }
   }
+
+  Future<bool> updateBasicUserInfo({
+    required String input,
+  }) async {
+    try {
+      final userFireStoreRepo = ref.read(userFirestoreRepositoryProvider);
+      final authState = ref.read(authStateControllerProvider);
+      final userId = authState.value?.userId;
+
+      if (userId == null) {
+        throw Exception(
+          'Update basic user info failed - userId is null',
+        );
+      }
+
+      state = await AsyncValue.guard(() async {
+        await userFireStoreRepo.updateBasicUserInfo(
+          userId: userId,
+          newUserName: input,
+        );
+        final userData = await fetchUserInfor(userId);
+        return UserState(
+          isLoading: false,
+          user: userData,
+          error: null,
+        );
+      });
+      return true;
+    } catch (error, stackTrace) {
+      state = AsyncError(error, stackTrace);
+      return false;
+    }
+  }
 }
