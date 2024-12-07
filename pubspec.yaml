@@ -29,8 +29,8 @@ dependencies:
   uuid: ^4.4.0
   hooks_riverpod: ^2.5.1
   font_awesome_flutter: ^10.7.0
-  image_picker: ^1.0.8
-  image: ^4.1.7
+  image_picker: ^1.1.2
+  image: ^4.3.0
   flutter_hooks: ^0.20.5
   intl: any
   lottie: ^3.1.0
@@ -39,16 +39,18 @@ dependencies:
   riverpod_annotation: ^2.3.5
   riverpod_generator: ^2.4.0
   full_calender: ^1.2.12
-  intl_translation: ^0.20.0
   go_router: ^14.2.1
   go_router_builder: ^2.7.0
   flutter_native_splash: ^2.4.1
-  another_flushbar: ^1.12.30
   flutter_screenutil: ^5.9.3
   collection: ^1.18.0
   rrule: ^0.2.16
   skeletonizer: ^1.4.2
   firebase_app_check: ^0.3.1+6
+  permission_handler: ^11.3.1
+  cached_network_image: ^3.4.1
+  shared_preferences: ^2.3.3
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
