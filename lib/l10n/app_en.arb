@@ -71,7 +71,7 @@
   "userDefaultNameText": "You",
   "preferencesHeaderText": "Preferences",
   "religionPreferencesSettingTitleText": "Your religion preferences",
-  "firstNameAndLastName": "First name & Last name",
+  "userNameText": "User name",
   "updateButtonText": "Update",
   "generalSettingsHeaderText": "General settings",
   "themeSettingTitleText": "Theme",
@@ -87,5 +87,10 @@
   "grantAccessToPhotosText": "Allow access to galery and photos",
   "cancelButtonText": "Cancel",
   "openSettingsButtonText": "Open Settings",
+  "saveButtonText": "Save",
+  "profileUpdatedSuccessfullyText": "Profile updated successfully!",
+  "profileUpdatedFailedText": "Profile update failed!",
+  "eventCreatedSuccessfullyText": "Event created successfully!",
+  "eventCreatedFailedText": "Event created failed!",
   "@@locale": "en"
 }
