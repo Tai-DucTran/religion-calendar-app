@@ -2,7 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:religion_calendar_app/constants/constant_values.dart';
+import 'package:religion_calendar_app/constants/other_implementation_constants.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class ViewEventModalBottomSheet extends ConsumerStatefulWidget {
