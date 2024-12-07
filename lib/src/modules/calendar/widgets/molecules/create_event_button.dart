@@ -83,7 +83,9 @@ class CreateEventButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
       onPressed: () => addEvent(context, ref),
-      child: Text(LocalizedKeys.createEventButtonText),
+      child: Text(
+        LocalizedKeys.createEventButtonText,
+      ),
     );
   }
 }

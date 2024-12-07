@@ -14,6 +14,7 @@ class EventDescriptionText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final description = event.description ?? '';
+    final isReligionEvent = event.eventCategory == EventCategory.religionEvent;
 
     return Column(
       children: [
@@ -21,7 +22,7 @@ class EventDescriptionText extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (!(event.eventCategory == EventCategory.religionEvent))
+            if (!isReligionEvent)
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
