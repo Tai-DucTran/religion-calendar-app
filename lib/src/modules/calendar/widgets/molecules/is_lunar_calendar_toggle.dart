@@ -24,7 +24,10 @@ class IsLunarCalendarToggle extends ConsumerWidget {
               AriesIcons.moon01Icon,
               width: 16.w,
               height: 16.h,
-              color: AriesColor.neutral100,
+              colorFilter: ColorFilter.mode(
+                AriesColor.neutral100,
+                BlendMode.srcIn,
+              ),
             ),
             Spacing.sp8,
             Text(

@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -12,8 +13,7 @@ part 'user_firestore_repo.g.dart';
 /// lib/core/firebase_provider
 
 @riverpod
-UserFirestoreRepository userFirestoreRepository(
-    UserFirestoreRepositoryRef ref) {
+UserFirestoreRepository userFirestoreRepository(Ref ref) {
   return UserFirestoreRepository();
 }
 

@@ -7,7 +7,7 @@ part of 'user_event_repository.dart';
 // **************************************************************************
 
 String _$userEventRepositoryHash() =>
-    r'be2987a6e3ca029929f5b31ebc81f2aca1dbd1cb';
+    r'ce8322b08fc0b5731db05df059284534f665b2e9';
 
 /// See also [userEventRepository].
 @ProviderFor(userEventRepository)

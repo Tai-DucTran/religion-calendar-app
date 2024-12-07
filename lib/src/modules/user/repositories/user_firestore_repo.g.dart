@@ -7,7 +7,7 @@ part of 'user_firestore_repo.dart';
 // **************************************************************************
 
 String _$userFirestoreRepositoryHash() =>
-    r'eac533a8fc3bc5f47a676d1e44fb9415f212c615';
+    r'c0c4b03da7674b7a2724964963b97c5e07e6a4d4';
 
 /// ! Restructure this Firestore implementation
 /// Create a new folder to store everything related to [Firebase] and [Firestore]

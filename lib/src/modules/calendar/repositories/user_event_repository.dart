@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -6,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'user_event_repository.g.dart';
 
 @riverpod
-UserEventRepository userEventRepository(UserEventRepositoryRef ref) {
+UserEventRepository userEventRepository(Ref ref) {
   return UserEventRepository();
 }
 
