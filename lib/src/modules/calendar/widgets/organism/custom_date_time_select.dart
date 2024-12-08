@@ -42,7 +42,7 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
   /// categories such as Islamic lunar calendar using [hijri] library
   /// source: https://pub.dev/packages/hijri
 
-  late DateTime limitedDay, _selectedDate, _preSelectedDate;
+  late DateTime limitedDay, _selectedDate;
   late LunarDateTime limitedDayInLunar;
   late TimeOfDay _selectedTime;
 
@@ -101,7 +101,7 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
 
     bool isStartDayChange = ref.watch(isStartDayChangeControllerProvider);
     var eventDateTime = ref.watch(eventDateTimeControllerProvider);
-    _preSelectedDate = ref.watch(previousSelectedDateControllerProvider);
+    ref.watch(previousSelectedDateControllerProvider);
 
     if (!widget.isStartDate && isStartDayChange) {
       limitedDay = eventDateTime.startDate;
