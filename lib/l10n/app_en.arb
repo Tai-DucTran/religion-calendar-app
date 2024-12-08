@@ -71,6 +71,7 @@
   "emptyEventText": "You haven't had any events yet!",
   "descriptionHint": "Description",
   "createEventButtonText": "Create event",
+  "@@context": "------Profile Page------",
   "userInfoHeaderText": "Your Information",
   "editUserInfoButtonText": "Edit profile",
   "userDefaultNameText": "You",
@@ -103,5 +104,7 @@
   "deleteEventConfirmationQuestionText": "Delete event?",
   "deleteEventConfirmationText": "Delete this event",
   "moreDetailsButtonText": "More details",
+  "@@context": "------Explore Page------",
+  "explorePageHeaderText": "Explore",
   "@@locale": "en"
 }

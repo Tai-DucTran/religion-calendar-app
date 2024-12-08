@@ -71,6 +71,7 @@
   "emptyEventText": "Bạn chưa có sự kiện nào!",
   "descriptionHint": "Thêm nội dung mô tả",
   "createEventButtonText": "Thêm sự kiện",
+  "@@context": "------Profile Page------",
   "userInfoHeaderText": "Thông tin của bạn",
   "editUserInfoButtonText": "Chỉnh sửa hồ sơ",
   "userDefaultNameText": "Bạn",
@@ -103,5 +104,7 @@
   "deleteEventConfirmationQuestionText": "Xóa sự kiện?",
   "deleteEventConfirmationText": "Xóa sự kiện này",
   "moreDetailsButtonText": "Xem thêm",
+  "@@context": "------Explore Page------",
+  "explorePageHeaderText": "Khám phá",
   "@@locale": "vi"
 }

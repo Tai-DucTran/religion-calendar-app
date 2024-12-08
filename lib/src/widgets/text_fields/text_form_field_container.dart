@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class TextFormFieldContainer extends StatefulWidget {
   const TextFormFieldContainer({
     super.key,
-    required this.title,
+    this.title,
     this.keyboardType,
     this.hintText,
     this.textCapitalization,
@@ -18,7 +18,7 @@ class TextFormFieldContainer extends StatefulWidget {
     this.enable,
   });
 
-  final String title;
+  final String? title;
   final TextStyle? titleStyle;
   final bool? obscureText;
   final TextInputType? keyboardType;
@@ -46,15 +46,17 @@ class _TextFormFieldContainerState extends State<TextFormFieldContainer> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.title,
-          style: widget.titleStyle ??
-              TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
-        ),
-        Spacing.sp6,
+        if (widget.title != null) ...[
+          Text(
+            widget.title ?? '',
+            style: widget.titleStyle ??
+                TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+          ),
+          Spacing.sp6,
+        ],
         Container(
           decoration: BoxDecoration(
             color: isEnabled ? widget.textFieldColors : AriesColor.neutral30,
@@ -67,6 +69,7 @@ class _TextFormFieldContainerState extends State<TextFormFieldContainer> {
             obscureText: widget.obscureText ?? false,
             keyboardType: widget.keyboardType,
             autocorrect: false,
+            autofocus: false,
             cursorColor: AriesColor.neutral50,
             textCapitalization:
                 widget.textCapitalization ?? TextCapitalization.none,

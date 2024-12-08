@@ -114,4 +114,5 @@ class LocalizedKeys {
   static String get deleteEventConfirmationQuestionText => AppLocalizations.of(_context)!.deleteEventConfirmationQuestionText;
   static String get deleteEventConfirmationText => AppLocalizations.of(_context)!.deleteEventConfirmationText;
   static String get moreDetailsButtonText => AppLocalizations.of(_context)!.moreDetailsButtonText;
+  static String get explorePageHeaderText => AppLocalizations.of(_context)!.explorePageHeaderText;
 }
