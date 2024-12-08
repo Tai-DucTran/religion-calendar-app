@@ -35,8 +35,9 @@ class EventCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final now = DateTime.now();
+    DateTime lastMidnight = DateTime(now.year, now.month, now.day);
     final String currentLocale = Localizations.localeOf(context).toString();
-    final countDownFromNow = eventDate.difference(now).inDays;
+    int countDownFromNow = eventDate.difference(lastMidnight).inDays;
     final solarDate = getFullSolarDateText(
       inputDate: eventDate,
       locale: currentLocale,
@@ -159,8 +160,9 @@ class EventCard extends ConsumerWidget {
                                     : joinTwoString(
                                           firstString:
                                               countDownFromNow.toString(),
-                                          secondString:
-                                              LocalizedKeys.daysLeftText,
+                                          secondString: countDownFromNow == 1
+                                              ? LocalizedKeys.dayLeftText
+                                              : LocalizedKeys.daysLeftText,
                                         ) ??
                                         '',
                                 style: AriesTextStyles.textBodySmall.copyWith(
