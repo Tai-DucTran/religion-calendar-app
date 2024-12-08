@@ -30,7 +30,9 @@ class EventCategorySelect extends ConsumerWidget {
         ),
         child: Center(
           child: DropdownButton<EventCategory>(
-            items: options.map(
+            items: options
+                .where((option) => option != EventCategory.religionEvent)
+                .map(
               (option) {
                 return DropdownMenuItem(
                   value: option,
