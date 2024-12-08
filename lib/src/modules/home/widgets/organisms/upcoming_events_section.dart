@@ -23,7 +23,7 @@ class UpComingEventsSection extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const UpComingEventsHeader(),
-          events.maybeWhen(
+          events.when(
             loading: () => Skeletonizer(
               effect: const ShimmerEffect(
                 baseColor: AriesColor.neutral30,
@@ -38,41 +38,38 @@ class UpComingEventsSection extends ConsumerWidget {
                 isLoading: true,
               ),
             ),
-            error: (error, stacktrace) => const Offstage(),
-            orElse: () => const Offstage(),
+            error: (error, stackTrace) => const Offstage(),
             data: (listOfEvents) {
               if (listOfEvents.isEmpty) {
                 return Text(LocalizedKeys.emptyEventText);
               }
-              final displayedEvents =
-                  listOfEvents.take(maxEventsHomePage).toList();
+
+              final displayedEvents = listOfEvents.take(maxEventsHomePage).toList();
 
               return Column(
-                children: [
-                  ...displayedEvents.map(
-                    (event) {
-                      final eventTime = DateFormat(DateTimeFormat.hourMinute)
-                          .format(event.startDate);
+                children: displayedEvents.map(
+                  (event) {
+                    final eventTime = DateFormat(DateTimeFormat.hourMinute)
+                        .format(event.startDate);
 
-                      return GestureDetector(
-                        onTap: () async {
-                          final result = await ViewEventModalBottomSheet.show(
-                            context,
-                            event: event,
-                          );
-                          if (!result) return;
-                        },
-                        child: EventCard(
-                          eventName: event.title,
-                          eventDate: event.startDate,
-                          eventTime: eventTime,
-                          eventCategory: event.eventCategory,
-                          eventLocation: event.location,
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                    return GestureDetector(
+                      onTap: () async {
+                        final result = await ViewEventModalBottomSheet.show(
+                          context,
+                          event: event,
+                        );
+                        if (!result) return;
+                      },
+                      child: EventCard(
+                        eventName: event.title,
+                        eventDate: event.startDate,
+                        eventTime: eventTime,
+                        eventCategory: event.eventCategory,
+                        eventLocation: event.location,
+                      ),
+                    );
+                  },
+                ).toList(),
               );
             },
           ),
