@@ -97,9 +97,11 @@
   "profileUpdatedFailedText": "Profile update failed!",
   "eventCreatedSuccessfullyText": "Event created successfully!",
   "eventCreatedFailedText": "Event created failed!",
+  "eventDeletedSuccessfullyText": "Event deleted successfully!",
+  "eventDeletedFailedText": "Event deleted failed!",
   "deleteEventButtonText": "Delete event",
+  "deleteEventConfirmationQuestionText": "Delete event?",
+  "deleteEventConfirmationText": "Delete this event",
   "moreDetailsButtonText": "More details",
-  "eventCreatedMessageText": "Event created successfully",
-  "eventDeletedMessageText": "Event deleted successfully",
   "@@locale": "en"
 }

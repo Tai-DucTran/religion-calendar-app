@@ -97,9 +97,11 @@
   "profileUpdatedFailedText": "Cập nhật hồ sơ thất bại!",
   "eventCreatedSuccessfullyText": "Đã thêm sự kiện!",
   "eventCreatedFailedText": "Thêm sự kiện thất bại!",
+  "eventDeletedSuccessfullyText": "Đã xóa sự kiện!",
+  "eventDeletedFailedText": "Xóa sự kiện thất bại!",
   "deleteEventButtonText": "Xóa sự kiện",
+  "deleteEventConfirmationQuestionText": "Xóa sự kiện?",
+  "deleteEventConfirmationText": "Xóa sự kiện này",
   "moreDetailsButtonText": "Xem thêm",
-  "eventCreatedMessageText": "Tạo sự kiện thành công",
-  "eventDeletedMessageText": "Xóa sự kiện thành công",
   "@@locale": "vi"
 }
