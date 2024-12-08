@@ -20,6 +20,28 @@ class ReligionEventRepository {
     FirebaseCollectionName.users,
   );
 
+  Stream<List<ReligionEvent>> streamReligionEvents(ReligionPreference religion) {
+    return firestoreReligionsRef
+        .doc(religion.name.toLowerCase())
+        .collection(FirebaseCollectionName.events)
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs
+          .map((doc) {
+            try {
+              final event = ReligionEvent.fromJson(doc.data());
+              return event;
+            } catch (error) {
+              throw Exception(
+                'Error in parsing religionEvent: $error',
+              );
+            }
+          })
+          .whereType<ReligionEvent>()
+          .toList();
+    });
+  }
+
   Future<List<ReligionEvent>> fetchReligionEvents(
       ReligionPreference religion) async {
     try {
