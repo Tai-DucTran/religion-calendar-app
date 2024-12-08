@@ -1,9 +1,11 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
-class DeleteEventButton extends StatelessWidget {
+class DeleteEventButton extends ConsumerWidget {
   const DeleteEventButton({
     super.key,
     required this.eventId,
@@ -12,7 +14,7 @@ class DeleteEventButton extends StatelessWidget {
   final String eventId;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Positioned(
       bottom: 0,
       left: 0,
@@ -31,10 +33,11 @@ class DeleteEventButton extends StatelessWidget {
         ),
         child: Center(
           child: CupertinoButton(
-            padding: EdgeInsets.zero,
-            minSize: 0,
-            onPressed: () {
-            },
+            onPressed: () => DeleteConfirmation.showDeleteConfirmation(
+              context,
+              ref,
+              eventId,
+            ),
             child: Text(
               LocalizedKeys.deleteEventButtonText,
               style: AriesTextStyles.textBodySmall.copyWith(

@@ -4,6 +4,7 @@ export 'calendar_text_field.dart';
 export 'custom_cupertino_picker.dart';
 export 'date_picker.dart';
 export 'date_subtitle_picker.dart';
+export 'delete_confirmation.dart';
 export 'edit_event_button.dart';
 export 'event_category_dot.dart';
 export 'event_divider.dart';
