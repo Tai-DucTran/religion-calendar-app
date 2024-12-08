@@ -36,6 +36,7 @@ class LocalizedKeys {
   static String get profileNavItemText => AppLocalizations.of(_context)!.profileNavItemText;
   static String get todayText => AppLocalizations.of(_context)!.todayText;
   static String get yourEventText => AppLocalizations.of(_context)!.yourEventText;
+  static String get dayLeftText => AppLocalizations.of(_context)!.dayLeftText;
   static String get daysLeftText => AppLocalizations.of(_context)!.daysLeftText;
   static String get eventInputHintText => AppLocalizations.of(_context)!.eventInputHintText;
   static String get eventCategoryFamilyText => AppLocalizations.of(_context)!.eventCategoryFamilyText;

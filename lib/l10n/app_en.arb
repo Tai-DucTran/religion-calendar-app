@@ -25,6 +25,7 @@
   "profileNavItemText": "Profile",
   "todayText": "Today",
   "yourEventText": "Your events",
+  "dayLeftText": "day left",
   "daysLeftText": "days left",
   "eventInputHintText": "What is event name?",
   "eventCategoryFamilyText": "Family event",
