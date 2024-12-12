@@ -42,8 +42,7 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
   /// categories such as Islamic lunar calendar using [hijri] library
   /// source: https://pub.dev/packages/hijri
 
-  late DateTime limitedDay, _selectedDate;
-  late LunarDateTime limitedDayInLunar;
+  late DateTime _selectedDate, startDate;
   late TimeOfDay _selectedTime;
 
   Timer? _debounce;
@@ -62,7 +61,6 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
   @override
   void initState() {
     super.initState();
-    _initializeDateTime();
     _initializeFixedExtentScrollController();
   }
 
@@ -73,17 +71,6 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
     scrollMonthController.dispose();
     scrollYearController.dispose();
     super.dispose();
-  }
-
-  void _initializeDateTime() {
-    limitedDay = DateTime(
-      DateTime.now().year,
-      DateTime.now().month,
-      DateTime.now().day,
-    );
-    limitedDayInLunar = convertSolarDateToLunarDate(inputDate: limitedDay);
-    _selectedDate = limitedDay;
-    _selectedTime = const TimeOfDay(hour: 08, minute: 08);
   }
 
   void _initializeFixedExtentScrollController() {
@@ -101,13 +88,14 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
 
     bool isStartDayChange = ref.watch(isStartDayChangeControllerProvider);
     var eventDateTime = ref.watch(eventDateTimeControllerProvider);
-    ref.watch(previousSelectedDateControllerProvider);
+    startDate = eventDateTime.startDate;
 
-    if (!widget.isStartDate && isStartDayChange) {
-      limitedDay = eventDateTime.startDate;
-      limitedDayInLunar = convertSolarDateToLunarDate(inputDate: limitedDay);
-      _selectedDate = limitedDay;
-    }
+    _selectedDate = widget.isStartDate || isStartDayChange
+        ? eventDateTime.startDate
+        : eventDateTime.endDate;
+
+    _selectedTime = TimeOfDay.fromDateTime(
+        widget.isStartDate ? eventDateTime.startTime! : eventDateTime.endTime!);
 
     return Column(
       children: [
@@ -210,8 +198,6 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
     selectedDay = _selectedDate.day;
     selectedMonth = _selectedDate.month;
     selectedYear = _selectedDate.year;
-
-    DateTime startDate = ref.watch(previousSelectedDateControllerProvider);
 
     scrollDayController = FixedExtentScrollController(
         initialItem: (!widget.isStartDate &&
@@ -321,7 +307,6 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
     isLeap = currentLunarDate.isLeap;
     timeZone = currentLunarDate.timeZone;
 
-    DateTime startDate = ref.watch(previousSelectedDateControllerProvider);
     LunarDateTime startDateInLunar =
         convertSolarDateToLunarDate(inputDate: startDate);
 
@@ -467,7 +452,6 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
       isLeap,
       timeZone,
       typeChange) {
-    DateTime startDate = ref.watch(previousSelectedDateControllerProvider);
     LunarDateTime startDateInLunar =
         convertSolarDateToLunarDate(inputDate: startDate);
 
@@ -560,11 +544,6 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
     }
 
     setSelectedDay(selectedDate);
-    if (widget.isStartDate) {
-      ref
-          .read(previousSelectedDateControllerProvider.notifier)
-          .set(selectedDate);
-    }
 
     return (
       listDays,
@@ -577,7 +556,6 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
   }
 
   List<int> getDaysInASolarMonth(int month, int year) {
-    DateTime startDate = ref.watch(previousSelectedDateControllerProvider);
     final listAllSolarDaysOfYear = getNumberOfDaysInSolarMonths(year);
     List<int> listDays =
         List.generate(listAllSolarDaysOfYear[month]!, (index) => 1 + index);
@@ -590,7 +568,6 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
   }
 
   List<int> getDaysInALunarMonth(int month, int year, bool isLeap) {
-    DateTime startDate = ref.watch(previousSelectedDateControllerProvider);
     LunarDateTime startDateInLunar =
         convertSolarDateToLunarDate(inputDate: startDate);
     final listAllLunarDaysOfYear = getNumberOfDaysInLunarMonths(year);
@@ -612,8 +589,6 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
   }
 
   List<String> getMonthsInASolarYear(int year) {
-    DateTime startDate = ref.watch(previousSelectedDateControllerProvider);
-
     List<String> listMonths =
         List.generate(12, (index) => (1 + index).toString());
     if (!widget.isStartDate && startDate.year == year) {
@@ -623,7 +598,6 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
   }
 
   List<String> getMonthsInALunarYear(int year) {
-    DateTime startDate = ref.watch(previousSelectedDateControllerProvider);
     LunarDateTime startDateInLunar =
         convertSolarDateToLunarDate(inputDate: startDate);
     int isLeapMonth = getLeapMonth(year);
@@ -661,8 +635,6 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
   }
 
   List<int> getYears() {
-    DateTime startDate = ref.watch(previousSelectedDateControllerProvider);
-
     List<int> listYears = List.generate(100, (index) => 2000 + index);
     if (!widget.isStartDate) {
       listYears = listYears.sublist(startDate.year - 2000);
