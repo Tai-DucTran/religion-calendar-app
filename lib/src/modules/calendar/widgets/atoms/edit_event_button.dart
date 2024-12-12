@@ -1,6 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class EditEventButton extends StatelessWidget {
   const EditEventButton({
@@ -16,7 +17,13 @@ class EditEventButton extends StatelessWidget {
       top: 16.w,
       right: 16.w,
       child: GestureDetector(
-        onTap: () {},
+        onTap: () async {
+          final result = await EventDetailModalBottomSheet.show(
+            context,
+            eventId: eventId,
+          );
+          if (!result) return;
+        },
         child: Container(
           width: 46.w,
           height: 46.w,
