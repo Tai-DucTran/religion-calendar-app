@@ -216,6 +216,31 @@ extension RepeatedFrequencyExtension on RepeatedFrequency {
   }
 }
 
+RepeatedFrequency getRepeatedFrequencyJsonValue(String repeatedFrequencyAt) {
+  try {
+    return switch (repeatedFrequencyAt) {
+      String s
+          when s == RepeatedFrequency.daily.toRecurrenceRule().toString() =>
+        RepeatedFrequency.daily,
+      String s
+          when s == RepeatedFrequency.weekly.toRecurrenceRule().toString() =>
+        RepeatedFrequency.weekly,
+      String s
+          when s == RepeatedFrequency.biweekly.toRecurrenceRule().toString() =>
+        RepeatedFrequency.biweekly,
+      String s
+          when s == RepeatedFrequency.monthly.toRecurrenceRule().toString() =>
+        RepeatedFrequency.monthly,
+      String s
+          when s == RepeatedFrequency.yearly.toRecurrenceRule().toString() =>
+        RepeatedFrequency.yearly,
+      _ => RepeatedFrequency.doesNotRepeat
+    };
+  } catch (e) {
+    return RepeatedFrequency.doesNotRepeat;
+  }
+}
+
 enum RemindMeBeforeOptions {
   @JsonValue('AT_TIME')
   atTime,
@@ -270,6 +295,27 @@ extension RemindMeBeforeOptionsExtension on RemindMeBeforeOptions {
       case RemindMeBeforeOptions.oneWeek:
         return 24 * 7;
     }
+  }
+}
+
+RemindMeBeforeOptions getRemindMeBeforeOptionsJsonValue(double value) {
+  switch (value) {
+    case 0:
+      return RemindMeBeforeOptions.atTime;
+    case const (10 / 60):
+      return RemindMeBeforeOptions.tenMinutes;
+    case 0.5:
+      return RemindMeBeforeOptions.thirtyMinutes;
+    case 1:
+      return RemindMeBeforeOptions.oneHour;
+    case 24:
+      return RemindMeBeforeOptions.oneDay;
+    case const (24 * 3):
+      return RemindMeBeforeOptions.threeDays;
+    case const (24 * 7):
+      return RemindMeBeforeOptions.oneWeek;
+    default:
+      return RemindMeBeforeOptions.atTime;
   }
 }
 
