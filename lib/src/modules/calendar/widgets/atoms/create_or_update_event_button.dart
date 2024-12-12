@@ -27,73 +27,74 @@ class CreateOrUpdateEventButton extends ConsumerWidget {
       eventDescriptionController;
 
   Future<void> createOrUpdateEvent(BuildContext context, WidgetRef ref) async {
-  try {
-    final calendarCategory = ref.watch(calendarCategoryControllerProvider);
-    final selectedCategory = ref.watch(eventCategoryControllerProvider);
-    final isAllDay = ref.watch(isAllDayToggleControllerProvider);
-    final currentEventDateTime = ref.watch(eventDateTimeControllerProvider);
-    final repeatedFrequencyAt = ref.watch(repeatedFrequencyControllerProvider);
-    final remindMeBefore = ref.watch(remindMeBeforeControllerProvider);
-    final createEventAt = ref.watch(createEventAtControllerProvider);
+    try {
+      final calendarCategory = ref.watch(calendarCategoryControllerProvider);
+      final selectedCategory = ref.watch(eventCategoryControllerProvider);
+      final isAllDay = ref.watch(isAllDayToggleControllerProvider);
+      final currentEventDateTime = ref.watch(eventDateTimeControllerProvider);
+      final repeatedFrequencyAt =
+          ref.watch(repeatedFrequencyControllerProvider);
+      final remindMeBefore = ref.watch(remindMeBeforeControllerProvider);
+      final createEventAt = ref.watch(createEventAtControllerProvider);
 
-    final authenticatorRepo = ref.watch(authenticatorRepositoryProvider);
-    final userId = authenticatorRepo.currentUser?.uid;
-    final eventsCollection = FirebaseFirestore.instance
-        .collection(FirebaseCollectionName.users)
-        .doc(userId)
-        .collection(FirebaseCollectionName.events);
+      final authenticatorRepo = ref.watch(authenticatorRepositoryProvider);
+      final userId = authenticatorRepo.currentUser?.uid;
+      final eventsCollection = FirebaseFirestore.instance
+          .collection(FirebaseCollectionName.users)
+          .doc(userId)
+          .collection(FirebaseCollectionName.events);
 
-    UserEvent userEvent = UserEvent(
-      id: eventId ?? eventsCollection.doc().id,
-      title: eventNameInputController.text,
-      calendarCategory: calendarCategory,
-      eventCategory: selectedCategory,
-      isAllDay: isAllDay,
-      startDate: currentEventDateTime.startDate,
-      endDate: currentEventDateTime.endDate,
-      location: eventLocationInputController.text,
-      createdAt: createEventAt,
-      updatedAt: DateTime.now(),
-      repeatedFrequencyAt: repeatedFrequencyAt.toRecurrenceRule().toString(),
-      remindMeBefore: remindMeBefore.fromStringToDouble,
-      description: eventDescriptionController.text,
-    );
+      UserEvent userEvent = UserEvent(
+        id: eventId ?? eventsCollection.doc().id,
+        title: eventNameInputController.text,
+        calendarCategory: calendarCategory,
+        eventCategory: selectedCategory,
+        isAllDay: isAllDay,
+        startDate: currentEventDateTime.startDate,
+        endDate: currentEventDateTime.endDate,
+        location: eventLocationInputController.text,
+        createdAt: createEventAt,
+        updatedAt: DateTime.now(),
+        repeatedFrequencyAt: repeatedFrequencyAt.toRecurrenceRule().toString(),
+        remindMeBefore: remindMeBefore.fromStringToDouble,
+        description: eventDescriptionController.text,
+      );
 
-    if (eventId != null) {
-      await eventsCollection.doc(eventId).update(userEvent.toJson());
-    } else {
-      await eventsCollection.doc(userEvent.id).set(userEvent.toJson());
-    }
-
-    if (context.mounted) {
-      Navigator.of(context).pop(true);
       if (eventId != null) {
-        Navigator.of(context).pop(true);
+        await eventsCollection.doc(eventId).update(userEvent.toJson());
+      } else {
+        await eventsCollection.doc(userEvent.id).set(userEvent.toJson());
       }
-      ScaffoldMessenger.of(context).showSnackBar(
-        getCustomSnackbar(
-          context: context,
-          message: eventId != null 
-              ? LocalizedKeys.eventUpdatedSuccessfullyText 
-              : LocalizedKeys.eventCreatedSuccessfullyText,
-          snackbarType: SnackbarType.success,
-        ),
-      );
-    }
-  } catch (e) {
-    if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        getCustomSnackbar(
-          context: context,
-          message: eventId != null
-              ? LocalizedKeys.eventUpdatedFailedText
-              : LocalizedKeys.eventCreatedFailedText,
-          snackbarType: SnackbarType.error,
-        ),
-      );
+
+      if (context.mounted) {
+        Navigator.of(context).pop(true);
+        if (eventId != null) {
+          Navigator.of(context).pop(true);
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          getCustomSnackbar(
+            context: context,
+            message: eventId != null
+                ? LocalizedKeys.eventUpdatedSuccessfullyText
+                : LocalizedKeys.eventCreatedSuccessfullyText,
+            snackbarType: SnackbarType.success,
+          ),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          getCustomSnackbar(
+            context: context,
+            message: eventId != null
+                ? LocalizedKeys.eventUpdatedFailedText
+                : LocalizedKeys.eventCreatedFailedText,
+            snackbarType: SnackbarType.error,
+          ),
+        );
+      }
     }
   }
-}
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -101,7 +102,10 @@ class CreateOrUpdateEventButton extends ConsumerWidget {
       right: -10.w,
       child: Center(
         child: CupertinoButton(
-          onPressed: () => createOrUpdateEvent(context, ref),
+          onPressed: () => createOrUpdateEvent(
+            context,
+            ref,
+          ),
           child: Text(
             eventId == null
                 ? LocalizedKeys.createEventButtonText
