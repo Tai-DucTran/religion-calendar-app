@@ -60,11 +60,12 @@ class _ViewEventModalBottomSheetState
                   event: event,
                   bannerHeight: bannerHeight,
                 ),
+                Spacing.sp12,
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
                       padding: EdgeInsets.only(
-                        top: 24.w,
+                        top: 12.w,
                         left: 16.w,
                         right: 16.w,
                         bottom: deleteButtonHeight + 10.h,
