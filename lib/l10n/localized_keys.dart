@@ -83,6 +83,7 @@ class LocalizedKeys {
   static String get emptyEventText => AppLocalizations.of(_context)!.emptyEventText;
   static String get descriptionHint => AppLocalizations.of(_context)!.descriptionHint;
   static String get createEventButtonText => AppLocalizations.of(_context)!.createEventButtonText;
+  static String get updateEventButtonText => AppLocalizations.of(_context)!.updateEventButtonText;
   static String get userInfoHeaderText => AppLocalizations.of(_context)!.userInfoHeaderText;
   static String get editUserInfoButtonText => AppLocalizations.of(_context)!.editUserInfoButtonText;
   static String get userDefaultNameText => AppLocalizations.of(_context)!.userDefaultNameText;
@@ -111,6 +112,8 @@ class LocalizedKeys {
   static String get eventCreatedFailedText => AppLocalizations.of(_context)!.eventCreatedFailedText;
   static String get eventDeletedSuccessfullyText => AppLocalizations.of(_context)!.eventDeletedSuccessfullyText;
   static String get eventDeletedFailedText => AppLocalizations.of(_context)!.eventDeletedFailedText;
+  static String get eventUpdatedSuccessfullyText => AppLocalizations.of(_context)!.eventUpdatedSuccessfullyText;
+  static String get eventUpdatedFailedText => AppLocalizations.of(_context)!.eventUpdatedFailedText;
   static String get deleteEventButtonText => AppLocalizations.of(_context)!.deleteEventButtonText;
   static String get deleteEventConfirmationQuestionText => AppLocalizations.of(_context)!.deleteEventConfirmationQuestionText;
   static String get deleteEventConfirmationText => AppLocalizations.of(_context)!.deleteEventConfirmationText;
