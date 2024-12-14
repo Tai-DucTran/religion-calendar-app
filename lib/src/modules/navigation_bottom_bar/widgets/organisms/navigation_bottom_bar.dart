@@ -62,7 +62,7 @@ class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
                     width: 24,
                     colorFilter: ColorFilter.mode(
                       isSelected
-                          ? AriesColor.yellowP300
+                          ? AriesColor.yellowP950
                           : AriesColor.neutral100,
                       BlendMode.srcIn,
                     ),
@@ -73,7 +73,7 @@ class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
                     item.name,
                     style: TextStyle(
                       color: isSelected
-                          ? AriesColor.yellowP300
+                          ? AriesColor.yellowP950
                           : AriesColor.neutral100,
                       fontSize: 12.sp,
                     ),

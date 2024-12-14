@@ -45,7 +45,7 @@ class LoginSection extends ConsumerWidget {
             child: const Text(
               'Forgot Password?',
               style: TextStyle(
-                color: AriesColor.yellowP300,
+                color: AriesColor.yellowP950,
                 fontWeight: FontWeight.w600,
                 fontSize: 14,
               ),

@@ -43,7 +43,7 @@ class HomePage extends ConsumerWidget {
           if (!result) return;
         },
         shape: const CircleBorder(),
-        backgroundColor: AriesColor.yellowP300,
+        backgroundColor: AriesColor.yellowP950,
         elevation: 2,
         child: const Icon(
           Icons.add,

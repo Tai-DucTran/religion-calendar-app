@@ -43,7 +43,7 @@ class WeeklyCalendarSection extends ConsumerWidget {
               icon: Icon(
                 Icons.arrow_drop_down_rounded,
                 size: 30.h,
-                color: AriesColor.yellowP300,
+                color: AriesColor.yellowP950,
               ),
             )
           ],

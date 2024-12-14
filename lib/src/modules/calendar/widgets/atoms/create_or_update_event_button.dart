@@ -111,7 +111,7 @@ class CreateOrUpdateEventButton extends ConsumerWidget {
                 ? LocalizedKeys.createEventButtonText
                 : LocalizedKeys.updateEventButtonText,
             style: AriesTextStyles.textBodySmall.copyWith(
-              color: AriesColor.yellowP300,
+              color: AriesColor.yellowP950,
             ),
           ),
         ),

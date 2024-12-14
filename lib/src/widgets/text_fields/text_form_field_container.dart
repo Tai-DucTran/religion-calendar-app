@@ -130,7 +130,7 @@ class _TextFormFieldContainerState extends State<TextFormFieldContainer> {
                   Radius.circular(8.r),
                 ),
                 borderSide: BorderSide(
-                  color: AriesColor.yellowP300,
+                  color: AriesColor.yellowP950,
                 ),
               ),
             ),
