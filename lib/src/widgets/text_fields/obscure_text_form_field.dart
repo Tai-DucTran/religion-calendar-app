@@ -82,7 +82,7 @@ class _ObscureTextFormFieldState extends State<ObscureTextFormField> {
                 Radius.circular(8),
               ),
               borderSide: BorderSide(
-                color: AriesColor.yellowP300,
+                color: AriesColor.yellowP950,
               ),
             ),
           ),

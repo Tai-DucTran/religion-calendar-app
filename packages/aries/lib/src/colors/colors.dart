@@ -15,6 +15,10 @@ class AriesColor {
   static const yellowP400 = Color(0xFFe7bf4c);
   static const yellowP500 = Color(0xFF9e7d1b);
   static const yellowP600 = Color(0xFF8a6d18);
+  static const yellowP700 = Color(0xFF673C1C);
+  static const yellowP800 = Color(0xFF79471A);
+  static const yellowP900 = Color(0xFF915817);
+  static const yellowP950 = Color(0xFF3C1E0C);
 
   /* Brown */
   static const brown = Color(0xFF261E07);

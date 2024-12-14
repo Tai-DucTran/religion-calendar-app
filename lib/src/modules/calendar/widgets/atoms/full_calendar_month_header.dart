@@ -60,14 +60,14 @@ class FullMonthCalendarHeader extends ConsumerWidget {
               IconButton(
                 icon: const Icon(
                   Icons.chevron_left,
-                  color: AriesColor.yellowP300,
+                  color: AriesColor.yellowP950,
                 ),
                 onPressed: onPreviousMonth,
               ),
               IconButton(
                 icon: const Icon(
                   Icons.chevron_right,
-                  color: AriesColor.yellowP300,
+                  color: AriesColor.yellowP950,
                 ),
                 onPressed: onNextMonth,
               ),

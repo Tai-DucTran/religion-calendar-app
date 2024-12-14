@@ -54,7 +54,7 @@ class _ExplorePageState extends State<ExplorePage>
             ),
             child: TabBar(
               controller: _tabController,
-              labelColor: AriesColor.yellowP300,
+              labelColor: AriesColor.yellowP950,
               unselectedLabelColor: AriesColor.neutral90,
               dividerColor: Colors.transparent,
               tabs: const [

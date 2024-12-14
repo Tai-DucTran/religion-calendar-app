@@ -149,7 +149,7 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
                 dateFormat: dateFormat,
               ),
         style: AriesTextStyles.textBodyNormal.copyWith(
-          color: AriesColor.yellowP300,
+          color: AriesColor.yellowP950,
         ),
       ),
     );

@@ -17,7 +17,7 @@ class AuthenticationBackgroundContainer extends StatelessWidget {
             Color(0xFFFFFFFF),
             Color(0xFFFBF4E0),
             Color(0xFFECCC6F),
-            AriesColor.yellowP300,
+            AriesColor.yellowP950,
           ],
           stops: [0.0, 0.0, 0.48, 1],
         ),

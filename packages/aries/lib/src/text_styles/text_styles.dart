@@ -116,7 +116,7 @@ class AriesTextStyles {
   //* Text Input Field style:
   static TextStyle get textInputField => TextStyle(
         overflow: TextOverflow.ellipsis,
-        color: AriesColor.yellowP300,
+        color: AriesColor.yellowP950,
         fontSize: 14.sp,
         fontWeight: FontWeight.w600,
       );
