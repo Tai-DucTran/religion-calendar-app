@@ -66,10 +66,12 @@ class ReligionLocationCard extends StatelessWidget {
                       child: Text(
                         location,
                         style: AriesTextStyles.textBodySmall,
+                        maxLines: 2,
                       ),
                     )
                   ],
                 ),
+                Spacing.sp4,
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
