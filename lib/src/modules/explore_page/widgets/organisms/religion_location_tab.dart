@@ -17,8 +17,9 @@ class ReligionLocationTab extends StatelessWidget {
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Spacing.sp12,
           Text(
-            'Nhờ thờ gần tôi',
+            'Nhà thờ gần tôi',
             style: AriesTextStyles.textHeading5,
           ),
           Spacing.sp16,
