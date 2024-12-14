@@ -20,7 +20,7 @@ class CtaFullWidthButton extends HookConsumerWidget {
     return CustomElevatedButton(
       text: buttonText,
       width: double.infinity,
-      buttonColor: buttonColor ?? AriesColor.yellowP950,
+      buttonColor: buttonColor ?? AriesColor.yellowP400,
       onPressed: onPressed,
     );
   }

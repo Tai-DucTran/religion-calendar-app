@@ -45,9 +45,6 @@ class ReligionCalendar extends HookConsumerWidget {
       title: 'Religion Calendar App',
       theme: ThemeData(
         primaryColor: AriesColor.yellowP950,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: AriesColor.yellowP950,
-        ),
         useMaterial3: true,
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
