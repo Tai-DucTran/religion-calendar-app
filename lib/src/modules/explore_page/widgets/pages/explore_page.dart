@@ -1,7 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/explore_page/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
@@ -37,43 +37,6 @@ class _ExplorePageState extends State<ExplorePage>
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        floatingActionButton: Padding(
-          padding: EdgeInsets.only(
-            left: 150,
-          ),
-          child: Container(
-            width: 200,
-            height: 60,
-            decoration: BoxDecoration(
-              color: AriesColor.black.withOpacity(
-                0.8,
-              ),
-              borderRadius: BorderRadius.circular(
-                8.r,
-              ),
-            ),
-            child: TabBar(
-              controller: _tabController,
-              labelColor: AriesColor.yellowP950,
-              unselectedLabelColor: AriesColor.neutral90,
-              dividerColor: Colors.transparent,
-              tabs: const [
-                Tab(
-                  text: 'Nhà thờ',
-                  icon: Icon(
-                    Icons.church,
-                  ),
-                ),
-                Tab(
-                  text: 'Thư viện',
-                  icon: Icon(
-                    Icons.menu_book_sharp,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
         body: MainAppBackgroundContainer(
           paddingHorizontal: 0,
           child: CustomScrollView(
@@ -105,6 +68,21 @@ class _ExplorePageState extends State<ExplorePage>
                         ],
                       ),
                     ),
+                    Spacing.sp8,
+                    TabBar(
+                      controller: _tabController,
+                      labelColor: AriesColor.yellowP950,
+                      unselectedLabelColor: AriesColor.neutral90,
+                      dividerColor: Colors.transparent,
+                      tabs: [
+                        Tab(
+                          text: LocalizedKeys.libraryButtonText,
+                        ),
+                        Tab(
+                          text: LocalizedKeys.churchesButtonText,
+                        ),
+                      ],
+                    ),
                     Spacing.sp24,
                     SizedBox(
                       height: MediaQuery.of(context).size.height - 200,
@@ -115,7 +93,6 @@ class _ExplorePageState extends State<ExplorePage>
                         child: TabBarView(
                           controller: _tabController,
                           children: [
-                            ReligionLocationTab(),
                             Container(
                               color: AriesColor.yellowP50,
                               padding: EdgeInsets.only(
@@ -128,6 +105,7 @@ class _ExplorePageState extends State<ExplorePage>
                                 ),
                               ),
                             ),
+                            ReligionLocationTab(),
                           ],
                         ),
                       ),
