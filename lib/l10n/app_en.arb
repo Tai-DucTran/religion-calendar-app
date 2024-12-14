@@ -1,4 +1,5 @@
 {
+  "@@context": "------Explore Page------",
   "religionCatholicismText": "Catholicism",
   "religionBuddhismText": "Buddhism",
   "religionUnknownText": "I don''t have religion",
@@ -110,5 +111,8 @@
   "moreDetailsButtonText": "More details",
   "@@context": "------Explore Page------",
   "explorePageHeaderText": "Explore",
+  "libraryButtonText": "Library",
+  "churchesButtonText": "Churches",
+  "templeInBuddhismButtonText": "Chùa",
   "@@locale": "en"
 }

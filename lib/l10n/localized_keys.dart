@@ -119,4 +119,7 @@ class LocalizedKeys {
   static String get deleteEventConfirmationText => AppLocalizations.of(_context)!.deleteEventConfirmationText;
   static String get moreDetailsButtonText => AppLocalizations.of(_context)!.moreDetailsButtonText;
   static String get explorePageHeaderText => AppLocalizations.of(_context)!.explorePageHeaderText;
+  static String get libraryButtonText => AppLocalizations.of(_context)!.libraryButtonText;
+  static String get churchesButtonText => AppLocalizations.of(_context)!.churchesButtonText;
+  static String get templeInBuddhismButtonText => AppLocalizations.of(_context)!.templeInBuddhismButtonText;
 }

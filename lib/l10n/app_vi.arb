@@ -1,5 +1,6 @@
 {
-  "religionCatholicismText": "Thiên Chúa Giáo",
+  "@@context": "------Religion Preferences------",
+  "religionCatholicismText": "Công giáo",
   "religionBuddhismText": "Phật Giáo",
   "religionUnknownText": "Tôi không có",
   "religionText": "Tôn Giáo",
@@ -110,5 +111,8 @@
   "moreDetailsButtonText": "Xem thêm",
   "@@context": "------Explore Page------",
   "explorePageHeaderText": "Khám phá",
+  "libraryButtonText": "Thư viện",
+  "churchesButtonText": "Nhà thờ",
+  "templeInBuddhismButtonText": "Chùa",
   "@@locale": "vi"
 }
