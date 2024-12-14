@@ -113,6 +113,10 @@
   "explorePageHeaderText": "Explore",
   "libraryButtonText": "Library",
   "churchesButtonText": "Churches",
-  "templeInBuddhismButtonText": "Chùa",
+  "templeInBuddhismButtonText": "Temples",
+  "librarySearchHintText": "Search Scriptures or books",
+  "worshipCatholicismSearchHintText": "Search mass times",
+  "worshipBuddhismHintText": "Search temples",
+  "defaultSearchHintText": "Search",
   "@@locale": "en"
 }

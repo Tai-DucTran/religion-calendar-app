@@ -114,5 +114,9 @@
   "libraryButtonText": "Thư viện",
   "churchesButtonText": "Nhà thờ",
   "templeInBuddhismButtonText": "Chùa",
+  "librarySearchHintText": "Tìm Kinh hoặc sách",
+  "worshipCatholicismSearchHintText": "Tìm giờ lễ nhà thờ",
+  "worshipBuddhismHintText": "Tìm Chùa",
+  "defaultSearchHintText": "Tìm kiếm",
   "@@locale": "vi"
 }

@@ -122,4 +122,8 @@ class LocalizedKeys {
   static String get libraryButtonText => AppLocalizations.of(_context)!.libraryButtonText;
   static String get churchesButtonText => AppLocalizations.of(_context)!.churchesButtonText;
   static String get templeInBuddhismButtonText => AppLocalizations.of(_context)!.templeInBuddhismButtonText;
+  static String get librarySearchHintText => AppLocalizations.of(_context)!.librarySearchHintText;
+  static String get worshipCatholicismSearchHintText => AppLocalizations.of(_context)!.worshipCatholicismSearchHintText;
+  static String get worshipBuddhismHintText => AppLocalizations.of(_context)!.worshipBuddhismHintText;
+  static String get defaultSearchHintText => AppLocalizations.of(_context)!.defaultSearchHintText;
 }
