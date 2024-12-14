@@ -87,7 +87,7 @@ class _UserNameTextFieldState extends ConsumerState<UserNameTextField> {
         ),
         Spacing.sp30,
         CustomElevatedButton(
-          buttonColor: AriesColor.yellowP950,
+          buttonColor: AriesColor.yellowP400,
           text: LocalizedKeys.saveButtonText,
           onPressed: updateBasicInfo,
           width: double.infinity,
