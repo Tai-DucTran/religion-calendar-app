@@ -13,7 +13,7 @@ enum ReligionPreference {
 }
 
 extension ReligionPrefernceExtension on ReligionPreference {
-  String get localized {
+  String get localizedName {
     switch (this) {
       case ReligionPreference.catholicism:
         return LocalizedKeys.religionCatholicismText;
@@ -21,6 +21,18 @@ extension ReligionPrefernceExtension on ReligionPreference {
         return LocalizedKeys.religionBuddhismText;
       case ReligionPreference.unknown:
         return LocalizedKeys.religionUnknownText;
+    }
+  }
+
+  String get searchHintLocalized {
+    switch (this) {
+      case ReligionPreference.catholicism:
+        return LocalizedKeys.worshipCatholicismSearchHintText;
+      case ReligionPreference.buddhism:
+        return LocalizedKeys.worshipBuddhismHintText;
+      case ReligionPreference.unknown:
+      default:
+        return LocalizedKeys.defaultSearchHintText;
     }
   }
 

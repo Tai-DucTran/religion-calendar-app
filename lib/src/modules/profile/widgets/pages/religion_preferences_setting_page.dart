@@ -56,7 +56,7 @@ class ReligionPreferencesSettingPage extends ConsumerWidget {
                   horizontal: ScreenConfig.defaultHorizontalScreenPadding,
                 ),
                 title: Text(
-                  religion.localized.toCapitalized(),
+                  religion.localizedName.toCapitalized(),
                   style: AriesTextStyles.textBodyNormal,
                 ),
                 horizontalTitleGap: 4,

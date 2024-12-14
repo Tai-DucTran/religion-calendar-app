@@ -15,15 +15,24 @@ class ExplorePage extends StatefulWidget {
 class _ExplorePageState extends State<ExplorePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  int _currentTabIndex = 0;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(() {
+      if (_tabController.indexIsChanging) {
+        setState(() {
+          _currentTabIndex = _tabController.index;
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
+    _tabController.removeListener(() {});
     _tabController.dispose();
     super.dispose();
   }
@@ -42,7 +51,9 @@ class _ExplorePageState extends State<ExplorePage>
                   [
                     const ExplorePageHeader(),
                     Spacing.sp24,
-                    SearchBarSection(),
+                    SearchBarSection(
+                      tabIndex: _currentTabIndex,
+                    ),
                     Spacing.sp8,
                     TabsSection(
                       controller: _tabController,

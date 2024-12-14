@@ -58,7 +58,7 @@ class OnboardingReligionPreferencePage extends ConsumerWidget {
                 return ListTile(
                   contentPadding: const EdgeInsets.only(left: 0),
                   title: Text(
-                    religion.localized.toCapitalized(),
+                    religion.localizedName.toCapitalized(),
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
