@@ -52,7 +52,7 @@ class _ExplorePageState extends State<ExplorePage>
                     const ExplorePageHeader(),
                     Spacing.sp24,
                     SearchBarSection(
-                      tabIndex: _currentTabIndex,
+                      _currentTabIndex,
                     ),
                     Spacing.sp8,
                     TabsSection(
