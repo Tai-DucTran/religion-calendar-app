@@ -18,7 +18,7 @@ class _EventNameInputState extends State<EventNameInput> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Spacing.sp24,
+        Spacing.sp8,
         Flexible(
           child: TextField(
             controller: widget.controller,

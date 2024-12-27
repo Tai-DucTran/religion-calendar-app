@@ -1,4 +1,6 @@
+import 'package:aries/aries.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class TopBanner extends StatelessWidget {
@@ -13,17 +15,40 @@ class TopBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isReligionEvent = event.eventCategory == EventCategory.religionEvent;
+    final isReligionOrSpecialEvent =
+        event.eventCategory == EventCategory.religionEvent ||
+            event.eventCategory == EventCategory.specialEvent;
 
-    return SizedBox(
+    final isReligionEvent = event.eventCategory == EventCategory.religionEvent;
+
+    return Container(
       height: bannerHeight,
+      decoration: BoxDecoration(
+        color: isReligionOrSpecialEvent
+            ? isReligionEvent
+                ? AriesColor.yellowP50
+                : AriesColor.success50
+            : Color(0xffEAEFFD),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20.r),
+        ),
+      ),
       child: Stack(
         children: [
           BannerImage(
-            img: event.img,
+            img: isReligionOrSpecialEvent
+                ? isReligionEvent
+                    ? AriesImages.defaultCatholicismEvent1
+                    : AriesImages.defaultChristmasEvent
+                : AriesImages.defaultFamilyEvent1,
           ),
-          BannerLine(),
-          if (!isReligionEvent)
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: BannerLine(),
+          ),
+          if (!isReligionOrSpecialEvent)
             EditEventButton(
               eventId: event.id,
             ),
