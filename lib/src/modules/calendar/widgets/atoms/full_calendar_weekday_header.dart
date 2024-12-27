@@ -18,9 +18,8 @@ class FullCalendarWeekdayHeader extends StatelessWidget {
       isShortName: true,
     );
     return Padding(
-      padding: EdgeInsets.only(
-        right: 16.w,
-        left: 16.w,
+      padding: EdgeInsets.symmetric(
+        horizontal: 13.w,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

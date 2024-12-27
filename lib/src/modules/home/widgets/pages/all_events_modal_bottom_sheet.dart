@@ -4,9 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/constants/other_implementation_constants.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
+import 'package:religion_calendar_app/src/modules/home/widgets/widgets.dart';
 
-class FullCalendarModalBottomSheet extends ConsumerStatefulWidget {
-  const FullCalendarModalBottomSheet({super.key});
+class AllEventsModalBottomSheet extends ConsumerStatefulWidget {
+  const AllEventsModalBottomSheet({super.key});
 
   static Future<bool> show(
     BuildContext context,
@@ -23,37 +24,32 @@ class FullCalendarModalBottomSheet extends ConsumerStatefulWidget {
           ),
         ),
       ),
-      builder: (context) => const FullCalendarModalBottomSheet(),
+      builder: (context) => const AllEventsModalBottomSheet(),
     );
     return result ?? false;
   }
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _FullCalendarModalBottomSheetState();
+      _AllEventsModalBottomSheetState();
 }
 
-class _FullCalendarModalBottomSheetState
-    extends ConsumerState<FullCalendarModalBottomSheet> {
+class _AllEventsModalBottomSheetState
+    extends ConsumerState<AllEventsModalBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    return SizedBox(
-      height: screenHeight * bottomSheetHeightFactorMax,
-      child: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              height: 20.w,
-              child: BannerLine(),
-            ),
-            Expanded(
-              child: const FullCalendarSection(),
-            ),
-          ],
-        ),
+    return FractionallySizedBox(
+      heightFactor: bottomSheetHeightFactorMax,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 20.w,
+            child: BannerLine(),
+          ),
+          Expanded(
+            child: const AllEventsSection(),
+          ),
+        ],
       ),
     );
   }

@@ -2,8 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:religion_calendar_app/src/modules/calendar/controllers/event_category_controller.dart';
-import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
+import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class EventCategorySelect extends ConsumerWidget {
   const EventCategorySelect({super.key});
@@ -31,7 +30,9 @@ class EventCategorySelect extends ConsumerWidget {
         child: Center(
           child: DropdownButton<EventCategory>(
             items: options
-                .where((option) => option != EventCategory.religionEvent)
+                .where((option) =>
+                    option != EventCategory.religionEvent &&
+                    option != EventCategory.specialEvent)
                 .map(
               (option) {
                 return DropdownMenuItem(

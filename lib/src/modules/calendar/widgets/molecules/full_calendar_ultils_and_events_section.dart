@@ -1,7 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
+import 'package:religion_calendar_app/constants/constants.dart';
+import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class FullCalendarUltilsAndEventsSection extends ConsumerWidget {
   const FullCalendarUltilsAndEventsSection({
@@ -10,68 +13,95 @@ class FullCalendarUltilsAndEventsSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const _HeightAdjustedSection(
-      child: _EventSectionContent(),
-    );
+    return const _EventSectionContent();
   }
 }
 
-class _HeightAdjustedSection extends ConsumerWidget {
-  const _HeightAdjustedSection({
-    required this.child,
-  });
+class _EventSectionContent extends ConsumerWidget {
+  const _EventSectionContent();
 
-  final Widget child;
+  List<BasedEvent> sortEventsByPriority(List<BasedEvent> events) {
+    events.sort((a, b) {
+      if (a.eventCategory == EventCategory.religionEvent &&
+          b.eventCategory != EventCategory.religionEvent) {
+        return -1;
+      }
+      if (b.eventCategory == EventCategory.religionEvent &&
+          a.eventCategory != EventCategory.religionEvent) {
+        return 1;
+      }
+
+      if (a.eventCategory == EventCategory.specialEvent &&
+          b.eventCategory != EventCategory.specialEvent) {
+        return -1;
+      }
+      if (b.eventCategory == EventCategory.specialEvent &&
+          a.eventCategory != EventCategory.specialEvent) {
+        return 1;
+      }
+
+      return 0;
+    });
+    return events;
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final screenHeight = MediaQuery.of(context).size.height;
+    final events = ref.watch(combineEventsControllerProvider);
 
-    return SizedBox(
-      height: screenHeight * 0.40,
-      child: child,
-    );
-  }
-}
-
-class _EventSectionContent extends StatelessWidget {
-  const _EventSectionContent();
-
-  @override
-  Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
         const FullCalendarUtilButtons(),
-        Spacing.sp8,
-        Expanded(
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                const FullCalendarEventCard(
-                  eventName: 'Lễ ngày Chúa nhật',
-                  eventTime: null,
-                  eventCategory: EventCategory.religionEvent,
-                ),
-                const FullCalendarEventCard(
-                  eventName: 'Sự kiện này rất rất dài và là một sự kiện mẫu',
-                  eventTime: null,
-                  eventCategory: EventCategory.familyEvent,
-                ),
-                FullCalendarEventCard(
-                  eventName: 'Đám giỗ ông A',
-                  eventTime: DateTime.now(),
-                  eventCategory: EventCategory.personalEvent,
-                ),
-                FullCalendarEventCard(
-                  eventName: 'Sự kiện này rất rất dài và là một sự kiện mẫu',
-                  eventTime: DateTime.now(),
-                  eventCategory: EventCategory.businessEvent,
-                ),
-              ],
+        Spacing.sp16,
+        events.when(
+          loading: () => Skeletonizer(
+            effect: const ShimmerEffect(
+              baseColor: AriesColor.neutral30,
+            ),
+            enableSwitchAnimation: true,
+            child: FullCalendarEventCard(
+              eventName: mockLoadingTextContent,
+              eventTime: DateTime.now(),
+              eventLocation: mockLoadingTextContent,
+              eventCategory: EventCategory.businessEvent,
             ),
           ),
+          error: (error, stackTrace) => const Offstage(),
+          data: (events) {
+            final selectedDate = ref.watch(selectedDateProvider);
+            List<BasedEvent> listOfEvents = events.where((event) {
+              return event.startDate.year == selectedDate.year &&
+                  event.startDate.month == selectedDate.month &&
+                  event.startDate.day == selectedDate.day;
+            }).toList();
+
+            if (listOfEvents.isEmpty) {
+              return Text(LocalizedKeys.emptyEventText);
+            }
+            listOfEvents = sortEventsByPriority(listOfEvents);
+
+            return Column(
+              children: listOfEvents.map(
+                (event) {
+                  return GestureDetector(
+                    onTap: () async {
+                      final result = await ViewEventModalBottomSheet.show(
+                        context,
+                        event: event,
+                      );
+                      if (!result) return;
+                    },
+                    child: FullCalendarEventCard(
+                      eventName: event.title,
+                      eventTime: event.isAllDay ? null : event.startDate,
+                      eventLocation: event.location,
+                      eventCategory: event.eventCategory,
+                    ),
+                  );
+                },
+              ).toList(),
+            );
+          },
         ),
       ],
     );

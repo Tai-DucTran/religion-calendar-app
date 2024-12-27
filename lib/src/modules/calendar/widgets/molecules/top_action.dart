@@ -19,8 +19,8 @@ class TopAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 30.h,
-      child: Stack(
+      height: 70.w,
+      child: Column(
         children: [
           BannerLine(),
           CreateOrUpdateEventButton(

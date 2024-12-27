@@ -41,6 +41,7 @@ class DeleteEventButton extends ConsumerWidget {
             child: Text(
               LocalizedKeys.deleteEventButtonText,
               style: AriesTextStyles.textBodySmall.copyWith(
+                fontWeight: FontWeight.w600,
                 color: AriesColor.danger400,
               ),
             ),

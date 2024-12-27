@@ -121,14 +121,11 @@ class _EventDetailModalBottomSheetState
         ),
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: TopAction(
-                eventId: widget.eventId,
-                eventNameInputController: eventNameInputController,
-                eventLocationInputController: eventLocationInputController,
-                eventDescriptionController: eventDescriptionController,
-              ),
+            TopAction(
+              eventId: widget.eventId,
+              eventNameInputController: eventNameInputController,
+              eventLocationInputController: eventLocationInputController,
+              eventDescriptionController: eventDescriptionController,
             ),
             Expanded(
               child: Container(

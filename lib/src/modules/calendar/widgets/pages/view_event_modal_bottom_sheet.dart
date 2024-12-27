@@ -42,6 +42,10 @@ class _ViewEventModalBottomSheetState
     final deleteButtonHeight = 75.h;
     final bannerHeight = 150.w;
 
+    final isReligionOrSpecialEvent =
+        event.eventCategory == EventCategory.religionEvent ||
+            event.eventCategory == EventCategory.specialEvent;
+
     return FractionallySizedBox(
       heightFactor: bottomSheetHeightFactorMax,
       child: Container(
@@ -104,7 +108,7 @@ class _ViewEventModalBottomSheetState
                 ),
               ],
             ),
-            event.eventCategory == EventCategory.religionEvent
+            isReligionOrSpecialEvent
                 ? MoreDetailsButton(
                     event: event,
                     deleteButtonHeight: deleteButtonHeight,

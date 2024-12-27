@@ -41,6 +41,7 @@ class LocalizedKeys {
   static String get eventInputHintText => AppLocalizations.of(_context)!.eventInputHintText;
   static String get eventCategoryFamilyText => AppLocalizations.of(_context)!.eventCategoryFamilyText;
   static String get eventCategoryReligionText => AppLocalizations.of(_context)!.eventCategoryReligionText;
+  static String get eventCategorySpecialText => AppLocalizations.of(_context)!.eventCategorySpecialText;
   static String get eventCategoryBusinessText => AppLocalizations.of(_context)!.eventCategoryBusinessText;
   static String get eventCategoryPersonalText => AppLocalizations.of(_context)!.eventCategoryPersonalText;
   static String get eventCategoryOtherText => AppLocalizations.of(_context)!.eventCategoryOtherText;
@@ -84,6 +85,13 @@ class LocalizedKeys {
   static String get descriptionHint => AppLocalizations.of(_context)!.descriptionHint;
   static String get createEventButtonText => AppLocalizations.of(_context)!.createEventButtonText;
   static String get updateEventButtonText => AppLocalizations.of(_context)!.updateEventButtonText;
+  static String get todayEventText => AppLocalizations.of(_context)!.todayEventText;
+  static String get goodMorningText => AppLocalizations.of(_context)!.goodMorningText;
+  static String get goodAfternoonText => AppLocalizations.of(_context)!.goodAfternoonText;
+  static String get goodEveningText => AppLocalizations.of(_context)!.goodEveningText;
+  static String get watchFullCalendarText => AppLocalizations.of(_context)!.watchFullCalendarText;
+  static String get allEventsText => AppLocalizations.of(_context)!.allEventsText;
+  static String get loadMoreEventsText => AppLocalizations.of(_context)!.loadMoreEventsText;
   static String get userInfoHeaderText => AppLocalizations.of(_context)!.userInfoHeaderText;
   static String get editUserInfoButtonText => AppLocalizations.of(_context)!.editUserInfoButtonText;
   static String get userDefaultNameText => AppLocalizations.of(_context)!.userDefaultNameText;

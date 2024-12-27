@@ -1,5 +1,6 @@
 import 'package:aries/aries.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
@@ -20,21 +21,26 @@ class MoreDetailsButton extends StatelessWidget {
       left: 0,
       right: 0,
       child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 28),
-        child: TextButton(
-          onPressed: () {},
-          style: TextButton.styleFrom(
-            backgroundColor: const Color(0xFFF8F1C9),
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
+        height: 75.h,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              AriesColor.neutral0.withOpacity(0.9),
+              AriesColor.neutral0.withOpacity(1),
+            ],
           ),
-          child: Text(
-            LocalizedKeys.moreDetailsButtonText,
-            style: AriesTextStyles.textBodySmall.copyWith(
-              color: const Color(0xFF673C1C),
+        ),
+        child: Center(
+          child: CupertinoButton(
+            onPressed: () {},
+            child: Text(
+              LocalizedKeys.moreDetailsButtonText,
+              style: AriesTextStyles.textBodySmall.copyWith(
+                fontWeight: FontWeight.w600,
+                color: AriesColor.yellowP950,
+              ),
             ),
           ),
         ),
