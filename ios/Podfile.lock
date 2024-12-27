@@ -1233,7 +1233,7 @@ PODS:
     - FirebaseCore (~> 11.0)
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
-  - FirebaseAppCheckInterop (11.5.0)
+  - FirebaseAppCheckInterop (11.6.0)
   - FirebaseAuth (11.4.0):
     - FirebaseAppCheckInterop (~> 11.0)
     - FirebaseAuthInterop (~> 11.0)
@@ -1243,14 +1243,14 @@ PODS:
     - GoogleUtilities/Environment (~> 8.0)
     - GTMSessionFetcher/Core (< 5.0, >= 3.4)
     - RecaptchaInterop (~> 100.0)
-  - FirebaseAuthInterop (11.5.0)
+  - FirebaseAuthInterop (11.6.0)
   - FirebaseCore (11.4.0):
     - FirebaseCoreInternal (~> 11.0)
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/Logger (~> 8.0)
   - FirebaseCoreExtension (11.4.1):
     - FirebaseCore (~> 11.0)
-  - FirebaseCoreInternal (11.5.0):
+  - FirebaseCoreInternal (11.6.0):
     - "GoogleUtilities/NSData+zlib (~> 8.0)"
   - FirebaseFirestore (11.4.0):
     - FirebaseCore (~> 11.4)
@@ -1277,7 +1277,7 @@ PODS:
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - PromisesObjC (~> 2.4)
-  - FirebaseSharedSwift (11.5.0)
+  - FirebaseSharedSwift (11.6.0)
   - FirebaseStorage (11.4.0):
     - FirebaseAppCheckInterop (~> 11.0)
     - FirebaseAuthInterop (~> 11.0)
@@ -1586,16 +1586,16 @@ SPEC CHECKSUMS:
   firebase_storage: 942caaa628c22c941bff8af058347cc5c38a70bf
   FirebaseAnalytics: 3feef9ae8733c567866342a1000691baaa7cad49
   FirebaseAppCheck: 933cbda29279ed316b82360bca77602ac1af1ff2
-  FirebaseAppCheckInterop: d265d9f4484e7ec1c591086408840fdd383d1213
+  FirebaseAppCheckInterop: 347aa09a805219a31249b58fc956888e9fcb314b
   FirebaseAuth: c359af98bd703cbf4293eec107a40de08ede6ce6
-  FirebaseAuthInterop: 1219bee9b23e6ebe84c256a0d95adab53d11c331
+  FirebaseAuthInterop: a919d415797d23b7bfe195a04f322b86c65020ef
   FirebaseCore: e0510f1523bc0eb21653cac00792e1e2bd6f1771
   FirebaseCoreExtension: f1bc67a4702931a7caa097d8e4ac0a1b0d16720e
-  FirebaseCoreInternal: f47dd28ae7782e6a4738aad3106071a8fe0af604
+  FirebaseCoreInternal: d98ab91e2d80a56d7b246856a8885443b302c0c2
   FirebaseFirestore: 2ccdf893fd7e175aa8ec58faa06338b346d27db8
   FirebaseFirestoreInternal: 004452c4669d5df8869c9f8f7a24ee0009852d5b
   FirebaseInstallations: 6ef4a1c7eb2a61ee1f74727d7f6ce2e72acf1414
-  FirebaseSharedSwift: 302ac5967857ad7e7388b15382d705b8c8d892aa
+  FirebaseSharedSwift: a4e5dfca3e210633bb3a3dfb94176c019211948b
   FirebaseStorage: 1bf8f80ac3bb02c72844b7350e95e10be7113ef0
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_facebook_auth: 48be46091bd1a5cc5a66055f1228a9d99a28bfaa

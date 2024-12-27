@@ -20,7 +20,6 @@ extension ReligionPrefernceExtension on ReligionPreference {
       case ReligionPreference.buddhism:
         return LocalizedKeys.religionBuddhismText;
       case ReligionPreference.unknown:
-      default:
         return LocalizedKeys.religionUnknownText;
     }
   }
@@ -32,7 +31,6 @@ extension ReligionPrefernceExtension on ReligionPreference {
       case ReligionPreference.buddhism:
         return Icons.temple_buddhist_outlined;
       case ReligionPreference.unknown:
-      default:
         return Icons.wb_sunny_outlined;
     }
   }
@@ -44,7 +42,6 @@ extension ReligionPrefernceExtension on ReligionPreference {
       case ReligionPreference.buddhism:
         return AriesImages.defaultBuddismEvent;
       case ReligionPreference.unknown:
-      default:
         return AriesImages.defaultOtherEvent;
     }
   }

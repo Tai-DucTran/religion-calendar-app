@@ -13,7 +13,6 @@ ReligionBackgroundImagePath getOnboardingBackgroundPath(
     case ReligionPreference.catholicism:
       return AriesImages.christImage;
     case ReligionPreference.unknown:
-    default:
       return AriesImages.sunAndMoonImage;
   }
 }
