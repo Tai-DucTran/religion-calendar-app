@@ -48,7 +48,9 @@ class EventCard extends ConsumerWidget {
       dateFormat: 'dd, MMMM',
     );
     final isToday = isDateToday(eventDate);
-    final isReligionEvent = eventCategory == EventCategory.religionEvent;
+    final isReligionOrSpecialEvent =
+        eventCategory == EventCategory.religionEvent ||
+            eventCategory == EventCategory.specialEvent;
 
     final userReligionPreference =
         ref.watch(userControllerProvider).value?.user?.religionPreference;
@@ -129,7 +131,7 @@ class EventCard extends ConsumerWidget {
                       ),
                       Spacing.sp4,
                       if ((eventTime != null || eventLocation != null) &&
-                          !isReligionEvent) ...[
+                          !isReligionOrSpecialEvent) ...[
                         Text(
                           joinTwoString(
                                 firstString: eventTime,

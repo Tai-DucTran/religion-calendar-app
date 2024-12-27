@@ -10,12 +10,14 @@ class DateSection extends ConsumerWidget {
     required this.inputDate,
     required this.isToday,
     required this.isNotInCurrentMonth,
+    required this.listMarkerColor,
     super.key,
   });
 
   final DateTime inputDate;
   final bool isToday;
   final bool isNotInCurrentMonth;
+  final List<Color> listMarkerColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -70,22 +72,32 @@ class DateSection extends ConsumerWidget {
               ),
               decoration: BoxDecoration(
                 color: isToday ? AriesColor.yellowP100 : Colors.transparent,
-                borderRadius: BorderRadius.circular(4.r),
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(40.r),
+                  bottom: Radius.circular(8.r),
+                ),
                 border: isToday
                     ? Border.all(
-                        color: AriesColor.yellowP50,
+                        color: AriesColor.yellowP100,
                         width: 0,
                       )
                     : null,
               ),
               child: Column(
                 children: [
-                  Text(
-                    date,
-                    style: AriesTextStyles.textBodyMedium.copyWith(
-                      color: isNotInCurrentMonth ? Colors.grey : Colors.black,
-                      fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
-                      fontSize: 20.sp,
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: 4.w,
+                      bottom: 6.w,
+                    ),
+                    child: Text(
+                      date,
+                      style: AriesTextStyles.textBodyMedium.copyWith(
+                        color: isNotInCurrentMonth ? Colors.grey : Colors.black,
+                        fontWeight:
+                            isToday ? FontWeight.bold : FontWeight.normal,
+                        fontSize: 20.sp,
+                      ),
                     ),
                   ),
                   Text(
@@ -99,6 +111,39 @@ class DateSection extends ConsumerWidget {
                               : Colors.black,
                       fontSize: 14.sp,
                       fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 3.w,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: listMarkerColor.isEmpty
+                          ? [
+                              SizedBox(
+                                width: 8.w,
+                                height: 8.w,
+                              )
+                            ]
+                          : listMarkerColor
+                              .map(
+                                (color) => Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 2.w,
+                                  ),
+                                  child: Container(
+                                    width: 8.w,
+                                    height: 8.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: color,
+                                    ),
+                                  ),
+                                ),
+                              )
+                              .toList(),
                     ),
                   ),
                 ],
