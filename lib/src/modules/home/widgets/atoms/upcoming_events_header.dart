@@ -1,6 +1,7 @@
 import 'package:aries/aries.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/modules/home/widgets/widgets.dart';
 
 class UpComingEventsHeader extends StatelessWidget {
   const UpComingEventsHeader({super.key});
@@ -14,22 +15,20 @@ class UpComingEventsHeader extends StatelessWidget {
           LocalizedKeys.yourEventText,
           style: AriesTextStyles.textHeading6,
         ),
-        TextButton(
-          onPressed: () {},
-          style: ButtonStyle(
-            padding: WidgetStateProperty.all<EdgeInsets>(
-              EdgeInsets.zero,
-            ),
-            minimumSize: WidgetStateProperty.all<Size>(
-              Size.zero,
-            ),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
+        CupertinoButton(
+          padding: EdgeInsets.zero,
+          minSize: 0,
+          onPressed: () async {
+          final result = await AllEventsModalBottomSheet.show(
+            context,
+          );
+          if (!result) return;
+        },
           child: Text(
             LocalizedKeys.viewAllButtonText,
             style: AriesTextStyles.textBodySmall.copyWith(
               fontWeight: FontWeight.w600,
-              color: AriesColor.yellowP500,
+              color: AriesColor.yellowP950,
             ),
           ),
         ),
