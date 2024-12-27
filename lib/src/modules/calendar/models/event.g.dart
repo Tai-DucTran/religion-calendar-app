@@ -47,6 +47,7 @@ const _$CalendarCategoryEnumMap = {
 };
 
 const _$EventCategoryEnumMap = {
+  EventCategory.specialEvent: 'SPECIAL_EVENT',
   EventCategory.religionEvent: 'RELIGION_EVENT',
   EventCategory.familyEvent: 'FAMILY_EVENT',
   EventCategory.businessEvent: 'BUSINESS_EVENT',

@@ -383,6 +383,8 @@ extension CalendarCategoryExtension on CalendarCategory {
 }
 
 enum EventCategory {
+  @JsonValue('SPECIAL_EVENT')
+  specialEvent,
   @JsonValue('RELIGION_EVENT')
   religionEvent,
   @JsonValue('FAMILY_EVENT')
@@ -398,6 +400,8 @@ enum EventCategory {
 extension EventCategoryExtension on EventCategory {
   String get localized {
     switch (this) {
+      case EventCategory.specialEvent:
+        return LocalizedKeys.eventCategorySpecialText;
       case EventCategory.religionEvent:
         return LocalizedKeys.eventCategoryReligionText;
       case EventCategory.familyEvent:
@@ -413,6 +417,8 @@ extension EventCategoryExtension on EventCategory {
 
   IconData? get icon {
     switch (this) {
+      case EventCategory.specialEvent:
+        return Icons.hub;
       case EventCategory.familyEvent:
         return Icons.family_restroom_sharp;
       case EventCategory.businessEvent:
@@ -435,6 +441,8 @@ extension EventCategoryExtension on EventCategory {
       case EventCategory.personalEvent:
         return AriesImages.defaultPersonalEvent;
       case EventCategory.otherEvent:
+        return AriesImages.defaultOtherEvent;
+      case EventCategory.specialEvent:
         return AriesImages.defaultOtherEvent;
       case EventCategory.religionEvent:
         return null;
