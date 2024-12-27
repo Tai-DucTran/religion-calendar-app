@@ -25,16 +25,16 @@ class EditEventButton extends StatelessWidget {
           if (!result) return;
         },
         child: Container(
-          width: 46.w,
-          height: 46.w,
+          width: 36.w,
+          height: 36.w,
           decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(23.r),
+            color: AriesColor.yellowP950.withOpacity(0.4),
+            borderRadius: BorderRadius.circular(8.r),
           ),
           child: Icon(
-            Icons.edit,
+            Icons.edit_outlined,
             color: AriesColor.neutral0,
-            size: 23.w,
+            size: 20.w,
           ),
         ),
       ),

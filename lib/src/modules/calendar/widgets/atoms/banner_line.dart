@@ -9,17 +9,17 @@ class BannerLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 10.h,
-      left: 0,
-      right: 0,
+    return Padding(
+      padding: EdgeInsets.only(
+        top: 10.w,
+      ),
       child: Center(
         child: Container(
           width: 40.w,
-          height: 5.h,
+          height: 5.w,
           decoration: BoxDecoration(
             color: AriesColor.black.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(2.r),
+            borderRadius: BorderRadius.circular(3.r),
           ),
         ),
       ),

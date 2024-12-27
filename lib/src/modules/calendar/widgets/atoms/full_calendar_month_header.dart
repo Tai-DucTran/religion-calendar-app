@@ -36,10 +36,8 @@ class FullMonthCalendarHeader extends ConsumerWidget {
     final displayedMonth = ref.watch(displayedMonthProvider);
 
     return Padding(
-      padding: EdgeInsets.only(
-        right: 16.w,
-        left: 16.w,
-        top: 16.w,
+      padding: EdgeInsets.symmetric(
+        horizontal: 16.w,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

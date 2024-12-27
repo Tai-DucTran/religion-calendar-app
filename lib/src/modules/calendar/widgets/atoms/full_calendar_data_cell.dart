@@ -14,7 +14,7 @@ class FullCalendarDataCell extends StatelessWidget {
     required this.isToday,
     required this.hasMarker,
     required this.onTap,
-    this.markerColor,
+    required this.listMarkerColor,
     this.markerBuilder,
   });
 
@@ -23,7 +23,7 @@ class FullCalendarDataCell extends StatelessWidget {
   final bool isToday;
   final bool hasMarker;
   final VoidCallback onTap;
-  final Color? markerColor;
+  final List<Color> listMarkerColor;
   final Widget Function(
     DateTime date,
     Color color,
@@ -52,8 +52,9 @@ class FullCalendarDataCell extends StatelessWidget {
               : isSelected
                   ? AriesColor.yellowP200
                   : Colors.transparent,
-          borderRadius: BorderRadius.circular(
-            4.r,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20.r),
+            bottom: Radius.circular(4.r),
           ),
         ),
         child: Stack(
@@ -88,13 +89,33 @@ class FullCalendarDataCell extends StatelessWidget {
             if (hasMarker && markerBuilder == null)
               Positioned(
                 bottom: 6,
-                child: Container(
-                  width: 8.w,
-                  height: 4.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2.r),
-                    color: markerColor ?? Colors.blue,
-                  ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: listMarkerColor.isEmpty
+                      ? [
+                          SizedBox(
+                            width: 4.w,
+                            height: 4.w,
+                          )
+                        ]
+                      : listMarkerColor
+                          .map(
+                            (color) => Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 1.w,
+                              ),
+                              child: Container(
+                                width: 4.w,
+                                height: 4.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(2.r),
+                                  color: color,
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
                 ),
               ),
           ],

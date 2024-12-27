@@ -1,3 +1,4 @@
+import 'package:aries/aries.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +56,9 @@ class DeleteConfirmation {
         child: CupertinoActionSheet(
           title: Text(
             LocalizedKeys.deleteEventConfirmationQuestionText,
+            style: AriesTextStyles.textBodySmall.copyWith(
+                color: AriesColor.neutral700.withOpacity(0.5),
+              ),
           ),
           actions: [
             CupertinoActionSheetAction(
@@ -69,6 +73,9 @@ class DeleteConfirmation {
               },
               child: Text(
                 LocalizedKeys.deleteEventConfirmationText,
+                style: AriesTextStyles.textBodyNormal.copyWith(
+                color: AriesColor.danger200,
+              ),
               ),
             ),
           ],
@@ -78,6 +85,9 @@ class DeleteConfirmation {
             },
             child: Text(
               LocalizedKeys.cancelButtonText,
+              style: AriesTextStyles.textBodyNormal.copyWith(
+                color: AriesColor.facebookColor,
+              ),
             ),
           ),
         ),

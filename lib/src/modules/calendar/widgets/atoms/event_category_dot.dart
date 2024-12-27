@@ -11,6 +11,11 @@ class EventCategoryDot extends StatelessWidget {
 
   final EventCategory eventCategory;
 
+  static const _categoryColors = {
+    EventCategory.religionEvent: AriesColor.yellowP300,
+    EventCategory.specialEvent: AriesColor.success200,
+  };
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,9 +25,7 @@ class EventCategoryDot extends StatelessWidget {
         height: 6.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(3.r),
-          color: eventCategory == EventCategory.religionEvent
-              ? AriesColor.warning300
-              : AriesColor.success300,
+          color: _categoryColors[eventCategory] ?? const Color(0xFF6F66FF),
         ),
       ),
     );

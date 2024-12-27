@@ -98,21 +98,45 @@ class CreateOrUpdateEventButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Positioned(
-      right: -10.w,
-      child: Center(
-        child: CupertinoButton(
-          onPressed: () => createOrUpdateEvent(
-            context,
-            ref,
-          ),
-          child: Text(
-            eventId == null
-                ? LocalizedKeys.createEventButtonText
-                : LocalizedKeys.updateEventButtonText,
-            style: AriesTextStyles.textBodySmall.copyWith(
-              color: AriesColor.yellowP950,
-            ),
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 26.w),
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CupertinoButton(
+                padding: EdgeInsets.zero,
+                minSize: 0,
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+                child: Text(
+                  LocalizedKeys.cancelButtonText,
+                  style: AriesTextStyles.textBodySmall.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AriesColor.yellowP950,
+                  ),
+                ),
+              ),
+              CupertinoButton(
+                padding: EdgeInsets.zero,
+                minSize: 0,
+                onPressed: () => createOrUpdateEvent(
+                  context,
+                  ref,
+                ),
+                child: Text(
+                  eventId == null
+                      ? LocalizedKeys.createEventButtonText
+                      : LocalizedKeys.updateEventButtonText,
+                  style: AriesTextStyles.textBodySmall.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AriesColor.yellowP950,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
