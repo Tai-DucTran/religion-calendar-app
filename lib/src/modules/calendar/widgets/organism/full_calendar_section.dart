@@ -17,26 +17,29 @@ class FullCalendarSection extends ConsumerWidget {
     final currentLocale = ref.watch(localeControllerProvider).languageCode;
     final pageController = ref.watch(fullCalendarControllerProvider);
 
-    return Column(
-      children: [
-        FullMonthCalendarHeader(
-          controller: pageController,
-          currentLocale: currentLocale,
-        ),
-        Spacing.sp16,
-        FullCalendarWeekdayHeader(
-          currentLocale: currentLocale,
-        ),
-        Spacing.sp4,
-        Expanded(
-          child: FullCalendarDaysInMonth(
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FullMonthCalendarHeader(
             controller: pageController,
-            onPageChanged:
-                ref.read(fullCalendarControllerProvider.notifier).onPageChanged,
+            currentLocale: currentLocale,
           ),
-        ),
-        const FullCalendarUltilsAndEventsSection()
-      ],
+          Spacing.sp16,
+          FullCalendarWeekdayHeader(
+            currentLocale: currentLocale,
+          ),
+          Spacing.sp4,
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.42,
+            child: FullCalendarDaysInMonth(
+              controller: pageController,
+              onPageChanged: ref.read(fullCalendarControllerProvider.notifier).onPageChanged,
+            ),
+          ),
+          const FullCalendarUltilsAndEventsSection(),
+        ],
+      ),
     );
   }
 }
