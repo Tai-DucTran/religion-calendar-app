@@ -7,7 +7,7 @@ part of 'religion_event_controller.dart';
 // **************************************************************************
 
 String _$religionEventControllerHash() =>
-    r'09b25d7d2b6cb9417bb81a5c9ab4b5798029ed94';
+    r'316264088f15cc3260c51e45886b490d6c8c9c8c';
 
 /// See also [ReligionEventController].
 @ProviderFor(ReligionEventController)

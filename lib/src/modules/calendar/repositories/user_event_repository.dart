@@ -16,10 +16,28 @@ class UserEventRepository {
     FirebaseCollectionName.users,
   );
 
-  Stream<List<UserEvent>> streamUserEvents(String userId) {
+  Stream<List<UserEvent>> streamUserEvents(String userId, DateTime month) {
+    final startOfMonth = DateTime(
+      month.year,
+      month.month,
+      1,
+    ).toUtc().toIso8601String();
+
+    final endOfMonth = DateTime(
+      month.year,
+      month.month + 1,
+      0,
+      23,
+      59,
+      59,
+    ).toUtc().toIso8601String();
+
     return firestoreUserRef
         .doc(userId)
         .collection(FirebaseCollectionName.events)
+        .where('startDate', isGreaterThanOrEqualTo: startOfMonth)
+        .where('startDate', isLessThanOrEqualTo: endOfMonth)
+        .orderBy('startDate')
         .snapshots()
         .map((snapshot) {
       return snapshot.docs
