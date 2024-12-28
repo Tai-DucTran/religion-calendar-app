@@ -6,10 +6,7 @@ import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 class FullCalendarDaysInMonth extends ConsumerWidget {
   const FullCalendarDaysInMonth({
     super.key,
-    required this.onPageChanged,
   });
-
-  final Function(int)? onPageChanged;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pageController = ref.watch(fullCalendarControllerProvider);
@@ -58,7 +55,8 @@ class FullCalendarDaysInMonth extends ConsumerWidget {
       builder: (context, constraints) {
         return PageView.builder(
           controller: pageController,
-          onPageChanged: onPageChanged,
+          onPageChanged:
+              ref.read(fullCalendarControllerProvider.notifier).onPageChanged,
           itemBuilder: (context, index) {
             final monthDiff = index - 1000;
             final month = DateTime(

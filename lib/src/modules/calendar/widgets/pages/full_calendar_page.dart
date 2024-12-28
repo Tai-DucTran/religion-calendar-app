@@ -47,11 +47,7 @@ class FullCalendarPage extends ConsumerWidget {
                     Spacing.sp4,
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.42,
-                      child: FullCalendarDaysInMonth(
-                        onPageChanged: ref
-                            .read(fullCalendarControllerProvider.notifier)
-                            .onPageChanged,
-                      ),
+                      child: FullCalendarDaysInMonth(),
                     ),
                     const FullCalendarUltilsAndEventsSection(),
                   ],
