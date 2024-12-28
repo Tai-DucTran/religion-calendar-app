@@ -19,10 +19,12 @@ class FullCalendarPage extends ConsumerWidget {
       backgroundColor: AriesColor.yellowP50,
       appBar: AppBar(
         backgroundColor: AriesColor.yellowP50,
+        surfaceTintColor: AriesColor.yellowP50,
         title: SelectedMonthAppBarTitle(),
         leading: IconButton(
           onPressed: () {
             context.pop();
+            ref.read(displayedMonthProvider.notifier).state = DateTime.now();
           },
           icon: Icon(
             Icons.arrow_back,
@@ -42,7 +44,6 @@ class FullCalendarPage extends ConsumerWidget {
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Spacing.sp16,
                     FullCalendarWeekdayHeader(),
                     Spacing.sp4,
                     SizedBox(

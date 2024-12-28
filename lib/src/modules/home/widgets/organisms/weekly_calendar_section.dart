@@ -81,8 +81,6 @@ class WeeklyCalendarSection extends ConsumerWidget {
               padding: EdgeInsets.zero,
               minSize: 0,
               onPressed: () async {
-                ref.read(displayedMonthProvider.notifier).state =
-                    DateTime.now();
                 context.push(
                   FullCalendarRoute().location,
                 );

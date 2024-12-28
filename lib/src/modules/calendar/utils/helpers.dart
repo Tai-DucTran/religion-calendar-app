@@ -1,9 +1,11 @@
+import 'package:aries/aries.dart';
 import 'package:full_calender/enums/time_zone.dart';
 import 'package:full_calender/full_calender.dart';
 import 'package:full_calender/full_calender_extension.dart';
 import 'package:full_calender/models/lunar_date_time.dart';
 import 'package:intl/intl.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
+import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 DateTime getCurrentSolarDate({int? timeZone}) =>
     FullCalender.now(timeZone ?? TimeZone.vietnamese.timezone).date;
@@ -262,23 +264,45 @@ List<LunarMonth> getNumberOfDaysInLunarMonths(int year) {
   return listAllLunarDaysOfYear;
 }
 
-bool isImportantDay(LunarDateTime lunarDate) {
-  final numberOfDaysInMonths = getNumberOfDaysInLunarMonths(lunarDate.year);
-  late int lastDayInMonths;
-
-  for (var eachMonth in numberOfDaysInMonths) {
-    if (eachMonth.month == lunarDate.month &&
-        eachMonth.isLeap == lunarDate.isLeap) {
-      lastDayInMonths = eachMonth.days;
-    }
-  }
-
-  final lunarDay = lunarDate.day;
-
-  return importantLunarDays.contains(lunarDay) || lunarDay == lastDayInMonths;
-}
-
 bool isHasSixWeeksInMonth(DateTime month) {
   final firstDayOfMonth = DateTime(month.year, month.month, 1);
   return (firstDayOfMonth.weekday == 7) && month.day <= 30;
+}
+
+List<MarkedDate> getMarkedDatesFromEvents(List<BasedEvent> events) {
+  final groupedEvents = events.fold<Map<DateTime, Set<EventCategory>>>(
+    {},
+    (map, event) {
+      final date = DateTime(
+        event.startDate.year,
+        event.startDate.month,
+        event.startDate.day,
+      );
+
+      map.putIfAbsent(date, () => <EventCategory>{});
+      map[date]!.add(event.eventCategory);
+      return map;
+    },
+  );
+
+  return groupedEvents.entries.map((entry) {
+    final date = entry.key;
+    final categories = entry.value;
+
+    final colors = categories.map((category) {
+      switch (category) {
+        case EventCategory.religionEvent:
+          return AriesColor.yellowP300;
+        case EventCategory.specialEvent:
+          return AriesColor.success200;
+        default:
+          return AriesColor.purple;
+      }
+    }).toList();
+
+    return MarkedDate(
+      date: date,
+      markedColors: colors,
+    );
+  }).toList();
 }

@@ -27,6 +27,9 @@ class FullCalendarEventCard extends ConsumerWidget {
     final isSpecialEvent = eventCategory == EventCategory.specialEvent;
 
     return Container(
+      margin: EdgeInsets.only(
+        bottom: 16.h,
+      ),
       width: double.maxFinite,
       decoration: BoxDecoration(
         color: isReligionEvent

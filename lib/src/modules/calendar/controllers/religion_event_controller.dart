@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
+import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/calendar/repositories/repositories.dart';
 import 'package:religion_calendar_app/src/modules/user/user.dart';
-import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'religion_event_controller.g.dart';
@@ -14,10 +13,10 @@ class ReligionEventController extends _$ReligionEventController {
 
   @override
   FutureOr<List<ReligionEvent>> build() async {
-    ref.cache();
-    final religionEventRepo = ref.read(religionEventRepositoryProvider);
+    final repo = ref.read(religionEventRepositoryProvider);
     final userInfor = ref.watch(userControllerProvider);
     final userReligionPreference = userInfor.value?.user?.religionPreference;
+    final targetMonth = ref.watch(displayedMonthProvider);
 
     if (userReligionPreference == null) {
       return [];
@@ -25,20 +24,25 @@ class ReligionEventController extends _$ReligionEventController {
 
     _subscription?.cancel();
 
-    _subscription =
-        religionEventRepo.streamReligionEvents(userReligionPreference).listen(
-      (events) {
-        state = AsyncData(events);
-      },
-      onError: (error) {
-        state = AsyncError(error, StackTrace.current);
-      },
-    );
+    return repo
+        .streamReligionEvents(userReligionPreference, targetMonth)
+        .first
+        .then((initialEvents) {
+      _subscription =
+          repo.streamReligionEvents(userReligionPreference, targetMonth).listen(
+        (events) {
+          state = AsyncData(events);
+        },
+        onError: (error) {
+          state = AsyncError(error, StackTrace.current);
+        },
+      );
 
-    ref.onDispose(() {
-      _subscription?.cancel();
+      ref.onDispose(() {
+        _subscription?.cancel();
+      });
+
+      return initialEvents;
     });
-
-    return await religionEventRepo.fetchReligionEvents(userReligionPreference);
   }
 }

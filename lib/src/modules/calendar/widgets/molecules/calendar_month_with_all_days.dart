@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
+
+class CalendarMonthWithAllDays extends ConsumerWidget {
+  const CalendarMonthWithAllDays({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final monthConfig = ref.watch(calendarMonthConfigProvider);
+    final markedDatesWithColors = ref
+        .watch(combineEventsControllerProvider.notifier)
+        .getMarkedDateWithColors();
+    final events = ref.watch(combineEventsControllerProvider).value;
+
+    final markedDatesMap = Map.fromEntries(
+      markedDatesWithColors.map(
+        (marked) => MapEntry(
+          DateTime(
+            marked.date.year,
+            marked.date.month,
+            marked.date.day,
+          ),
+          marked.markedColors,
+        ),
+      ),
+    );
+
+    events?.length.log();
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 7,
+            mainAxisSpacing: 4,
+            crossAxisSpacing: 8,
+            childAspectRatio: 0.8,
+          ),
+          itemCount: monthConfig.hasSixWeeks ? 42 : 35,
+          itemBuilder: (context, index) {
+            final dayOffset = index - (monthConfig.firstWeekday - 1);
+            final day = dayOffset + 1;
+
+            if (dayOffset < 0 || day > monthConfig.daysInMonth) {
+              return const SizedBox.shrink();
+            }
+
+            final date = DateTime(monthConfig.year, monthConfig.month, day);
+            final hasMarker = markedDatesMap.containsKey(date);
+
+            return FullCalendarDataCell(
+              date: date,
+              hasMarker: hasMarker,
+              listMarkerColor: markedDatesMap[date] ?? [],
+            );
+          },
+        );
+      },
+    );
+  }
+}

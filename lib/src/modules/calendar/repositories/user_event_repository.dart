@@ -16,7 +16,10 @@ class UserEventRepository {
     FirebaseCollectionName.users,
   );
 
-  Stream<List<UserEvent>> streamUserEvents(String userId, DateTime month) {
+  Stream<List<UserEvent>> streamUserEvents(
+    String userId,
+    DateTime month,
+  ) {
     final startOfMonth = DateTime(
       month.year,
       month.month,

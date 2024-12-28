@@ -14,5 +14,6 @@ export 'full_calendar_data_cell.dart';
 export 'full_calendar_util_buttons.dart';
 export 'full_calendar_weekday_header.dart';
 export 'intrinsic_width_text_field.dart';
+export 'lunar_date_cell_data.dart';
 export 'selected_day_highlight_box.dart';
 export 'selected_month_app_bar_title.dart';
