@@ -79,4 +79,7 @@ class AriesColor {
   static const black = Color(0xFF000000);
 
   static const transparent = Color(0x00000000);
+
+  /* Event Color */
+  static const purple = Color(0xFF6F66FF);
 }

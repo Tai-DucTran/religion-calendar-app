@@ -1,28 +1,29 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:full_calender/enums/time_zone.dart';
-import 'package:full_calender/full_calender.dart';
-import 'package:religion_calendar_app/constants/date_time_format.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
-class FullCalendarDataCell extends StatelessWidget {
+class _CellConstants {
+  static final topRadius = Radius.circular(20.r);
+  static final bottomRadius = Radius.circular(4.r);
+  static final markerSize = 4.w;
+  static final markerPadding = EdgeInsets.symmetric(horizontal: 1.w);
+  static final markerBorderRadius = BorderRadius.circular(2.r);
+}
+
+class FullCalendarDataCell extends ConsumerWidget {
   const FullCalendarDataCell({
     super.key,
     required this.date,
-    required this.isSelected,
-    required this.isToday,
     required this.hasMarker,
-    required this.onTap,
     required this.listMarkerColor,
     this.markerBuilder,
   });
 
   final DateTime date;
-  final bool isSelected;
-  final bool isToday;
+
   final bool hasMarker;
-  final VoidCallback onTap;
   final List<Color> listMarkerColor;
   final Widget Function(
     DateTime date,
@@ -30,39 +31,33 @@ class FullCalendarDataCell extends StatelessWidget {
   )? markerBuilder;
 
   @override
-  Widget build(BuildContext context) {
-    final String currentLocale = Localizations.localeOf(context).toString();
-    final lunarDate = FullCalender(
-      date: date,
-      timeZone: TimeZone.vietnamese.timezone,
-    ).lunarDate;
-    final isImportance = isImportantDay(lunarDate);
-    final formattedLunarDateText = LunarDateFormatter.format(
-      lunarDate,
-      isImportance ? DateTimeFormat.dayMonth : DateTimeFormat.day,
-      currentLocale,
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedDate = ref.watch(selectedDateProvider);
+    final isSelected = date.year == selectedDate.year &&
+        date.month == selectedDate.month &&
+        date.day == selectedDate.day;
 
+    final isToday = _isToday(date);
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        ref.read(selectedDateProvider.notifier).state = date;
+      },
       child: Container(
-        decoration: BoxDecoration(
-          color: isToday
-              ? AriesColor.yellowP100
-              : isSelected
-                  ? AriesColor.yellowP200
-                  : Colors.transparent,
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(20.r),
-            bottom: Radius.circular(4.r),
+          decoration: BoxDecoration(
+            color: isToday
+                ? AriesColor.yellowP100
+                : isSelected
+                    ? AriesColor.yellowP200
+                    : Colors.transparent,
+            borderRadius: BorderRadius.vertical(
+              top: _CellConstants.topRadius,
+              bottom: _CellConstants.bottomRadius,
+            ),
           ),
-        ),
-        child: Stack(
-          alignment: Alignment.topCenter,
-          children: [
-            Positioned(
-              top: 4,
-              child: Text(
+          child: Column(
+            children: [
+              Spacing.sp2,
+              Text(
                 date.day.toString(),
                 style: TextStyle(
                   color: isSelected ? Colors.black : AriesColor.neutral800,
@@ -71,45 +66,32 @@ class FullCalendarDataCell extends StatelessWidget {
                       : FontWeight.normal,
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 12,
-              child: Text(
-                formattedLunarDateText.toString(),
-                style: AriesTextStyles.textBodySmall.copyWith(
-                  fontSize: 12,
-                  color: isImportance
-                      ? isSelected
-                          ? AriesColor.danger300
-                          : AriesColor.danger100
-                      : AriesColor.neutral100,
-                ),
+              LunarDateCellData(
+                date: date,
+                isSelected: isSelected,
+                key: Key('${date.day}-${date.month}-lunar-section'),
               ),
-            ),
-            if (hasMarker && markerBuilder == null)
-              Positioned(
-                bottom: 6,
-                child: Row(
+              if (hasMarker && markerBuilder == null)
+                Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: listMarkerColor.isEmpty
                       ? [
                           SizedBox(
-                            width: 4.w,
-                            height: 4.w,
+                            width: _CellConstants.markerSize,
+                            height: _CellConstants.markerSize,
                           )
                         ]
                       : listMarkerColor
                           .map(
                             (color) => Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 1.w,
-                              ),
+                              padding: _CellConstants.markerPadding,
                               child: Container(
-                                width: 4.w,
-                                height: 4.w,
+                                width: _CellConstants.markerSize,
+                                height: _CellConstants.markerSize,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2.r),
+                                  borderRadius:
+                                      _CellConstants.markerBorderRadius,
                                   color: color,
                                 ),
                               ),
@@ -117,10 +99,15 @@ class FullCalendarDataCell extends StatelessWidget {
                           )
                           .toList(),
                 ),
-              ),
-          ],
-        ),
-      ),
+            ],
+          )),
     );
+  }
+
+  bool _isToday(DateTime date) {
+    final now = DateTime.now();
+    return date.year == now.year &&
+        date.month == now.month &&
+        date.day == now.day;
   }
 }

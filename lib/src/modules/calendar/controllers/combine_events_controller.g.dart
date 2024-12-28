@@ -7,7 +7,7 @@ part of 'combine_events_controller.dart';
 // **************************************************************************
 
 String _$combineEventsControllerHash() =>
-    r'09281f8a0cf4d264045547d1f2398d20fcfb1dd1';
+    r'92686de43a4d5afef3c96bc5a26068b8b7088410';
 
 /// See also [CombineEventsController].
 @ProviderFor(CombineEventsController)

@@ -1,3 +1,4 @@
+export 'calendar_month_with_all_days.dart';
 export 'date_picker_modal.dart';
 export 'date_text.dart';
 export 'delete_event_button.dart';
@@ -9,7 +10,6 @@ export 'event_location_input.dart';
 export 'event_location_text.dart';
 export 'event_name_input.dart';
 export 'event_title_text.dart';
-export 'full_calendar_days_in_month.dart';
 export 'full_calendar_event_card.dart';
 export 'full_calendar_ultils_and_events_section.dart';
 export 'is_day_toggle.dart';

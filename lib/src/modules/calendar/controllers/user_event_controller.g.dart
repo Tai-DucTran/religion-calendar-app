@@ -7,7 +7,7 @@ part of 'user_event_controller.dart';
 // **************************************************************************
 
 String _$userEventControllerHash() =>
-    r'c3b327e4aa045c2e0f082295b21b4e6053d92853';
+    r'23836c4750be60d3cc6f1d98f3a027f433cef48a';
 
 /// See also [UserEventController].
 @ProviderFor(UserEventController)
