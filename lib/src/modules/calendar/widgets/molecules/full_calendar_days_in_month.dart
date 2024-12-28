@@ -1,19 +1,18 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class FullCalendarDaysInMonth extends ConsumerWidget {
   const FullCalendarDaysInMonth({
     super.key,
-    required this.controller,
     required this.onPageChanged,
   });
-  final PageController controller;
+
   final Function(int)? onPageChanged;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final pageController = ref.watch(fullCalendarControllerProvider);
     final events = ref.watch(combineEventsControllerProvider);
     final Map<DateTime, List<Color>> markedDates = {};
 
@@ -58,7 +57,7 @@ class FullCalendarDaysInMonth extends ConsumerWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return PageView.builder(
-          controller: controller,
+          controller: pageController,
           onPageChanged: onPageChanged,
           itemBuilder: (context, index) {
             final monthDiff = index - 1000;
@@ -78,11 +77,7 @@ class FullCalendarDaysInMonth extends ConsumerWidget {
               }
             });
 
-            return Container(
-              padding: EdgeInsets.only(
-                right: 16.w,
-                left: 16.w,
-              ),
+            return SizedBox(
               height: constraints.maxHeight,
               child: _CalendarMonth(
                 displayedMonth: month,

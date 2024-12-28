@@ -26,89 +26,81 @@ class FullCalendarEventCard extends ConsumerWidget {
     final isReligionEvent = eventCategory == EventCategory.religionEvent;
     final isSpecialEvent = eventCategory == EventCategory.specialEvent;
 
-    return Padding(
-      padding: EdgeInsets.fromLTRB(
-        16.w,
-        0,
-        16.w,
-        16.w,
-      ),
-      child: Container(
-        width: double.maxFinite,
-        decoration: BoxDecoration(
-          color: isReligionEvent
-              ? AriesColor.yellowP50
-              : isSpecialEvent
-                  ? AriesColor.success50
-                  : Color(0xffEAEFFD),
-          borderRadius: BorderRadius.circular(8.r),
-          border: Border(
-            left: BorderSide(
-              color: isReligionEvent
-                  ? AriesColor.yellowP500
-                  : isSpecialEvent
-                      ? AriesColor.success200
-                      : Color(0xff614EEE),
-              width: 2.w,
-            ),
+    return Container(
+      width: double.maxFinite,
+      decoration: BoxDecoration(
+        color: isReligionEvent
+            ? AriesColor.yellowP50
+            : isSpecialEvent
+                ? AriesColor.success50
+                : Color(0xffEAEFFD),
+        borderRadius: BorderRadius.circular(8.r),
+        border: Border(
+          left: BorderSide(
+            color: isReligionEvent
+                ? AriesColor.yellowP500
+                : isSpecialEvent
+                    ? AriesColor.success200
+                    : Color(0xff614EEE),
+            width: 2.w,
           ),
         ),
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Spacing.sp4,
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 8.w,
-                horizontal: 16.w,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    eventName,
-                    style: AriesTextStyles.textHeading5.copyWith(
-                      color: AriesColor.neutral900,
-                    ),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Spacing.sp4,
+          Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: 8.w,
+              horizontal: 16.w,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  eventName,
+                  style: AriesTextStyles.textHeading5.copyWith(
+                    color: AriesColor.neutral900,
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        eventTime == null || isReligionEvent
-                            ? LocalizedKeys.allDayText
-                            : DateFormat('HH:mm').format(eventTime!),
-                        style: AriesTextStyles.textBodySmall.copyWith(
-                          fontWeight: FontWeight.bold,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      eventTime == null || isReligionEvent
+                          ? LocalizedKeys.allDayText
+                          : DateFormat('HH:mm').format(eventTime!),
+                      style: AriesTextStyles.textBodySmall.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    if (!isReligionEvent &&
+                        eventLocation != null &&
+                        eventLocation != '')
+                      Expanded(
+                        child: Text(
+                          ' - ${eventLocation!}',
+                          style: AriesTextStyles.textBodySmall,
                         ),
                       ),
-                      if (!isReligionEvent &&
-                          eventLocation != null &&
-                          eventLocation != '')
-                        Expanded(
-                          child: Text(
-                            ' - ${eventLocation!}',
-                            style: AriesTextStyles.textBodySmall,
-                          ),
-                        ),
-                    ],
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ],
             ),
-            SizedBox(
-              width: double.infinity,
-              child: SvgPicture.asset(
-                isReligionEvent
-                    ? AriesImages.defaultCatholicismEvent1
-                    : isSpecialEvent
-                        ? AriesImages.defaultChristmasEvent
-                        : AriesImages.defaultFamilyEvent1,
-                fit: BoxFit.fitWidth,
-              ),
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: SvgPicture.asset(
+              isReligionEvent
+                  ? AriesImages.defaultCatholicismEvent1
+                  : isSpecialEvent
+                      ? AriesImages.defaultChristmasEvent
+                      : AriesImages.defaultFamilyEvent1,
+              fit: BoxFit.fitWidth,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

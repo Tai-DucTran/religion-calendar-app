@@ -1,10 +1,12 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/home/widgets/widgets.dart';
+import 'package:religion_calendar_app/src/router/routes.dart';
 
 class WeeklyCalendarSection extends ConsumerWidget {
   const WeeklyCalendarSection({super.key});
@@ -79,12 +81,11 @@ class WeeklyCalendarSection extends ConsumerWidget {
               padding: EdgeInsets.zero,
               minSize: 0,
               onPressed: () async {
-                final result = await FullCalendarModalBottomSheet.show(context);
-                if (!result) {
-                  ref.read(displayedMonthProvider.notifier).state =
-                      DateTime.now();
-                  return;
-                }
+                ref.read(displayedMonthProvider.notifier).state =
+                    DateTime.now();
+                context.push(
+                  FullCalendarRoute().location,
+                );
               },
               child: Text(
                 LocalizedKeys.watchFullCalendarText,

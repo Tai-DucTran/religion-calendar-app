@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:religion_calendar_app/src/modules/calendar/widgets/pages/full_calendar_page.dart';
 import 'package:religion_calendar_app/src/modules/daily_activities/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/forgot_pasword_page.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/login_page.dart';
@@ -130,6 +131,11 @@ class OnboardingRoute extends GoRouteData {
 
 @TypedGoRoute<HomeRoute>(
   path: HomeRoute.path,
+  routes: [
+    TypedGoRoute<FullCalendarRoute>(
+      path: FullCalendarRoute.path,
+    ),
+  ],
 )
 class HomeRoute extends GoRouteData {
   const HomeRoute();
@@ -138,6 +144,16 @@ class HomeRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return HomePage();
+  }
+}
+
+class FullCalendarRoute extends GoRouteData {
+  const FullCalendarRoute();
+  static const path = 'full-calendar';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const FullCalendarPage();
   }
 }
 

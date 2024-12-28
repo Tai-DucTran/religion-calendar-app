@@ -24,57 +24,52 @@ class FullCalendarWeekdayHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentLocale = Localizations.localeOf(context).languageCode;
 
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 13.w,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          SizedBox(
-            child: Text(
-              _getWeekdayName(0, currentLocale),
-              style: _textStyle,
-            ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        SizedBox(
+          child: Text(
+            _getWeekdayName(0, currentLocale),
+            style: _textStyle,
           ),
-          SizedBox(
-            child: Text(
-              _getWeekdayName(1, currentLocale),
-              style: _textStyle,
-            ),
+        ),
+        SizedBox(
+          child: Text(
+            _getWeekdayName(1, currentLocale),
+            style: _textStyle,
           ),
-          SizedBox(
-            child: Text(
-              _getWeekdayName(2, currentLocale),
-              style: _textStyle,
-            ),
+        ),
+        SizedBox(
+          child: Text(
+            _getWeekdayName(2, currentLocale),
+            style: _textStyle,
           ),
-          SizedBox(
-            child: Text(
-              _getWeekdayName(3, currentLocale),
-              style: _textStyle,
-            ),
+        ),
+        SizedBox(
+          child: Text(
+            _getWeekdayName(3, currentLocale),
+            style: _textStyle,
           ),
-          SizedBox(
-            child: Text(
-              _getWeekdayName(4, currentLocale),
-              style: _textStyle,
-            ),
+        ),
+        SizedBox(
+          child: Text(
+            _getWeekdayName(4, currentLocale),
+            style: _textStyle,
           ),
-          SizedBox(
-            child: Text(
-              _getWeekdayName(5, currentLocale),
-              style: _textStyle,
-            ),
+        ),
+        SizedBox(
+          child: Text(
+            _getWeekdayName(5, currentLocale),
+            style: _textStyle,
           ),
-          SizedBox(
-            child: Text(
-              _getWeekdayName(6, currentLocale),
-              style: _textStyle,
-            ),
+        ),
+        SizedBox(
+          child: Text(
+            _getWeekdayName(6, currentLocale),
+            style: _textStyle,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
