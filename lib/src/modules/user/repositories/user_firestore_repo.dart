@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
-import 'package:religion_calendar_app/src/utils/log.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/models.dart';
@@ -89,8 +89,12 @@ class UserFirestoreRepository {
               merge: true,
             ),
           );
-    } catch (error) {
-      error.log();
+    } catch (error, stackTrace) {
+      Log.error(
+        'Error updating religion preference process',
+        error: error,
+        stackTrace: stackTrace,
+      );
       throw Exception(error);
     }
   }
@@ -110,8 +114,12 @@ class UserFirestoreRepository {
               merge: true,
             ),
           );
-    } catch (error) {
-      error.log();
+    } catch (error, stackTrace) {
+      Log.error(
+        'Error updating user information',
+        error: error,
+        stackTrace: stackTrace,
+      );
       throw Exception('Update user name failed: $error');
     }
   }
@@ -134,8 +142,12 @@ class UserFirestoreRepository {
         }
       }
       return false;
-    } catch (error) {
-      error.log();
+    } catch (error, stackTrace) {
+      Log.error(
+        'Error updating hasCompleteOnboarding',
+        error: error,
+        stackTrace: stackTrace,
+      );
       throw Exception(error);
     }
   }

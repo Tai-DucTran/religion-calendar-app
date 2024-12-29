@@ -56,7 +56,7 @@ GoRouter router(Ref ref) {
         return HomeRoute.path;
       }
 
-      "Redirecting. Current location: ${state.fullPath}".log();
+      Log.info("Redirecting. Current location: ${state.fullPath}");
       return null;
     },
   );

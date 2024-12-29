@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
-import 'package:religion_calendar_app/src/utils/utils.dart';
 
 class CalendarMonthWithAllDays extends ConsumerWidget {
   const CalendarMonthWithAllDays({
@@ -14,7 +13,6 @@ class CalendarMonthWithAllDays extends ConsumerWidget {
     final markedDatesWithColors = ref
         .watch(combineEventsControllerProvider.notifier)
         .getMarkedDateWithColors();
-    final events = ref.watch(combineEventsControllerProvider).value;
 
     final markedDatesMap = Map.fromEntries(
       markedDatesWithColors.map(
@@ -28,8 +26,6 @@ class CalendarMonthWithAllDays extends ConsumerWidget {
         ),
       ),
     );
-
-    events?.length.log();
 
     return LayoutBuilder(
       builder: (context, constraints) {

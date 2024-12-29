@@ -24,8 +24,6 @@ class CombineEventsController extends _$CombineEventsController {
       loading: () => [],
     );
 
-    'Tai logs - userEvents: $userEvents';
-    'Tai logs - userEventsLength: ${userEvents.length}';
     final convertedUserEventsToBasedEvents = userEvents.map(
       (event) => BasedEvent.fromUserEvent(event),
     );
