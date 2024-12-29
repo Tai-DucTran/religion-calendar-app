@@ -1,4 +1,5 @@
 import 'package:aries/aries.dart';
+import 'package:flutter/material.dart';
 import 'package:full_calender/enums/time_zone.dart';
 import 'package:full_calender/full_calender.dart';
 import 'package:full_calender/full_calender_extension.dart';
@@ -289,20 +290,51 @@ List<MarkedDate> getMarkedDatesFromEvents(List<BasedEvent> events) {
     final date = entry.key;
     final categories = entry.value;
 
-    final colors = categories.map((category) {
-      switch (category) {
-        case EventCategory.religionEvent:
-          return AriesColor.yellowP300;
-        case EventCategory.specialEvent:
-          return AriesColor.success200;
-        default:
-          return AriesColor.purple;
-      }
-    }).toList();
+    final colors = categories
+        .map((category) {
+          switch (category) {
+            case EventCategory.religionEvent:
+              return AriesColor.yellowP300;
+            case EventCategory.specialEvent:
+              return AriesColor.success200;
+            default:
+              return AriesColor.purple;
+          }
+        })
+        .toSet()
+        .toList();
 
     return MarkedDate(
       date: date,
       markedColors: colors,
     );
   }).toList();
+}
+
+List<BasedEvent> getUpcomingEvents(List<BasedEvent> events) {
+  final now = DateTime.now();
+  if (events.isEmpty) {
+    return [];
+  }
+  return events
+      .where((event) => event.startDate.isAfter(now))
+      .take(maxEventsHomePage)
+      .toList();
+}
+
+Color getTextLunarColorInCalendar(
+  bool isToday,
+  bool isSelected,
+  bool isImportant,
+) {
+  if (isToday) {
+    return isImportant ? AriesColor.danger300 : AriesColor.yellowP500;
+  }
+  if (isSelected) {
+    return isImportant ? AriesColor.danger300 : AriesColor.danger100;
+  }
+  if (isImportant) {
+    return AriesColor.danger100;
+  }
+  return AriesColor.neutral100;
 }

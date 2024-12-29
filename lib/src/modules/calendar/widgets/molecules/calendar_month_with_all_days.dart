@@ -10,22 +10,9 @@ class CalendarMonthWithAllDays extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final monthConfig = ref.watch(calendarMonthConfigProvider);
-    final markedDatesWithColors = ref
+    final markedDatesMap = ref
         .watch(combineEventsControllerProvider.notifier)
         .getMarkedDateWithColors();
-
-    final markedDatesMap = Map.fromEntries(
-      markedDatesWithColors.map(
-        (marked) => MapEntry(
-          DateTime(
-            marked.date.year,
-            marked.date.month,
-            marked.date.day,
-          ),
-          marked.markedColors,
-        ),
-      ),
-    );
 
     return LayoutBuilder(
       builder: (context, constraints) {

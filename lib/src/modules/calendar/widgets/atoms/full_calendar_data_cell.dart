@@ -69,6 +69,7 @@ class FullCalendarDataCell extends ConsumerWidget {
               LunarDateCellData(
                 date: date,
                 isSelected: isSelected,
+                isToday: isToday,
                 key: Key('${date.day}-${date.month}-lunar-section'),
               ),
               if (hasMarker && markerBuilder == null)
