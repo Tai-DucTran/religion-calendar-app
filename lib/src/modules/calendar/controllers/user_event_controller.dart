@@ -13,22 +13,26 @@ class UserEventController extends _$UserEventController {
 
   @override
   FutureOr<List<UserEvent>> build() async {
+    final targetMonth = ref.watch(displayedMonthProvider);
+    return await getStreamUserEventsByMonth(targetMonth);
+  }
+
+  Future<List<UserEvent>> getStreamUserEventsByMonth(DateTime month) {
     final repo = ref.watch(userEventRepositoryProvider);
     final authenticatorRepo = ref.watch(authenticatorRepositoryProvider);
     final userId = authenticatorRepo.currentUser?.uid;
-    final targetMonth = ref.watch(displayedMonthProvider);
 
     if (userId == null) {
-      return [];
+      return Future.value(<UserEvent>[]);
     }
 
     _subscription?.cancel();
 
     return repo
-        .streamUserEvents(userId, targetMonth)
+        .streamUserEventsByMonth(userId, month)
         .first
         .then((initialEvents) {
-      _subscription = repo.streamUserEvents(userId, targetMonth).listen(
+      _subscription = repo.streamUserEventsByMonth(userId, month).listen(
         (events) {
           state = AsyncData(events);
         },

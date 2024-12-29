@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:religion_calendar_app/src/modules/geoip_and_locales/controllers/controllers.dart';
@@ -40,13 +42,6 @@ class CombineEventsController extends _$CombineEventsController {
       ),
     );
 
-    // final now = DateTime.now();
-
-    // final combinedEvents = [
-    //   ...convertedUserEventsToBasedEvents,
-    //   ...convertedReligionEventsToBasedEvents,
-    // ].where((event) => event.startDate.isAfter(now)).toList()
-    //   ..sort((a, b) => a.startDate.compareTo(b.startDate));
     final combinedEvents = [
       ...convertedUserEventsToBasedEvents,
       ...convertedReligionEventsToBasedEvents,
@@ -55,16 +50,28 @@ class CombineEventsController extends _$CombineEventsController {
     return combinedEvents;
   }
 
-  List<MarkedDate> getMarkedDateWithColors() {
-    ref.cache();
+  Map<DateTime, List<Color>> getMarkedDateWithColors() {
     return state.when(
-      loading: () => [],
-      error: (error, stackTrace) => [],
+      loading: () => {},
+      error: (error, stackTrace) => {},
       data: (events) {
         if (events.isEmpty) {
-          return [];
+          return {};
         }
-        return getMarkedDatesFromEvents(events);
+
+        final markedDatesWithColors = getMarkedDatesFromEvents(events);
+        return Map.fromEntries(
+          markedDatesWithColors.map(
+            (marked) => MapEntry(
+              DateTime(
+                marked.date.year,
+                marked.date.month,
+                marked.date.day,
+              ),
+              marked.markedColors,
+            ),
+          ),
+        );
       },
     );
   }

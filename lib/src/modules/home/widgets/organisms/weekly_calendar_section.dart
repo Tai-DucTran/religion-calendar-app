@@ -7,7 +7,6 @@ import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/home/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/router/routes.dart';
-import 'package:religion_calendar_app/src/utils/log.dart';
 
 class WeeklyCalendarSection extends ConsumerWidget {
   const WeeklyCalendarSection({super.key});
@@ -30,8 +29,6 @@ class WeeklyCalendarSection extends ConsumerWidget {
     final markedDatesMap = ref
         .watch(combineEventsControllerProvider.notifier)
         .getMarkedDateWithColors();
-
-    markedDatesMap.log();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

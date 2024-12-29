@@ -110,4 +110,51 @@ class UserEventRepository {
       throw UserEventException('Unexpected error fetching user events', e);
     }
   }
+
+  Future<List<({UserEvent event, DocumentSnapshot snapshot})>>
+      fetchUpcomingUserEvents({
+    required String userId,
+    DocumentSnapshot? lastDocument,
+    int limit = limitedPagination,
+  }) async {
+    try {
+      final now = DateTime.now();
+      final today =
+          DateTime(now.year, now.month, now.day).toUtc().toIso8601String();
+
+      Query<Map<String, dynamic>> query = firestoreUserRef
+          .doc(userId)
+          .collection(FirebaseCollectionName.events)
+          .where('startDate', isGreaterThanOrEqualTo: today)
+          .orderBy('startDate')
+          .limit(limit);
+
+      if (lastDocument != null) {
+        query = query.startAfterDocument(lastDocument);
+      }
+
+      final querySnapshot = await query.get().timeout(
+            const Duration(seconds: 10),
+            onTimeout: () => throw UserEventException('Fetch timeout'),
+          );
+
+      return querySnapshot.docs.map((doc) {
+        try {
+          final event = UserEvent.fromJson(doc.data());
+          return (event: event, snapshot: doc);
+        } catch (error) {
+          throw UserEventException(
+            'Error parsing event document ${doc.id}',
+            error,
+          );
+        }
+      }).toList();
+    } on FirebaseException catch (e) {
+      throw UserEventException('Firebase error: ${e.message}', e);
+    } on UserEventException {
+      rethrow;
+    } catch (e) {
+      throw UserEventException('Unexpected error fetching upcoming events', e);
+    }
+  }
 }
