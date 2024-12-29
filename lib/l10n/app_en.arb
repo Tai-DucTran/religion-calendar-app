@@ -24,7 +24,7 @@
   "exploreNavItemText": "Explore",
   "profileNavItemText": "Profile",
   "todayText": "Today",
-  "yourEventText": "Your events",
+  "yourEventText": "Events in month",
   "dayLeftText": "day left",
   "daysLeftText": "days left",
   "eventInputHintText": "What is event name?",
