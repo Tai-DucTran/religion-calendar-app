@@ -6,6 +6,7 @@ class Log {
   static const String _redColor = '\x1B[31m';
   static const String _yellowColor = '\x1B[33m';
   static const String _blueColor = '\x1B[34m';
+  static const String _greenColor = '\x1B[32m';
   static const String _resetColor = '\x1B[0m';
   static const String _boldText = '\x1B[1m';
 
@@ -49,6 +50,17 @@ class Log {
       );
     } else {
       _productionLog('INFO', message);
+    }
+  }
+
+  static void dev(String message) {
+    if (kDebugMode) {
+      developer.log(
+        '$_boldText$_greenColor[DEV Logs] $message$_resetColor',
+        name: 'ReligionCalendarApp',
+      );
+    } else {
+      _productionLog('DEV Logs', message);
     }
   }
 
