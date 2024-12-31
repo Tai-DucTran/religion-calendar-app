@@ -267,7 +267,7 @@ List<LunarMonth> getNumberOfDaysInLunarMonths(int year) {
 
 bool isHasSixWeeksInMonth(DateTime month) {
   final firstDayOfMonth = DateTime(month.year, month.month, 1);
-  return (firstDayOfMonth.weekday == 7) && month.day <= 30;
+  return (firstDayOfMonth.weekday == 7) && month.day <= 31;
 }
 
 List<MarkedDate> getMarkedDatesFromEvents(List<BasedEvent> events) {
