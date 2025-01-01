@@ -12,8 +12,11 @@ DateTime getCurrentSolarDate({int? timeZone}) =>
     FullCalender.now(timeZone ?? TimeZone.vietnamese.timezone).date;
 
 List<DateTime> getCurrentWeekDates() {
-  final DateTime now = getCurrentSolarDate();
-  final DateTime startOfWeek = now.subtract(Duration(days: now.weekday - 1));
+  final DateTime now = DateTime.now();
+  final todayExcludingTime = DateTime(now.year, now.month, now.day);
+
+  final DateTime startOfWeek =
+      todayExcludingTime.subtract(Duration(days: now.weekday - 1));
 
   return List<DateTime>.generate(
     7,
@@ -47,10 +50,10 @@ bool isDateToday(DateTime date) {
       date.year == now.year;
 }
 
-bool isDateInCurrentMonth(DateTime date) {
+bool isFromLastMonth(DateTime date) {
   final DateTime now = getCurrentSolarDate();
 
-  return date.month == now.month;
+  return date.month == now.month - 1;
 }
 
 String getLunarDateNumberText({required DateTime inputDate, int? timeZone}) {

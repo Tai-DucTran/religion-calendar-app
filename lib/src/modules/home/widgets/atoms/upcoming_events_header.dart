@@ -19,15 +19,15 @@ class UpComingEventsHeader extends StatelessWidget {
           padding: EdgeInsets.zero,
           minSize: 0,
           onPressed: () async {
-          final result = await AllEventsModalBottomSheet.show(
-            context,
-          );
-          if (!result) return;
-        },
+            final result = await AllEventsModalBottomSheet.show(
+              context,
+            );
+            if (!result) return;
+          },
           child: Text(
             LocalizedKeys.viewAllButtonText,
             style: AriesTextStyles.textBodySmall.copyWith(
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.bold,
               color: AriesColor.yellowP950,
             ),
           ),

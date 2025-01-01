@@ -23,7 +23,6 @@ class HomePage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const WeeklyCalendarSection(),
-                      Spacing.sp18,
                       const CurrentDateCard(),
                       const UpComingEventsSection(),
                       const WordOfWisdomSection(),

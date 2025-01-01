@@ -9,4 +9,9 @@ class LunarCellData {
 
   final String formattedText;
   final bool isImportant;
+
+  @override
+  String toString() {
+    return 'LunarCellData(formattedText: $formattedText, isImportant: $isImportant)';
+  }
 }
