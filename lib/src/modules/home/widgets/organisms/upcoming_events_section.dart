@@ -39,12 +39,12 @@ class UpComingEventsSection extends ConsumerWidget {
               ),
             ),
             error: (error, stackTrace) => const Offstage(),
-            data: (listOfEvents) {
-              if (listOfEvents.isEmpty) {
+            data: (events) {
+              if (events.isEmpty) {
                 return Text(LocalizedKeys.emptyEventText);
               }
 
-              final displayedEvents = listOfEvents.take(maxEventsHomePage).toList();
+              final displayedEvents = getUpcomingEvents(events);
 
               return Column(
                 children: displayedEvents.map(

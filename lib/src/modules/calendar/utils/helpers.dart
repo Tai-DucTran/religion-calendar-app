@@ -1,4 +1,5 @@
 import 'package:aries/aries.dart';
+import 'package:flutter/material.dart';
 import 'package:full_calender/enums/time_zone.dart';
 import 'package:full_calender/full_calender.dart';
 import 'package:full_calender/full_calender_extension.dart';
@@ -11,8 +12,11 @@ DateTime getCurrentSolarDate({int? timeZone}) =>
     FullCalender.now(timeZone ?? TimeZone.vietnamese.timezone).date;
 
 List<DateTime> getCurrentWeekDates() {
-  final DateTime now = getCurrentSolarDate();
-  final DateTime startOfWeek = now.subtract(Duration(days: now.weekday - 1));
+  final DateTime now = DateTime.now();
+  final todayExcludingTime = DateTime(now.year, now.month, now.day);
+
+  final DateTime startOfWeek =
+      todayExcludingTime.subtract(Duration(days: now.weekday - 1));
 
   return List<DateTime>.generate(
     7,
@@ -46,10 +50,10 @@ bool isDateToday(DateTime date) {
       date.year == now.year;
 }
 
-bool isDateInCurrentMonth(DateTime date) {
+bool isFromLastMonth(DateTime date) {
   final DateTime now = getCurrentSolarDate();
 
-  return date.month == now.month;
+  return date.month == now.month - 1;
 }
 
 String getLunarDateNumberText({required DateTime inputDate, int? timeZone}) {
@@ -266,7 +270,7 @@ List<LunarMonth> getNumberOfDaysInLunarMonths(int year) {
 
 bool isHasSixWeeksInMonth(DateTime month) {
   final firstDayOfMonth = DateTime(month.year, month.month, 1);
-  return (firstDayOfMonth.weekday == 7) && month.day <= 30;
+  return (firstDayOfMonth.weekday == 7) && month.day <= 31;
 }
 
 List<MarkedDate> getMarkedDatesFromEvents(List<BasedEvent> events) {
@@ -289,20 +293,51 @@ List<MarkedDate> getMarkedDatesFromEvents(List<BasedEvent> events) {
     final date = entry.key;
     final categories = entry.value;
 
-    final colors = categories.map((category) {
-      switch (category) {
-        case EventCategory.religionEvent:
-          return AriesColor.yellowP300;
-        case EventCategory.specialEvent:
-          return AriesColor.success200;
-        default:
-          return AriesColor.purple;
-      }
-    }).toList();
+    final colors = categories
+        .map((category) {
+          switch (category) {
+            case EventCategory.religionEvent:
+              return AriesColor.yellowP300;
+            case EventCategory.specialEvent:
+              return AriesColor.success200;
+            default:
+              return AriesColor.purple;
+          }
+        })
+        .toSet()
+        .toList();
 
     return MarkedDate(
       date: date,
       markedColors: colors,
     );
   }).toList();
+}
+
+List<BasedEvent> getUpcomingEvents(List<BasedEvent> events) {
+  final now = DateTime.now();
+  if (events.isEmpty) {
+    return [];
+  }
+  return events
+      .where((event) => event.startDate.isAfter(now))
+      .take(maxEventsHomePage)
+      .toList();
+}
+
+Color getTextLunarColorInCalendar(
+  bool isToday,
+  bool isSelected,
+  bool isImportant,
+) {
+  if (isToday) {
+    return isImportant ? AriesColor.danger300 : AriesColor.yellowP500;
+  }
+  if (isSelected) {
+    return isImportant ? AriesColor.danger300 : AriesColor.danger100;
+  }
+  if (isImportant) {
+    return AriesColor.danger100;
+  }
+  return AriesColor.neutral100;
 }

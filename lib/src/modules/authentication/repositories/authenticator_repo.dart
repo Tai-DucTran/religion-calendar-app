@@ -108,9 +108,13 @@ class AuthenticatorRepository {
       } else {
         throw UserNotLoggedInAuthException();
       }
-    } on FirebaseAuthException catch (e) {
-      e.code.log();
-      switch (e.code) {
+    } on FirebaseAuthException catch (error, stackTrace) {
+      Log.error(
+        'Error creating user withEmailAndPassword - errorCode: ${error.code}',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      switch (error.code) {
         case 'weak-password':
           throw WeakPasswordAuthException();
         case 'email-already-in-use':
@@ -141,9 +145,13 @@ class AuthenticatorRepository {
       } else {
         return AuthResults.failure;
       }
-    } on FirebaseAuthException catch (e) {
-      e.code.log();
-      switch (e.code) {
+    } on FirebaseAuthException catch (error, stackTrace) {
+      Log.error(
+        'Error login withEmailAndPassword - errorCode: ${error.code}',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      switch (error.code) {
         case 'user-not-found':
           throw UserNotFoundAuthException();
         case 'wrong-password':

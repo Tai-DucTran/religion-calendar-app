@@ -22,7 +22,6 @@ class FullCalendarDataCell extends ConsumerWidget {
   });
 
   final DateTime date;
-
   final bool hasMarker;
   final List<Color> listMarkerColor;
   final Widget Function(
@@ -43,64 +42,64 @@ class FullCalendarDataCell extends ConsumerWidget {
         ref.read(selectedDateProvider.notifier).state = date;
       },
       child: Container(
-          decoration: BoxDecoration(
-            color: isToday
-                ? AriesColor.yellowP100
-                : isSelected
-                    ? AriesColor.yellowP200
-                    : Colors.transparent,
-            borderRadius: BorderRadius.vertical(
-              top: _CellConstants.topRadius,
-              bottom: _CellConstants.bottomRadius,
-            ),
+        decoration: BoxDecoration(
+          color: isToday
+              ? AriesColor.yellowP100
+              : isSelected
+                  ? AriesColor.yellowP200
+                  : Colors.transparent,
+          borderRadius: BorderRadius.vertical(
+            top: _CellConstants.topRadius,
+            bottom: _CellConstants.bottomRadius,
           ),
-          child: Column(
-            children: [
-              Spacing.sp2,
-              Text(
-                date.day.toString(),
-                style: TextStyle(
-                  color: isSelected ? Colors.black : AriesColor.neutral800,
-                  fontWeight: isSelected || isToday
-                      ? FontWeight.bold
-                      : FontWeight.normal,
-                ),
+        ),
+        child: Column(
+          children: [
+            Spacing.sp2,
+            Text(
+              date.day.toString(),
+              style: TextStyle(
+                color: isSelected ? Colors.black : AriesColor.neutral800,
+                fontWeight:
+                    isSelected || isToday ? FontWeight.bold : FontWeight.normal,
               ),
-              LunarDateCellData(
-                date: date,
-                isSelected: isSelected,
-                key: Key('${date.day}-${date.month}-lunar-section'),
-              ),
-              if (hasMarker && markerBuilder == null)
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: listMarkerColor.isEmpty
-                      ? [
-                          SizedBox(
-                            width: _CellConstants.markerSize,
-                            height: _CellConstants.markerSize,
-                          )
-                        ]
-                      : listMarkerColor
-                          .map(
-                            (color) => Padding(
-                              padding: _CellConstants.markerPadding,
-                              child: Container(
-                                width: _CellConstants.markerSize,
-                                height: _CellConstants.markerSize,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      _CellConstants.markerBorderRadius,
-                                  color: color,
-                                ),
+            ),
+            LunarDateCellData(
+              date: date,
+              isSelected: isSelected,
+              isToday: isToday,
+              key: Key('${date.day}-${date.month}-lunar-section'),
+            ),
+            if (hasMarker && markerBuilder == null)
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: listMarkerColor.isEmpty
+                    ? [
+                        SizedBox(
+                          width: _CellConstants.markerSize,
+                          height: _CellConstants.markerSize,
+                        )
+                      ]
+                    : listMarkerColor
+                        .map(
+                          (color) => Padding(
+                            padding: _CellConstants.markerPadding,
+                            child: Container(
+                              width: _CellConstants.markerSize,
+                              height: _CellConstants.markerSize,
+                              decoration: BoxDecoration(
+                                borderRadius: _CellConstants.markerBorderRadius,
+                                color: color,
                               ),
                             ),
-                          )
-                          .toList(),
-                ),
-            ],
-          )),
+                          ),
+                        )
+                        .toList(),
+              ),
+          ],
+        ),
+      ),
     );
   }
 

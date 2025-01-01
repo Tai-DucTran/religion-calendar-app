@@ -7,11 +7,13 @@ class LunarDateCellData extends ConsumerWidget {
   const LunarDateCellData({
     super.key,
     required this.date,
-    required this.isSelected,
+    required this.isToday,
+    this.isSelected,
   });
 
   final DateTime date;
-  final bool isSelected;
+  final bool? isSelected;
+  final bool isToday;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,15 +26,18 @@ class LunarDateCellData extends ConsumerWidget {
         ),
       ),
     );
+
+    final color = getTextLunarColorInCalendar(
+      isToday,
+      isSelected ?? false,
+      lunarData.isImportant,
+    );
+
     return Text(
       lunarData.formattedText.toString(),
       style: AriesTextStyles.textBodySmall.copyWith(
         fontSize: 12.0,
-        color: lunarData.isImportant
-            ? isSelected
-                ? AriesColor.danger300
-                : AriesColor.danger100
-            : AriesColor.neutral100,
+        color: color,
       ),
     );
   }

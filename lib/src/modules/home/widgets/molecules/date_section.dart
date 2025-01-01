@@ -9,31 +9,21 @@ class DateSection extends ConsumerWidget {
   const DateSection({
     required this.inputDate,
     required this.isToday,
-    required this.isNotInCurrentMonth,
     required this.listMarkerColor,
     super.key,
   });
 
   final DateTime inputDate;
   final bool isToday;
-  final bool isNotInCurrentMonth;
   final List<Color> listMarkerColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final String currentLocale = Localizations.localeOf(context).toString();
-    final String weekdayName = getWeekdayName(
-      inputDate: inputDate,
-      locale: currentLocale,
-    );
     final String date = DateFormat.d(currentLocale).format(
       inputDate,
     );
-    final lunarDate = getFullLunarDateText(
-      inputDate: inputDate,
-      locale: currentLocale,
-      dateFormat: 'dd/MM',
-    );
+    final isBelongToLastMonth = isFromLastMonth(inputDate);
 
     return Material(
       color: Colors.transparent,
@@ -52,14 +42,6 @@ class DateSection extends ConsumerWidget {
         ),
         child: Column(
           children: [
-            Text(
-              weekdayName,
-              style: AriesTextStyles.textBodyMedium.copyWith(
-                color:
-                    isNotInCurrentMonth ? Colors.grey : AriesColor.neutral400,
-                fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
-              ),
-            ),
             Container(
               padding: EdgeInsets.only(
                 top: 4.h,
@@ -93,25 +75,16 @@ class DateSection extends ConsumerWidget {
                     child: Text(
                       date,
                       style: AriesTextStyles.textBodyMedium.copyWith(
-                        color: isNotInCurrentMonth ? Colors.grey : Colors.black,
+                        color: isBelongToLastMonth ? Colors.grey : Colors.black,
                         fontWeight:
                             isToday ? FontWeight.bold : FontWeight.normal,
-                        fontSize: 20.sp,
+                        fontSize: 14.sp,
                       ),
                     ),
                   ),
-                  Text(
-                    textAlign: TextAlign.right,
-                    lunarDate,
-                    style: AriesTextStyles.textBodyMedium.copyWith(
-                      color: isNotInCurrentMonth
-                          ? Colors.grey
-                          : isToday
-                              ? AriesColor.yellowP500
-                              : Colors.black,
-                      fontSize: 14.sp,
-                      fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
-                    ),
+                  LunarDateCellData(
+                    date: inputDate,
+                    isToday: isToday,
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
@@ -137,7 +110,9 @@ class DateSection extends ConsumerWidget {
                                     width: 8.w,
                                     height: 8.w,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4.r),
+                                      borderRadius: BorderRadius.circular(
+                                        4.r,
+                                      ),
                                       color: color,
                                     ),
                                   ),

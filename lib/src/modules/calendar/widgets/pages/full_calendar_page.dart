@@ -25,6 +25,7 @@ class FullCalendarPage extends ConsumerWidget {
           onPressed: () {
             context.pop();
             ref.read(displayedMonthProvider.notifier).state = DateTime.now();
+            ref.read(selectedDateProvider.notifier).state = DateTime.now();
           },
           icon: Icon(
             Icons.arrow_back,
