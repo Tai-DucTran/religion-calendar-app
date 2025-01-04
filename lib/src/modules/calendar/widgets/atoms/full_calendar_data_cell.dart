@@ -2,7 +2,11 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
+import 'package:religion_calendar_app/src/router/router_provider.dart';
+import 'package:religion_calendar_app/src/router/routes.dart';
 
 class _CellConstants {
   static final topRadius = Radius.circular(20.r);
@@ -35,11 +39,24 @@ class FullCalendarDataCell extends ConsumerWidget {
     final isSelected = date.year == selectedDate.year &&
         date.month == selectedDate.month &&
         date.day == selectedDate.day;
+    final goRouterProvider = ref.watch(routerProvider);
+    final currentRoute = goRouterProvider.state?.path;
+    final isHomeRoute = currentRoute == RouteNames.home;
 
     final isToday = _isToday(date);
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         ref.read(selectedDateProvider.notifier).state = date;
+        if (isHomeRoute) {
+          if (hasMarker) {
+            context.go(FullCalendarRoute().location);
+          } else {
+            final result = await EventDetailModalBottomSheet.show(
+              context,
+            );
+            if (!result) return;
+          }
+        }
       },
       child: Container(
         decoration: BoxDecoration(
