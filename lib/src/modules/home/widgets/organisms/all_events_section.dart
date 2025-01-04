@@ -7,7 +7,7 @@ import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/home/widgets/widgets.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 final displayedEventsProvider =
     StateNotifierProvider<DisplayedEventsNotifier, List<BasedEvent>>((ref) {
@@ -129,11 +129,7 @@ class _AllEventsSectionState extends ConsumerState<AllEventsSection> {
   }
 
   Widget _buildLoadingState() {
-    return Skeletonizer(
-      effect: const ShimmerEffect(
-        baseColor: AriesColor.neutral30,
-      ),
-      enableSwitchAnimation: true,
+    return DefaultSkeleton(
       child: EventCard(
         eventName: mockLoadingTextContent,
         eventDate: DateTime.now(),

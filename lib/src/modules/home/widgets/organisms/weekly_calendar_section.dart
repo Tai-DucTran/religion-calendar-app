@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/router/routes.dart';
-import 'package:religion_calendar_app/src/utils/log.dart';
+import 'package:religion_calendar_app/src/widgets/widgets.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class WeeklyCalendarSection extends ConsumerWidget {
@@ -27,10 +27,6 @@ class WeeklyCalendarSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentWeekDates = ref.watch(getCurrentWeekProvider);
-    final markedDatesMap = ref
-        .watch(combineEventsControllerProvider.notifier)
-        .getMarkedDateWithColors();
-    Log.dev('markedDatesMap: $markedDatesMap');
     final combineEventsAsync = ref.watch(combineEventsControllerProvider);
 
     return Column(
@@ -68,6 +64,10 @@ class WeeklyCalendarSection extends ConsumerWidget {
           loading: () => _LoadingSkeleton(),
           error: (err, stack) => const Offstage(),
           data: (data) {
+            final markedDatesMap = ref
+                .watch(combineEventsControllerProvider.notifier)
+                .getMarkedDateWithColors();
+
             return SizedBox(
               height: 60.h,
               width: double.infinity,
@@ -107,11 +107,7 @@ class _LoadingSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Skeletonizer(
-      effect: const ShimmerEffect(
-        baseColor: AriesColor.neutral30,
-      ),
-      enableSwitchAnimation: true,
+    return DefaultSkeleton(
       child: SizedBox(
         height: 60.h,
         width: double.infinity,

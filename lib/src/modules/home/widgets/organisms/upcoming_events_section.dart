@@ -1,4 +1,3 @@
-import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +6,7 @@ import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/home/widgets/widgets.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class UpComingEventsSection extends ConsumerWidget {
   const UpComingEventsSection({super.key});
@@ -24,11 +23,7 @@ class UpComingEventsSection extends ConsumerWidget {
         children: [
           const UpComingEventsHeader(),
           events.when(
-            loading: () => Skeletonizer(
-              effect: const ShimmerEffect(
-                baseColor: AriesColor.neutral30,
-              ),
-              enableSwitchAnimation: true,
+            loading: () => DefaultSkeleton(
               child: EventCard(
                 eventName: mockLoadingTextContent,
                 eventDate: DateTime.now(),

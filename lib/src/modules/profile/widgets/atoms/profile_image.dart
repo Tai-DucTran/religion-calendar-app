@@ -1,10 +1,9 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:skeletonizer/skeletonizer.dart';
-
 import 'package:religion_calendar_app/constants/firebase_image.dart';
 import 'package:religion_calendar_app/src/modules/profile/controllers/profile_image_controller.dart';
+import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class ProfileImage extends ConsumerWidget {
   const ProfileImage({
@@ -29,11 +28,7 @@ class ProfileImage extends ConsumerWidget {
                 FirebaseImage.defaultUserProfileImage,
               ) as ImageProvider,
       ),
-      loading: () => Skeletonizer(
-        effect: const ShimmerEffect(
-          baseColor: AriesColor.neutral30,
-        ),
-        enableSwitchAnimation: true,
+      loading: () => DefaultSkeleton(
         child: ClipOval(
           child: Container(
             width: imageSize! * 2,
