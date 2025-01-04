@@ -3,7 +3,6 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
-import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class FullCalendarUltilsAndEventsSection extends ConsumerWidget {
   const FullCalendarUltilsAndEventsSection({
@@ -53,7 +52,7 @@ class _EventSectionContent extends ConsumerWidget {
         const FullCalendarUtilButtons(),
         Spacing.sp16,
         events.when(
-          loading: () => CardSkeletons(),
+          loading: () => const Offstage(),
           error: (error, stackTrace) => const Offstage(),
           data: (events) {
             final selectedDate = ref.watch(selectedDateProvider);
