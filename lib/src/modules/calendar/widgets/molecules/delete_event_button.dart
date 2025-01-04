@@ -26,8 +26,12 @@ class DeleteEventButton extends ConsumerWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              AriesColor.neutral0.withOpacity(0.9),
-              AriesColor.neutral0.withOpacity(1),
+              AriesColor.neutral0.withValues(
+                alpha: 0.9,
+              ),
+              AriesColor.neutral0.withValues(
+                alpha: 1,
+              ),
             ],
           ),
         ),

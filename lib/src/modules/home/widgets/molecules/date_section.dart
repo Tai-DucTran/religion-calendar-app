@@ -37,8 +37,8 @@ class DateSection extends ConsumerWidget {
           if (!result) return;
         },
         borderRadius: BorderRadius.circular(4.r),
-        splashColor: AriesColor.yellowP200.withOpacity(
-          0.3,
+        splashColor: AriesColor.yellowP200.withValues(
+          alpha: 0.3,
         ),
         child: Column(
           children: [

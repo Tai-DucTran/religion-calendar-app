@@ -18,7 +18,7 @@ class BannerLine extends StatelessWidget {
           width: 40.w,
           height: 5.w,
           decoration: BoxDecoration(
-            color: AriesColor.black.withOpacity(0.2),
+            color: AriesColor.black.withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(3.r),
           ),
         ),

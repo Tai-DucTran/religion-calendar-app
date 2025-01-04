@@ -25,7 +25,9 @@ class ReligionLocationCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.r),
         boxShadow: [
           BoxShadow(
-            color: AriesColor.yellowP600.withOpacity(0.1),
+            color: AriesColor.yellowP600.withValues(
+              alpha: 0.1,
+            ),
             offset: const Offset(0, 2),
             blurRadius: 13.4,
           ),

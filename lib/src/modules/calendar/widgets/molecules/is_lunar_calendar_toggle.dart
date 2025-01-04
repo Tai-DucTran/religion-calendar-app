@@ -44,7 +44,7 @@ class IsLunarCalendarToggle extends ConsumerWidget {
               onChanged: (value) => ref
                   .read(calendarCategoryControllerProvider.notifier)
                   .toggleCategory(),
-              activeColor: AriesColor.yellowP200,
+              activeTrackColor: AriesColor.yellowP200,
             ),
           ),
         ),

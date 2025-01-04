@@ -14,7 +14,9 @@ class SelectedDayHighlightBox extends StatelessWidget {
               child: Container(
                 height: 42,
                 decoration: BoxDecoration(
-                  color: AriesColor.neutral50.withOpacity(0.1),
+                  color: AriesColor.neutral50.withValues(
+                    alpha: 0.1,
+                  ),
                 ),
               ),
             ),

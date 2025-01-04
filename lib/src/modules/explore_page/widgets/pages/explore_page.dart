@@ -45,8 +45,8 @@ class _ExplorePageState extends State<ExplorePage>
             width: 200,
             height: 60,
             decoration: BoxDecoration(
-              color: AriesColor.black.withOpacity(
-                0.8,
+              color: AriesColor.black.withValues(
+                alpha: 0.8,
               ),
               borderRadius: BorderRadius.circular(
                 8.r,

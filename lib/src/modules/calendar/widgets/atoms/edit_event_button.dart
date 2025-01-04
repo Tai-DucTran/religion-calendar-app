@@ -28,7 +28,9 @@ class EditEventButton extends StatelessWidget {
           width: 36.w,
           height: 36.w,
           decoration: BoxDecoration(
-            color: AriesColor.yellowP950.withOpacity(0.4),
+            color: AriesColor.yellowP950.withValues(
+              alpha: 0.4,
+            ),
             borderRadius: BorderRadius.circular(8.r),
           ),
           child: Icon(

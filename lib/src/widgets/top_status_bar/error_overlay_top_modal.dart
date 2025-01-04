@@ -43,8 +43,8 @@ class ErrorOverlayTopModal extends StatelessWidget {
               BoxShadow(
                 color: isErrorOverlay
                     ? AriesColor.danger75
-                    : Colors.black.withOpacity(
-                        0.25,
+                    : Colors.black.withValues(
+                        alpha: 0.25,
                       ),
                 offset: isErrorOverlay ? Offset.zero : const Offset(0, 4),
                 blurRadius: isErrorOverlay ? 0 : 4,

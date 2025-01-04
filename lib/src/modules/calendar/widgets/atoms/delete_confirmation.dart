@@ -57,8 +57,10 @@ class DeleteConfirmation {
           title: Text(
             LocalizedKeys.deleteEventConfirmationQuestionText,
             style: AriesTextStyles.textBodySmall.copyWith(
-                color: AriesColor.neutral700.withOpacity(0.5),
+              color: AriesColor.neutral700.withValues(
+                alpha: 0.5,
               ),
+            ),
           ),
           actions: [
             CupertinoActionSheetAction(
@@ -74,8 +76,8 @@ class DeleteConfirmation {
               child: Text(
                 LocalizedKeys.deleteEventConfirmationText,
                 style: AriesTextStyles.textBodyNormal.copyWith(
-                color: AriesColor.danger200,
-              ),
+                  color: AriesColor.danger200,
+                ),
               ),
             ),
           ],

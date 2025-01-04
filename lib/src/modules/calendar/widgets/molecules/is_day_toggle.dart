@@ -40,7 +40,7 @@ class IsAllDayToggle extends ConsumerWidget {
                     ref.read(isAllDayToggleControllerProvider.notifier);
                 controller.toggle();
               },
-              activeColor: AriesColor.yellowP200,
+              activeTrackColor: AriesColor.yellowP200,
             ),
           ),
         ),
