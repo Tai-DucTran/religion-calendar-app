@@ -9,6 +9,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/profile/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/profile/profile_page.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 
 class UploadProfileImageSection extends ConsumerStatefulWidget {
   const UploadProfileImageSection({super.key});
@@ -36,7 +37,7 @@ class _UploadProfileImageSectionState
         await profileImageController.uploadProfileImage(pickedImage);
       }
     } catch (e) {
-      debugPrint('Error picking image: $e');
+      Log.error('Error picking image: $e');
     }
   }
 

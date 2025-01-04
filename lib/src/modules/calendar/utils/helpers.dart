@@ -68,8 +68,6 @@ DateTime convertToLunarDate({
   int? timeZone,
 }) {
   final lunarDate = convertSolarDateToLunarDate(inputDate: inputDate);
-  print('LunarDate: $lunarDate');
-
   return DateTime(lunarDate.year, lunarDate.month, lunarDate.day);
 }
 

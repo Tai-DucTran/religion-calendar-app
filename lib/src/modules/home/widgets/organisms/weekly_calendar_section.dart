@@ -7,7 +7,6 @@ import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/router/routes.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class WeeklyCalendarSection extends ConsumerWidget {
   const WeeklyCalendarSection({super.key});

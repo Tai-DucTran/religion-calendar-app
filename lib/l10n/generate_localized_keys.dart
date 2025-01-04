@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:religion_calendar_app/src/utils/utils.dart';
+
 void main() {
   const l10nFilePath = '.dart_tool/flutter_gen/gen_l10n/app_localizations.dart';
   const outputFilePath = 'lib/l10n/localized_keys.dart';
@@ -7,7 +9,7 @@ void main() {
   final l10nFile = File(l10nFilePath);
 
   if (!l10nFile.existsSync()) {
-    print('Error: $l10nFilePath does not exist.');
+    Log.error('Error: $l10nFilePath does not exist.');
     exit(1);
   }
 
@@ -18,7 +20,7 @@ void main() {
   final outputFile = File(outputFilePath);
   outputFile.writeAsStringSync(localizedKeysContent);
 
-  print('Success: localized_keys.dart has been generated.');
+  Log.info('Success: localized_keys.dart has been generated.');
 }
 
 List<String> extractKeys(String content) {

@@ -96,8 +96,7 @@ class UserEventRepository {
           events.add(event);
         } catch (e, stackTrace) {
           Log.error('Error parsing event document ${doc.id}: $e');
-          print('Stack trace: $stackTrace');
-          // Continue processing other documents
+          Log.error('Error parsing event document Stack trace: $stackTrace');
         }
       }
 
