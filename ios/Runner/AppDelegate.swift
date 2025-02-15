@@ -1,6 +1,9 @@
 import UIKit
 import Flutter
 
+// Implement google admob
+import google_mobile_ads
+
 @main
 @objc class AppDelegate: FlutterAppDelegate {
   override func application(
@@ -8,6 +11,14 @@ import Flutter
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
+
+    // TODO: Register ListTileNativeAdFactory
+    let listTileFactory = ListTileNativeAdFactory()
+    FLTGoogleMobileAdsPlugin.registerNativeAdFactory(
+        self, factoryId: "listTile", nativeAdFactory: listTileFactory)
+
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
+
+  
 }

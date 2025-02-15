@@ -1,11 +1,15 @@
+import 'dart:async';
+
 import 'package:aries/aries.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'firebase_options.dart';
 import 'src/modules/authentication/authentication.dart';
 import 'src/modules/geoip_and_locales/controllers/controllers.dart';
@@ -21,11 +25,21 @@ void main() async {
   );
   await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
   await FirebaseAppCheck.instance.activate(
-    // Use AndroidProvider.debug for development
     androidProvider: AndroidProvider.debug,
   );
+
+  unawaited(
+    MobileAds.instance.initialize().then((_) {
+      Log.info('AdMob initialized successfully');
+    }).catchError(
+      (error) {
+        Log.error('Error: Failed to initilize AdMob: $error');
+      },
+    ),
+  );
+
   await ScreenUtil.ensureScreenSize();
-  runApp(const ProviderScope(
+  runApp(ProviderScope(
     child: ReligionCalendar(),
   ));
 }

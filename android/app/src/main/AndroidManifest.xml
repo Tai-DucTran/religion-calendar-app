@@ -53,6 +53,10 @@
         <meta-data
             android:name="google_analytics_default_allow_analytics_storage"
             android:value="true" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2606262175429490~4544248266"
+        />
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility?hl=en and
