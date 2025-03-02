@@ -51,6 +51,7 @@ dependencies:
   cached_network_image: ^3.4.1
   shared_preferences: ^2.3.3
   path_provider: ^2.1.5
+  flutter_launcher_icons: ^0.14.3
 
 dev_dependencies:
   flutter_test:
@@ -66,3 +67,4 @@ flutter:
   assets:
     - assets/images/
     - assets/animations/
+    - assets/app_icons/
