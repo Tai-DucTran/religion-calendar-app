@@ -41,6 +41,15 @@ Melos also comes with IDE support for `VSCode` and `IntelliJ` to make running sc
 4. `make upgrade`: recommend running this command after upgrading new flutter version.
 5. `make rm-gen`: remove all generated files
 6. `make native_splash`: generate initial splash screen.
+7. `icon_launcher`: generate icon app
+8. `clean`: do a quick flutter clean and get depencies
+9. `install_pre_git`: install pre-commit hook
+
+### scripts
+
+Run this command `make install_pre_git` in your terminal to install pre-commit hook!
+To ensure we don't acidentially commit and push google-service.json and GoogleService-Info.plist
+
 
 ## Directory Structure
 

@@ -50,8 +50,11 @@ pubspec_overrides.yaml
 .fvm/
 
 # Firebase config:
-/lib/firebase_options
-/ios/config
-/android/app/src/development/google-services.json
-/android/app/src/production/google-services.json
-/android/app/src/staging/google-services.json
+.env
+firebase.json
+.firebaserc
+**/google-services.json
+**/GoogleService-Info.plist
+firebase-debug.log
+firestore-debug.log
+ui-debug.log

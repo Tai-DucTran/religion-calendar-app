@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Check if any Firebase config files are being committed
+if git diff --cached --name-only | grep -E 'google-services.json|GoogleService-Info.plist|.env' > /dev/null; then
+  echo "⛔ ERROR: You're trying to commit Firebase configuration files!"
+  echo "Please remove these files from your commit:"
+  git diff --cached --name-only | grep -E 'google-services.json|GoogleService-Info.plist'
+  exit 1
+fi
+
+# Continue with commit if no Firebase files found
+exit 0

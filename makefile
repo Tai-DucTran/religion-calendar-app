@@ -37,4 +37,5 @@ clean: |
 	fvm flutter clean && \
 	fvm flutter pub get \
 
-
+install_pre_git: 
+	./scripts/install-hooks.sh
