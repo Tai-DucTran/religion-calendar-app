@@ -48,3 +48,10 @@ pubspec_overrides.yaml
 
 # FVM Version Cache
 .fvm/
+
+# Firebase config:
+/lib/firebase_options
+/ios/config
+/android/app/src/development/google-services.json
+/android/app/src/production/google-services.json
+/android/app/src/staging/google-services.json

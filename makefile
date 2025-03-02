@@ -29,3 +29,12 @@ rm_gen: |
 native_splash: |
 	dart run flutter_native_splash:create --path=native_splash.yaml
 
+icon_launcher: |
+	fvm flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons*
+
+clean: |
+	dart pub global activate fvm && \
+	fvm flutter clean && \
+	fvm flutter pub get \
+
+
