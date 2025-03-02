@@ -20,7 +20,6 @@ void runMainApp({
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: firebaseOptions,
-    name: flavor.toString(),
   );
   await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
   await FirebaseAppCheck.instance.activate(
