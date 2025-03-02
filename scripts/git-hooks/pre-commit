@@ -4,7 +4,7 @@
 if git diff --cached --name-only | grep -E 'google-services.json|GoogleService-Info.plist|.env' > /dev/null; then
   echo "⛔ ERROR: You're trying to commit Firebase configuration files!"
   echo "Please remove these files from your commit:"
-  git diff --cached --name-only | grep -E 'google-services.json|GoogleService-Info.plist'
+  git diff --cached --name-only | grep -E 'google-services.json|GoogleService-Info.plist|.env'
   exit 1
 fi
 

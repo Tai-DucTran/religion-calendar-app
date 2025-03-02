@@ -70,6 +70,7 @@ class DefaultFirebaseOptionsDev {
     projectId: dotenv.env['FIREBASE_OPTION_PROJECT_ID_${flavorSuffix}']!,
     storageBucket:
         dotenv.env['FIREBASE_OPTION_STORAGE_BUCKET_${flavorSuffix}']!,
+    iosClientId: dotenv.env['FIREBASE_OPTION_IOS_CLIENT_ID_${flavorSuffix}']!,
     iosBundleId: dotenv.env['FIREBASE_OPTION_IOS_BUNDLE_ID_${flavorSuffix}']!,
   );
 }
