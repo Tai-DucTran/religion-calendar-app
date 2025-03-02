@@ -48,3 +48,13 @@ pubspec_overrides.yaml
 
 # FVM Version Cache
 .fvm/
+
+# Firebase config:
+.env
+firebase.json
+.firebaserc
+**/google-services.json
+**/GoogleService-Info.plist
+firebase-debug.log
+firestore-debug.log
+ui-debug.log

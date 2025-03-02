@@ -1,0 +1,2 @@
+/Volumes/tai-tran/Software-Development/personal-projects/religion_calendar_app/android/app/.cxx/Debug/2y692i1j/x86_64/CMakeFiles/edit_cache.dir
+/Volumes/tai-tran/Software-Development/personal-projects/religion_calendar_app/android/app/.cxx/Debug/2y692i1j/x86_64/CMakeFiles/rebuild_cache.dir

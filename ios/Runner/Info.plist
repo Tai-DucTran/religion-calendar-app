@@ -6,8 +6,6 @@
 	<string>We need access to reminders to help you set up event notifications</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>CFBundleDisplayName</key>
-	<string>Religion Calendar App</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -80,5 +78,7 @@
 	<string>This identifier will be used to deliver personalized ads to you</string>
 	<key>UIStatusBarHidden</key>
 	<false/>
+	<key>CFBundleDisplayName</key>
+	<string>$(APP_DISPLAY_NAME)</string>
 </dict>
 </plist>
