@@ -17,7 +17,7 @@
 
     
     <application
-        android:label="religion_calendar_app"
+        android:label="@string/app_name"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
