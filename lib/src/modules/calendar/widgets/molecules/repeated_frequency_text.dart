@@ -1,6 +1,6 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/l10n/app_localizations.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class RepeatedFrequencyText extends StatelessWidget {
@@ -11,29 +11,31 @@ class RepeatedFrequencyText extends StatelessWidget {
 
   final String repeatedFrequencyAt;
 
-  String _getLocalizedFrequencyText(String repeatedFrequencyAt) {
+  String _getLocalizedFrequencyText(
+      String repeatedFrequencyAt, BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     try {
       return switch (repeatedFrequencyAt) {
         String s
             when s == RepeatedFrequency.daily.toRecurrenceRule().toString() =>
-          LocalizedKeys.dailyRepeatedText,
+          l10n.dailyRepeatedText,
         String s
             when s == RepeatedFrequency.weekly.toRecurrenceRule().toString() =>
-          LocalizedKeys.weeklyRepeatedText,
+          l10n.weeklyRepeatedText,
         String s
             when s ==
                 RepeatedFrequency.biweekly.toRecurrenceRule().toString() =>
-          LocalizedKeys.biweeklyRepeatedText,
+          l10n.biweeklyRepeatedText,
         String s
             when s == RepeatedFrequency.monthly.toRecurrenceRule().toString() =>
-          LocalizedKeys.monthlyRepeatedText,
+          l10n.monthlyRepeatedText,
         String s
             when s == RepeatedFrequency.yearly.toRecurrenceRule().toString() =>
-          LocalizedKeys.yearlyRepeatedText,
-        _ => LocalizedKeys.doesNotRepeatText
+          l10n.yearlyRepeatedText,
+        _ => l10n.doesNotRepeatText
       };
     } catch (e) {
-      return LocalizedKeys.doesNotRepeatText;
+      return l10n.doesNotRepeatText;
     }
   }
 
@@ -48,6 +50,7 @@ class RepeatedFrequencyText extends StatelessWidget {
               child: Text(
                 _getLocalizedFrequencyText(
                   repeatedFrequencyAt,
+                  context,
                 ),
                 maxLines: null,
                 style: AriesTextStyles.textBodySmall.copyWith(

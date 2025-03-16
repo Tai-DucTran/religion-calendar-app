@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/profile/widgets/widgets.dart';
 
 class NotificationSettingPage extends StatelessWidget {
@@ -8,7 +8,7 @@ class NotificationSettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SettingPageTemplate(
-      header: LocalizedKeys.notificationSettingTitleText,
+      header: context.l10n.notificationSettingTitleText,
       child: Container(),
     );
   }

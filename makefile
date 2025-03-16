@@ -13,7 +13,6 @@ gen:
 
 l10n: |
 	flutter gen-l10n
-	dart run lib/l10n/generate_localized_keys.dart
 
 upgrade: |
 	flutter precache --ios && \

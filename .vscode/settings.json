@@ -4,5 +4,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": "always"
   },
-  "dart.flutterSdkPath": "~/fvm/versions/3.29.0"
+  "dart.flutterSdkPath": "~/fvm/versions/3.29.0",
+  "makefile.configureOnOpen": false
 }

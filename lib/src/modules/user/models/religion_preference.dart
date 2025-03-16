@@ -1,7 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 
 enum ReligionPreference {
   @JsonValue('CATHOLICISM')
@@ -13,14 +13,14 @@ enum ReligionPreference {
 }
 
 extension ReligionPrefernceExtension on ReligionPreference {
-  String get localized {
+  String getLocalized(BuildContext context) {
     switch (this) {
       case ReligionPreference.catholicism:
-        return LocalizedKeys.religionCatholicismText;
+        return context.l10n.religionCatholicismText;
       case ReligionPreference.buddhism:
-        return LocalizedKeys.religionBuddhismText;
+        return context.l10n.religionBuddhismText;
       case ReligionPreference.unknown:
-        return LocalizedKeys.religionUnknownText;
+        return context.l10n.religionUnknownText;
     }
   }
 

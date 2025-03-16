@@ -1,7 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/profile/widgets/widgets.dart';
 
 class BasicInfoSettingPage extends StatelessWidget {
@@ -10,7 +10,7 @@ class BasicInfoSettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SettingPageTemplate(
-      header: LocalizedKeys.editUserInfoButtonText,
+      header: context.l10n.editUserInfoButtonText,
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: ScreenConfig.defaultHorizontalScreenPadding,

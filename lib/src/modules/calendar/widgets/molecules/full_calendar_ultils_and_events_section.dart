@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class FullCalendarUltilsAndEventsSection extends ConsumerWidget {
@@ -63,7 +63,7 @@ class _EventSectionContent extends ConsumerWidget {
             }).toList();
 
             if (listOfEvents.isEmpty) {
-              return Text(LocalizedKeys.emptyEventText);
+              return Text(context.l10n.emptyEventText);
             }
             listOfEvents = sortEventsByPriority(listOfEvents);
 

@@ -1,5 +1,6 @@
 import 'package:aries/aries.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:flutter/material.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 
 class NavigationBottomItem {
   final String iconSelectedPath;
@@ -19,19 +20,19 @@ enum NavigationBottomItemTypes {
 }
 
 extension NavigationBottomItemExtension on NavigationBottomItemTypes {
-  NavigationBottomItem get item {
+  NavigationBottomItem getItem(BuildContext context) {
     switch (this) {
       case NavigationBottomItemTypes.home:
         return NavigationBottomItem(
           iconSelectedPath: AriesIcons.homeLineFillIcon,
           iconUnSelectedPath: AriesIcons.homeOutlineIcon,
-          name: LocalizedKeys.homeNavItemText,
+          name: context.l10n.homeNavItemText,
         );
       case NavigationBottomItemTypes.profile:
         return NavigationBottomItem(
           iconSelectedPath: AriesIcons.user03LineFillIcon,
           iconUnSelectedPath: AriesIcons.user03OutlineIcon,
-          name: LocalizedKeys.profileNavItemText,
+          name: context.l10n.profileNavItemText,
         );
     }
   }

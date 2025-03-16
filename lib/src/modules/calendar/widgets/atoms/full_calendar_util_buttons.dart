@@ -2,7 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class FullCalendarUtilButtons extends ConsumerWidget {
@@ -14,7 +14,7 @@ class FullCalendarUtilButtons extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          LocalizedKeys.todayEventText,
+          context.l10n.todayEventText,
           style: AriesTextStyles.textHeading6,
         ),
         Row(
@@ -27,7 +27,7 @@ class FullCalendarUtilButtons extends ConsumerWidget {
                 ref.read(selectedDateProvider.notifier).state = DateTime.now(),
               },
               child: Text(
-                LocalizedKeys.todayText,
+                context.l10n.todayText,
                 style: AriesTextStyles.textBodySmall.copyWith(
                   fontWeight: FontWeight.bold,
                   color: AriesColor.yellowP950,

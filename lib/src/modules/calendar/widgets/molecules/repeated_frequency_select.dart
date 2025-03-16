@@ -35,7 +35,7 @@ class RepeatedFrequencySelect extends ConsumerWidget {
                 return DropdownMenuItem(
                   value: option,
                   child: Text(
-                    option.localized,
+                    option.localized as String,
                     style: AriesTextStyles.textBodySmall,
                   ),
                 );

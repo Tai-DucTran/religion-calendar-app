@@ -1,6 +1,6 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/login_page.dart';
 import 'package:religion_calendar_app/src/modules/sign_up/widgets/molecules/molecules.dart';
 
@@ -24,7 +24,7 @@ class SignUpSection extends StatelessWidget {
         ],
         Spacing.sp12,
         Text(
-          LocalizedKeys.or,
+          context.l10n.or,
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
@@ -37,8 +37,8 @@ class SignUpSection extends StatelessWidget {
         const SocialLoginButtonsWrapper(),
         Spacing.sp24,
         BottomRichTextWithAction(
-          initialQuestion: LocalizedKeys.alreadyAMember,
-          textSpan: LocalizedKeys.login,
+          initialQuestion: context.l10n.alreadyAMember,
+          textSpan: context.l10n.login,
           onTap: () {
             Navigator.push(
               context,

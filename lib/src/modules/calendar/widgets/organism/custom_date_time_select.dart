@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:full_calender/full_calender_extension.dart';
 import 'package:full_calender/models/lunar_date_time.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'dart:async';
@@ -158,8 +158,8 @@ class _CustomDateTimeSelectState extends ConsumerState<CustomDateTimeSelect> {
   Widget _buildDateSubtitle(String locale, bool isLunarCalendar) {
     const dateFormat = DateTimeFormat.dateMonth;
     final calendarCategoryLabel = isLunarCalendar
-        ? LocalizedKeys.calendarCategorySolarText
-        : LocalizedKeys.calendarCategoryLunarText;
+        ? context.l10n.calendarCategorySolarText
+        : context.l10n.calendarCategoryLunarText;
 
     final subDateLabel = isLunarCalendar
         ? getFullSolarDateText(

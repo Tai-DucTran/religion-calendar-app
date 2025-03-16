@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/constants/screen_config.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/onboarding/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/profile/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 import 'package:religion_calendar_app/src/modules/user/repositories/repositories.dart';
-import 'package:religion_calendar_app/src/utils/string_helper.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class ReligionPreferencesSettingPage extends ConsumerWidget {
@@ -24,7 +23,7 @@ class ReligionPreferencesSettingPage extends ConsumerWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return SettingPageTemplate(
-      header: LocalizedKeys.religionPreferencesSettingTitleText,
+      header: context.l10n.religionPreferencesSettingTitleText,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -56,7 +55,7 @@ class ReligionPreferencesSettingPage extends ConsumerWidget {
                   horizontal: ScreenConfig.defaultHorizontalScreenPadding,
                 ),
                 title: Text(
-                  religion.localized.toCapitalized(),
+                  religion.getLocalized(context).toCapitalized(),
                   style: AriesTextStyles.textBodyNormal,
                 ),
                 horizontalTitleGap: 4,
@@ -78,7 +77,7 @@ class ReligionPreferencesSettingPage extends ConsumerWidget {
               horizontal: ScreenConfig.defaultHorizontalScreenPadding,
             ),
             child: CtaFullWidthButton(
-              buttonText: LocalizedKeys.updateButtonText,
+              buttonText: context.l10n.updateButtonText,
               onPressed: () async {
                 final userFirestoreController =
                     ref.read(userFirestoreRepositoryProvider);
@@ -96,8 +95,8 @@ class ReligionPreferencesSettingPage extends ConsumerWidget {
               horizontal: ScreenConfig.defaultHorizontalScreenPadding,
             ),
             child: BottomRichTextWithAction(
-              initialQuestion: '${LocalizedKeys.youWantToHaveYourReligion} ',
-              textSpan: LocalizedKeys.submitHereButtonText,
+              initialQuestion: '${context.l10n.youWantToHaveYourReligion} ',
+              textSpan: context.l10n.submitHereButtonText,
               onTap: () {},
             ),
           )

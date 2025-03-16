@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/calendar/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class CreateOrUpdateEventButton extends ConsumerWidget {
@@ -75,8 +75,8 @@ class CreateOrUpdateEventButton extends ConsumerWidget {
           getCustomSnackbar(
             context: context,
             message: eventId != null
-                ? LocalizedKeys.eventUpdatedSuccessfullyText
-                : LocalizedKeys.eventCreatedSuccessfullyText,
+                ? context.l10n.eventUpdatedSuccessfullyText
+                : context.l10n.eventCreatedSuccessfullyText,
             snackbarType: SnackbarType.success,
           ),
         );
@@ -87,8 +87,8 @@ class CreateOrUpdateEventButton extends ConsumerWidget {
           getCustomSnackbar(
             context: context,
             message: eventId != null
-                ? LocalizedKeys.eventUpdatedFailedText
-                : LocalizedKeys.eventCreatedFailedText,
+                ? context.l10n.eventUpdatedFailedText
+                : context.l10n.eventCreatedFailedText,
             snackbarType: SnackbarType.error,
           ),
         );
@@ -112,7 +112,7 @@ class CreateOrUpdateEventButton extends ConsumerWidget {
                   Navigator.of(context).pop(true);
                 },
                 child: Text(
-                  LocalizedKeys.cancelButtonText,
+                  context.l10n.cancelButtonText,
                   style: AriesTextStyles.textBodySmall.copyWith(
                     fontWeight: FontWeight.w600,
                     color: AriesColor.yellowP950,
@@ -128,8 +128,8 @@ class CreateOrUpdateEventButton extends ConsumerWidget {
                 ),
                 child: Text(
                   eventId == null
-                      ? LocalizedKeys.createEventButtonText
-                      : LocalizedKeys.updateEventButtonText,
+                      ? context.l10n.createEventButtonText
+                      : context.l10n.updateEventButtonText,
                   style: AriesTextStyles.textBodySmall.copyWith(
                     fontWeight: FontWeight.w600,
                     color: AriesColor.yellowP950,

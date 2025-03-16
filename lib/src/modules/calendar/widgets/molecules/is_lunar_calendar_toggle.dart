@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/calendar/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
 
@@ -31,7 +31,7 @@ class IsLunarCalendarToggle extends ConsumerWidget {
             ),
             Spacing.sp8,
             Text(
-              '${LocalizedKeys.calendarCategoryLunarText}?',
+              '${context.l10n.calendarCategoryLunarText}?',
               style: AriesTextStyles.textBodySmall,
             ),
           ],

@@ -98,19 +98,22 @@ my_module/widgets/
 
 ### Localization
 
-This project stores localized-key translate in the project for no-internet uses.
+This project uses Flutter's built-in localization system.
 
 #### How to add a new localization?
 
-1. Add new value into all `.arb` files (do not forgot any file)
+1. Add new value into all `.arb` files (do not forget any file)
+   - Files are located in `lib/l10n/` directory (app_en.arb, app_vi.arb, etc.)
+   - If some keys don't have localization, we return English version as default
 
-- If some keys don't have localization, we return English version as default
+2. After adding new translations, run `make l10n` to generate the localization files
 
-2. After add, run `make l10n` to re-generate `localized_keys.dart`
-3. In the Text widget, return the localization like this:
-   `Text(
-  LocalizedKeys.eventRemindMeBefore,
-),`
+3. In the Text widget, access the localization like this:
+   ```dart
+   Text(
+     context.l10n.eventRemindMeBefore,
+   ),
+   ```
 
 #### Name convention
 

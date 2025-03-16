@@ -1,7 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 
 class ExplorePageHeader extends StatelessWidget {
   const ExplorePageHeader({super.key});
@@ -13,7 +13,7 @@ class ExplorePageHeader extends StatelessWidget {
         horizontal: ScreenConfig.defaultHorizontalScreenPadding,
       ),
       child: Text(
-        LocalizedKeys.explorePageHeaderText,
+        context.l10n.explorePageHeaderText,
         style: AriesTextStyles.textHeading4,
       ),
     );

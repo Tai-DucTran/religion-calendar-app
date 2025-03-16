@@ -1,7 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/authentication/exceptions/authenticator_exceptions.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
@@ -75,7 +75,7 @@ class _SignUpFormFieldsState extends ConsumerState<SignUpFormFields> {
             ),
             Spacing.sp24,
             CtaFullWidthButton(
-              buttonText: LocalizedKeys.signUp,
+              buttonText: context.l10n.signUp,
               onPressed: () async {
                 setState(() {
                   _isEmailValid = _formKey.currentState!.validate();
@@ -93,14 +93,14 @@ class _SignUpFormFieldsState extends ConsumerState<SignUpFormFields> {
                     if (e is EmailAlreadyInUseAuthException) {
                       if (_emailController.text.contains('gmail')) {
                         _showErrorOverlay(
-                          title: LocalizedKeys.emailAlreadyInUseTitle,
-                          message: LocalizedKeys.googleEmailAlreadyInUseMessage,
+                          title: context.l10n.emailAlreadyInUseTitle,
+                          message: context.l10n.googleEmailAlreadyInUseMessage,
                           isErrorOverlay: false,
                         );
                       } else {
                         _showErrorOverlay(
-                          title: LocalizedKeys.emailAlreadyInUseTitle,
-                          message: LocalizedKeys.emailAlreadyInUseMessage,
+                          title: context.l10n.emailAlreadyInUseTitle,
+                          message: context.l10n.emailAlreadyInUseMessage,
                           isErrorOverlay: false,
                           icon: Icons.mail_outline_rounded,
                         );

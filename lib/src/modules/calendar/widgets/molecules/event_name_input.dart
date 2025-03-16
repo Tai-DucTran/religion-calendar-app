@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:aries/aries.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 
 class EventNameInput extends StatefulWidget {
   const EventNameInput({
@@ -24,7 +24,7 @@ class _EventNameInputState extends State<EventNameInput> {
             controller: widget.controller,
             maxLines: null,
             decoration: InputDecoration(
-              hintText: LocalizedKeys.eventInputHintText,
+              hintText: context.l10n.eventInputHintText,
               border: InputBorder.none,
               hintStyle: const TextStyle(
                 color: AriesColor.neutral50,

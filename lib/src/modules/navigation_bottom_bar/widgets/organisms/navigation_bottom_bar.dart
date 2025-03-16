@@ -42,7 +42,7 @@ class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
   List<Widget> _buildNavItems(BuildContext context) {
     return NavigationBottomItemTypes.values.map(
       (type) {
-        final item = type.item;
+        final item = type.getItem(context);
         final index = NavigationBottomItemTypes.values.indexOf(type);
         final isSelected = widget.navigationShell.currentIndex == index;
         final selectedColor =

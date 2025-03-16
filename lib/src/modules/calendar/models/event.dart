@@ -1,7 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/l10n/app_localizations.dart';
 import 'package:religion_calendar_app/src/modules/geoip_and_locales/models/supported_locales.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 import 'package:rrule/rrule.dart';
@@ -198,20 +198,21 @@ extension RepeatedFrequencyExtension on RepeatedFrequency {
     }
   }
 
-  String get localized {
+  String localized(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     switch (this) {
       case RepeatedFrequency.daily:
-        return LocalizedKeys.dailyText;
+        return l10n.dailyText;
       case RepeatedFrequency.weekly:
-        return LocalizedKeys.weeklyText;
+        return l10n.weeklyText;
       case RepeatedFrequency.biweekly:
-        return LocalizedKeys.biweeklyText;
+        return l10n.biweeklyText;
       case RepeatedFrequency.monthly:
-        return LocalizedKeys.monthlyText;
+        return l10n.monthlyText;
       case RepeatedFrequency.yearly:
-        return LocalizedKeys.yearlyText;
+        return l10n.yearlyText;
       case RepeatedFrequency.doesNotRepeat:
-        return LocalizedKeys.doesNotRepeatText;
+        return l10n.doesNotRepeatText;
     }
   }
 }
@@ -259,22 +260,23 @@ enum RemindMeBeforeOptions {
 }
 
 extension RemindMeBeforeOptionsExtension on RemindMeBeforeOptions {
-  String get localized {
+  String localized(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     switch (this) {
       case RemindMeBeforeOptions.atTime:
-        return LocalizedKeys.atTimeOfEventText;
+        return l10n.atTimeOfEventText;
       case RemindMeBeforeOptions.tenMinutes:
-        return LocalizedKeys.tenMinutesText;
+        return l10n.tenMinutesText;
       case RemindMeBeforeOptions.thirtyMinutes:
-        return LocalizedKeys.thirtyMinutesText;
+        return l10n.thirtyMinutesText;
       case RemindMeBeforeOptions.oneHour:
-        return LocalizedKeys.oneHourText;
+        return l10n.oneHourText;
       case RemindMeBeforeOptions.oneDay:
-        return LocalizedKeys.oneDayText;
+        return l10n.oneDayText;
       case RemindMeBeforeOptions.threeDays:
-        return LocalizedKeys.threeDaysText;
+        return l10n.threeDaysText;
       case RemindMeBeforeOptions.oneWeek:
-        return LocalizedKeys.oneWeekText;
+        return l10n.oneWeekText;
     }
   }
 
@@ -320,18 +322,19 @@ RemindMeBeforeOptions getRemindMeBeforeOptionsJsonValue(double value) {
 }
 
 extension ImportantLevelFunction on int {
-  String? get localized {
+  String? localized(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     switch (this) {
       case 1:
-        return LocalizedKeys.calendarCategorySolarText;
+        return l10n.calendarCategorySolarText;
       case 2:
-        return LocalizedKeys.calendarCategorySolarText;
+        return l10n.calendarCategorySolarText;
       case 3:
-        return LocalizedKeys.calendarCategorySolarText;
+        return l10n.calendarCategorySolarText;
       case 4:
-        return LocalizedKeys.calendarCategorySolarText;
+        return l10n.calendarCategorySolarText;
       default:
-        return LocalizedKeys.calendarCategorySolarText;
+        return l10n.calendarCategorySolarText;
     }
   }
 
@@ -372,12 +375,13 @@ enum CalendarCategory {
 }
 
 extension CalendarCategoryExtension on CalendarCategory {
-  String get localized {
+  String localized(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     switch (this) {
       case CalendarCategory.solar:
-        return LocalizedKeys.calendarCategorySolarText;
+        return l10n.calendarCategorySolarText;
       case CalendarCategory.lunar:
-        return LocalizedKeys.calendarCategoryLunarText;
+        return l10n.calendarCategoryLunarText;
     }
   }
 }
@@ -398,20 +402,21 @@ enum EventCategory {
 }
 
 extension EventCategoryExtension on EventCategory {
-  String get localized {
+  String localized(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     switch (this) {
       case EventCategory.specialEvent:
-        return LocalizedKeys.eventCategorySpecialText;
+        return l10n.eventCategorySpecialText;
       case EventCategory.religionEvent:
-        return LocalizedKeys.eventCategoryReligionText;
+        return l10n.eventCategoryReligionText;
       case EventCategory.familyEvent:
-        return LocalizedKeys.eventCategoryFamilyText;
+        return l10n.eventCategoryFamilyText;
       case EventCategory.businessEvent:
-        return LocalizedKeys.eventCategoryBusinessText;
+        return l10n.eventCategoryBusinessText;
       case EventCategory.personalEvent:
-        return LocalizedKeys.eventCategoryPersonalText;
+        return l10n.eventCategoryPersonalText;
       case EventCategory.otherEvent:
-        return LocalizedKeys.eventCategoryOtherText;
+        return l10n.eventCategoryOtherText;
     }
   }
 

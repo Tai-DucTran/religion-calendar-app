@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class FullCalendarEventCard extends ConsumerWidget {
@@ -72,7 +72,7 @@ class FullCalendarEventCard extends ConsumerWidget {
                   children: [
                     Text(
                       eventTime == null || isReligionEvent
-                          ? LocalizedKeys.allDayText
+                          ? context.l10n.allDayText
                           : DateFormat('HH:mm').format(eventTime!),
                       style: AriesTextStyles.textBodySmall.copyWith(
                         fontWeight: FontWeight.bold,
