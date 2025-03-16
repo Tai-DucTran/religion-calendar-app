@@ -38,11 +38,11 @@ GoRouter router(Ref ref) {
           state.matchedLocation == const SignUpRoute().location;
       final isOnboardingPage =
           state.matchedLocation == const OnboardingRoute().location;
-      final isInMainShell = state.matchedLocation.startsWith('/home') ||
-          state.matchedLocation.startsWith('/daily-activities') ||
-          state.matchedLocation.startsWith('/explore') ||
-          state.matchedLocation.startsWith('/profile') ||
-          state.matchedLocation.startsWith('/basic-info-setting');
+      final isInMainShell =
+          // Add more main shell route below if we have more page in the future
+          state.matchedLocation.startsWith('/home') ||
+              state.matchedLocation.startsWith('/profile') ||
+              state.matchedLocation.startsWith('/basic-info-setting');
 
       if (!isLoggedIn && !isSignUpPage) {
         return const SignUpRoute().location;

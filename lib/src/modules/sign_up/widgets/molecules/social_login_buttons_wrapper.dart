@@ -23,16 +23,6 @@ class SocialLoginButtonsWrapper extends ConsumerWidget {
           ),
           Spacing.sp12,
           SocialLoginButton(
-            iconPath: AriesIcons.facebookWhiteIcon,
-            backgroundColor: AriesColor.facebookColor,
-            borderColor: AriesColor.facebookColor,
-            onTap: () async {
-              final controller = ref.read(authStateControllerProvider.notifier);
-              await controller.loginWithFacebook();
-            },
-          ),
-          Spacing.sp12,
-          SocialLoginButton(
             iconPath: AriesIcons.appleWhiteIcon,
             backgroundColor: AriesColor.black,
             borderColor: AriesColor.black,

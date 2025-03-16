@@ -28,22 +28,6 @@ RouteBase get $mainShellRouteData => StatefulShellRouteData.$route(
         StatefulShellBranchData.$branch(
           routes: [
             GoRouteData.$route(
-              path: '/daily-activities',
-              factory: $DailyActivitiesRouteExtension._fromState,
-            ),
-          ],
-        ),
-        StatefulShellBranchData.$branch(
-          routes: [
-            GoRouteData.$route(
-              path: '/explore',
-              factory: $ExploreRouteExtension._fromState,
-            ),
-          ],
-        ),
-        StatefulShellBranchData.$branch(
-          routes: [
-            GoRouteData.$route(
               path: '/profile',
               factory: $ProfileRouteExtension._fromState,
             ),
@@ -62,41 +46,6 @@ extension $HomeRouteExtension on HomeRoute {
 
   String get location => GoRouteData.$location(
         '/home',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $DailyActivitiesRouteExtension on DailyActivitiesRoute {
-  static DailyActivitiesRoute _fromState(GoRouterState state) =>
-      const DailyActivitiesRoute();
-
-  String get location => GoRouteData.$location(
-        '/daily-activities',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $ExploreRouteExtension on ExploreRoute {
-  static ExploreRoute _fromState(GoRouterState state) => const ExploreRoute();
-
-  String get location => GoRouteData.$location(
-        '/explore',
       );
 
   void go(BuildContext context) => context.go(location);

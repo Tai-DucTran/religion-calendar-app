@@ -84,38 +84,6 @@ class AuthStateController extends _$AuthStateController {
     }
   }
 
-  Future<void> loginWithFacebook() async {
-    final authenticatorRepo = ref.read(authenticatorRepositoryProvider);
-    final userFireStoreRepo = ref.read(userFirestoreRepositoryProvider);
-
-    state = const AsyncLoading();
-    final result = await authenticatorRepo.loginWithFacebook();
-    final userId = authenticatorRepo.userId;
-
-    if (result == AuthResults.success && userId != null) {
-      final user = User(
-        userId: userId,
-        displayName: authenticatorRepo.displayName,
-        email: authenticatorRepo.email,
-        isVerified: true,
-      );
-      await userFireStoreRepo.saveUserInfo(user);
-    }
-
-    final hasCompleteOnboarding =
-        await userFireStoreRepo.hasCompleteOnboarding(userId: userId ?? '');
-
-    state = AsyncValue.data(
-      AuthState(
-        result: result,
-        isLoading: false,
-        userId: userId,
-        isLoggedIn: result == AuthResults.success ? true : false,
-        hasCompleteOnboarding: hasCompleteOnboarding,
-      ),
-    );
-  }
-
   Future<void> createUserWithEmailAndPassword({
     required String email,
     required String password,
