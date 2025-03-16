@@ -1,6 +1,6 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 
 class EventLocationInput extends StatefulWidget {
   const EventLocationInput({
@@ -29,7 +29,7 @@ class _EventLocationInputState extends State<EventLocationInput> {
             maxLines: null,
             controller: widget.controller,
             decoration: InputDecoration(
-              hintText: LocalizedKeys.eventLocationHint,
+              hintText: context.l10n.eventLocationHint,
               border: InputBorder.none,
               hintStyle: const TextStyle(
                 color: AriesColor.neutral50,

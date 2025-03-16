@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/profile/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/profile/profile_page.dart';
 import 'package:religion_calendar_app/src/utils/utils.dart';
@@ -103,15 +103,15 @@ showAlertDialog(context) => showCupertinoDialog(
       context: context,
       builder: (BuildContext context) => CupertinoAlertDialog(
         title: Text(
-          LocalizedKeys.permissionDeninedText,
+          context.l10n.permissionDeninedText,
         ),
         content: Text(
-          LocalizedKeys.grantAccessToPhotosText,
+          context.l10n.grantAccessToPhotosText,
         ),
         actions: <CupertinoDialogAction>[
           CupertinoDialogAction(
             child: Text(
-              LocalizedKeys.cancelButtonText,
+              context.l10n.cancelButtonText,
               style: TextStyle(
                 color: AriesColor.neutral700,
               ),
@@ -120,7 +120,7 @@ showAlertDialog(context) => showCupertinoDialog(
           ),
           CupertinoDialogAction(
             child: Text(
-              LocalizedKeys.openSettingsButtonText,
+              context.l10n.openSettingsButtonText,
               style: TextStyle(
                 color: AriesColor.neutral700,
               ),

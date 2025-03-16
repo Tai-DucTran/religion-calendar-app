@@ -1,6 +1,6 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/sign_up/widgets/organisms/organisms.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
@@ -17,7 +17,7 @@ class SignUpPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            LocalizedKeys.signUp,
+            context.l10n.signUp,
             style: const TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.w700,

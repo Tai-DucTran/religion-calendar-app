@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/home/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
@@ -120,7 +120,7 @@ class _AllEventsSectionState extends ConsumerState<AllEventsSection> {
         vertical: 32.w,
       ),
       child: Text(
-        LocalizedKeys.loadMoreEventsText,
+        context.l10n.loadMoreEventsText,
         style: AriesTextStyles.textBodySmall.copyWith(
           color: AriesColor.yellowP950,
         ),
@@ -159,7 +159,7 @@ class _AllEventsSectionState extends ConsumerState<AllEventsSection> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  LocalizedKeys.allEventsText,
+                  context.l10n.allEventsText,
                   style: AriesTextStyles.textHeading6,
                 ),
               ),
@@ -168,7 +168,7 @@ class _AllEventsSectionState extends ConsumerState<AllEventsSection> {
                 error: (error, stackTrace) => const Offstage(),
                 data: (listOfEvents) {
                   if (listOfEvents.isEmpty) {
-                    return Text(LocalizedKeys.emptyEventText);
+                    return Text(context.l10n.emptyEventText);
                   }
 
                   return Column(

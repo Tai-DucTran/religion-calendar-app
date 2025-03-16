@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/profile/models/models.dart';
 import 'package:religion_calendar_app/src/modules/profile/widgets/molecules/molecules.dart';
 
@@ -9,7 +9,7 @@ class GeneralSettingSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SettingSection(
-      heading: LocalizedKeys.generalSettingsHeaderText,
+      heading: context.l10n.generalSettingsHeaderText,
       settingOptions: generalSettingOptionsList,
     );
   }

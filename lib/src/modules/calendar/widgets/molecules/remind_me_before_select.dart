@@ -13,7 +13,7 @@ class RemindMeBeforeSelect extends ConsumerWidget {
     final options = RemindMeBeforeOptions.values.toList();
     final selectedOption = ref.watch(remindMeBeforeControllerProvider);
     final TextStyle textStyle = AriesTextStyles.textBodySmall;
-    
+
     return Row(
       children: [
         const Icon(
@@ -29,7 +29,7 @@ class RemindMeBeforeSelect extends ConsumerWidget {
                   value: option,
                   child: Row(children: [
                     Text(
-                      option.localized,
+                      option.localized as String,
                     ),
                   ]),
                 );
@@ -44,8 +44,7 @@ class RemindMeBeforeSelect extends ConsumerWidget {
             decoration: const InputDecoration(
               border: InputBorder.none,
             ),
-            dropdownColor:
-                AriesColor.neutral0,
+            dropdownColor: AriesColor.neutral0,
             style: textStyle.copyWith(
               color: AriesColor.black,
             ),

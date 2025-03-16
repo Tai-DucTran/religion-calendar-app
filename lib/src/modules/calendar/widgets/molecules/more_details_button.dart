@@ -1,7 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class MoreDetailsButton extends StatelessWidget {
@@ -40,7 +40,7 @@ class MoreDetailsButton extends StatelessWidget {
           child: CupertinoButton(
             onPressed: () {},
             child: Text(
-              LocalizedKeys.moreDetailsButtonText,
+              context.l10n.moreDetailsButtonText,
               style: AriesTextStyles.textBodySmall.copyWith(
                 fontWeight: FontWeight.w600,
                 color: AriesColor.yellowP950,

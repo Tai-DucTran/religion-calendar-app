@@ -4,8 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:religion_calendar_app/constants/firebase_collection_name.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
+
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class DeleteConfirmation {
@@ -26,7 +27,7 @@ class DeleteConfirmation {
         ScaffoldMessenger.of(context).showSnackBar(
           getCustomSnackbar(
             context: context,
-            message: LocalizedKeys.eventDeletedSuccessfullyText,
+            message: context.l10n.eventDeletedSuccessfullyText,
             snackbarType: SnackbarType.success,
           ),
         );
@@ -36,7 +37,7 @@ class DeleteConfirmation {
         ScaffoldMessenger.of(context).showSnackBar(
           getCustomSnackbar(
             context: context,
-            message: LocalizedKeys.eventDeletedFailedText,
+            message: context.l10n.eventDeletedFailedText,
             snackbarType: SnackbarType.error,
           ),
         );
@@ -55,7 +56,7 @@ class DeleteConfirmation {
         padding: const EdgeInsets.only(bottom: 20),
         child: CupertinoActionSheet(
           title: Text(
-            LocalizedKeys.deleteEventConfirmationQuestionText,
+            context.l10n.deleteEventConfirmationQuestionText,
             style: AriesTextStyles.textBodySmall.copyWith(
               color: AriesColor.neutral700.withValues(
                 alpha: 0.5,
@@ -74,7 +75,7 @@ class DeleteConfirmation {
                 );
               },
               child: Text(
-                LocalizedKeys.deleteEventConfirmationText,
+                context.l10n.deleteEventConfirmationText,
                 style: AriesTextStyles.textBodyNormal.copyWith(
                   color: AriesColor.danger200,
                 ),
@@ -86,7 +87,7 @@ class DeleteConfirmation {
               Navigator.pop(context);
             },
             child: Text(
-              LocalizedKeys.cancelButtonText,
+              context.l10n.cancelButtonText,
               style: AriesTextStyles.textBodyNormal.copyWith(
                 color: AriesColor.facebookColor,
               ),

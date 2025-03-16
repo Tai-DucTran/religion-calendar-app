@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/l10n/app_localizations.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/router/routes.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
@@ -11,15 +12,15 @@ import 'package:religion_calendar_app/src/widgets/widgets.dart';
 class WeeklyCalendarSection extends ConsumerWidget {
   const WeeklyCalendarSection({super.key});
 
-  String getGreetingText() {
+  String getGreetingText(AppLocalizations l10n) {
     final hour = DateTime.now().hour;
 
     if (hour >= 5 && hour < 12) {
-      return LocalizedKeys.goodMorningText;
+      return l10n.goodMorningText;
     } else if (hour >= 12 && hour < 18) {
-      return LocalizedKeys.goodAfternoonText;
+      return l10n.goodAfternoonText;
     } else {
-      return LocalizedKeys.goodEveningText;
+      return l10n.goodEveningText;
     }
   }
 
@@ -27,6 +28,7 @@ class WeeklyCalendarSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentWeekDates = ref.watch(getCurrentWeekProvider);
     final combineEventsAsync = ref.watch(combineEventsControllerProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +38,7 @@ class WeeklyCalendarSection extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              getGreetingText(),
+              getGreetingText(l10n),
               style: AriesTextStyles.textHeading4,
             ),
             CupertinoButton(
@@ -48,7 +50,7 @@ class WeeklyCalendarSection extends ConsumerWidget {
                 );
               },
               child: Text(
-                LocalizedKeys.watchFullCalendarText,
+                context.l10n.watchFullCalendarText,
                 style: AriesTextStyles.textBodySmall.copyWith(
                   fontWeight: FontWeight.bold,
                   color: AriesColor.yellowP950,

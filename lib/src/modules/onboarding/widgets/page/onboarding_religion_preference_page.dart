@@ -2,8 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
-import 'package:religion_calendar_app/src/utils/string_helper.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/onboarding/controllers/get_religion_onboarding_image_controller.dart';
 import 'package:religion_calendar_app/src/router/routes.dart';
@@ -29,14 +28,14 @@ class OnboardingReligionPreferencePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              LocalizedKeys.religionText,
+              context.l10n.religionText,
               style: const TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.w700,
               ),
             ),
             Text(
-              LocalizedKeys.whatIsYourReligion,
+              context.l10n.whatIsYourReligion,
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w300,
@@ -58,7 +57,7 @@ class OnboardingReligionPreferencePage extends ConsumerWidget {
                 return ListTile(
                   contentPadding: const EdgeInsets.only(left: 0),
                   title: Text(
-                    religion.localized.toCapitalized(),
+                    religion.getLocalized(context).toCapitalized(),
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -80,7 +79,7 @@ class OnboardingReligionPreferencePage extends ConsumerWidget {
               },
             ),
             CtaFullWidthButton(
-              buttonText: LocalizedKeys.selectButtonText,
+              buttonText: context.l10n.selectButtonText,
               onPressed: () async {
                 final userFirestoreController =
                     ref.read(userFirestoreRepositoryProvider);
@@ -98,8 +97,8 @@ class OnboardingReligionPreferencePage extends ConsumerWidget {
             // https://taisidehustle.atlassian.net/browse/KAN-67
             Spacing.sp24,
             BottomRichTextWithAction(
-              initialQuestion: '${LocalizedKeys.youWantToHaveYourReligion} ',
-              textSpan: LocalizedKeys.submitHereButtonText,
+              initialQuestion: '${context.l10n.youWantToHaveYourReligion} ',
+              textSpan: context.l10n.submitHereButtonText,
               onTap: () {},
             )
           ],

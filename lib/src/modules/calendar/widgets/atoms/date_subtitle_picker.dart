@@ -1,8 +1,8 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 
 class DateSubtitlePicker extends StatelessWidget {
   const DateSubtitlePicker({
@@ -19,8 +19,8 @@ class DateSubtitlePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final calendarCategoryLabel = isLunarCalendar
-        ? LocalizedKeys.calendarCategorySolarText
-        : LocalizedKeys.calendarCategoryLunarText;
+        ? context.l10n.calendarCategorySolarText
+        : context.l10n.calendarCategoryLunarText;
 
     return Text(
       '$calendarCategoryLabel ${getFullLunarDateText(

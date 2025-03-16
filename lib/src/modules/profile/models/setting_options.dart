@@ -1,5 +1,6 @@
 import 'package:aries/aries.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:flutter/widgets.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/router/routes.dart';
 
 class SettingOptionItem {
@@ -25,40 +26,40 @@ enum SettingOptions {
 }
 
 extension SettingOptionsExtension on SettingOptions {
-  SettingOptionItem get item {
+  SettingOptionItem getItem(BuildContext context) {
     final config = switch (this) {
       SettingOptions.religionPreferencesSetting => (
-          title: LocalizedKeys.religionPreferencesSettingTitleText,
+          title: context.l10n.religionPreferencesSettingTitleText,
           iconPath: AriesIcons.start05Icon,
           route: ReligionPreferencesSettingRoute().location,
         ),
       SettingOptions.themeSetting => (
-          title: LocalizedKeys.themeSettingTitleText,
+          title: context.l10n.themeSettingTitleText,
           iconPath: AriesIcons.moon01Icon,
           route: ThemeSettingRoute().location,
         ),
       SettingOptions.notificationSetting => (
-          title: LocalizedKeys.notificationSettingTitleText,
+          title: context.l10n.notificationSettingTitleText,
           iconPath: AriesIcons.bell01Icon,
           route: NotificationSettingRoute().location,
         ),
       SettingOptions.feedbackAndReportSetting => (
-          title: LocalizedKeys.feebackAndReportSettingTitlText,
+          title: context.l10n.feebackAndReportSettingTitlText,
           iconPath: AriesIcons.checkHearIcon,
           route: FeedbackAndReportSettingRoute().location,
         ),
       SettingOptions.helpAndFAQsSetting => (
-          title: LocalizedKeys.helpAndFAQsSettingTitleText,
+          title: context.l10n.helpAndFAQsSettingTitleText,
           iconPath: AriesIcons.messageQuestionCircleIcon,
           route: HelpAndFAQsSettingRoute().location,
         ),
       SettingOptions.termsOfUseSetting => (
-          title: LocalizedKeys.termsOfUseTitleText,
+          title: context.l10n.termsOfUseTitleText,
           iconPath: AriesIcons.file05Icon,
           route: TermsOfUseSettingRoute().location,
         ),
       SettingOptions.privacyPolicySetting => (
-          title: LocalizedKeys.privacyPolicySettingTitleText,
+          title: context.l10n.privacyPolicySettingTitleText,
           iconPath: AriesIcons.lock02Icon,
           route: PrivacyPolicySettingRoute().location,
         )

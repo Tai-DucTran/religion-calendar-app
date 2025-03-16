@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:religion_calendar_app/constants/screen_config.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/profile/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/modules/user/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/router/routes.dart';
@@ -48,7 +48,7 @@ class UserInfoCard extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  userName ?? userEmail ?? LocalizedKeys.userDefaultNameText,
+                  userName ?? userEmail ?? context.l10n.userDefaultNameText,
                   style: AriesTextStyles.textHeading5,
                 ),
                 Spacing.sp4,
@@ -59,7 +59,7 @@ class UserInfoCard extends ConsumerWidget {
                     );
                   },
                   child: Text(
-                    LocalizedKeys.editUserInfoButtonText,
+                    context.l10n.editUserInfoButtonText,
                     style: AriesTextStyles.textBodyNormal.copyWith(
                       color: AriesColor.yellowP600,
                       fontWeight: FontWeight.w600,

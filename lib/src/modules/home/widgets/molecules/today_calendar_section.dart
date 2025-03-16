@@ -2,7 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class TodayCalendarSection extends StatelessWidget {
@@ -29,7 +29,7 @@ class TodayCalendarSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              LocalizedKeys.todayText,
+              context.l10n.todayText,
               style: AriesTextStyles.textBodyMedium,
               textScaler: const TextScaler.linear(1.05),
             ),

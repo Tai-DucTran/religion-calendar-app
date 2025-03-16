@@ -31,7 +31,7 @@ class SettingSection extends StatelessWidget {
         Spacing.sp14,
         ...settingOptions.map(
           (option) {
-            final settingOption = option.item;
+            final settingOption = option.getItem(context);
             return SettingCard(
               iconPath: settingOption.iconPath,
               route: settingOption.route,

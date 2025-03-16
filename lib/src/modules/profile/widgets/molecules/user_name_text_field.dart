@@ -1,7 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/user/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
@@ -30,7 +30,7 @@ class _UserNameTextFieldState extends ConsumerState<UserNameTextField> {
         ScaffoldMessenger.of(context).showSnackBar(
           getCustomSnackbar(
             context: context,
-            message: LocalizedKeys.profileUpdatedSuccessfullyText,
+            message: context.l10n.profileUpdatedSuccessfullyText,
             snackbarType: SnackbarType.success,
           ),
         );
@@ -40,7 +40,7 @@ class _UserNameTextFieldState extends ConsumerState<UserNameTextField> {
         ScaffoldMessenger.of(context).showSnackBar(
           getCustomSnackbar(
             context: context,
-            message: LocalizedKeys.profileUpdatedFailedText,
+            message: context.l10n.profileUpdatedFailedText,
             snackbarType: SnackbarType.error,
           ),
         );
@@ -72,14 +72,14 @@ class _UserNameTextFieldState extends ConsumerState<UserNameTextField> {
     return Column(
       children: [
         TextFormFieldContainer(
-          title: LocalizedKeys.userNameText,
+          title: context.l10n.userNameText,
           titleStyle: AriesTextStyles.textBodyNormal,
           textFieldColors: Colors.white,
           controller: _userNameController,
         ),
         Spacing.sp16,
         TextFormFieldContainer(
-          title: LocalizedKeys.email,
+          title: context.l10n.email,
           titleStyle: AriesTextStyles.textBodyNormal,
           textFieldColors: Colors.white,
           controller: _userEmailController,
@@ -88,7 +88,7 @@ class _UserNameTextFieldState extends ConsumerState<UserNameTextField> {
         Spacing.sp30,
         CustomElevatedButton(
           buttonColor: AriesColor.yellowP400,
-          text: LocalizedKeys.saveButtonText,
+          text: context.l10n.saveButtonText,
           onPressed: updateBasicInfo,
           width: double.infinity,
         ),

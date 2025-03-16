@@ -1,7 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 
 class ProfilePageHeader extends StatelessWidget {
   const ProfilePageHeader({super.key});
@@ -13,7 +13,7 @@ class ProfilePageHeader extends StatelessWidget {
         horizontal: ScreenConfig.defaultHorizontalScreenPadding,
       ),
       child: Text(
-        LocalizedKeys.userInfoHeaderText,
+        context.l10n.userInfoHeaderText,
         style: AriesTextStyles.textHeading4,
       ),
     );

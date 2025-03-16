@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 
 class IsAllDayToggle extends ConsumerWidget {
@@ -25,7 +25,7 @@ class IsAllDayToggle extends ConsumerWidget {
             ),
             Spacing.sp6,
             Text(
-              LocalizedKeys.allDayToggleText,
+              context.l10n.allDayToggleText,
               style: AriesTextStyles.textBodySmall,
             ),
           ],

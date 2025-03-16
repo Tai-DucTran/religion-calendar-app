@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/home/widgets/utils/helpers.dart';
 import 'package:religion_calendar_app/src/modules/user/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/utils/string_helper.dart';
@@ -75,7 +75,7 @@ class EventCard extends ConsumerWidget {
                 joinTwoString(
                       firstString: lunarDate,
                       secondString:
-                          LocalizedKeys.calendarCategoryLunarAcronymText,
+                          context.l10n.calendarCategoryLunarAcronymText,
                       separator: ', ',
                     ) ??
                     '',
@@ -160,13 +160,13 @@ class EventCard extends ConsumerWidget {
                               Spacing.sp4,
                               Text(
                                 isToday
-                                    ? LocalizedKeys.todayText
+                                    ? context.l10n.todayText
                                     : joinTwoString(
                                           firstString:
                                               countDownFromNow.toString(),
                                           secondString: countDownFromNow == 1
-                                              ? LocalizedKeys.dayLeftText
-                                              : LocalizedKeys.daysLeftText,
+                                              ? context.l10n.dayLeftText
+                                              : context.l10n.daysLeftText,
                                         ) ??
                                         '',
                                 style: AriesTextStyles.textBodySmall.copyWith(

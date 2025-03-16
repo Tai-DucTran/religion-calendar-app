@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/constants/screen_config.dart';
-import 'package:religion_calendar_app/l10n/localized_keys.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/authentication/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
@@ -18,7 +18,7 @@ class AccountActionsSection extends ConsumerWidget {
             horizontal: ScreenConfig.defaultHorizontalScreenPadding,
           ),
           child: CustomElevatedButton(
-            text: LocalizedKeys.logoutButtonText,
+            text: context.l10n.logoutButtonText,
             buttonColor: AriesColor.neutral10,
             width: double.infinity,
             height: 34.h,
@@ -33,7 +33,7 @@ class AccountActionsSection extends ConsumerWidget {
         TextButton(
           onPressed: () {},
           child: Text(
-            LocalizedKeys.deleteUserAccountButtonText,
+            context.l10n.deleteUserAccountButtonText,
             style: TextStyle(
               color: AriesColor.danger400,
             ),
