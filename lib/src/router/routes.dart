@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:religion_calendar_app/src/modules/calendar/widgets/pages/full_calendar_page.dart';
-import 'package:religion_calendar_app/src/modules/daily_activities/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/forgot_pasword_page.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/login_page.dart';
 import 'package:religion_calendar_app/src/modules/navigation_bottom_bar/widgets/organisms/navigation_bottom_bar.dart';
 import 'package:religion_calendar_app/src/modules/onboarding/widgets/page/onboarding_religion_preference_page.dart';
 import 'package:religion_calendar_app/src/modules/sign_up/widgets/page/page.dart';
 
-import '../modules/explore_page/widgets/widgets.dart';
 import '../modules/home/widgets/pages/pages.dart';
 import '../modules/profile/widgets/widgets.dart';
 
@@ -19,24 +17,11 @@ final shellNavigationKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
 @TypedStatefulShellRoute<MainShellRouteData>(
   branches: <TypedStatefulShellBranch>[
+    // Add more main shell route below if we have more page in the future
     TypedStatefulShellBranch(
       routes: [
         TypedGoRoute<HomeRoute>(
           path: HomeRoute.path,
-        ),
-      ],
-    ),
-    TypedStatefulShellBranch(
-      routes: [
-        TypedGoRoute<DailyActivitiesRoute>(
-          path: DailyActivitiesRoute.path,
-        ),
-      ],
-    ),
-    TypedStatefulShellBranch(
-      routes: [
-        TypedGoRoute<ExploreRoute>(
-          path: ExploreRoute.path,
         ),
       ],
     ),
@@ -154,26 +139,6 @@ class FullCalendarRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const FullCalendarPage();
-  }
-}
-
-class DailyActivitiesRoute extends GoRouteData {
-  const DailyActivitiesRoute();
-  static const path = '/daily-activities';
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return DailyActivitiesPage();
-  }
-}
-
-class ExploreRoute extends GoRouteData {
-  const ExploreRoute();
-  static const path = '/explore';
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return ExplorePage();
   }
 }
 

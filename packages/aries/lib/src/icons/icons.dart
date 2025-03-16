@@ -22,10 +22,16 @@ class AriesIcons {
       'packages/aries/assets/images/icons/calendar_outline_icon.svg';
   static const homeOutlineIcon =
       'packages/aries/assets/images/icons/home_outline_icon.svg';
+  static const homeLineFillIcon =
+      'packages/aries/assets/images/icons/home_line_fill_icon.svg';
   static const sunOutlineIcon =
       'packages/aries/assets/images/icons/sun_outline_icon.svg';
   static const userOutlineIcon =
       'packages/aries/assets/images/icons/user_outline_icon.svg';
+  static const user03LineFillIcon =
+      'packages/aries/assets/images/icons/user_03_line_fill_icon.svg';
+  static const user03OutlineIcon =
+      'packages/aries/assets/images/icons/user_03_line_fill_icon.svg';
   static const moonStartOutlineIcon =
       'packages/aries/assets/images/icons/moon_star_outline.svg';
   static const wordOfWisdomOutlineIcon =

@@ -40,7 +40,7 @@ class FullCalendarDataCell extends ConsumerWidget {
         date.month == selectedDate.month &&
         date.day == selectedDate.day;
     final goRouterProvider = ref.watch(routerProvider);
-    final currentRoute = goRouterProvider.state?.path;
+    final currentRoute = goRouterProvider.state.path;
     final isHomeRoute = currentRoute == RouteNames.home;
 
     final isToday = _isToday(date);

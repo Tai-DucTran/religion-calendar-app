@@ -2,19 +2,19 @@ import 'package:aries/aries.dart';
 import 'package:religion_calendar_app/l10n/localized_keys.dart';
 
 class NavigationBottomItem {
-  final String iconPath;
+  final String iconSelectedPath;
+  final String iconUnSelectedPath;
   final String name;
 
   NavigationBottomItem({
-    required this.iconPath,
+    required this.iconSelectedPath,
+    required this.iconUnSelectedPath,
     required this.name,
   });
 }
 
 enum NavigationBottomItemTypes {
   home,
-  dailyActivities,
-  explore,
   profile,
 }
 
@@ -23,22 +23,14 @@ extension NavigationBottomItemExtension on NavigationBottomItemTypes {
     switch (this) {
       case NavigationBottomItemTypes.home:
         return NavigationBottomItem(
-          iconPath: AriesIcons.homeOutlineIcon,
+          iconSelectedPath: AriesIcons.homeLineFillIcon,
+          iconUnSelectedPath: AriesIcons.homeOutlineIcon,
           name: LocalizedKeys.homeNavItemText,
-        );
-      case NavigationBottomItemTypes.dailyActivities:
-        return NavigationBottomItem(
-          iconPath: AriesIcons.calendarOutlineIcon,
-          name: 'Daily',
-        );
-      case NavigationBottomItemTypes.explore:
-        return NavigationBottomItem(
-          iconPath: AriesIcons.sunOutlineIcon,
-          name: LocalizedKeys.exploreNavItemText,
         );
       case NavigationBottomItemTypes.profile:
         return NavigationBottomItem(
-          iconPath: AriesIcons.userOutlineIcon,
+          iconSelectedPath: AriesIcons.user03LineFillIcon,
+          iconUnSelectedPath: AriesIcons.user03OutlineIcon,
           name: LocalizedKeys.profileNavItemText,
         );
     }

@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:religion_calendar_app/src/modules/authentication/exceptions/authenticator_exceptions.dart';
@@ -31,32 +30,6 @@ class AuthenticatorRepository {
   Future<void> logOut() async {
     await _auth.signOut();
     await GoogleSignIn().signOut();
-    await FacebookAuth.instance.logOut();
-  }
-
-  Future<AuthResults> loginWithFacebook() async {
-    final loginResult = await FacebookAuth.instance.login();
-
-    // To check if the user aborts the login process or not
-    // We will check the returned token from [loginResult]
-    final token = loginResult.accessToken?.tokenString;
-    if (token == null) {
-      return AuthResults.aborted;
-    }
-
-    final oauthCredentials = FacebookAuthProvider.credential(token);
-
-    try {
-      await _auth.signInWithCredential(
-        oauthCredentials,
-      );
-      return AuthResults.success;
-    } on FirebaseAuthException catch (e) {
-      throw FirebaseAuthException(
-        code: e.code,
-        message: e.message,
-      );
-    }
   }
 
   Future<AuthResults> loginWithGoogle() async {

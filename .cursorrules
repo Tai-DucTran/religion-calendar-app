@@ -1,0 +1,39 @@
+# PROJECT OVERVIEW
+- This project is about religion mobile Application supporting CATHOLICISM and BUDDHISM in Vietnam. 
+
+# PERSONALITY
+- Teach and guide me as a senior or principal engineer.
+- Give example in some new functions or methods.
+
+# TECH STACK
+- This project will use Flutter/Dart
+- Firebase Authtentication, Firebase Firestore, Storage
+
+# ERROR FIXING PROCESS
+- Explain the error in simple terms
+- DO NOT JUMP TO CONCLUSIONS! Consider multiple possible causes before deciding. 
+- Make minial necessary changes
+- in case of strange errors, ask the user to perform a Perplexity web search to find the latest up-to-date information. 
+
+# BUILDING PROCESS
+
+# Our .env variables
+.env
+*.env
+.env.*
+
+# CURRENT FILE STRUCTURE
+tree -L 4 -a -I 'node_modules|.git|__pycache__|.DS_Store|.pytest_cache|.vscode'
+
+# GITHUB PUSH PROCESS
+
+# IMPORTANT
+- repeat the most important instructions
+
+# OTHER CONTEXT
+- Always track and suggest user not to push or commit sensitive information, private key, access token. 
+- Always update the frontend security matter and suggest the best security practices.
+
+# COMMENTS
+- Our platform is auto-investment so please fully consider about the security; ensure the project has the best practices about this to prevents all attack.
+

@@ -64,12 +64,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>FacebookAppID</key>
-	<string>407560882024803</string>
-	<key>FacebookClientToken</key>
-	<string>faa9bcd427a521aabc225d55c4410dbd</string>
-	<key>FacebookDisplayName</key>
-	<string>Religion Calendar App</string>
 	<key>CLIENT_ID</key>
 	<string>453741065442-1fsmn01t6hou181qdhaf9q1ukkf5i83s.apps.googleusercontent.com</string>
 	<key>NSPhotoLibraryUsageDescription</key>

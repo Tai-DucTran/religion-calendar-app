@@ -9,37 +9,43 @@ class SocialLoginButtonsWrapper extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return FittedBox(
-      fit: BoxFit.contain,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SocialLoginButton(
-            iconPath: AriesIcons.googleIcon,
-            onTap: () async {
-              final controller = ref.read(authStateControllerProvider.notifier);
-              await controller.loginWithGoogle();
-            },
-          ),
-          Spacing.sp12,
-          SocialLoginButton(
-            iconPath: AriesIcons.facebookWhiteIcon,
-            backgroundColor: AriesColor.facebookColor,
-            borderColor: AriesColor.facebookColor,
-            onTap: () async {
-              final controller = ref.read(authStateControllerProvider.notifier);
-              await controller.loginWithFacebook();
-            },
-          ),
-          Spacing.sp12,
-          SocialLoginButton(
-            iconPath: AriesIcons.appleWhiteIcon,
-            backgroundColor: AriesColor.black,
-            borderColor: AriesColor.black,
-            onTap: () {},
-          ),
-        ],
-      ),
+    final isAppleDevice = Theme.of(context).platform == TargetPlatform.iOS ||
+        Theme.of(context).platform == TargetPlatform.macOS;
+
+    return SizedBox(
+      width: double.infinity,
+      child: isAppleDevice
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SocialLoginButton(
+                  iconPath: AriesIcons.googleIcon,
+                  onTap: () async {
+                    final controller =
+                        ref.read(authStateControllerProvider.notifier);
+                    await controller.loginWithGoogle();
+                  },
+                ),
+                Spacing.sp12,
+                SocialLoginButton(
+                  iconPath: AriesIcons.appleWhiteIcon,
+                  backgroundColor: AriesColor.black,
+                  borderColor: AriesColor.black,
+                  onTap: () {},
+                ),
+              ],
+            )
+          : SizedBox(
+              width: double.infinity,
+              child: SocialLoginButton(
+                iconPath: AriesIcons.googleIcon,
+                onTap: () async {
+                  final controller =
+                      ref.read(authStateControllerProvider.notifier);
+                  await controller.loginWithGoogle();
+                },
+              ),
+            ),
     );
   }
 }

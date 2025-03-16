@@ -45,6 +45,10 @@ class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
         final item = type.item;
         final index = NavigationBottomItemTypes.values.indexOf(type);
         final isSelected = widget.navigationShell.currentIndex == index;
+        final selectedColor =
+            isSelected ? AriesColor.yellowP950 : AriesColor.neutral100;
+        final selectedIconPath =
+            isSelected ? item.iconSelectedPath : item.iconUnSelectedPath;
 
         return InkWell(
           onTap: () => _onTap(context, index),
@@ -57,13 +61,11 @@ class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.asset(
-                    item.iconPath,
+                    selectedIconPath,
                     height: 24,
                     width: 24,
                     colorFilter: ColorFilter.mode(
-                      isSelected
-                          ? AriesColor.yellowP950
-                          : AriesColor.neutral100,
+                      selectedColor,
                       BlendMode.srcIn,
                     ),
                   ),
@@ -72,9 +74,7 @@ class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
                     textAlign: TextAlign.center,
                     item.name,
                     style: TextStyle(
-                      color: isSelected
-                          ? AriesColor.yellowP950
-                          : AriesColor.neutral100,
+                      color: selectedColor,
                       fontSize: 12.sp,
                     ),
                   ),
@@ -94,12 +94,6 @@ class _NavigationBottomBarState extends ConsumerState<NavigationBottomBar> {
         path = HomeRoute.path;
         break;
       case 1:
-        path = DailyActivitiesRoute.path;
-        break;
-      case 2:
-        path = ExploreRoute.path;
-        break;
-      case 3:
         path = ProfileRoute.path;
         break;
       default:
