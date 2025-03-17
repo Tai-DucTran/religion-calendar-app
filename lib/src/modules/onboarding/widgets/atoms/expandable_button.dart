@@ -99,9 +99,15 @@ class _ExpandableButtonState extends State<ExpandableButton>
             child: Stack(
               alignment: Alignment.center,
               children: [
-                // Icon (visible in circle state)
-                Opacity(
-                  opacity: 1.0 - _controller.value,
+                // Icon with improved transition
+                FadeTransition(
+                  opacity: Tween<double>(begin: 1.0, end: 0.0).animate(
+                    CurvedAnimation(
+                      parent: _controller,
+                      // Make icon fade out faster in the first half of animation
+                      curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
+                    ),
+                  ),
                   child: SvgPicture.asset(
                     widget.iconPath,
                     height: 20,
@@ -113,9 +119,15 @@ class _ExpandableButtonState extends State<ExpandableButton>
                   ),
                 ),
 
-                // Text (visible in expanded state)
-                Opacity(
-                  opacity: _controller.value,
+                // Text with improved transition
+                FadeTransition(
+                  opacity: Tween<double>(begin: 0.0, end: 1.0).animate(
+                    CurvedAnimation(
+                      parent: _controller,
+                      // Make text fade in after icon has mostly faded out
+                      curve: const Interval(0.4, 1.0, curve: Curves.easeIn),
+                    ),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
