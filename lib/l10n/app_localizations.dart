@@ -110,7 +110,7 @@ abstract class AppLocalizations {
   /// No description provided for @religionUnknownText.
   ///
   /// In en, this message translates to:
-  /// **'I don\'\'t have religion'**
+  /// **'Other / None'**
   String get religionUnknownText;
 
   /// No description provided for @religionText.

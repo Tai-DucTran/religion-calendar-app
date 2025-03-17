@@ -15,7 +15,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get religionBuddhismText => 'Buddhism';
 
   @override
-  String get religionUnknownText => 'I don\'\'t have religion';
+  String get religionUnknownText => 'Other / None';
 
   @override
   String get religionText => 'Religion';
