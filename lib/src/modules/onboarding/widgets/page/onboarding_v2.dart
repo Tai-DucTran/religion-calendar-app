@@ -32,7 +32,10 @@ class OnboardingPageV2 extends StatelessWidget {
             height: 128,
           ),
           Container(
-            margin: const EdgeInsets.only(left: 42, right: 42),
+            margin: const EdgeInsets.only(
+              left: 42,
+              right: 42,
+            ),
             child: Text(
               context.l10n.myReligionIs,
               style: AriesTextStyles.textHeading3.copyWith(

@@ -23,6 +23,7 @@ class _ExpandableButtonsSectionState extends State<ExpandableButtonsSection> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      spacing: 12,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ExpandableButton(
@@ -32,7 +33,6 @@ class _ExpandableButtonsSectionState extends State<ExpandableButtonsSection> {
           isExpanded: _selectedIndex == 0,
           onTap: () => _onButtonTap(0),
         ),
-        Spacing.sp12,
         ExpandableButton(
           iconPath: AriesIcons.buddaIcon,
           text: ReligionPreference.buddhism.getLocalized(context),
@@ -40,9 +40,8 @@ class _ExpandableButtonsSectionState extends State<ExpandableButtonsSection> {
           isExpanded: _selectedIndex == 1,
           onTap: () => _onButtonTap(1),
         ),
-        Spacing.sp12,
         ExpandableButton(
-          iconPath: AriesIcons.catholicIcon,
+          iconPath: AriesIcons.heartCircleIcon,
           text: ReligionPreference.unknown.getLocalized(context),
           color: AriesColor.neutral900,
           isExpanded: _selectedIndex == 2,

@@ -50,4 +50,6 @@ class AriesIcons {
   static const buddaIcon = 'packages/aries/assets/images/icons/budda_icon.svg';
   static const catholicIcon =
       'packages/aries/assets/images/icons/catholic-icon.svg';
+  static const heartCircleIcon =
+      'packages/aries/assets/images/icons/heart_circle_icon.svg';
 }
