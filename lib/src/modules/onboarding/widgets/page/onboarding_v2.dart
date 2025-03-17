@@ -1,11 +1,27 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
+import 'package:religion_calendar_app/src/modules/onboarding/widgets/atoms/atoms.dart';
+import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 import 'package:religion_calendar_app/src/utils/localization_extension.dart';
 
-class OnboardingPageV2 extends StatelessWidget {
+class OnboardingPageV2 extends StatefulWidget {
   const OnboardingPageV2({
     super.key,
   });
+
+  @override
+  State<OnboardingPageV2> createState() => _OnboardingPageV2State();
+}
+
+class _OnboardingPageV2State extends State<OnboardingPageV2>
+    with SingleTickerProviderStateMixin {
+  int _selectedIndex = 0;
+
+  void _onButtonTap(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +43,11 @@ class OnboardingPageV2 extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
+          SizedBox(
+            height: 128,
+          ),
           Container(
-            margin: const EdgeInsets.only(top: 128, left: 42, right: 42),
+            margin: const EdgeInsets.only(left: 42, right: 42),
             child: Text(
               context.l10n.myReligionIs,
               style: AriesTextStyles.textHeading3.copyWith(
@@ -37,7 +56,36 @@ class OnboardingPageV2 extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-          )
+          ),
+          Spacing.sp32,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ExpandableButton(
+                iconPath: AriesIcons.catholicIcon,
+                text: ReligionPreference.catholicism.getLocalized(context),
+                color: AriesColor.neutral900,
+                isExpanded: _selectedIndex == 0,
+                onTap: () => _onButtonTap(0),
+              ),
+              Spacing.sp12,
+              ExpandableButton(
+                iconPath: AriesIcons.buddaIcon,
+                text: ReligionPreference.buddhism.getLocalized(context),
+                color: AriesColor.neutral900,
+                isExpanded: _selectedIndex == 1,
+                onTap: () => _onButtonTap(1),
+              ),
+              Spacing.sp12,
+              ExpandableButton(
+                iconPath: AriesIcons.catholicIcon,
+                text: ReligionPreference.unknown.getLocalized(context),
+                color: AriesColor.neutral900,
+                isExpanded: _selectedIndex == 2,
+                onTap: () => _onButtonTap(2),
+              ),
+            ],
+          ),
         ],
       ),
     );
