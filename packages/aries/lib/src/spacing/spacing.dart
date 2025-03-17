@@ -66,7 +66,6 @@ class Spacing {
     width: 48.w,
     height: 48.h,
   );
-
   static Widget expand = const Expanded(
     child: SizedBox(),
   );
