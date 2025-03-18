@@ -19,34 +19,28 @@ class OnboardingPageV2 extends StatelessWidget {
           end: Alignment.bottomCenter,
           colors: [
             AriesColor.yellowP50,
-            AriesColor.yellowP100,
             AriesColor.yellowP200,
           ],
         ),
         borderRadius: BorderRadius.circular(24.0),
       ),
-      padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
           SizedBox(
-            height: 128,
+            height: 100,
           ),
-          Container(
-            margin: const EdgeInsets.only(
-              left: 42,
-              right: 42,
+          Text(
+            context.l10n.myReligionIs,
+            style: AriesTextStyles.textHeading3.copyWith(
+              fontSize: 26,
+              decoration: TextDecoration.none,
             ),
-            child: Text(
-              context.l10n.myReligionIs,
-              style: AriesTextStyles.textHeading3.copyWith(
-                fontSize: 26,
-                decoration: TextDecoration.none,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            textAlign: TextAlign.center,
           ),
-          Spacing.sp32,
-          ExpandableButtonsSection(),
+          Spacing.sp24,
+          ExpandableReligionButtonsSection(),
+          Spacing.sp24,
+          OnboardingReligionBackground(),
         ],
       ),
     );

@@ -15,7 +15,7 @@ class ReligionPreferencesSettingPage extends ConsumerWidget {
   const ReligionPreferencesSettingPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imagePath = ref.watch(selectedReligionProvider);
+    final imagePath = ref.watch(selectedReligionBackgroundProvider);
     final currentReligionPref =
         ref.watch(currentReligionProvider.notifier).state.name.toUpperCase();
     final userId = ref.watch(authenticatorRepositoryProvider).currentUser?.uid;

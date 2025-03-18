@@ -9,11 +9,11 @@ ReligionBackgroundImagePath getOnboardingBackgroundPath(
     ReligionPreference religion) {
   switch (religion) {
     case ReligionPreference.buddhism:
-      return AriesImages.buddaImage;
+      return AriesImages.buddaOnboardingBackground;
     case ReligionPreference.catholicism:
-      return AriesImages.christImage;
+      return AriesImages.catholicOnboardingBackground;
     case ReligionPreference.unknown:
-      return AriesImages.sunAndMoonImage;
+      return AriesImages.defaultBusinessEvent;
   }
 }
 
@@ -27,7 +27,7 @@ final currentReligionProvider = StateProvider<ReligionPreference>(
   },
 );
 
-final selectedReligionProvider = StateProvider((ref) {
+final selectedReligionBackgroundProvider = StateProvider((ref) {
   final religion = ref.watch(currentReligionProvider);
 
   return getOnboardingBackgroundPath(religion);

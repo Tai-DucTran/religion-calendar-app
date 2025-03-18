@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 class ExpandableButton extends StatefulWidget {
   final String iconPath;
   final String text;
-  final Color color;
   final bool isExpanded;
   final VoidCallback onTap;
 
@@ -13,7 +12,6 @@ class ExpandableButton extends StatefulWidget {
     super.key,
     required this.iconPath,
     required this.text,
-    required this.color,
     required this.isExpanded,
     required this.onTap,
   });
@@ -73,7 +71,7 @@ class _ExpandableButtonState extends State<ExpandableButton>
   @override
   Widget build(BuildContext context) {
     final selectedBackgroundColor =
-        widget.isExpanded ? AriesColor.yellowP900 : AriesColor.neutral75;
+        widget.isExpanded ? AriesColor.yellowP950 : AriesColor.neutral75;
 
     return GestureDetector(
       onTap: widget.onTap,
@@ -88,11 +86,14 @@ class _ExpandableButtonState extends State<ExpandableButton>
               borderRadius: BorderRadius.circular(30.0),
               boxShadow: [
                 BoxShadow(
-                  color: selectedBackgroundColor.withValues(
-                    alpha: 0.4,
+                  color: Colors.black.withValues(
+                    alpha: 0.2,
                   ),
                   blurRadius: 8,
-                  offset: const Offset(0, 3),
+                  offset: const Offset(
+                    0,
+                    3,
+                  ),
                 ),
               ],
             ),
