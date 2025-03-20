@@ -13,7 +13,7 @@ ReligionBackgroundImagePath getOnboardingBackgroundPath(
     case ReligionPreference.catholicism:
       return AriesImages.catholicOnboardingBackground;
     case ReligionPreference.unknown:
-      return AriesImages.defaultBusinessEvent;
+      return AriesImages.spiritualOnboardingBackground;
   }
 }
 
@@ -23,7 +23,7 @@ final currentReligionProvider = StateProvider<ReligionPreference>(
     final currentUserReligion = userProvider.value?.user?.religionPreference;
 
     if (currentUserReligion != null) return currentUserReligion;
-    return ReligionPreference.unknown;
+    return ReligionPreference.catholicism;
   },
 );
 
