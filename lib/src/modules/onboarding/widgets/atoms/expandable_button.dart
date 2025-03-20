@@ -83,19 +83,9 @@ class _ExpandableButtonState extends State<ExpandableButton>
             height: 60.0,
             decoration: BoxDecoration(
               color: selectedBackgroundColor,
-              borderRadius: BorderRadius.circular(30.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(
-                    alpha: 0.2,
-                  ),
-                  blurRadius: 8,
-                  offset: const Offset(
-                    0,
-                    3,
-                  ),
-                ),
-              ],
+              borderRadius: BorderRadius.circular(
+                30.0,
+              ),
             ),
             child: Stack(
               alignment: Alignment.center,
