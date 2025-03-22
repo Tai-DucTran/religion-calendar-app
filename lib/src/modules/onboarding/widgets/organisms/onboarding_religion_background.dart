@@ -47,8 +47,8 @@ class _OnboardingReligionBackgroundState
         setState(() {
           _isAnimating = true;
           _shouldShow = true;
-          _currentBackground =
-              AriesImages.catholicOnboardingBackground; // Adjust path as needed
+          // _currentBackground =
+          //     AriesImages.catholicOnboardingBackground; // Adjust path as needed
         });
         _controller.forward();
       }
