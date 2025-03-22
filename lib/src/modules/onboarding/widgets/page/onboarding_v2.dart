@@ -24,23 +24,27 @@ class OnboardingPageV2 extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(24.0),
       ),
-      child: Column(
+      child: Stack(
         children: [
-          SizedBox(
-            height: 100,
+          Column(
+            children: [
+              const SizedBox(
+                height: 100,
+              ),
+              Text(
+                context.l10n.myReligionIs,
+                style: AriesTextStyles.textHeading3.copyWith(
+                  fontSize: 26,
+                  decoration: TextDecoration.none,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              Spacing.sp24,
+              const ExpandableReligionButtonsSection(),
+            ],
           ),
-          Text(
-            context.l10n.myReligionIs,
-            style: AriesTextStyles.textHeading3.copyWith(
-              fontSize: 26,
-              decoration: TextDecoration.none,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          Spacing.sp24,
-          ExpandableReligionButtonsSection(),
-          Spacing.sp24,
-          OnboardingReligionBackground(),
+          const OnboardingReligionBackground(),
+          CompleteButton(),
         ],
       ),
     );

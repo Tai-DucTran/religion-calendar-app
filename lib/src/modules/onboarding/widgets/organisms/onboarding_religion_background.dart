@@ -155,34 +155,42 @@ class _OnboardingReligionBackgroundState
     final entranceInterval =
         Interval(_entranceDelay, 1.0, curve: Curves.easeIn);
 
-    return Expanded(
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          // Exit animation for current background
-          if (_isAnimating)
-            _buildExitAnimation(
-              isCurrentCatholicism: isCurrentCatholicism,
-              isCurrentBuddhism: isCurrentBuddhism,
-            ),
+    return Positioned(
+      top: 300,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      child: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            // Exit animation for current background
+            if (_isAnimating)
+              _buildExitAnimation(
+                isCurrentCatholicism: isCurrentCatholicism,
+                isCurrentBuddhism: isCurrentBuddhism,
+              ),
 
-          // Entrance animation for new background
-          if (_isAnimating)
-            _buildEntranceAnimation(
-              isBuddhism: isBuddhism,
-              isCatholicism: isCatholicism,
-              entranceInterval: entranceInterval,
-            ),
+            // Entrance animation for new background
+            if (_isAnimating)
+              _buildEntranceAnimation(
+                isBuddhism: isBuddhism,
+                isCatholicism: isCatholicism,
+                entranceInterval: entranceInterval,
+              ),
 
-          // Static display when not animating
-          if (!_isAnimating)
-            SvgPicture.asset(
-              _currentBackground,
-              allowDrawingOutsideViewBox: true,
-              fit: BoxFit.contain,
-              width: double.infinity,
-            ),
-        ],
+            // Static display when not animating
+            if (!_isAnimating)
+              SvgPicture.asset(
+                _currentBackground,
+                allowDrawingOutsideViewBox: true,
+                fit: BoxFit.contain,
+                width: double.infinity,
+              ),
+          ],
+        ),
       ),
     );
   }
