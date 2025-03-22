@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:religion_calendar_app/src/modules/onboarding/widgets/widgets.dart';
 import 'package:religion_calendar_app/src/utils/localization_extension.dart';
 
-class OnboardingPageV2 extends StatelessWidget {
-  const OnboardingPageV2({
+class ReligionPreferenceOnboarding extends StatelessWidget {
+  const ReligionPreferenceOnboarding({
     super.key,
+    this.isProfilePageSetting = false,
   });
+
+  final bool isProfilePageSetting;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class OnboardingPageV2 extends StatelessWidget {
             ],
           ),
           const OnboardingReligionBackground(),
-          CompleteButton(),
+          CompleteButton(isProfilePageSetting),
         ],
       ),
     );

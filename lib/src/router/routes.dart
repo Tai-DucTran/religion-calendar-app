@@ -110,7 +110,7 @@ class OnboardingRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const OnboardingPageV2();
+    return const ReligionPreferenceOnboarding();
   }
 }
 
@@ -199,7 +199,9 @@ class ReligionPreferencesSettingRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const ReligionPreferencesSettingPage();
+    return const ReligionPreferenceOnboarding(
+      isProfilePageSetting: true,
+    );
   }
 }
 
