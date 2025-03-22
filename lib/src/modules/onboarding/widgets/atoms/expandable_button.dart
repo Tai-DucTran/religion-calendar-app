@@ -30,7 +30,7 @@ class _ExpandableButtonState extends State<ExpandableButton>
     super.initState();
 
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: 600),
       vsync: this,
     );
 
@@ -54,11 +54,16 @@ class _ExpandableButtonState extends State<ExpandableButton>
 
     // Animate when isExpanded changes
     if (widget.isExpanded != oldWidget.isExpanded) {
-      if (widget.isExpanded) {
-        _controller.forward();
-      } else {
-        _controller.reverse();
-      }
+      // Add the same delay as the background animation
+      Future.delayed(const Duration(milliseconds: 200), () {
+        if (mounted) {
+          if (widget.isExpanded) {
+            _controller.forward();
+          } else {
+            _controller.reverse();
+          }
+        }
+      });
     }
   }
 

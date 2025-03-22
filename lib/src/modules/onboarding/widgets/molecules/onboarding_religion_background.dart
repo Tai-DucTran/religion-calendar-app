@@ -3,20 +3,248 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:religion_calendar_app/src/modules/onboarding/controllers/controllers.dart';
 
-class OnboardingReligionBackground extends ConsumerWidget {
+class OnboardingReligionBackground extends ConsumerStatefulWidget {
   const OnboardingReligionBackground({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final selectedReligionBackground =
-        ref.watch(selectedReligionBackgroundProvider);
-    return Expanded(
-      child: SvgPicture.asset(
-        selectedReligionBackground,
-        allowDrawingOutsideViewBox: true,
-        fit: BoxFit.cover,
-        width: double.infinity,
+  ConsumerState<OnboardingReligionBackground> createState() =>
+      _OnboardingReligionBackgroundState();
+}
+
+class _OnboardingReligionBackgroundState
+    extends ConsumerState<OnboardingReligionBackground>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  String _currentBackground = '';
+  String _nextBackground = '';
+  bool _isAnimating = false;
+
+  // Constants for animation configuration
+  static const _animationDuration = Duration(milliseconds: 400);
+  static const _animationDelay = Duration(milliseconds: 100);
+  static const _entranceDelay = 0.4;
+
+  // Constants for slide transitions
+  static const _buddhaMoveOffset = Offset(-0.03, -0.03);
+  static const _buddhaExitOffset = Offset(0.3, 0.3);
+  static const _catholicMoveOffset = Offset(0.05, 0.0);
+  static const _catholicExitOffset = Offset(-0.1, 0.0);
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: _animationDuration,
+      vsync: this,
+    )..addStatusListener(_handleAnimationStatus);
+  }
+
+  void _handleAnimationStatus(AnimationStatus status) {
+    if (status == AnimationStatus.completed) {
+      setState(() {
+        _currentBackground = _nextBackground;
+        _isAnimating = false;
+      });
+      _controller.reset();
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _updateBackground(String newBackground) {
+    if (newBackground == _currentBackground) return;
+
+    if (_isAnimating) {
+      _nextBackground = newBackground;
+    } else {
+      setState(() {
+        _nextBackground = newBackground;
+        _isAnimating = true;
+      });
+      Future.delayed(_animationDelay, () {
+        if (mounted) _controller.forward();
+      });
+    }
+  }
+
+  TweenSequence<Offset> _buildCatholicExitSequence() {
+    return TweenSequence<Offset>([
+      TweenSequenceItem(
+        tween: Tween<Offset>(
+          begin: Offset.zero,
+          end: _catholicMoveOffset,
+        ).chain(CurveTween(curve: Curves.easeOut)),
+        weight: 30,
       ),
+      TweenSequenceItem(
+        tween: Tween<Offset>(
+          begin: _catholicMoveOffset,
+          end: _catholicExitOffset,
+        ).chain(CurveTween(curve: Curves.easeIn)),
+        weight: 70,
+      ),
+    ]);
+  }
+
+  TweenSequence<Offset> _buildBuddhaExitSequence() {
+    return TweenSequence<Offset>([
+      TweenSequenceItem(
+        tween: Tween<Offset>(
+          begin: Offset.zero,
+          end: _buddhaMoveOffset,
+        ).chain(
+          CurveTween(
+            curve: Curves.easeOut,
+          ),
+        ),
+        weight: 30,
+      ),
+      TweenSequenceItem(
+        tween: Tween<Offset>(
+          begin: _buddhaMoveOffset,
+          end: _buddhaExitOffset,
+        ).chain(
+          CurveTween(
+            curve: Curves.easeIn,
+          ),
+        ),
+        weight: 70,
+      ),
+    ]);
+  }
+
+  Offset _getEntranceOffset(bool isBuddhism, bool isCatholicism) {
+    if (isBuddhism) {
+      return const Offset(
+        0.1,
+        0.1,
+      );
+    }
+    if (isCatholicism) {
+      return const Offset(
+        -0.1,
+        0.0,
+      );
+    }
+    return Offset.zero;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final selectedBackground = ref.watch(selectedReligionBackgroundProvider);
+
+    // Initialize on first build or handle background change
+    if (_currentBackground.isEmpty) {
+      _currentBackground = selectedBackground;
+    } else if (selectedBackground != _currentBackground &&
+        selectedBackground != _nextBackground) {
+      _updateBackground(selectedBackground);
+    }
+
+    final isBuddhism = _nextBackground.contains('budda_onboarding');
+    final isCatholicism = _nextBackground.contains('catholic_onboarding');
+    final isCurrentCatholicism =
+        _currentBackground.contains('catholic_onboarding');
+    final isCurrentBuddhism = _currentBackground.contains('budda_onboarding');
+
+    // Entrance animation with delayed start
+    final entranceInterval =
+        Interval(_entranceDelay, 1.0, curve: Curves.easeIn);
+
+    return Expanded(
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Exit animation for current background
+          if (_isAnimating)
+            _buildExitAnimation(
+              isCurrentCatholicism: isCurrentCatholicism,
+              isCurrentBuddhism: isCurrentBuddhism,
+            ),
+
+          // Entrance animation for new background
+          if (_isAnimating)
+            _buildEntranceAnimation(
+              isBuddhism: isBuddhism,
+              isCatholicism: isCatholicism,
+              entranceInterval: entranceInterval,
+            ),
+
+          // Static display when not animating
+          if (!_isAnimating)
+            SvgPicture.asset(
+              _currentBackground,
+              allowDrawingOutsideViewBox: true,
+              fit: BoxFit.contain,
+              width: double.infinity,
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildExitAnimation({
+    required bool isCurrentCatholicism,
+    required bool isCurrentBuddhism,
+  }) {
+    return FadeTransition(
+      opacity: Tween<double>(begin: 1.0, end: 0.0).animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: Curves.easeOut,
+        ),
+      ),
+      child: isCurrentCatholicism
+          ? SlideTransition(
+              position: _buildCatholicExitSequence().animate(_controller),
+              child: _buildSvgImage(_currentBackground),
+            )
+          : isCurrentBuddhism
+              ? SlideTransition(
+                  position: _buildBuddhaExitSequence().animate(_controller),
+                  child: _buildSvgImage(_currentBackground),
+                )
+              : _buildSvgImage(_currentBackground),
+    );
+  }
+
+  Widget _buildEntranceAnimation({
+    required bool isBuddhism,
+    required bool isCatholicism,
+    required Interval entranceInterval,
+  }) {
+    return FadeTransition(
+      opacity: Tween<double>(begin: 0.0, end: 1.0).animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: entranceInterval,
+        ),
+      ),
+      child: SlideTransition(
+        position: Tween<Offset>(
+          begin: _getEntranceOffset(isBuddhism, isCatholicism),
+          end: Offset.zero,
+        ).animate(
+          CurvedAnimation(
+            parent: _controller,
+            curve: entranceInterval,
+          ),
+        ),
+        child: _buildSvgImage(_nextBackground),
+      ),
+    );
+  }
+
+  Widget _buildSvgImage(String assetPath) {
+    return SvgPicture.asset(
+      assetPath,
+      allowDrawingOutsideViewBox: true,
+      fit: BoxFit.contain,
+      width: double.infinity,
     );
   }
 }
