@@ -3,7 +3,7 @@ class AriesImages {
   static const splashScreenImage =
       'packages/aries/assets/images/others/welcome_page.svg';
   static const sunAndMoonImage =
-      'packages/aries/assets/images/religions/sun_and_moon.png';
+      'packages/aries/assets/images/others/sun_and_moon_logo.svg';
   static const buddaImage = 'packages/aries/assets/images/religions/budda.png';
   static const christImage =
       'packages/aries/assets/images/religions/christ.png';
@@ -29,6 +29,10 @@ class AriesImages {
   static const defaultChristmasEvent =
       'packages/aries/assets/images/events/christmas_event.svg';
   /* Background Images for Quotes **/
-  static const defaultQuoteBackgroundImages =
-      'packages/aries/assets/images/background_wallpapers/image_sample.jpg';
+  static const catholicOnboardingBackground =
+      'packages/aries/assets/images/background_wallpapers/catholic_onboarding_background.svg';
+  static const buddaOnboardingBackground =
+      'packages/aries/assets/images/background_wallpapers/budda_onboarding_background.svg';
+  static const spiritualOnboardingBackground =
+      'packages/aries/assets/images/background_wallpapers/spiritual_background.svg';
 }

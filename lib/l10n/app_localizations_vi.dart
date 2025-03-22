@@ -9,13 +9,13 @@ class AppLocalizationsVi extends AppLocalizations {
   AppLocalizationsVi([String locale = 'vi']) : super(locale);
 
   @override
-  String get religionCatholicismText => 'Thiên Chúa Giáo';
+  String get religionCatholicismText => 'Công Giáo';
 
   @override
   String get religionBuddhismText => 'Phật Giáo';
 
   @override
-  String get religionUnknownText => 'Tôi không có';
+  String get religionUnknownText => 'Khác';
 
   @override
   String get religionText => 'Tôn Giáo';
@@ -361,4 +361,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get explorePageHeaderText => 'Khám phá';
+
+  @override
+  String get completeButtonText => 'Hoàn thành';
 }

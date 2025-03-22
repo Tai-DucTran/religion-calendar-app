@@ -1,7 +1,7 @@
 {
   "religionCatholicismText": "Catholicism",
   "religionBuddhismText": "Buddhism",
-  "religionUnknownText": "I don''t have religion",
+  "religionUnknownText": "Other / None",
   "religionText": "Religion",
   "whatIsYourReligion": "What is your religion?",
   "myReligionIs": "My Religion is...",
@@ -119,5 +119,6 @@
   "moreDetailsButtonText": "More details",
   "@@context": "------Explore Page------",
   "explorePageHeaderText": "Explore",
+  "completeButtonText": "Complete",
   "@@locale": "en"
 }

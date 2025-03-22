@@ -9,7 +9,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/profile/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/profile/profile_page.dart';
-import 'package:religion_calendar_app/src/utils/utils.dart';
 
 class UploadProfileImageSection extends ConsumerStatefulWidget {
   const UploadProfileImageSection({super.key});

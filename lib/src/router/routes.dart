@@ -4,7 +4,7 @@ import 'package:religion_calendar_app/src/modules/calendar/widgets/pages/full_ca
 import 'package:religion_calendar_app/src/modules/login/widgets/page/forgot_pasword_page.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/login_page.dart';
 import 'package:religion_calendar_app/src/modules/navigation_bottom_bar/widgets/organisms/navigation_bottom_bar.dart';
-import 'package:religion_calendar_app/src/modules/onboarding/widgets/page/onboarding_religion_preference_page.dart';
+import 'package:religion_calendar_app/src/modules/onboarding/widgets/page/onboarding_v2.dart';
 import 'package:religion_calendar_app/src/modules/sign_up/widgets/page/page.dart';
 
 import '../modules/home/widgets/pages/pages.dart';
@@ -110,7 +110,7 @@ class OnboardingRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const OnboardingReligionPreferencePage();
+    return const ReligionPreferenceOnboarding();
   }
 }
 
@@ -199,7 +199,9 @@ class ReligionPreferencesSettingRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const ReligionPreferencesSettingPage();
+    return const ReligionPreferenceOnboarding(
+      isProfilePageSetting: true,
+    );
   }
 }
 

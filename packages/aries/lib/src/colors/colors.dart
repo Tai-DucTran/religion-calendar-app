@@ -61,6 +61,7 @@ class AriesColor {
   static const neutral50 = Color(0xFFc9c7c1);
   static const neutral60 = Color(0xFFbcb9b2);
   static const neutral70 = Color(0xFFb1aea6);
+  static const neutral75 = Color(0xFFF3DFA6);
   static const neutral80 = Color(0xFFa4a197);
   static const neutral90 = Color(0xFF979388);
   static const neutral100 = Color(0xFF8a8679);

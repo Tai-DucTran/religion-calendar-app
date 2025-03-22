@@ -15,7 +15,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get religionBuddhismText => 'Buddhism';
 
   @override
-  String get religionUnknownText => 'I don\'\'t have religion';
+  String get religionUnknownText => 'Other / None';
 
   @override
   String get religionText => 'Religion';
@@ -361,4 +361,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get explorePageHeaderText => 'Explore';
+
+  @override
+  String get completeButtonText => 'Complete';
 }

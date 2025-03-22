@@ -45,7 +45,7 @@ class ReligionCalendar extends HookConsumerWidget {
 
     return MaterialApp.router(
       routerConfig: router,
-      title: 'Religion Calendar App',
+      title: 'Religion App',
       theme: ThemeData(
         primaryColor: AriesColor.yellowP950,
         useMaterial3: true,

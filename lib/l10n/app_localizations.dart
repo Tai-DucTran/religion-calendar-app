@@ -110,7 +110,7 @@ abstract class AppLocalizations {
   /// No description provided for @religionUnknownText.
   ///
   /// In en, this message translates to:
-  /// **'I don\'\'t have religion'**
+  /// **'Other / None'**
   String get religionUnknownText;
 
   /// No description provided for @religionText.
@@ -802,6 +802,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Explore'**
   String get explorePageHeaderText;
+
+  /// No description provided for @completeButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete'**
+  String get completeButtonText;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
