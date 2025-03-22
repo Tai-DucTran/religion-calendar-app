@@ -361,4 +361,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get explorePageHeaderText => 'Explore';
+
+  @override
+  String get completeButtonText => 'Complete';
 }

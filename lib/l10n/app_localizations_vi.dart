@@ -361,4 +361,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get explorePageHeaderText => 'Khám phá';
+
+  @override
+  String get completeButtonText => 'Hoàn thành';
 }

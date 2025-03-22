@@ -802,6 +802,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Explore'**
   String get explorePageHeaderText;
+
+  /// No description provided for @completeButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete'**
+  String get completeButtonText;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
