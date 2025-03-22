@@ -1,3 +1,4 @@
+import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,10 +19,12 @@ class _OnboardingReligionBackgroundState
   String _currentBackground = '';
   String _nextBackground = '';
   bool _isAnimating = false;
+  bool _isInitialAnimation = true;
+  bool _shouldShow = false;
 
   // Constants for animation configuration
   static const _animationDuration = Duration(milliseconds: 400);
-  static const _animationDelay = Duration(milliseconds: 100);
+  static const _initialDelay = Duration(milliseconds: 1000);
   static const _entranceDelay = 0.4;
 
   // Constants for slide transitions
@@ -37,14 +40,36 @@ class _OnboardingReligionBackgroundState
       duration: _animationDuration,
       vsync: this,
     )..addStatusListener(_handleAnimationStatus);
+
+    // Delay the initial Catholic entrance animation
+    Future.delayed(_initialDelay, () {
+      if (mounted) {
+        setState(() {
+          _isAnimating = true;
+          _shouldShow = true;
+          _currentBackground =
+              AriesImages.catholicOnboardingBackground; // Adjust path as needed
+        });
+        _controller.forward();
+      }
+    });
   }
 
   void _handleAnimationStatus(AnimationStatus status) {
     if (status == AnimationStatus.completed) {
-      setState(() {
-        _currentBackground = _nextBackground;
-        _isAnimating = false;
-      });
+      if (_isInitialAnimation) {
+        setState(() {
+          _isInitialAnimation = false;
+          _isAnimating = false;
+          _shouldShow = true;
+        });
+      } else {
+        setState(() {
+          _currentBackground = _nextBackground;
+          _isAnimating = false;
+          _shouldShow = true;
+        });
+      }
       _controller.reset();
     }
   }
@@ -65,7 +90,7 @@ class _OnboardingReligionBackgroundState
         _nextBackground = newBackground;
         _isAnimating = true;
       });
-      Future.delayed(_animationDelay, () {
+      Future.delayed(_animationDuration, () {
         if (mounted) _controller.forward();
       });
     }
@@ -137,12 +162,16 @@ class _OnboardingReligionBackgroundState
   Widget build(BuildContext context) {
     final selectedBackground = ref.watch(selectedReligionBackgroundProvider);
 
-    // Initialize on first build or handle background change
+    // Initialize background changes after initial animation
     if (_currentBackground.isEmpty) {
       _currentBackground = selectedBackground;
     } else if (selectedBackground != _currentBackground &&
         selectedBackground != _nextBackground) {
       _updateBackground(selectedBackground);
+    }
+
+    if (_currentBackground.isEmpty) {
+      return const SizedBox.shrink();
     }
 
     final isBuddhism = _nextBackground.contains('budda_onboarding');
@@ -151,7 +180,6 @@ class _OnboardingReligionBackgroundState
         _currentBackground.contains('catholic_onboarding');
     final isCurrentBuddhism = _currentBackground.contains('budda_onboarding');
 
-    // Entrance animation with delayed start
     final entranceInterval =
         Interval(_entranceDelay, 1.0, curve: Curves.easeIn);
 
@@ -166,23 +194,24 @@ class _OnboardingReligionBackgroundState
         child: Stack(
           fit: StackFit.expand,
           children: [
-            // Exit animation for current background
-            if (_isAnimating)
+            // Exit animation for current background (only for religion changes, not initial animation)
+            if (_isAnimating && !_isInitialAnimation)
               _buildExitAnimation(
                 isCurrentCatholicism: isCurrentCatholicism,
                 isCurrentBuddhism: isCurrentBuddhism,
               ),
 
-            // Entrance animation for new background
+            // Initial animation or entrance animation for religion changes
             if (_isAnimating)
-              _buildEntranceAnimation(
+              _buildInitialOrEntranceAnimation(
+                isInitial: _isInitialAnimation,
                 isBuddhism: isBuddhism,
                 isCatholicism: isCatholicism,
                 entranceInterval: entranceInterval,
               ),
 
-            // Static display when not animating
-            if (!_isAnimating)
+            // Static display when not animating but should be shown
+            if (!_isAnimating && _shouldShow)
               SvgPicture.asset(
                 _currentBackground,
                 allowDrawingOutsideViewBox: true,
@@ -192,6 +221,44 @@ class _OnboardingReligionBackgroundState
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildInitialOrEntranceAnimation({
+    required bool isInitial,
+    required bool isBuddhism,
+    required bool isCatholicism,
+    required Interval entranceInterval,
+  }) {
+    // For initial animation, slide in from left with fade
+    if (isInitial) {
+      return FadeTransition(
+        opacity: Tween<double>(begin: 0.0, end: 1.0).animate(
+          CurvedAnimation(
+            parent: _controller,
+            curve: Curves.easeIn,
+          ),
+        ),
+        child: SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(-0.2, 0.0), // Start from left side
+            end: Offset.zero,
+          ).animate(
+            CurvedAnimation(
+              parent: _controller,
+              curve: Curves.easeOutCubic, // Smooth easing for natural motion
+            ),
+          ),
+          child: _buildSvgImage(_currentBackground),
+        ),
+      );
+    }
+
+    // For religion changes, use the existing entrance animation
+    return _buildEntranceAnimation(
+      isBuddhism: isBuddhism,
+      isCatholicism: isCatholicism,
+      entranceInterval: entranceInterval,
     );
   }
 

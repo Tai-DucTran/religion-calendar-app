@@ -18,71 +18,66 @@ class CompleteButton extends ConsumerWidget {
     final userId = ref.watch(authenticatorRepositoryProvider).currentUser?.uid;
     final currentReligionPref = ref.watch(currentReligionProvider);
 
-    return Positioned(
-      left: 0,
-      right: 0,
-      bottom: 0,
-      child: Padding(
-        padding: const EdgeInsets.only(
-          left: 16.0,
-          right: 16.0,
-          bottom: 40.0,
-        ),
-        child: Row(
-          spacing: 8,
-          children: [
-            if (isProfilePageSetting) ...[
-              SizedBox(
-                width: 80,
-                height: 48,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AriesColor.neutral20,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(8),
-                      ),
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 16.0,
+        right: 16.0,
+        bottom: 40.0,
+      ),
+      child: Row(
+        spacing: 8,
+        children: [
+          if (isProfilePageSetting) ...[
+            SizedBox(
+              width: 80,
+              height: 48,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AriesColor.neutral20,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
                     ),
                   ),
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: AriesColor.black,
-                  ),
                 ),
-              ),
-            ],
-            Expanded(
-              child: CustomElevatedButton(
-                text: context.l10n.completeButtonText,
-                onPressed: () async {
-                  final userFirestoreController =
-                      ref.read(userFirestoreRepositoryProvider);
-                  userFirestoreController.updateReligionPreferenceOnboarding(
-                    userId: userId,
-                    religionPreference:
-                        currentReligionPref.name.toString().toUpperCase(),
-                  );
-                  ref
-                      .read(authStateControllerProvider.notifier)
-                      .updateOnboardingStatus(true);
-
-                  if (isProfilePageSetting) {
-                    Navigator.of(context).pop(true);
-                  } else {
-                    context.go(HomeRoute().location);
-                  }
-                },
-                textStyle: TextStyle(
-                  color: Colors.white,
+                child: Icon(
+                  Icons.arrow_back,
+                  color: AriesColor.black,
                 ),
-                buttonColor: AriesColor.yellowP950,
               ),
             ),
           ],
-        ),
+          Expanded(
+            child: CustomElevatedButton(
+              text: context.l10n.completeButtonText,
+              onPressed: () async {
+                final userFirestoreController =
+                    ref.read(userFirestoreRepositoryProvider);
+                userFirestoreController.updateReligionPreferenceOnboarding(
+                  userId: userId,
+                  religionPreference:
+                      currentReligionPref.name.toString().toUpperCase(),
+                );
+                ref
+                    .read(authStateControllerProvider.notifier)
+                    .updateOnboardingStatus(true);
+
+                if (isProfilePageSetting) {
+                  Navigator.of(context).pop(true);
+                } else {
+                  context.go(HomeRoute().location);
+                }
+              },
+              textStyle: TextStyle(
+                color: Colors.white,
+              ),
+              buttonColor: AriesColor.yellowP950,
+            ),
+          ),
+        ],
       ),
     );
   }

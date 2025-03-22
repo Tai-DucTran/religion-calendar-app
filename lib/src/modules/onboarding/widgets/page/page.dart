@@ -1,1 +1,1 @@
-export 'onboarding_v2.dart';
+export 'religion_preference_onboarding.dart';
