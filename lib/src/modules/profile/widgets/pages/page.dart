@@ -5,4 +5,3 @@ export 'notification_setting_page.dart';
 export 'privacy_policy_setting_page.dart';
 export 'profile_page.dart';
 export 'terms_of_use_setting_page.dart';
-export 'theme_setting_page.dart';

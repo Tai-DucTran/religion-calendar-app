@@ -230,10 +230,6 @@ RouteBase get $profileRoute => GoRouteData.$route(
           factory: $ReligionPreferencesSettingRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'theme-setting',
-          factory: $ThemeSettingRouteExtension._fromState,
-        ),
-        GoRouteData.$route(
           path: 'notification-setting',
           factory: $NotificationSettingRouteExtension._fromState,
         ),
@@ -281,24 +277,6 @@ extension $ReligionPreferencesSettingRouteExtension
 
   String get location => GoRouteData.$location(
         '/profile/religion-preference-setting',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $ThemeSettingRouteExtension on ThemeSettingRoute {
-  static ThemeSettingRoute _fromState(GoRouterState state) =>
-      const ThemeSettingRoute();
-
-  String get location => GoRouteData.$location(
-        '/profile/theme-setting',
       );
 
   void go(BuildContext context) => context.go(location);

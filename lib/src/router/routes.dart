@@ -153,9 +153,6 @@ class FullCalendarRoute extends GoRouteData {
     TypedGoRoute<ReligionPreferencesSettingRoute>(
       path: ReligionPreferencesSettingRoute.path,
     ),
-    TypedGoRoute<ThemeSettingRoute>(
-      path: ThemeSettingRoute.path,
-    ),
     TypedGoRoute<NotificationSettingRoute>(
       path: NotificationSettingRoute.path,
     ),
@@ -202,16 +199,6 @@ class ReligionPreferencesSettingRoute extends GoRouteData {
     return const ReligionPreferenceOnboarding(
       isProfilePageSetting: true,
     );
-  }
-}
-
-class ThemeSettingRoute extends GoRouteData {
-  const ThemeSettingRoute();
-  static const path = 'theme-setting';
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const ThemeSettingPage();
   }
 }
 

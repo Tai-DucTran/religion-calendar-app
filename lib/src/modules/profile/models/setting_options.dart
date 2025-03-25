@@ -17,7 +17,6 @@ class SettingOptionItem {
 
 enum SettingOptions {
   religionPreferencesSetting,
-  themeSetting,
   notificationSetting,
   feedbackAndReportSetting,
   helpAndFAQsSetting,
@@ -32,11 +31,6 @@ extension SettingOptionsExtension on SettingOptions {
           title: context.l10n.religionPreferencesSettingTitleText,
           iconPath: AriesIcons.start05Icon,
           route: ReligionPreferencesSettingRoute().location,
-        ),
-      SettingOptions.themeSetting => (
-          title: context.l10n.themeSettingTitleText,
-          iconPath: AriesIcons.moon01Icon,
-          route: ThemeSettingRoute().location,
         ),
       SettingOptions.notificationSetting => (
           title: context.l10n.notificationSettingTitleText,
@@ -78,12 +72,12 @@ const preferencesSettingOptionsList = [
 ];
 
 const generalSettingOptionsList = [
-  SettingOptions.themeSetting,
   SettingOptions.notificationSetting,
 ];
 
 const contactAndOtherSettingOptionsList = [
   SettingOptions.feedbackAndReportSetting,
   SettingOptions.helpAndFAQsSetting,
+  SettingOptions.termsOfUseSetting,
   SettingOptions.privacyPolicySetting,
 ];
