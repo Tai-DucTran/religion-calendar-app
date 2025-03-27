@@ -238,7 +238,7 @@ class TermsOfUseSettingRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const TermsOsUseSettingPage();
+    return const TermsOfUseSettingPage();
   }
 }
 
