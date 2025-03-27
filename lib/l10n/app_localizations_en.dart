@@ -364,4 +364,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get completeButtonText => 'Complete';
+
+  @override
+  String get errorLoadingContentText => 'Không thể hiển thị được nội dung';
+
+  @override
+  String get errorSomethingWentWrongText => 'Something went wrong!';
 }

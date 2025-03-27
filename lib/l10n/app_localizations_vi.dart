@@ -364,4 +364,10 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get completeButtonText => 'Hoàn thành';
+
+  @override
+  String get errorLoadingContentText => 'Error loading contente';
+
+  @override
+  String get errorSomethingWentWrongText => 'Đã có lỗi xảy ra!';
 }

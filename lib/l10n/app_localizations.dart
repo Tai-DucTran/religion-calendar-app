@@ -808,6 +808,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Complete'**
   String get completeButtonText;
+
+  /// No description provided for @errorLoadingContentText.
+  ///
+  /// In en, this message translates to:
+  /// **'Không thể hiển thị được nội dung'**
+  String get errorLoadingContentText;
+
+  /// No description provided for @errorSomethingWentWrongText.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong!'**
+  String get errorSomethingWentWrongText;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
