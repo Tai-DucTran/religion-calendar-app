@@ -360,6 +360,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get moreDetailsButtonText => 'More details';
 
   @override
+  String get firstQuestionInFAQsTitleText => '## 1. I accidentally selected the wrong religion, how do I change it?';
+
+  @override
+  String get firstAnswerInFAQsDescText => 'To change your religion, access your Profile; then select **Your religion preferences** in the **Preferences** section. Finally, reselect your religion.';
+
+  @override
+  String get secondQuestionInFAQsTitleText => '## 2. How do I create a new event?';
+
+  @override
+  String get secondAnswerInFAQsADescText => 'To create a new event, access the **Home Page**; then select the yellow circular plus icon in the bottom right corner of the screen. Customize your event information and select **Add** or **Save** event in the top right corner.';
+
+  @override
+  String get thirdQuestionInFAQsTitleText => '## 3. I see incorrect event or information, how do I report it?';
+
+  @override
+  String get fourthQuestionInFAQsTitleText => '## 4. Does the app store my personal data?';
+
+  @override
+  String get fifthQuestionInFAQsTitleText => '##  5. Does the app plan to support more religion?';
+
+  @override
   String get explorePageHeaderText => 'Explore';
 
   @override

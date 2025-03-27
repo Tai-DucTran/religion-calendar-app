@@ -55,6 +55,7 @@ dependencies:
   flutter_animate: ^4.5.2
   flutter_markdown: ^0.7.6+2
   flutter_lorem: ^2.0.0
+  toggle_list: ^0.3.1
 
 dev_dependencies:
   flutter_test:

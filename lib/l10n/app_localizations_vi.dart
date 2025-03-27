@@ -360,6 +360,27 @@ class AppLocalizationsVi extends AppLocalizations {
   String get moreDetailsButtonText => 'Xem thêm';
 
   @override
+  String get firstQuestionInFAQsTitleText => '## 1. Tôi lỡ chọn sai tôn giáo của mình, làm sao để chọn lại?';
+
+  @override
+  String get firstAnswerInFAQsDescText => 'Để thay đổ lại tôn giáo của bạn, truy cập **Hồ Sơ** của bạn; sau đó chọn **Tôn giáo của bạn** - mục **Tùy chọn của bạn**. Cuối cùng, chọn lại tôn giáo của bạn';
+
+  @override
+  String get secondQuestionInFAQsTitleText => '## 2. Làm sao để tạo một sự kiện mới?';
+
+  @override
+  String get secondAnswerInFAQsADescText => 'Để tạo sự kiện mới của bạn, truy cập **Trang Chủ**; sau đó chọn icon **Hình tròn, dấu cộng màu vàng** dưới góc phải màn hình. Tùy chỉnh thông tin sự kiện của bạn và chọn **Thêm sự kiện** ở góc trên bên phải';
+
+  @override
+  String get thirdQuestionInFAQsTitleText => '## 3. Tôi thấy sự kiện hoặc thông tin bị sai, làm sao để báo cáo?';
+
+  @override
+  String get fourthQuestionInFAQsTitleText => '##  4. Ứng dụng có lưu trữ dữ liệu cá nhân của tôi?';
+
+  @override
+  String get fifthQuestionInFAQsTitleText => '##  5. Ứng dụng có dự định hỗ trợ thêm tôn giáo trong tương lai?';
+
+  @override
   String get explorePageHeaderText => 'Khám phá';
 
   @override

@@ -797,6 +797,48 @@ abstract class AppLocalizations {
   /// **'More details'**
   String get moreDetailsButtonText;
 
+  /// No description provided for @firstQuestionInFAQsTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'## 1. I accidentally selected the wrong religion, how do I change it?'**
+  String get firstQuestionInFAQsTitleText;
+
+  /// No description provided for @firstAnswerInFAQsDescText.
+  ///
+  /// In en, this message translates to:
+  /// **'To change your religion, access your Profile; then select **Your religion preferences** in the **Preferences** section. Finally, reselect your religion.'**
+  String get firstAnswerInFAQsDescText;
+
+  /// No description provided for @secondQuestionInFAQsTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'## 2. How do I create a new event?'**
+  String get secondQuestionInFAQsTitleText;
+
+  /// No description provided for @secondAnswerInFAQsADescText.
+  ///
+  /// In en, this message translates to:
+  /// **'To create a new event, access the **Home Page**; then select the yellow circular plus icon in the bottom right corner of the screen. Customize your event information and select **Add** or **Save** event in the top right corner.'**
+  String get secondAnswerInFAQsADescText;
+
+  /// No description provided for @thirdQuestionInFAQsTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'## 3. I see incorrect event or information, how do I report it?'**
+  String get thirdQuestionInFAQsTitleText;
+
+  /// No description provided for @fourthQuestionInFAQsTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'## 4. Does the app store my personal data?'**
+  String get fourthQuestionInFAQsTitleText;
+
+  /// No description provided for @fifthQuestionInFAQsTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'##  5. Does the app plan to support more religion?'**
+  String get fifthQuestionInFAQsTitleText;
+
   /// No description provided for @explorePageHeaderText.
   ///
   /// In en, this message translates to:

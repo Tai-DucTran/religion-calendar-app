@@ -20,19 +20,20 @@ class MarkdownReader extends StatelessWidget {
     return Markdown(
       data: content,
       styleSheet: MarkdownStyleSheet(
-          h1: h1Style,
-          h2: h2Style,
-          h3: h3Style,
-          p: baseTextStyle,
-          listIndent: 20,
-          a: baseTextStyle,
-          blockquote: baseTextStyle,
-          strong: baseTextStyle.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-          pPadding: EdgeInsets.only(
-            bottom: 12,
-          )),
+        h1: h1Style,
+        h2: h2Style,
+        h3: h3Style,
+        p: baseTextStyle,
+        listIndent: 20,
+        a: baseTextStyle,
+        blockquote: baseTextStyle,
+        strong: baseTextStyle.copyWith(
+          fontWeight: FontWeight.bold,
+        ),
+        pPadding: EdgeInsets.only(
+          bottom: 12,
+        ),
+      ),
       padding: EdgeInsets.zero,
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
