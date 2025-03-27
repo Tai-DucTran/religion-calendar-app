@@ -29,7 +29,7 @@ class RemindMeBeforeSelect extends ConsumerWidget {
                   value: option,
                   child: Row(children: [
                     Text(
-                      option.localized as String,
+                      option.localized.toString(),
                     ),
                   ]),
                 );
