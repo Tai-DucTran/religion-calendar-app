@@ -120,5 +120,8 @@
   "@@context": "------Explore Page------",
   "explorePageHeaderText": "Explore",
   "completeButtonText": "Complete",
+  "@@context": "------App State------",
+  "errorLoadingContentText": "Không thể hiển thị được nội dung",
+  "errorSomethingWentWrongText": "Something went wrong!",
   "@@locale": "en"
 }

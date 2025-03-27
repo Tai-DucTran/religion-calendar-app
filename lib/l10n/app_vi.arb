@@ -120,5 +120,8 @@
   "@@context": "------Explore Page------",
   "explorePageHeaderText": "Khám phá",
   "completeButtonText": "Hoàn thành",
+  "@@context": "------App State------",
+  "errorLoadingContentText": "Error loading contente",
+  "errorSomethingWentWrongText": "Đã có lỗi xảy ra!",
   "@@locale": "vi"
 }

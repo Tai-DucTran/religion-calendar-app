@@ -53,6 +53,8 @@ dependencies:
   flutter_launcher_icons: ^0.14.3
   flutter_dotenv: ^5.2.1
   flutter_animate: ^4.5.2
+  flutter_markdown: ^0.7.6+2
+  flutter_lorem: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -70,4 +72,5 @@ flutter:
     - assets/images/
     - assets/animations/
     - assets/app_icons/
+    - assets/documents/
     - .env
