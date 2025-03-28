@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:religion_calendar_app/l10n/app_localizations.dart';
 
 enum FAQsTitle {
@@ -35,11 +34,11 @@ extension FAQsTitleExtension on FAQsTitle {
       case FAQsTitle.secondQuestion:
         return l10n.secondAnswerInFAQsADescText;
       case FAQsTitle.thirdQuestion:
-        return lorem(paragraphs: 2);
+        return l10n.thirdAnswerInFAQsDescText;
       case FAQsTitle.fourthQuestion:
-        return lorem(paragraphs: 2);
+        return l10n.fourthAnswerInFAQsDescText;
       case FAQsTitle.fifthQuestion:
-        return lorem(paragraphs: 2);
+        return l10n.fifthAnswerInFAQsDescText;
     }
   }
 }

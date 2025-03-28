@@ -833,11 +833,29 @@ abstract class AppLocalizations {
   /// **'## 4. Does the app store my personal data?'**
   String get fourthQuestionInFAQsTitleText;
 
+  /// No description provided for @thirdAnswerInFAQsDescText.
+  ///
+  /// In en, this message translates to:
+  /// **'Please  submit your feedback in **Feedback & Report** pag. Or please do screen shoot within the **Application**, **Feedback & Report** feature is going to be activated; then please describe the details incorrect information or bugs. Thanks for helping **Application** to be beter!'**
+  String get thirdAnswerInFAQsDescText;
+
+  /// No description provided for @fourthAnswerInFAQsDescText.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, **Application** collects and stores a few user\'s data for analyzing and improving **App Performance** and developing new features. **Application** follow the rules of mobile platforms where our application has been operating; in **iOS** is **Apple Store**; and in **Android** is **Google Play**. Read more our **Terms of use** and **Privacy Policy** in **Profile**!'**
+  String get fourthAnswerInFAQsDescText;
+
   /// No description provided for @fifthQuestionInFAQsTitleText.
   ///
   /// In en, this message translates to:
-  /// **'##  5. Does the app plan to support more religion?'**
+  /// **'##  5. Does the app plan to support more religion in the future?'**
   String get fifthQuestionInFAQsTitleText;
+
+  /// No description provided for @fifthAnswerInFAQsDescText.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, we plan to do that. Please submit feedback for us by selecting **Feature Suggestions** and filling out your request. We will analyze and prioritize the top-voted requests for support.'**
+  String get fifthAnswerInFAQsDescText;
 
   /// No description provided for @explorePageHeaderText.
   ///
