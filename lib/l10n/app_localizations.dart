@@ -857,6 +857,54 @@ abstract class AppLocalizations {
   /// **'Yes, we plan to do that. Please submit feedback for us by selecting **Feature Suggestions** and filling out your request. We will analyze and prioritize the top-voted requests for support.'**
   String get fifthAnswerInFAQsDescText;
 
+  /// No description provided for @whatKindOfFeedbackTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'What kind of feedback do you want to give?'**
+  String get whatKindOfFeedbackTitleText;
+
+  /// No description provided for @bugReportText.
+  ///
+  /// In en, this message translates to:
+  /// **'Bug report'**
+  String get bugReportText;
+
+  /// No description provided for @featureRequestText.
+  ///
+  /// In en, this message translates to:
+  /// **'Feature request'**
+  String get featureRequestText;
+
+  /// No description provided for @whatIsYourFeedbackTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'What is your feedback?'**
+  String get whatIsYourFeedbackTitleText;
+
+  /// No description provided for @feelBad.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m feeling bad'**
+  String get feelBad;
+
+  /// No description provided for @feelNeutral.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m okay!'**
+  String get feelNeutral;
+
+  /// No description provided for @feelGood.
+  ///
+  /// In en, this message translates to:
+  /// **'I like it!'**
+  String get feelGood;
+
+  /// No description provided for @submitButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submitButtonText;
+
   /// No description provided for @explorePageHeaderText.
   ///
   /// In en, this message translates to:

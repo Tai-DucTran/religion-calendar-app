@@ -390,6 +390,30 @@ class AppLocalizationsVi extends AppLocalizations {
   String get fifthAnswerInFAQsDescText => 'Có chứ! Bạn hãy truy cập mục **Góp Ý & Báo Lỗi** trong trang **Hồ Sơ** và gửi yêu cầu **Ứng Dụng** hỗ trợ tôn giáo của bạn. Chúng tôi sẽ ưu tiên những tôn giáo có số lượng yêu cầu cao nhất.';
 
   @override
+  String get whatKindOfFeedbackTitleText => 'Bạn muốn đưa ra loại phản hồi nào?';
+
+  @override
+  String get bugReportText => 'Báo cáo lỗi';
+
+  @override
+  String get featureRequestText => 'Gợi ý tính năng';
+
+  @override
+  String get whatIsYourFeedbackTitleText => 'Bạn muốn góp ý hoặc báo cáo điều gì?';
+
+  @override
+  String get feelBad => 'Tôi không hài lòng';
+
+  @override
+  String get feelNeutral => 'Tôi thấy ổn';
+
+  @override
+  String get feelGood => 'Tôi thấy rất tốt';
+
+  @override
+  String get submitButtonText => 'Gửi';
+
+  @override
   String get explorePageHeaderText => 'Khám phá';
 
   @override
