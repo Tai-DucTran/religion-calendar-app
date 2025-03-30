@@ -390,6 +390,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fifthAnswerInFAQsDescText => 'Yes, we plan to do that. Please submit feedback for us by selecting **Feature Suggestions** and filling out your request. We will analyze and prioritize the top-voted requests for support.';
 
   @override
+  String get whatKindOfFeedbackTitleText => 'What kind of feedback do you want to give?';
+
+  @override
+  String get bugReportText => 'Bug report';
+
+  @override
+  String get featureRequestText => 'Feature request';
+
+  @override
+  String get whatIsYourFeedbackTitleText => 'What is your feedback?';
+
+  @override
+  String get feelBad => 'I\'m feeling bad';
+
+  @override
+  String get feelNeutral => 'I\'m okay!';
+
+  @override
+  String get feelGood => 'I like it!';
+
+  @override
+  String get submitButtonText => 'Submit';
+
+  @override
   String get explorePageHeaderText => 'Explore';
 
   @override
