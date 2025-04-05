@@ -4,10 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/calendar/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/calendar/models/models.dart';
+import 'package:religion_calendar_app/src/modules/notification/notification.dart';
 import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
@@ -32,6 +34,20 @@ class CreateOrUpdateEventButton extends ConsumerWidget {
       final selectedCategory = ref.watch(eventCategoryControllerProvider);
       final isAllDay = ref.watch(isAllDayToggleControllerProvider);
       final currentEventDateTime = ref.watch(eventDateTimeControllerProvider);
+      final startDateTime = DateTime(
+        currentEventDateTime.startDate.year,
+        currentEventDateTime.startDate.month,
+        currentEventDateTime.startDate.day,
+        currentEventDateTime.startTime?.hour ?? 8,
+        currentEventDateTime.startTime?.minute ?? 0,
+      );
+      final endDateTime = DateTime(
+        currentEventDateTime.endDate.year,
+        currentEventDateTime.endDate.month,
+        currentEventDateTime.endDate.day,
+        currentEventDateTime.endTime?.hour ?? 23,
+        currentEventDateTime.endTime?.minute ?? 0,
+      );
       final repeatedFrequencyAt =
           ref.watch(repeatedFrequencyControllerProvider);
       final remindMeBefore = ref.watch(remindMeBeforeControllerProvider);
@@ -50,8 +66,8 @@ class CreateOrUpdateEventButton extends ConsumerWidget {
         calendarCategory: calendarCategory,
         eventCategory: selectedCategory,
         isAllDay: isAllDay,
-        startDate: currentEventDateTime.startDate,
-        endDate: currentEventDateTime.endDate,
+        startDate: startDateTime,
+        endDate: endDateTime,
         location: eventLocationInputController.text,
         createdAt: createEventAt,
         updatedAt: DateTime.now(),
@@ -65,6 +81,9 @@ class CreateOrUpdateEventButton extends ConsumerWidget {
       } else {
         await eventsCollection.doc(userEvent.id).set(userEvent.toJson());
       }
+
+      // Schedule notification for the event (undoned)
+      // await _scheduleEventNotification(userEvent);
 
       if (context.mounted) {
         Navigator.of(context).pop(true);
@@ -93,6 +112,29 @@ class CreateOrUpdateEventButton extends ConsumerWidget {
           ),
         );
       }
+    }
+  }
+
+// TODO (Thang): Setup notifications for local devices
+// https://taisidehustle.atlassian.net/browse/KAN-170
+
+  Future<void> _scheduleEventNotification(UserEvent event) async {
+    final notificationTime = event.startDate
+        .subtract(Duration(minutes: event.remindMeBefore.toInt()));
+
+    if (notificationTime.isAfter(DateTime.now())) {
+      await NotificationService().scheduleEventNotification(
+        eventId: event.id,
+        title: event.title,
+        body:
+            '${DateFormat('HH:mm').format(event.startDate)}${event.location.isNotEmpty ? ' at ${event.location}' : ''}',
+        scheduledTime: notificationTime,
+      );
+
+      Log.dev('Notification scheduled for ${event.title} at $notificationTime');
+    } else {
+      Log.info(
+          'Skipped notification for ${event.title} - reminder time has already passed');
     }
   }
 
