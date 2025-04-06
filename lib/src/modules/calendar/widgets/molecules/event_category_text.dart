@@ -39,7 +39,7 @@ class EventCategoryText extends StatelessWidget {
                 ),
                 Spacing.sp4,
                 Text(
-                  eventCategory.localized as String,
+                  eventCategory.localized(context),
                   maxLines: null,
                   style: AriesTextStyles.textBodySmall,
                 ),
