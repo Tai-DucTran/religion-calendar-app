@@ -1,27 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'feedback_controller.dart';
+part of 'feedback_service_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$feedbackControllerHash() =>
-    r'1629b2a487f65b96f969c3026fdf50d1eb6a1a41';
+String _$feedbackServiceHash() => r'99a4869ae27ad00df1ba5593a01b2655087aee61';
 
-/// See also [FeedbackController].
-@ProviderFor(FeedbackController)
-final feedbackControllerProvider =
-    NotifierProvider<FeedbackController, bool>.internal(
-  FeedbackController.new,
-  name: r'feedbackControllerProvider',
+/// See also [FeedbackService].
+@ProviderFor(FeedbackService)
+final feedbackServiceProvider =
+    NotifierProvider<FeedbackService, void>.internal(
+  FeedbackService.new,
+  name: r'feedbackServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$feedbackControllerHash,
+      : _$feedbackServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$FeedbackController = Notifier<bool>;
+typedef _$FeedbackService = Notifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

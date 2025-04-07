@@ -9,7 +9,11 @@ class FeedbackController extends _$FeedbackController {
     return false;
   }
 
-  void toggleFeedback() {
-    state = !state;
+  void showFeedbackForm() {
+    state = true;
+  }
+
+  void hideFeedbackForm() {
+    state = false;
   }
 }
