@@ -2,81 +2,17 @@ import 'package:aries/aries.dart';
 import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:religion_calendar_app/src/modules/feedback/controllers/controllers.dart';
+import 'package:religion_calendar_app/src/modules/feedback/models/models.dart';
 import 'package:religion_calendar_app/src/utils/localization_extension.dart';
-
-/// A data type holding user feedback consisting of a feedback type, free from
-/// feedback text, and a sentiment rating.
-class CustomFeedback {
-  CustomFeedback({
-    this.feedbackType,
-    this.feedbackText,
-    this.rating,
-  });
-
-  FeedbackType? feedbackType;
-  String? feedbackText;
-  FeedbackRating? rating;
-
-  @override
-  String toString() {
-    return {
-      if (rating != null) 'rating': rating.toString(),
-      'feedback_type': feedbackType.toString(),
-      'feedback_text': feedbackText,
-    }.toString();
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      if (rating != null) 'rating': rating.toString(),
-      'feedback_type': feedbackType.toString(),
-      'feedback_text': feedbackText,
-    };
-  }
-}
-
-/// What type of feedback the user wants to provide.
-enum FeedbackType {
-  bugReport,
-  featureRequest,
-}
-
-extension FeedbackTypeExtension on FeedbackType {
-  String getLocalized(BuildContext context) {
-    switch (this) {
-      case FeedbackType.bugReport:
-        return context.l10n.bugReportText;
-      case FeedbackType.featureRequest:
-        return context.l10n.featureRequestText;
-    }
-  }
-}
-
-/// A user-provided sentiment rating.
-enum FeedbackRating {
-  bad,
-  neutral,
-  good,
-}
-
-extension FeedbackRatingExtension on FeedbackRating {
-  String getLocalized(BuildContext context) {
-    switch (this) {
-      case FeedbackRating.bad:
-        return context.l10n.feelBad;
-      case FeedbackRating.neutral:
-        return context.l10n.feelNeutral;
-      case FeedbackRating.good:
-        return context.l10n.feelGood;
-    }
-  }
-}
 
 /// A form that prompts the user for the type of feedback they want to give,
 /// free form text feedback, and a sentiment rating.
 /// The submit button is disabled until the user provides the feedback type. All
 /// other fields are optional.
-class CustomFeedbackForm extends StatefulWidget {
+
+class CustomFeedbackForm extends ConsumerStatefulWidget {
   const CustomFeedbackForm({
     super.key,
     required this.onSubmit,
@@ -87,10 +23,11 @@ class CustomFeedbackForm extends StatefulWidget {
   final ScrollController? scrollController;
 
   @override
-  State<CustomFeedbackForm> createState() => _CustomFeedbackFormState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _CustomFeedbackFormState();
 }
 
-class _CustomFeedbackFormState extends State<CustomFeedbackForm> {
+class _CustomFeedbackFormState extends ConsumerState<CustomFeedbackForm> {
   final CustomFeedback _customFeedback = CustomFeedback();
 
   @override
@@ -175,12 +112,18 @@ class _CustomFeedbackFormState extends State<CustomFeedbackForm> {
           ),
         ),
         TextButton(
-          // disable this button until the user has specified a feedback type
           onPressed: _customFeedback.feedbackType != null
-              ? () => widget.onSubmit(
+              ? () {
+                  widget.onSubmit(
                     _customFeedback.feedbackText ?? '',
                     extras: _customFeedback.toMap(),
-                  )
+                  );
+
+                  // Hide the feedback form after submission
+                  ref
+                      .read(feedbackControllerProvider.notifier)
+                      .hideFeedbackForm();
+                }
               : null,
           child: Text(
             context.l10n.submitButtonText,
