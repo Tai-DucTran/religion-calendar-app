@@ -1,6 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/src/utils/localization_extension.dart';
 
 /// A data type holding user feedback consisting of a feedback type, free from
@@ -143,6 +144,28 @@ class _CustomFeedbackFormState extends State<CustomFeedbackForm> {
                   const SizedBox(height: 8),
                   Text(context.l10n.whatIsYourFeedbackTitleText),
                   TextField(
+                    cursorColor: AriesColor.neutral60,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(
+                        top: 4.h,
+                      ),
+                      isDense: true,
+                      hintStyle: AriesTextStyles.textHintTextField,
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: AriesColor.neutral40),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AriesColor.neutral50,
+                          width: 2,
+                        ),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AriesColor.neutral40,
+                        ),
+                      ),
+                    ),
                     onChanged: (newFeedback) =>
                         _customFeedback.feedbackText = newFeedback,
                   ),
