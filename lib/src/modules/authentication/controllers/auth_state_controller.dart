@@ -1,6 +1,7 @@
 import 'package:religion_calendar_app/src/modules/authentication/models/auth_results.dart';
 import 'package:religion_calendar_app/src/modules/authentication/models/auth_state.dart';
 import 'package:religion_calendar_app/src/modules/authentication/repositories/authenticator_repo.dart';
+import 'package:religion_calendar_app/src/modules/notification/notification.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 import 'package:religion_calendar_app/src/modules/user/repositories/user_firestore_repo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -44,6 +45,13 @@ class AuthStateController extends _$AuthStateController {
 
   Future<void> logOut() async {
     final authenticatorRepo = ref.read(authenticatorRepositoryProvider);
+    final userId = authenticatorRepo.userId;
+
+    if (userId != null) {
+      final deviceTokenRepo = ref.read(deviceTokenRepositoryProvider);
+      await deviceTokenRepo.removeDeviceToken(userId);
+    }
+
     await authenticatorRepo.logOut();
     state = const AsyncValue.loading();
     state = AsyncValue.data(AuthState.unknown());
@@ -67,6 +75,9 @@ class AuthStateController extends _$AuthStateController {
           isVerified: true,
         );
         await userFireStoreRepo.saveUserInfo(user);
+
+        final deviceTokenRepo = ref.read(deviceTokenRepositoryProvider);
+        await deviceTokenRepo.saveDeviceToken(userId);
       }
 
       final hasCompleteOnboarding =
@@ -106,6 +117,9 @@ class AuthStateController extends _$AuthStateController {
           email: email,
         );
         await userFireStoreRepo.saveUserInfo(user);
+
+        final deviceTokenRepo = ref.read(deviceTokenRepositoryProvider);
+        await deviceTokenRepo.saveDeviceToken(userId);
       }
 
       state = AsyncValue.data(

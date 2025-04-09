@@ -52,6 +52,9 @@ dependencies:
   path_provider: ^2.1.5
   flutter_launcher_icons: ^0.14.3
   flutter_dotenv: ^5.2.1
+  firebase_messaging: ^15.2.4
+  flutter_local_notifications: ^19.0.0
+  timezone: ^0.10.0
   flutter_animate: ^4.5.2
   flutter_markdown: ^0.7.6+2
   flutter_lorem: ^2.0.0

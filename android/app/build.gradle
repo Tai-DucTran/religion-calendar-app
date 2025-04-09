@@ -1,8 +1,8 @@
 plugins {
-    id "com.android.application" version "7.3.0"
-    id "kotlin-android" version "1.7.10"
+    id "com.android.application"
+    id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id 'com.google.gms.google-services' version "4.3.15"
+    id 'com.google.gms.google-services'
 }
 
 def localProperties = new Properties()
@@ -91,4 +91,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-appcheck-playintegrity'
     implementation 'com.google.firebase:firebase-appcheck-debug'
     implementation 'androidx.multidex:multidex:2.0.1'
+
+    implementation platform('com.google.firebase:firebase-bom:32.7.0')
+    implementation 'com.google.firebase:firebase-messaging'
 }

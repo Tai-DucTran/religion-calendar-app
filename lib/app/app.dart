@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:religion_calendar_app/l10n/app_localizations.dart';
+import 'package:religion_calendar_app/src/modules/notification/service/notification_service.dart';
 import 'package:religion_calendar_app/src/modules/feedback/feedback.dart';
 import 'package:religion_calendar_app/src/modules/feedback/widgets/page/page.dart';
 import '../src/modules/authentication/authentication.dart';
@@ -29,6 +30,7 @@ void runMainApp({
     androidProvider: AndroidProvider.debug,
   );
   await ScreenUtil.ensureScreenSize();
+  await NotificationService().initialize();
 
   runApp(
     const ProviderScope(

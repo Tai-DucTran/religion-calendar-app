@@ -37,7 +37,7 @@ class UserEventRepository {
         month.year,
         month.month,
         1,
-      ).toUtc().toIso8601String();
+      ).toIso8601String();
 
       final endOfMonth = DateTime(
         month.year,
@@ -46,7 +46,7 @@ class UserEventRepository {
         23,
         59,
         59,
-      ).toUtc().toIso8601String();
+      ).toIso8601String();
 
       return firestoreUserRef
           .doc(userId)
