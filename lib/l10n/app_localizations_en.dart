@@ -15,7 +15,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get religionBuddhismText => 'Buddhism';
 
   @override
-  String get religionUnknownText => 'I don\'\'t have religion';
+  String get religionUnknownText => 'Other / None';
 
   @override
   String get religionText => 'Religion';
@@ -360,5 +360,68 @@ class AppLocalizationsEn extends AppLocalizations {
   String get moreDetailsButtonText => 'More details';
 
   @override
+  String get firstQuestionInFAQsTitleText => '## 1. I accidentally selected the wrong religion, how do I change it?';
+
+  @override
+  String get firstAnswerInFAQsDescText => 'To change your religion, access your Profile; then select **Your religion preferences** in the **Preferences** section. Finally, reselect your religion.';
+
+  @override
+  String get secondQuestionInFAQsTitleText => '## 2. How do I create a new event?';
+
+  @override
+  String get secondAnswerInFAQsADescText => 'To create a new event, access the **Home Page**; then select the yellow circular plus icon in the bottom right corner of the screen. Customize your event information and select **Add** or **Save** event in the top right corner.';
+
+  @override
+  String get thirdQuestionInFAQsTitleText => '## 3. I see incorrect event or information, how do I report it?';
+
+  @override
+  String get fourthQuestionInFAQsTitleText => '## 4. Does the app store my personal data?';
+
+  @override
+  String get thirdAnswerInFAQsDescText => 'Please  submit your feedback in **Feedback & Report** pag. Or please do screen shoot within the **Application**, **Feedback & Report** feature is going to be activated; then please describe the details incorrect information or bugs. Thanks for helping **Application** to be beter!';
+
+  @override
+  String get fourthAnswerInFAQsDescText => 'Yes, **Application** collects and stores a few user\'s data for analyzing and improving **App Performance** and developing new features. **Application** follow the rules of mobile platforms where our application has been operating; in **iOS** is **Apple Store**; and in **Android** is **Google Play**. Read more our **Terms of use** and **Privacy Policy** in **Profile**!';
+
+  @override
+  String get fifthQuestionInFAQsTitleText => '##  5. Does the app plan to support more religion in the future?';
+
+  @override
+  String get fifthAnswerInFAQsDescText => 'Yes, we plan to do that. Please submit feedback for us by selecting **Feature Suggestions** and filling out your request. We will analyze and prioritize the top-voted requests for support.';
+
+  @override
+  String get whatKindOfFeedbackTitleText => 'What kind of feedback do you want to give?';
+
+  @override
+  String get bugReportText => 'Bug report';
+
+  @override
+  String get featureRequestText => 'Feature request';
+
+  @override
+  String get whatIsYourFeedbackTitleText => 'What is your feedback?';
+
+  @override
+  String get feelBad => 'I\'m feeling bad';
+
+  @override
+  String get feelNeutral => 'I\'m okay!';
+
+  @override
+  String get feelGood => 'I like it!';
+
+  @override
+  String get submitButtonText => 'Submit';
+
+  @override
   String get explorePageHeaderText => 'Explore';
+
+  @override
+  String get completeButtonText => 'Complete';
+
+  @override
+  String get errorLoadingContentText => 'Không thể hiển thị được nội dung';
+
+  @override
+  String get errorSomethingWentWrongText => 'Something went wrong!';
 }

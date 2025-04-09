@@ -9,13 +9,13 @@ class AppLocalizationsVi extends AppLocalizations {
   AppLocalizationsVi([String locale = 'vi']) : super(locale);
 
   @override
-  String get religionCatholicismText => 'Thiên Chúa Giáo';
+  String get religionCatholicismText => 'Công Giáo';
 
   @override
   String get religionBuddhismText => 'Phật Giáo';
 
   @override
-  String get religionUnknownText => 'Tôi không có';
+  String get religionUnknownText => 'Khác';
 
   @override
   String get religionText => 'Tôn Giáo';
@@ -360,5 +360,68 @@ class AppLocalizationsVi extends AppLocalizations {
   String get moreDetailsButtonText => 'Xem thêm';
 
   @override
+  String get firstQuestionInFAQsTitleText => '## 1. Tôi lỡ chọn sai tôn giáo của mình, làm sao để chọn lại?';
+
+  @override
+  String get firstAnswerInFAQsDescText => 'Để thay đổ lại tôn giáo của bạn, truy cập **Hồ Sơ** của bạn; sau đó chọn **Tôn giáo của bạn** - mục **Tùy chọn của bạn**. Cuối cùng, chọn lại tôn giáo của bạn.';
+
+  @override
+  String get secondQuestionInFAQsTitleText => '## 2. Làm sao để tạo một sự kiện mới?';
+
+  @override
+  String get secondAnswerInFAQsADescText => 'Để tạo sự kiện mới của bạn, truy cập **Trang Chủ**; sau đó chọn icon **Hình tròn, dấu cộng màu vàng** dưới góc phải màn hình. Tùy chỉnh thông tin sự kiện của bạn và chọn **Thêm sự kiện** ở góc trên bên phải.';
+
+  @override
+  String get thirdQuestionInFAQsTitleText => '## 3. Tôi thấy sự kiện hoặc thông tin bị sai, làm sao để báo cáo?';
+
+  @override
+  String get fourthQuestionInFAQsTitleText => '##  4. Ứng dụng có lưu trữ dữ liệu cá nhân của tôi?';
+
+  @override
+  String get thirdAnswerInFAQsDescText => 'Vui lòng gửi yêu cầu cho **Ứng Dụng** trong mục **Góp Ý & Báo lỗi**. Hoặc thực hiện thao tác chụp màn hình, chức năng **Báo cáo lỗi** sẽ tự động hiện ra. Bạn vui lòng miêu tả thông tin chi tiết về lỗi hoặc thông tin không chính xác! Cảm ơn bạn đã giúp **Ứng Dụng** trở nên tốt hơn!';
+
+  @override
+  String get fourthAnswerInFAQsDescText => 'Ứng dụng có thu thập và lưu trữ dữ liệu hoạt động trên ứng dụng của bạn để cải thiện hiệu suất, phát triển thêm tính năng. **Ứng Dụng** tuân thủ quy tắc và tiêu chuẩn của cửa hàng ứng dụng **iOS** là **App Store** và **Android** là **Google Play**. Xem thêm về **Điều khoản sử dụng** và **Chính sách bảo mật** trong trang **Hồ Sơ** để biết thêm chi tiết!';
+
+  @override
+  String get fifthQuestionInFAQsTitleText => '##  5. Ứng dụng có dự định hỗ trợ thêm tôn giáo trong tương lai?';
+
+  @override
+  String get fifthAnswerInFAQsDescText => 'Có chứ! Bạn hãy truy cập mục **Góp Ý & Báo Lỗi** trong trang **Hồ Sơ** và gửi yêu cầu **Ứng Dụng** hỗ trợ tôn giáo của bạn. Chúng tôi sẽ ưu tiên những tôn giáo có số lượng yêu cầu cao nhất.';
+
+  @override
+  String get whatKindOfFeedbackTitleText => 'Bạn muốn đưa ra loại phản hồi nào?';
+
+  @override
+  String get bugReportText => 'Báo cáo lỗi';
+
+  @override
+  String get featureRequestText => 'Gợi ý tính năng';
+
+  @override
+  String get whatIsYourFeedbackTitleText => 'Bạn muốn góp ý hoặc báo cáo điều gì?';
+
+  @override
+  String get feelBad => 'Tôi không hài lòng';
+
+  @override
+  String get feelNeutral => 'Tôi thấy ổn';
+
+  @override
+  String get feelGood => 'Tôi thấy rất tốt';
+
+  @override
+  String get submitButtonText => 'Gửi';
+
+  @override
   String get explorePageHeaderText => 'Khám phá';
+
+  @override
+  String get completeButtonText => 'Hoàn thành';
+
+  @override
+  String get errorLoadingContentText => 'Error loading contente';
+
+  @override
+  String get errorSomethingWentWrongText => 'Đã có lỗi xảy ra!';
 }

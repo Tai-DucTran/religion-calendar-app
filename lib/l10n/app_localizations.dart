@@ -110,7 +110,7 @@ abstract class AppLocalizations {
   /// No description provided for @religionUnknownText.
   ///
   /// In en, this message translates to:
-  /// **'I don\'\'t have religion'**
+  /// **'Other / None'**
   String get religionUnknownText;
 
   /// No description provided for @religionText.
@@ -797,11 +797,137 @@ abstract class AppLocalizations {
   /// **'More details'**
   String get moreDetailsButtonText;
 
+  /// No description provided for @firstQuestionInFAQsTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'## 1. I accidentally selected the wrong religion, how do I change it?'**
+  String get firstQuestionInFAQsTitleText;
+
+  /// No description provided for @firstAnswerInFAQsDescText.
+  ///
+  /// In en, this message translates to:
+  /// **'To change your religion, access your Profile; then select **Your religion preferences** in the **Preferences** section. Finally, reselect your religion.'**
+  String get firstAnswerInFAQsDescText;
+
+  /// No description provided for @secondQuestionInFAQsTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'## 2. How do I create a new event?'**
+  String get secondQuestionInFAQsTitleText;
+
+  /// No description provided for @secondAnswerInFAQsADescText.
+  ///
+  /// In en, this message translates to:
+  /// **'To create a new event, access the **Home Page**; then select the yellow circular plus icon in the bottom right corner of the screen. Customize your event information and select **Add** or **Save** event in the top right corner.'**
+  String get secondAnswerInFAQsADescText;
+
+  /// No description provided for @thirdQuestionInFAQsTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'## 3. I see incorrect event or information, how do I report it?'**
+  String get thirdQuestionInFAQsTitleText;
+
+  /// No description provided for @fourthQuestionInFAQsTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'## 4. Does the app store my personal data?'**
+  String get fourthQuestionInFAQsTitleText;
+
+  /// No description provided for @thirdAnswerInFAQsDescText.
+  ///
+  /// In en, this message translates to:
+  /// **'Please  submit your feedback in **Feedback & Report** pag. Or please do screen shoot within the **Application**, **Feedback & Report** feature is going to be activated; then please describe the details incorrect information or bugs. Thanks for helping **Application** to be beter!'**
+  String get thirdAnswerInFAQsDescText;
+
+  /// No description provided for @fourthAnswerInFAQsDescText.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, **Application** collects and stores a few user\'s data for analyzing and improving **App Performance** and developing new features. **Application** follow the rules of mobile platforms where our application has been operating; in **iOS** is **Apple Store**; and in **Android** is **Google Play**. Read more our **Terms of use** and **Privacy Policy** in **Profile**!'**
+  String get fourthAnswerInFAQsDescText;
+
+  /// No description provided for @fifthQuestionInFAQsTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'##  5. Does the app plan to support more religion in the future?'**
+  String get fifthQuestionInFAQsTitleText;
+
+  /// No description provided for @fifthAnswerInFAQsDescText.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, we plan to do that. Please submit feedback for us by selecting **Feature Suggestions** and filling out your request. We will analyze and prioritize the top-voted requests for support.'**
+  String get fifthAnswerInFAQsDescText;
+
+  /// No description provided for @whatKindOfFeedbackTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'What kind of feedback do you want to give?'**
+  String get whatKindOfFeedbackTitleText;
+
+  /// No description provided for @bugReportText.
+  ///
+  /// In en, this message translates to:
+  /// **'Bug report'**
+  String get bugReportText;
+
+  /// No description provided for @featureRequestText.
+  ///
+  /// In en, this message translates to:
+  /// **'Feature request'**
+  String get featureRequestText;
+
+  /// No description provided for @whatIsYourFeedbackTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'What is your feedback?'**
+  String get whatIsYourFeedbackTitleText;
+
+  /// No description provided for @feelBad.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m feeling bad'**
+  String get feelBad;
+
+  /// No description provided for @feelNeutral.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m okay!'**
+  String get feelNeutral;
+
+  /// No description provided for @feelGood.
+  ///
+  /// In en, this message translates to:
+  /// **'I like it!'**
+  String get feelGood;
+
+  /// No description provided for @submitButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submitButtonText;
+
   /// No description provided for @explorePageHeaderText.
   ///
   /// In en, this message translates to:
   /// **'Explore'**
   String get explorePageHeaderText;
+
+  /// No description provided for @completeButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete'**
+  String get completeButtonText;
+
+  /// No description provided for @errorLoadingContentText.
+  ///
+  /// In en, this message translates to:
+  /// **'Không thể hiển thị được nội dung'**
+  String get errorLoadingContentText;
+
+  /// No description provided for @errorSomethingWentWrongText.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong!'**
+  String get errorSomethingWentWrongText;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -47,4 +47,9 @@ class AriesIcons {
       'packages/aries/assets/images/icons/message-question-circle.svg';
   static const moon01Icon = 'packages/aries/assets/images/icons/moon-01.svg';
   static const start05Icon = 'packages/aries/assets/images/icons/star-05.svg';
+  static const buddaIcon = 'packages/aries/assets/images/icons/budda_icon.svg';
+  static const catholicIcon =
+      'packages/aries/assets/images/icons/catholic-icon.svg';
+  static const heartCircleIcon =
+      'packages/aries/assets/images/icons/heart_circle_icon.svg';
 }

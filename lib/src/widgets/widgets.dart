@@ -1,5 +1,6 @@
 export 'buttons/buttons.dart';
 export 'linear_gradient_containers/linear_gradient_containers.dart';
+export 'markdown/markdown.dart';
 export 'overlays/overlays.dart';
 export 'skeletons/skeletons.dart';
 export 'snackbar/snackbar.dart';

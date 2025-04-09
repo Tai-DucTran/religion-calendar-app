@@ -4,7 +4,7 @@ import 'package:religion_calendar_app/src/modules/calendar/widgets/pages/full_ca
 import 'package:religion_calendar_app/src/modules/login/widgets/page/forgot_pasword_page.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/login_page.dart';
 import 'package:religion_calendar_app/src/modules/navigation_bottom_bar/widgets/organisms/navigation_bottom_bar.dart';
-import 'package:religion_calendar_app/src/modules/onboarding/widgets/page/onboarding_religion_preference_page.dart';
+import 'package:religion_calendar_app/src/modules/onboarding/widgets/page/religion_preference_onboarding.dart';
 import 'package:religion_calendar_app/src/modules/sign_up/widgets/page/page.dart';
 
 import '../modules/home/widgets/pages/pages.dart';
@@ -110,7 +110,7 @@ class OnboardingRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const OnboardingReligionPreferencePage();
+    return const ReligionPreferenceOnboarding();
   }
 }
 
@@ -152,9 +152,6 @@ class FullCalendarRoute extends GoRouteData {
     ),
     TypedGoRoute<ReligionPreferencesSettingRoute>(
       path: ReligionPreferencesSettingRoute.path,
-    ),
-    TypedGoRoute<ThemeSettingRoute>(
-      path: ThemeSettingRoute.path,
     ),
     TypedGoRoute<NotificationSettingRoute>(
       path: NotificationSettingRoute.path,
@@ -199,17 +196,9 @@ class ReligionPreferencesSettingRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const ReligionPreferencesSettingPage();
-  }
-}
-
-class ThemeSettingRoute extends GoRouteData {
-  const ThemeSettingRoute();
-  static const path = 'theme-setting';
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const ThemeSettingPage();
+    return const ReligionPreferenceOnboarding(
+      isProfilePageSetting: true,
+    );
   }
 }
 
@@ -249,7 +238,7 @@ class TermsOfUseSettingRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const TermsOsUseSettingPage();
+    return const TermsOfUseSettingPage();
   }
 }
 

@@ -67,6 +67,14 @@ class AriesTextStyles {
         color: AriesColor.neutral700,
       );
 
+  // Heading 7: Bold, 16px, 1.3 x font size
+  static TextStyle get textHeading7 => TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 12.sp,
+        overflow: TextOverflow.ellipsis,
+        color: AriesColor.neutral700,
+      );
+
   // Lead Paragraph: Regular, 22px, 1.5 x font size
   static TextStyle get textLeadParagraph => TextStyle(
         fontWeight: FontWeight.normal,
