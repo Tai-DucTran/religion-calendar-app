@@ -3,8 +3,8 @@ import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:religion_calendar_app/src/modules/feedback/controllers/controllers.dart';
-import 'package:religion_calendar_app/src/modules/feedback/models/models.dart';
+import 'package:religion_calendar_app/src/modules/feedback_form/controllers/controllers.dart';
+import 'package:religion_calendar_app/src/modules/feedback_form/models/models.dart';
 import 'package:religion_calendar_app/src/utils/localization_extension.dart';
 
 /// A form that prompts the user for the type of feedback they want to give,

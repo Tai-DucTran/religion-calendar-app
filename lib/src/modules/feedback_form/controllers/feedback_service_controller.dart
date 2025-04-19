@@ -2,7 +2,7 @@ import 'package:feedback/feedback.dart';
 import 'package:religion_calendar_app/src/router/routes.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:religion_calendar_app/src/utils/log.dart';
-import 'package:religion_calendar_app/src/modules/feedback/controllers/feedback_controller.dart';
+import 'package:religion_calendar_app/src/modules/feedback_form/controllers/feedback_controller.dart';
 
 part 'feedback_service_controller.g.dart';
 
