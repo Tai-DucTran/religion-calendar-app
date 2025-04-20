@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:aries/aries.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -56,6 +58,21 @@ extension FeelingRatesExtension on FeelingRates {
         return AriesIcons.faceSmileIcon;
       case FeelingRates.love:
         return AriesIcons.faceHappyIcon;
+    }
+  }
+
+  Color getColor() {
+    switch (this) {
+      case FeelingRates.hate:
+        return AriesColor.danger300;
+      case FeelingRates.dislike:
+        return AriesColor.danger100;
+      case FeelingRates.neutral:
+        return AriesColor.yellowP400;
+      case FeelingRates.like:
+        return AriesColor.success300;
+      case FeelingRates.love:
+        return AriesColor.success400;
     }
   }
 }

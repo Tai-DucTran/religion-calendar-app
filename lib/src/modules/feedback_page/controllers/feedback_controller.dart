@@ -53,8 +53,6 @@ class FeedbackController extends _$FeedbackController {
   }
 
   void submitFeedback() {
-    // In a real implementation, this would send the feedback to the backend
-    // For now, just reset the form after "submission"
     resetForm();
   }
 }
