@@ -6,7 +6,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/home/widgets/utils/helpers.dart';
 import 'package:religion_calendar_app/src/modules/user/controllers/controllers.dart';
-import 'package:religion_calendar_app/src/utils/string_helper.dart';
 import 'package:religion_calendar_app/src/modules/calendar/calendar.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 

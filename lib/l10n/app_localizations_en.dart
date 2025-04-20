@@ -396,22 +396,49 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bugReportText => 'Bug report';
 
   @override
-  String get featureRequestText => 'Feature request';
+  String get featureRecommendationText => 'Recommendation';
 
   @override
   String get whatIsYourFeedbackTitleText => 'What is your feedback?';
 
   @override
-  String get feelBad => 'I\'m feeling bad';
+  String get feelDislike => 'I don\'t like it';
 
   @override
-  String get feelNeutral => 'I\'m okay!';
+  String get feelBad => 'I\'m feeling bad ';
 
   @override
-  String get feelGood => 'I like it!';
+  String get feelNeutral => 'It\'s okay';
+
+  @override
+  String get feelLike => 'I like your App';
+
+  @override
+  String get feelLove => 'I love it';
 
   @override
   String get submitButtonText => 'Submit';
+
+  @override
+  String get closeButtonText => 'Close';
+
+  @override
+  String get thankYouText => 'Thank you!';
+
+  @override
+  String get submittedSuccessfullyText => 'Your feedback has been submitted successfully. We appreciate your input.';
+
+  @override
+  String get inputFeedbackContentHintText => 'Please share your thoughts';
+
+  @override
+  String get tellUsMoreText => 'Tell us more';
+
+  @override
+  String get feedbackOrReportStatusesText => 'Feedback or Report Statuses';
+
+  @override
+  String get feedbackOrReportStatusesDescText => 'See all your feedbacks/reports responses';
 
   @override
   String get explorePageHeaderText => 'Explore';
