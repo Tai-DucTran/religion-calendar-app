@@ -3,8 +3,10 @@ import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:religion_calendar_app/src/modules/feedback_form/controllers/controllers.dart';
-import 'package:religion_calendar_app/src/modules/feedback_form/models/models.dart';
+import 'package:religion_calendar_app/src/modules/feedback_by_screenshot/controllers/controllers.dart';
+import 'package:religion_calendar_app/src/modules/feedback_page/controllers/feedback_controller.dart';
+import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
+import 'package:religion_calendar_app/src/modules/feedback_page/widgets/atoms/atoms.dart';
 import 'package:religion_calendar_app/src/utils/localization_extension.dart';
 
 /// A form that prompts the user for the type of feedback they want to give,
@@ -12,8 +14,8 @@ import 'package:religion_calendar_app/src/utils/localization_extension.dart';
 /// The submit button is disabled until the user provides the feedback type. All
 /// other fields are optional.
 
-class CustomFeedbackForm extends ConsumerStatefulWidget {
-  const CustomFeedbackForm({
+class ScreenshotFeedbackForm extends ConsumerStatefulWidget {
+  const ScreenshotFeedbackForm({
     super.key,
     required this.onSubmit,
     required this.scrollController,
@@ -24,14 +26,15 @@ class CustomFeedbackForm extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _CustomFeedbackFormState();
+      _ScreenshotFeedbackFormState();
 }
 
-class _CustomFeedbackFormState extends ConsumerState<CustomFeedbackForm> {
-  final CustomFeedback _customFeedback = CustomFeedback();
-
+class _ScreenshotFeedbackFormState
+    extends ConsumerState<ScreenshotFeedbackForm> {
   @override
   Widget build(BuildContext context) {
+    final feedback = ref.watch(feedbackControllerProvider);
+
     return Column(
       children: [
         Expanded(
@@ -48,38 +51,44 @@ class _CustomFeedbackFormState extends ConsumerState<CustomFeedbackForm> {
                   0,
                 ),
                 children: [
-                  Text(context.l10n.whatKindOfFeedbackTitleText),
+                  Text(
+                    context.l10n.whatKindOfFeedbackTitleText,
+                    style: AriesTextStyles.textHeading7,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Flexible(
                         child: DropdownButton<FeedbackType>(
-                          value: _customFeedback.feedbackType,
+                          value: feedback.feedbackType,
                           items: FeedbackType.values
                               .map(
                                 (type) => DropdownMenuItem<FeedbackType>(
                                   value: type,
                                   child: Text(
                                     type.getLocalized(context),
+                                    style: AriesTextStyles.textBodySmall,
                                   ),
                                 ),
                               )
                               .toList(),
-                          onChanged: (feedbackType) => setState(() =>
-                              _customFeedback.feedbackType = feedbackType),
+                          onChanged: (feedbackType) {
+                            final controller =
+                                ref.read(feedbackControllerProvider.notifier);
+                            controller.updateFeedbackType(feedbackType!);
+                          },
                         ),
                       ),
-                      Flexible(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children:
-                              FeedbackRating.values.map(_ratingToIcon).toList(),
-                        ),
-                      ),
+                      FeelingReatesWrapper(),
                     ],
                   ),
-                  const SizedBox(height: 8),
-                  Text(context.l10n.whatIsYourFeedbackTitleText),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    context.l10n.whatIsYourFeedbackTitleText,
+                    style: AriesTextStyles.textHeading7,
+                  ),
                   TextField(
                     cursorColor: AriesColor.neutral60,
                     decoration: InputDecoration(
@@ -103,63 +112,56 @@ class _CustomFeedbackFormState extends ConsumerState<CustomFeedbackForm> {
                         ),
                       ),
                     ),
-                    onChanged: (newFeedback) =>
-                        _customFeedback.feedbackText = newFeedback,
+                    onChanged: (newFeedback) {
+                      final controller =
+                          ref.read(feedbackControllerProvider.notifier);
+                      controller.updateFeedbackText(newFeedback);
+                    },
                   ),
                 ],
               ),
             ],
           ),
         ),
-        TextButton(
-          onPressed: _customFeedback.feedbackType != null
-              ? () {
-                  widget.onSubmit(
-                    _customFeedback.feedbackText ?? '',
-                    extras: _customFeedback.toMap(),
-                  );
-
-                  // Hide the feedback form after submission
-                  ref
-                      .read(feedbackControllerProvider.notifier)
-                      .hideFeedbackForm();
-                }
-              : null,
-          child: Text(
-            context.l10n.submitButtonText,
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 14.w),
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: feedback.feedbackType != null
+                ? () {
+                    widget.onSubmit(
+                      feedback.feedbackText ?? '',
+                      extras: feedback.toJson(),
+                    );
+                    ref
+                        .read(
+                          screenshotFeedbackFormControllerProvider.notifier,
+                        )
+                        .hideFeedbackForm();
+                  }
+                : null,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AriesColor.yellowP950,
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  8.r,
+                ),
+              ),
+              disabledBackgroundColor: AriesColor.neutral40,
+            ),
+            child: Text(
+              context.l10n.submitButtonText,
+              style: AriesTextStyles.textHeading6.copyWith(
+                color: AriesColor.neutral0,
+              ),
+            ),
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(
+          height: 20,
+        ),
       ],
-    );
-  }
-
-  Widget _ratingToIcon(FeedbackRating rating) {
-    final bool isSelected = _customFeedback.rating == rating;
-    late IconData icon;
-    late Color color;
-    switch (rating) {
-      case FeedbackRating.bad:
-        icon = Icons.sentiment_dissatisfied;
-        color = AriesColor.danger300;
-        break;
-      case FeedbackRating.neutral:
-        icon = Icons.sentiment_neutral;
-        color = AriesColor.yellowP300;
-        break;
-      case FeedbackRating.good:
-        icon = Icons.sentiment_satisfied;
-        color = AriesColor.success500;
-        break;
-    }
-
-    return IconButton(
-      color: isSelected ? color : Colors.grey,
-      onPressed: () => setState(
-        () => _customFeedback.rating = rating,
-      ),
-      icon: Icon(icon),
-      iconSize: 36,
     );
   }
 }

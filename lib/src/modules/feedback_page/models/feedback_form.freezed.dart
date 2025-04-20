@@ -21,10 +21,10 @@ FeedbackForm _$FeedbackFormFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$FeedbackForm {
   String get id => throw _privateConstructorUsedError;
-  FeedbackResponseStatus get status => throw _privateConstructorUsedError;
-  bool get isExpanded => throw _privateConstructorUsedError;
-  String get feedbackText => throw _privateConstructorUsedError;
-  FeedbackType get feedbackType => throw _privateConstructorUsedError;
+  FeedbackResponseStatus? get status => throw _privateConstructorUsedError;
+  bool? get isExpanded => throw _privateConstructorUsedError;
+  String? get feedbackText => throw _privateConstructorUsedError;
+  FeedbackType? get feedbackType => throw _privateConstructorUsedError;
   FeelingRates? get selectedSentiment => throw _privateConstructorUsedError;
 
   /// Serializes this FeedbackForm to a JSON map.
@@ -45,10 +45,10 @@ abstract class $FeedbackFormCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      FeedbackResponseStatus status,
-      bool isExpanded,
-      String feedbackText,
-      FeedbackType feedbackType,
+      FeedbackResponseStatus? status,
+      bool? isExpanded,
+      String? feedbackText,
+      FeedbackType? feedbackType,
       FeelingRates? selectedSentiment});
 }
 
@@ -68,10 +68,10 @@ class _$FeedbackFormCopyWithImpl<$Res, $Val extends FeedbackForm>
   @override
   $Res call({
     Object? id = null,
-    Object? status = null,
-    Object? isExpanded = null,
-    Object? feedbackText = null,
-    Object? feedbackType = null,
+    Object? status = freezed,
+    Object? isExpanded = freezed,
+    Object? feedbackText = freezed,
+    Object? feedbackType = freezed,
     Object? selectedSentiment = freezed,
   }) {
     return _then(_value.copyWith(
@@ -79,22 +79,22 @@ class _$FeedbackFormCopyWithImpl<$Res, $Val extends FeedbackForm>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as FeedbackResponseStatus,
-      isExpanded: null == isExpanded
+              as FeedbackResponseStatus?,
+      isExpanded: freezed == isExpanded
           ? _value.isExpanded
           : isExpanded // ignore: cast_nullable_to_non_nullable
-              as bool,
-      feedbackText: null == feedbackText
+              as bool?,
+      feedbackText: freezed == feedbackText
           ? _value.feedbackText
           : feedbackText // ignore: cast_nullable_to_non_nullable
-              as String,
-      feedbackType: null == feedbackType
+              as String?,
+      feedbackType: freezed == feedbackType
           ? _value.feedbackType
           : feedbackType // ignore: cast_nullable_to_non_nullable
-              as FeedbackType,
+              as FeedbackType?,
       selectedSentiment: freezed == selectedSentiment
           ? _value.selectedSentiment
           : selectedSentiment // ignore: cast_nullable_to_non_nullable
@@ -113,10 +113,10 @@ abstract class _$$FeedbackFormImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      FeedbackResponseStatus status,
-      bool isExpanded,
-      String feedbackText,
-      FeedbackType feedbackType,
+      FeedbackResponseStatus? status,
+      bool? isExpanded,
+      String? feedbackText,
+      FeedbackType? feedbackType,
       FeelingRates? selectedSentiment});
 }
 
@@ -134,10 +134,10 @@ class __$$FeedbackFormImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? status = null,
-    Object? isExpanded = null,
-    Object? feedbackText = null,
-    Object? feedbackType = null,
+    Object? status = freezed,
+    Object? isExpanded = freezed,
+    Object? feedbackText = freezed,
+    Object? feedbackType = freezed,
     Object? selectedSentiment = freezed,
   }) {
     return _then(_$FeedbackFormImpl(
@@ -145,22 +145,22 @@ class __$$FeedbackFormImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as FeedbackResponseStatus,
-      isExpanded: null == isExpanded
+              as FeedbackResponseStatus?,
+      isExpanded: freezed == isExpanded
           ? _value.isExpanded
           : isExpanded // ignore: cast_nullable_to_non_nullable
-              as bool,
-      feedbackText: null == feedbackText
+              as bool?,
+      feedbackText: freezed == feedbackText
           ? _value.feedbackText
           : feedbackText // ignore: cast_nullable_to_non_nullable
-              as String,
-      feedbackType: null == feedbackType
+              as String?,
+      feedbackType: freezed == feedbackType
           ? _value.feedbackType
           : feedbackType // ignore: cast_nullable_to_non_nullable
-              as FeedbackType,
+              as FeedbackType?,
       selectedSentiment: freezed == selectedSentiment
           ? _value.selectedSentiment
           : selectedSentiment // ignore: cast_nullable_to_non_nullable
@@ -174,10 +174,10 @@ class __$$FeedbackFormImplCopyWithImpl<$Res>
 class _$FeedbackFormImpl extends _FeedbackForm {
   const _$FeedbackFormImpl(
       {required this.id,
-      required this.status,
-      required this.isExpanded,
-      required this.feedbackText,
-      required this.feedbackType,
+      this.status = FeedbackResponseStatus.submitting,
+      this.isExpanded = false,
+      this.feedbackText = '',
+      this.feedbackType = FeedbackType.featureRecommendation,
       this.selectedSentiment})
       : super._();
 
@@ -187,13 +187,17 @@ class _$FeedbackFormImpl extends _FeedbackForm {
   @override
   final String id;
   @override
-  final FeedbackResponseStatus status;
+  @JsonKey()
+  final FeedbackResponseStatus? status;
   @override
-  final bool isExpanded;
+  @JsonKey()
+  final bool? isExpanded;
   @override
-  final String feedbackText;
+  @JsonKey()
+  final String? feedbackText;
   @override
-  final FeedbackType feedbackType;
+  @JsonKey()
+  final FeedbackType? feedbackType;
   @override
   final FeelingRates? selectedSentiment;
 
@@ -243,10 +247,10 @@ class _$FeedbackFormImpl extends _FeedbackForm {
 abstract class _FeedbackForm extends FeedbackForm {
   const factory _FeedbackForm(
       {required final String id,
-      required final FeedbackResponseStatus status,
-      required final bool isExpanded,
-      required final String feedbackText,
-      required final FeedbackType feedbackType,
+      final FeedbackResponseStatus? status,
+      final bool? isExpanded,
+      final String? feedbackText,
+      final FeedbackType? feedbackType,
       final FeelingRates? selectedSentiment}) = _$FeedbackFormImpl;
   const _FeedbackForm._() : super._();
 
@@ -256,13 +260,13 @@ abstract class _FeedbackForm extends FeedbackForm {
   @override
   String get id;
   @override
-  FeedbackResponseStatus get status;
+  FeedbackResponseStatus? get status;
   @override
-  bool get isExpanded;
+  bool? get isExpanded;
   @override
-  String get feedbackText;
+  String? get feedbackText;
   @override
-  FeedbackType get feedbackType;
+  FeedbackType? get feedbackType;
   @override
   FeelingRates? get selectedSentiment;
 

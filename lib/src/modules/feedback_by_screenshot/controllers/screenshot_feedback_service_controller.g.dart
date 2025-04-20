@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'feedback_controller.dart';
+part of 'screenshot_feedback_service_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$feedbackControllerHash() =>
-    r'1629b2a487f65b96f969c3026fdf50d1eb6a1a41';
+String _$screenshotFeedbackServiceHash() =>
+    r'c3a7691d70713c7ac455665883473abb3e45f146';
 
-/// See also [FeedbackController].
-@ProviderFor(FeedbackController)
-final feedbackControllerProvider =
-    NotifierProvider<FeedbackController, bool>.internal(
-  FeedbackController.new,
-  name: r'feedbackControllerProvider',
+/// See also [ScreenshotFeedbackService].
+@ProviderFor(ScreenshotFeedbackService)
+final screenshotFeedbackServiceProvider =
+    NotifierProvider<ScreenshotFeedbackService, void>.internal(
+  ScreenshotFeedbackService.new,
+  name: r'screenshotFeedbackServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$feedbackControllerHash,
+      : _$screenshotFeedbackServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$FeedbackController = Notifier<bool>;
+typedef _$ScreenshotFeedbackService = Notifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

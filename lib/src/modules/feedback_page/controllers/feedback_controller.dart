@@ -34,7 +34,7 @@ class FeedbackController extends _$FeedbackController {
   }
 
   void toggleExpanded() {
-    state = state.copyWith(isExpanded: !state.isExpanded);
+    state = state.copyWith(isExpanded: !state.isExpanded!);
   }
 
   void resetForm() {
@@ -49,7 +49,7 @@ class FeedbackController extends _$FeedbackController {
   }
 
   bool isSubmitEnabled() {
-    return state.feedbackText.isNotEmpty && state.isExpanded;
+    return state.feedbackText!.isNotEmpty && state.isExpanded!;
   }
 
   void submitFeedback() {

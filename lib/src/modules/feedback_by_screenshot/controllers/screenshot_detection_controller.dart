@@ -1,4 +1,4 @@
-import 'package:religion_calendar_app/src/modules/feedback_form/controllers/controllers.dart';
+import 'package:religion_calendar_app/src/modules/feedback_by_screenshot/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:screenshot_callback/screenshot_callback.dart';
@@ -15,7 +15,11 @@ class ScreenshotDetectionController extends _$ScreenshotDetectionController {
     try {
       _screenshotCallback = ScreenshotCallback();
       _screenshotCallback.addListener(() {
-        ref.read(feedbackServiceProvider.notifier).showFeedbackForm();
+        ref
+            .read(
+              screenshotFeedbackServiceProvider.notifier,
+            )
+            .showFeedbackForm();
       });
 
       _isInitialized = true;
@@ -37,7 +41,11 @@ class ScreenshotDetectionController extends _$ScreenshotDetectionController {
 
   void manualTriggerToggle() {
     if (_isInitialized) {
-      ref.read(feedbackServiceProvider.notifier).showFeedbackForm();
+      ref
+          .read(
+            screenshotFeedbackServiceProvider.notifier,
+          )
+          .showFeedbackForm();
     }
   }
 }

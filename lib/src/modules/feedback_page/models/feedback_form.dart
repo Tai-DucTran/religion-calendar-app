@@ -1,7 +1,7 @@
-import 'dart:ui';
-
 import 'package:aries/aries.dart';
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 
 part "feedback_form.freezed.dart";
 part "feedback_form.g.dart";
@@ -10,10 +10,10 @@ part "feedback_form.g.dart";
 class FeedbackForm with _$FeedbackForm {
   const factory FeedbackForm({
     required String id,
-    required FeedbackResponseStatus status,
-    required bool isExpanded,
-    required String feedbackText,
-    required FeedbackType feedbackType,
+    @Default(FeedbackResponseStatus.submitting) FeedbackResponseStatus? status,
+    @Default(false) bool? isExpanded,
+    @Default('') String? feedbackText,
+    @Default(FeedbackType.featureRecommendation) FeedbackType? feedbackType,
     FeelingRates? selectedSentiment,
   }) = _FeedbackForm;
 
@@ -80,4 +80,15 @@ extension FeelingRatesExtension on FeelingRates {
 enum FeedbackType {
   bugReport,
   featureRecommendation,
+}
+
+extension FeedbackTypeExtension on FeedbackType {
+  String getLocalized(BuildContext context) {
+    switch (this) {
+      case FeedbackType.bugReport:
+        return context.l10n.bugReportText;
+      case FeedbackType.featureRecommendation:
+        return context.l10n.featureRecommendationText;
+    }
+  }
 }

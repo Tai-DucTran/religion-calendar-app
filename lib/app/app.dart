@@ -8,8 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:religion_calendar_app/l10n/app_localizations.dart';
-import 'package:religion_calendar_app/src/modules/feedback_form/controllers/controllers.dart';
-import 'package:religion_calendar_app/src/modules/feedback_form/widgets/page/page.dart';
+import 'package:religion_calendar_app/src/modules/feedback_by_screenshot/controllers/controllers.dart';
+import 'package:religion_calendar_app/src/modules/feedback_by_screenshot/widgets/page/page.dart';
 import '../src/modules/authentication/authentication.dart';
 import '../src/modules/geoip_and_locales/controllers/controllers.dart';
 import '../src/modules/user/user.dart';
@@ -52,7 +52,9 @@ class _ReligionAppState extends ConsumerState<ReligionApp> {
     final router = ref.watch(routerProvider);
     final currentLocale = ref.watch(localeControllerProvider);
     ref.watch(screenshotDetectionControllerProvider);
-    final isFeedbackEnabled = ref.watch(feedbackControllerProvider);
+    final isFeedbackEnabled = ref.watch(
+      screenshotFeedbackFormControllerProvider,
+    );
 
     return BetterFeedback(
       theme: FeedbackThemeData(
@@ -78,7 +80,7 @@ class _ReligionAppState extends ConsumerState<ReligionApp> {
       pixelRatio: 1,
       feedbackBuilder: isFeedbackEnabled
           ? (context, onSubmit, scrollController) {
-              return CustomFeedbackForm(
+              return ScreenshotFeedbackForm(
                 onSubmit: onSubmit,
                 scrollController: scrollController,
               );

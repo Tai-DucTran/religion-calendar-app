@@ -9,10 +9,14 @@ part of 'feedback_form.dart';
 _$FeedbackFormImpl _$$FeedbackFormImplFromJson(Map<String, dynamic> json) =>
     _$FeedbackFormImpl(
       id: json['id'] as String,
-      status: $enumDecode(_$FeedbackResponseStatusEnumMap, json['status']),
-      isExpanded: json['isExpanded'] as bool,
-      feedbackText: json['feedbackText'] as String,
-      feedbackType: $enumDecode(_$FeedbackTypeEnumMap, json['feedbackType']),
+      status: $enumDecodeNullable(
+              _$FeedbackResponseStatusEnumMap, json['status']) ??
+          FeedbackResponseStatus.submitting,
+      isExpanded: json['isExpanded'] as bool? ?? false,
+      feedbackText: json['feedbackText'] as String? ?? '',
+      feedbackType:
+          $enumDecodeNullable(_$FeedbackTypeEnumMap, json['feedbackType']) ??
+              FeedbackType.featureRecommendation,
       selectedSentiment:
           $enumDecodeNullable(_$FeelingRatesEnumMap, json['selectedSentiment']),
     );
@@ -20,10 +24,10 @@ _$FeedbackFormImpl _$$FeedbackFormImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$FeedbackFormImplToJson(_$FeedbackFormImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'status': _$FeedbackResponseStatusEnumMap[instance.status]!,
+      'status': _$FeedbackResponseStatusEnumMap[instance.status],
       'isExpanded': instance.isExpanded,
       'feedbackText': instance.feedbackText,
-      'feedbackType': _$FeedbackTypeEnumMap[instance.feedbackType]!,
+      'feedbackType': _$FeedbackTypeEnumMap[instance.feedbackType],
       'selectedSentiment': _$FeelingRatesEnumMap[instance.selectedSentiment],
     };
 
