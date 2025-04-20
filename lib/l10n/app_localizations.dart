@@ -869,11 +869,11 @@ abstract class AppLocalizations {
   /// **'Bug report'**
   String get bugReportText;
 
-  /// No description provided for @featureRequestText.
+  /// No description provided for @featureRecommendationText.
   ///
   /// In en, this message translates to:
-  /// **'Feature request'**
-  String get featureRequestText;
+  /// **'Recommendation'**
+  String get featureRecommendationText;
 
   /// No description provided for @whatIsYourFeedbackTitleText.
   ///
@@ -881,29 +881,83 @@ abstract class AppLocalizations {
   /// **'What is your feedback?'**
   String get whatIsYourFeedbackTitleText;
 
+  /// No description provided for @feelDislike.
+  ///
+  /// In en, this message translates to:
+  /// **'I don\'t like it'**
+  String get feelDislike;
+
   /// No description provided for @feelBad.
   ///
   /// In en, this message translates to:
-  /// **'I\'m feeling bad'**
+  /// **'I\'m feeling bad '**
   String get feelBad;
 
   /// No description provided for @feelNeutral.
   ///
   /// In en, this message translates to:
-  /// **'I\'m okay!'**
+  /// **'It\'s okay'**
   String get feelNeutral;
 
-  /// No description provided for @feelGood.
+  /// No description provided for @feelLike.
   ///
   /// In en, this message translates to:
-  /// **'I like it!'**
-  String get feelGood;
+  /// **'I like your App'**
+  String get feelLike;
+
+  /// No description provided for @feelLove.
+  ///
+  /// In en, this message translates to:
+  /// **'I love it'**
+  String get feelLove;
 
   /// No description provided for @submitButtonText.
   ///
   /// In en, this message translates to:
   /// **'Submit'**
   String get submitButtonText;
+
+  /// No description provided for @closeButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get closeButtonText;
+
+  /// No description provided for @thankYouText.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you!'**
+  String get thankYouText;
+
+  /// No description provided for @submittedSuccessfullyText.
+  ///
+  /// In en, this message translates to:
+  /// **'Your feedback has been submitted successfully. We appreciate your input.'**
+  String get submittedSuccessfullyText;
+
+  /// No description provided for @inputFeedbackContentHintText.
+  ///
+  /// In en, this message translates to:
+  /// **'Please share your thoughts'**
+  String get inputFeedbackContentHintText;
+
+  /// No description provided for @tellUsMoreText.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us more'**
+  String get tellUsMoreText;
+
+  /// No description provided for @feedbackOrReportStatusesText.
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback or Report Statuses'**
+  String get feedbackOrReportStatusesText;
+
+  /// No description provided for @feedbackOrReportStatusesDescText.
+  ///
+  /// In en, this message translates to:
+  /// **'See all your feedbacks/reports responses'**
+  String get feedbackOrReportStatusesDescText;
 
   /// No description provided for @explorePageHeaderText.
   ///

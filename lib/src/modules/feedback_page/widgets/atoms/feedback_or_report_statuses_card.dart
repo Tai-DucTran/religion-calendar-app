@@ -1,5 +1,6 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
+import 'package:religion_calendar_app/src/utils/localization_extension.dart';
 
 class FeedbackOrReportStatusesCard extends StatelessWidget {
   const FeedbackOrReportStatusesCard({super.key});
@@ -14,11 +15,11 @@ class FeedbackOrReportStatusesCard extends StatelessWidget {
       color: AriesColor.neutral0,
       child: ListTile(
         title: Text(
-          'Feedback or Report Statuses',
+          context.l10n.feedbackOrReportStatusesText,
           style: AriesTextStyles.textHeading7,
         ),
         subtitle: Text(
-          'See all your feedbacks/reports response',
+          context.l10n.feedbackOrReportStatusesDescText,
           style: TextStyle(
             fontSize: 12,
             color: AriesColor.yellowP950,

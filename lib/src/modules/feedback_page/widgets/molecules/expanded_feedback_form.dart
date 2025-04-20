@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/controllers/feedback_controller.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/widgets/atoms/atoms.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 
 class ExpandedFeedbackForm extends ConsumerWidget {
   const ExpandedFeedbackForm({super.key});
@@ -25,14 +26,14 @@ class ExpandedFeedbackForm extends ConsumerWidget {
             Expanded(
               child: FeedbackTypeButton(
                 type: FeedbackType.bugReport,
-                label: 'Bug Report',
+                label: FeedbackType.bugReport.getLocalized(context),
                 isSelected: feedback.feedbackType == FeedbackType.bugReport,
               ),
             ),
             Expanded(
               child: FeedbackTypeButton(
                 type: FeedbackType.featureRecommendation,
-                label: 'Suggestion',
+                label: FeedbackType.featureRecommendation.getLocalized(context),
                 isSelected:
                     feedback.feedbackType == FeedbackType.featureRecommendation,
               ),
@@ -40,7 +41,7 @@ class ExpandedFeedbackForm extends ConsumerWidget {
           ],
         ),
         Text(
-          'Tell us more',
+          context.l10n.tellUsMoreText,
           style: AriesTextStyles.textBodySmall,
         ),
         TextField(
@@ -49,7 +50,7 @@ class ExpandedFeedbackForm extends ConsumerWidget {
           },
           maxLines: 4,
           decoration: InputDecoration(
-            hintText: 'Please share your thoughts...',
+            hintText: context.l10n.inputFeedbackContentHintText,
             hintStyle: AriesTextStyles.textHintTextField,
             fillColor: AriesColor.neutral0,
             filled: true,
@@ -68,8 +69,10 @@ class ExpandedFeedbackForm extends ConsumerWidget {
               borderRadius: BorderRadius.circular(8.r),
               borderSide: BorderSide(color: AriesColor.neutral40),
             ),
-            contentPadding:
-                EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 12.w,
+              vertical: 12.h,
+            ),
           ),
         ),
         Center(
@@ -91,7 +94,7 @@ class ExpandedFeedbackForm extends ConsumerWidget {
               disabledBackgroundColor: AriesColor.neutral40,
             ),
             child: Text(
-              'Submit',
+              context.l10n.submitButtonText,
             ),
           ),
         ),

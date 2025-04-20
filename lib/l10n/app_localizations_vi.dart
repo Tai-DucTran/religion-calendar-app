@@ -396,10 +396,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get bugReportText => 'Báo cáo lỗi';
 
   @override
-  String get featureRequestText => 'Gợi ý tính năng';
+  String get featureRecommendationText => 'Đề xuất';
 
   @override
   String get whatIsYourFeedbackTitleText => 'Bạn muốn góp ý hoặc báo cáo điều gì?';
+
+  @override
+  String get feelDislike => 'Tôi không thích';
 
   @override
   String get feelBad => 'Tôi không hài lòng';
@@ -408,10 +411,34 @@ class AppLocalizationsVi extends AppLocalizations {
   String get feelNeutral => 'Tôi thấy ổn';
 
   @override
-  String get feelGood => 'Tôi thấy rất tốt';
+  String get feelLike => 'Tôi thích App';
+
+  @override
+  String get feelLove => 'Tôi yêu App của bạn';
 
   @override
   String get submitButtonText => 'Gửi';
+
+  @override
+  String get closeButtonText => 'Close';
+
+  @override
+  String get thankYouText => 'Cảm ơn bạn!';
+
+  @override
+  String get submittedSuccessfullyText => 'Phản hồi đã gửi thành công. Đội ngũ phát triển cảm ơn phản hồi của bạn!';
+
+  @override
+  String get inputFeedbackContentHintText => 'Bạn vui lòng miêu tả thêm chi tiết...';
+
+  @override
+  String get tellUsMoreText => 'Chi tiết';
+
+  @override
+  String get feedbackOrReportStatusesText => 'Danh sách góp ý của bạn';
+
+  @override
+  String get feedbackOrReportStatusesDescText => 'Theo dõi chi tiết các góp ý và phản hồi của chúng tôi';
 
   @override
   String get explorePageHeaderText => 'Khám phá';

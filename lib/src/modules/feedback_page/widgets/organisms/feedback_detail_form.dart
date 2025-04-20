@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/controllers/controllers.dart';
-import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
+import 'package:religion_calendar_app/src/modules/feedback_page/widgets/atoms/atoms.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/widgets/molecules/molecules.dart';
 
 class FeedbackDetailForm extends ConsumerWidget {
@@ -39,30 +39,11 @@ class FeedbackDetailForm extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: FeelingRates.values.map(
-                (sentiment) {
-                  final isSelected = feedback.selectedSentiment == sentiment;
-                  return AriesIconButton(
-                    onClick: () {
-                      final controller =
-                          ref.read(feedbackControllerProvider.notifier);
-                      controller.selectSentiment(sentiment);
-                    },
-                    iconPath: sentiment.getIconPath(),
-                    color: isSelected
-                        ? feedback.selectedSentiment!.getColor()
-                        : AriesColor.neutral100,
-                    size: 40,
-                  );
-                },
-              ).toList(),
-            ),
+            FeelingReatesWrapper(),
             AnimatedCrossFade(
               firstChild: SizedBox(height: 0),
               secondChild: ExpandedFeedbackForm(),
-              crossFadeState: feedback.isExpanded
+              crossFadeState: feedback.isExpanded!
                   ? CrossFadeState.showSecond
                   : CrossFadeState.showFirst,
               duration: const Duration(
