@@ -40,14 +40,11 @@ class _OnboardingReligionBackgroundState
       vsync: this,
     )..addStatusListener(_handleAnimationStatus);
 
-    // Delay the initial Catholic entrance animation
     Future.delayed(_initialDelay, () {
       if (mounted) {
         setState(() {
           _isAnimating = true;
           _shouldShow = true;
-          // _currentBackground =
-          //     AriesImages.catholicOnboardingBackground; // Adjust path as needed
         });
         _controller.forward();
       }
