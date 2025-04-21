@@ -1,0 +1,11 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "notifications",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "scheduledTime", "order": "ASCENDING" }
+      ]
+    }
+  ]
+}
