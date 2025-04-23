@@ -7,7 +7,7 @@ part of 'auth_state_controller.dart';
 // **************************************************************************
 
 String _$authStateControllerHash() =>
-    r'f60b299fbe567893d538b430d747af7c7c114038';
+    r'bcb3552b687d448898351824f45929dd8edbf65c';
 
 /// See also [AuthStateController].
 @ProviderFor(AuthStateController)

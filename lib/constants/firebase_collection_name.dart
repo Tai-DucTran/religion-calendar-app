@@ -3,6 +3,7 @@ class FirebaseCollectionName {
   static const users = 'users';
   static const events = 'events';
   static const religions = 'religions';
+  static const feedbackForms = 'feedbackForms';
   const FirebaseCollectionName._();
 }
 
