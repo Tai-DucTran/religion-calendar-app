@@ -2,7 +2,7 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:religion_calendar_app/src/modules/feedback_page/controllers/feedback_controller.dart';
+import 'package:religion_calendar_app/src/modules/feedback_page/controllers/feedback_form_setting_controller.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/widgets/atoms/atoms.dart';
 import 'package:religion_calendar_app/src/utils/utils.dart';
@@ -12,8 +12,9 @@ class ExpandedFeedbackForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final feedback = ref.watch(feedbackControllerProvider);
-    final controller = ref.read(feedbackControllerProvider.notifier);
+    final feedbackFormSetting =
+        ref.watch(feedbackFormSettingControllerProvider).feedbackForm;
+    final controller = ref.read(feedbackFormSettingControllerProvider.notifier);
 
     return Column(
       spacing: 12.h,
@@ -27,15 +28,16 @@ class ExpandedFeedbackForm extends ConsumerWidget {
               child: FeedbackTypeButton(
                 type: FeedbackType.bugReport,
                 label: FeedbackType.bugReport.getLocalized(context),
-                isSelected: feedback.feedbackType == FeedbackType.bugReport,
+                isSelected:
+                    feedbackFormSetting.feedbackType == FeedbackType.bugReport,
               ),
             ),
             Expanded(
               child: FeedbackTypeButton(
                 type: FeedbackType.featureRecommendation,
                 label: FeedbackType.featureRecommendation.getLocalized(context),
-                isSelected:
-                    feedback.feedbackType == FeedbackType.featureRecommendation,
+                isSelected: feedbackFormSetting.feedbackType ==
+                    FeedbackType.featureRecommendation,
               ),
             ),
           ],
@@ -49,6 +51,7 @@ class ExpandedFeedbackForm extends ConsumerWidget {
             controller.updateFeedbackText(value);
           },
           maxLines: 4,
+          style: AriesTextStyles.textBodySmall,
           decoration: InputDecoration(
             hintText: context.l10n.inputFeedbackContentHintText,
             hintStyle: AriesTextStyles.textHintTextField,
@@ -78,8 +81,10 @@ class ExpandedFeedbackForm extends ConsumerWidget {
         Center(
           child: ElevatedButton(
             onPressed: controller.isSubmitEnabled()
-                ? () {
-                    controller.submitFeedback();
+                ? () async {
+                    await controller.submitFeedback(
+                      feedbackForm: feedbackFormSetting,
+                    );
                     _showFeedbackSubmittedDialog(context);
                   }
                 : null,

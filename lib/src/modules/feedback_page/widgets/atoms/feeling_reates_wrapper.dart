@@ -9,20 +9,24 @@ class FeelingReatesWrapper extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final feedback = ref.watch(feedbackControllerProvider);
+    final feedbackFormSetting =
+        ref.watch(feedbackFormSettingControllerProvider).feedbackForm;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: FeelingRates.values.map(
         (sentiment) {
-          final isSelected = feedback.selectedSentiment == sentiment;
+          final isSelected = feedbackFormSetting.selectedSentiment == sentiment;
           return AriesIconButton(
             onClick: () {
-              final controller = ref.read(feedbackControllerProvider.notifier);
+              final controller =
+                  ref.read(feedbackFormSettingControllerProvider.notifier);
               controller.selectSentiment(sentiment);
+              controller.toggleExpanded();
             },
             iconPath: sentiment.getIconPath(),
             color: isSelected
-                ? feedback.selectedSentiment!.getColor()
+                ? feedbackFormSetting.selectedSentiment!.getColor()
                 : AriesColor.neutral100,
             size: 40,
           );
