@@ -22,10 +22,11 @@ FeedbackForm _$FeedbackFormFromJson(Map<String, dynamic> json) {
 mixin _$FeedbackForm {
   String get id => throw _privateConstructorUsedError;
   FeedbackResponseStatus? get status => throw _privateConstructorUsedError;
-  bool? get isExpanded => throw _privateConstructorUsedError;
   String? get feedbackText => throw _privateConstructorUsedError;
   FeedbackType? get feedbackType => throw _privateConstructorUsedError;
   FeelingRates? get selectedSentiment => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   /// Serializes this FeedbackForm to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,10 +47,11 @@ abstract class $FeedbackFormCopyWith<$Res> {
   $Res call(
       {String id,
       FeedbackResponseStatus? status,
-      bool? isExpanded,
       String? feedbackText,
       FeedbackType? feedbackType,
-      FeelingRates? selectedSentiment});
+      FeelingRates? selectedSentiment,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -69,10 +71,11 @@ class _$FeedbackFormCopyWithImpl<$Res, $Val extends FeedbackForm>
   $Res call({
     Object? id = null,
     Object? status = freezed,
-    Object? isExpanded = freezed,
     Object? feedbackText = freezed,
     Object? feedbackType = freezed,
     Object? selectedSentiment = freezed,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -83,10 +86,6 @@ class _$FeedbackFormCopyWithImpl<$Res, $Val extends FeedbackForm>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as FeedbackResponseStatus?,
-      isExpanded: freezed == isExpanded
-          ? _value.isExpanded
-          : isExpanded // ignore: cast_nullable_to_non_nullable
-              as bool?,
       feedbackText: freezed == feedbackText
           ? _value.feedbackText
           : feedbackText // ignore: cast_nullable_to_non_nullable
@@ -99,6 +98,14 @@ class _$FeedbackFormCopyWithImpl<$Res, $Val extends FeedbackForm>
           ? _value.selectedSentiment
           : selectedSentiment // ignore: cast_nullable_to_non_nullable
               as FeelingRates?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -114,10 +121,11 @@ abstract class _$$FeedbackFormImplCopyWith<$Res>
   $Res call(
       {String id,
       FeedbackResponseStatus? status,
-      bool? isExpanded,
       String? feedbackText,
       FeedbackType? feedbackType,
-      FeelingRates? selectedSentiment});
+      FeelingRates? selectedSentiment,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -135,10 +143,11 @@ class __$$FeedbackFormImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? status = freezed,
-    Object? isExpanded = freezed,
     Object? feedbackText = freezed,
     Object? feedbackType = freezed,
     Object? selectedSentiment = freezed,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$FeedbackFormImpl(
       id: null == id
@@ -149,10 +158,6 @@ class __$$FeedbackFormImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as FeedbackResponseStatus?,
-      isExpanded: freezed == isExpanded
-          ? _value.isExpanded
-          : isExpanded // ignore: cast_nullable_to_non_nullable
-              as bool?,
       feedbackText: freezed == feedbackText
           ? _value.feedbackText
           : feedbackText // ignore: cast_nullable_to_non_nullable
@@ -165,6 +170,14 @@ class __$$FeedbackFormImplCopyWithImpl<$Res>
           ? _value.selectedSentiment
           : selectedSentiment // ignore: cast_nullable_to_non_nullable
               as FeelingRates?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -174,11 +187,12 @@ class __$$FeedbackFormImplCopyWithImpl<$Res>
 class _$FeedbackFormImpl extends _FeedbackForm {
   const _$FeedbackFormImpl(
       {required this.id,
-      this.status = FeedbackResponseStatus.submitting,
-      this.isExpanded = false,
+      this.status = FeedbackResponseStatus.pending,
       this.feedbackText = '',
       this.feedbackType = FeedbackType.featureRecommendation,
-      this.selectedSentiment})
+      this.selectedSentiment,
+      required this.createdAt,
+      required this.updatedAt})
       : super._();
 
   factory _$FeedbackFormImpl.fromJson(Map<String, dynamic> json) =>
@@ -191,19 +205,20 @@ class _$FeedbackFormImpl extends _FeedbackForm {
   final FeedbackResponseStatus? status;
   @override
   @JsonKey()
-  final bool? isExpanded;
-  @override
-  @JsonKey()
   final String? feedbackText;
   @override
   @JsonKey()
   final FeedbackType? feedbackType;
   @override
   final FeelingRates? selectedSentiment;
+  @override
+  final DateTime createdAt;
+  @override
+  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'FeedbackForm(id: $id, status: $status, isExpanded: $isExpanded, feedbackText: $feedbackText, feedbackType: $feedbackType, selectedSentiment: $selectedSentiment)';
+    return 'FeedbackForm(id: $id, status: $status, feedbackText: $feedbackText, feedbackType: $feedbackType, selectedSentiment: $selectedSentiment, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -213,20 +228,22 @@ class _$FeedbackFormImpl extends _FeedbackForm {
             other is _$FeedbackFormImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.isExpanded, isExpanded) ||
-                other.isExpanded == isExpanded) &&
             (identical(other.feedbackText, feedbackText) ||
                 other.feedbackText == feedbackText) &&
             (identical(other.feedbackType, feedbackType) ||
                 other.feedbackType == feedbackType) &&
             (identical(other.selectedSentiment, selectedSentiment) ||
-                other.selectedSentiment == selectedSentiment));
+                other.selectedSentiment == selectedSentiment) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, status, isExpanded,
-      feedbackText, feedbackType, selectedSentiment);
+  int get hashCode => Object.hash(runtimeType, id, status, feedbackText,
+      feedbackType, selectedSentiment, createdAt, updatedAt);
 
   /// Create a copy of FeedbackForm
   /// with the given fields replaced by the non-null parameter values.
@@ -248,10 +265,11 @@ abstract class _FeedbackForm extends FeedbackForm {
   const factory _FeedbackForm(
       {required final String id,
       final FeedbackResponseStatus? status,
-      final bool? isExpanded,
       final String? feedbackText,
       final FeedbackType? feedbackType,
-      final FeelingRates? selectedSentiment}) = _$FeedbackFormImpl;
+      final FeelingRates? selectedSentiment,
+      required final DateTime createdAt,
+      required final DateTime updatedAt}) = _$FeedbackFormImpl;
   const _FeedbackForm._() : super._();
 
   factory _FeedbackForm.fromJson(Map<String, dynamic> json) =
@@ -262,13 +280,15 @@ abstract class _FeedbackForm extends FeedbackForm {
   @override
   FeedbackResponseStatus? get status;
   @override
-  bool? get isExpanded;
-  @override
   String? get feedbackText;
   @override
   FeedbackType? get feedbackType;
   @override
   FeelingRates? get selectedSentiment;
+  @override
+  DateTime get createdAt;
+  @override
+  DateTime get updatedAt;
 
   /// Create a copy of FeedbackForm
   /// with the given fields replaced by the non-null parameter values.

@@ -10,11 +10,12 @@ part "feedback_form.g.dart";
 class FeedbackForm with _$FeedbackForm {
   const factory FeedbackForm({
     required String id,
-    @Default(FeedbackResponseStatus.submitting) FeedbackResponseStatus? status,
-    @Default(false) bool? isExpanded,
+    @Default(FeedbackResponseStatus.pending) FeedbackResponseStatus? status,
     @Default('') String? feedbackText,
     @Default(FeedbackType.featureRecommendation) FeedbackType? feedbackType,
     FeelingRates? selectedSentiment,
+    required DateTime createdAt,
+    required DateTime updatedAt,
   }) = _FeedbackForm;
 
   factory FeedbackForm.fromJson(Map<String, dynamic> json) =>
@@ -78,7 +79,9 @@ extension FeelingRatesExtension on FeelingRates {
 }
 
 enum FeedbackType {
+  @JsonValue("BUG_REPORT")
   bugReport,
+  @JsonValue("FEATURE_RECOMMENDATION")
   featureRecommendation,
 }
 
