@@ -35,4 +35,11 @@ class AriesImages {
       'packages/aries/assets/images/background_wallpapers/budda_onboarding_background.svg';
   static const spiritualOnboardingBackground =
       'packages/aries/assets/images/background_wallpapers/spiritual_background.svg';
+  /* Background Images for AppState **/
+  static const emptyStateBuddalism =
+      'packages/aries/assets/images/app_state/empty_state/empty_state_buddalism_religion.jpg';
+  static const emptyStateCatholic =
+      'packages/aries/assets/images/app_state/empty_state/empty_state_catholic_religion.jpg';
+  static const emptyStateSpiritual =
+      'packages/aries/assets/images/app_state/empty_state/empty_state_unknow_religion.jpg';
 }
