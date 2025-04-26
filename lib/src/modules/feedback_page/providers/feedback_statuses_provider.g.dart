@@ -1,27 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'feedback_controller.dart';
+part of 'feedback_statuses_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$feedbackControllerHash() =>
-    r'b85b2c722e485a1ba05a5bf1d4fc330244709a48';
+String _$feedbackStatusesProviderHash() =>
+    r'12d11b89af692638ff12786f61e5f7f3a7222597';
 
-/// See also [FeedbackController].
-@ProviderFor(FeedbackController)
-final feedbackControllerProvider =
-    AutoDisposeNotifierProvider<FeedbackController, FeedbackForm>.internal(
-  FeedbackController.new,
-  name: r'feedbackControllerProvider',
+/// See also [FeedbackStatusesProvider].
+@ProviderFor(FeedbackStatusesProvider)
+final feedbackStatusesProviderProvider = AutoDisposeAsyncNotifierProvider<
+    FeedbackStatusesProvider, List<FeedbackForm>>.internal(
+  FeedbackStatusesProvider.new,
+  name: r'feedbackStatusesProviderProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$feedbackControllerHash,
+      : _$feedbackStatusesProviderHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$FeedbackController = AutoDisposeNotifier<FeedbackForm>;
+typedef _$FeedbackStatusesProvider
+    = AutoDisposeAsyncNotifier<List<FeedbackForm>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

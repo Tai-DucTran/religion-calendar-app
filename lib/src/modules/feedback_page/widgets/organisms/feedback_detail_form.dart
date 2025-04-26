@@ -11,7 +11,8 @@ class FeedbackDetailForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final feedback = ref.watch(feedbackControllerProvider);
+    final feedbackFormSetting =
+        ref.watch(feedbackFormSettingControllerProvider);
 
     return Card(
       child: AnimatedContainer(
@@ -43,7 +44,7 @@ class FeedbackDetailForm extends ConsumerWidget {
             AnimatedCrossFade(
               firstChild: SizedBox(height: 0),
               secondChild: ExpandedFeedbackForm(),
-              crossFadeState: feedback.isExpanded!
+              crossFadeState: feedbackFormSetting.isExpanded
                   ? CrossFadeState.showSecond
                   : CrossFadeState.showFirst,
               duration: const Duration(

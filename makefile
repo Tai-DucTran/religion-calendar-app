@@ -1,15 +1,14 @@
 activate:
-	dart pub global activate fvm && \
 	dart pub global activate melos && \
-	fvm flutter pub get && \
+	flutter pub get && \
 	melos bs && \
-	melos generate:all
+	melos run generate
 
 bs:
 	melos clean && melos bs
 
 gen:
-	melos clean && melos bs && melos generate:all
+	melos clean && melos bs && melos run generate
 
 l10n: |
 	flutter gen-l10n
@@ -29,12 +28,11 @@ native_splash: |
 	dart run flutter_native_splash:create --path=native_splash.yaml
 
 icon_launcher: |
-	fvm flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons*
+	flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons*
 
 clean: |
-	dart pub global activate fvm && \
-	fvm flutter clean && \
-	fvm flutter pub get \
+	flutter clean && \
+	flutter pub get \
 
 install_pre_git: 
 	./scripts/install-hooks.sh

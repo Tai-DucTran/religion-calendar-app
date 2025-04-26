@@ -1,5 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:religion_calendar_app/src/router/routes.dart';
 import 'package:religion_calendar_app/src/utils/localization_extension.dart';
 
 class FeedbackOrReportStatusesCard extends StatelessWidget {
@@ -10,7 +12,9 @@ class FeedbackOrReportStatusesCard extends StatelessWidget {
     return Card(
       elevation: 1,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(
+          12,
+        ),
       ),
       color: AriesColor.neutral0,
       child: ListTile(
@@ -29,7 +33,11 @@ class FeedbackOrReportStatusesCard extends StatelessWidget {
           Icons.arrow_forward_ios,
           size: 16,
         ),
-        onTap: () {},
+        onTap: () {
+          context.push(
+            FeedbackStatusListPageRoute().location,
+          );
+        },
       ),
     );
   }

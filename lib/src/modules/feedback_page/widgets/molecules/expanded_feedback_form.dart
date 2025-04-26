@@ -2,18 +2,20 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:religion_calendar_app/src/modules/feedback_page/controllers/feedback_controller.dart';
+import 'package:religion_calendar_app/src/modules/feedback_page/controllers/feedback_form_setting_controller.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/widgets/atoms/atoms.dart';
 import 'package:religion_calendar_app/src/utils/utils.dart';
+import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class ExpandedFeedbackForm extends ConsumerWidget {
   const ExpandedFeedbackForm({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final feedback = ref.watch(feedbackControllerProvider);
-    final controller = ref.read(feedbackControllerProvider.notifier);
+    final feedbackFormSetting =
+        ref.watch(feedbackFormSettingControllerProvider).feedbackForm;
+    final controller = ref.read(feedbackFormSettingControllerProvider.notifier);
 
     return Column(
       spacing: 12.h,
@@ -27,15 +29,16 @@ class ExpandedFeedbackForm extends ConsumerWidget {
               child: FeedbackTypeButton(
                 type: FeedbackType.bugReport,
                 label: FeedbackType.bugReport.getLocalized(context),
-                isSelected: feedback.feedbackType == FeedbackType.bugReport,
+                isSelected:
+                    feedbackFormSetting.feedbackType == FeedbackType.bugReport,
               ),
             ),
             Expanded(
               child: FeedbackTypeButton(
                 type: FeedbackType.featureRecommendation,
                 label: FeedbackType.featureRecommendation.getLocalized(context),
-                isSelected:
-                    feedback.feedbackType == FeedbackType.featureRecommendation,
+                isSelected: feedbackFormSetting.feedbackType ==
+                    FeedbackType.featureRecommendation,
               ),
             ),
           ],
@@ -49,9 +52,12 @@ class ExpandedFeedbackForm extends ConsumerWidget {
             controller.updateFeedbackText(value);
           },
           maxLines: 4,
+          style: AriesTextStyles.textBodySmall,
           decoration: InputDecoration(
             hintText: context.l10n.inputFeedbackContentHintText,
-            hintStyle: AriesTextStyles.textHintTextField,
+            hintStyle: AriesTextStyles.textBodySmall.copyWith(
+              color: AriesColor.neutral300,
+            ),
             fillColor: AriesColor.neutral0,
             filled: true,
             border: OutlineInputBorder(
@@ -76,26 +82,20 @@ class ExpandedFeedbackForm extends ConsumerWidget {
           ),
         ),
         Center(
-          child: ElevatedButton(
-            onPressed: controller.isSubmitEnabled()
-                ? () {
-                    controller.submitFeedback();
-                    _showFeedbackSubmittedDialog(context);
+          child: CustomElevatedButton(
+            onPressedAsync: controller.isSubmitEnabled()
+                ? () async {
+                    await controller.submitFeedback(
+                      feedbackForm: feedbackFormSetting,
+                    );
+                    if (context.mounted) {
+                      _showFeedbackSubmittedDialog(context);
+                    }
                   }
                 : null,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AriesColor.yellowP950,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  8.r,
-                ),
-              ),
-              disabledBackgroundColor: AriesColor.neutral40,
-            ),
-            child: Text(
-              context.l10n.submitButtonText,
-            ),
+            width: double.infinity,
+            height: 40,
+            text: context.l10n.submitButtonText,
           ),
         ),
       ],
@@ -107,16 +107,19 @@ class ExpandedFeedbackForm extends ConsumerWidget {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AriesColor.neutral0,
-        title: Text('Thank You!'),
+        title: Text(
+          context.l10n.thankYouText,
+        ),
         content: Text(
-            'Your feedback has been submitted successfully. We appreciate your input.'),
+          context.l10n.submittedSuccessfullyText,
+        ),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
             child: Text(
-              'Close',
+              context.l10n.closeButtonText,
               style: TextStyle(
                 color: AriesColor.yellowP950,
               ),

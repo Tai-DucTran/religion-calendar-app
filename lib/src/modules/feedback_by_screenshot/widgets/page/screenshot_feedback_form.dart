@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/feedback_by_screenshot/controllers/controllers.dart';
-import 'package:religion_calendar_app/src/modules/feedback_page/controllers/feedback_controller.dart';
+import 'package:religion_calendar_app/src/modules/feedback_page/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/widgets/atoms/atoms.dart';
 import 'package:religion_calendar_app/src/utils/localization_extension.dart';
@@ -33,7 +33,9 @@ class _ScreenshotFeedbackFormState
     extends ConsumerState<ScreenshotFeedbackForm> {
   @override
   Widget build(BuildContext context) {
-    final feedback = ref.watch(feedbackControllerProvider);
+    final feedbackFormSetting =
+        ref.watch(feedbackFormSettingControllerProvider);
+    final feedbackForm = feedbackFormSetting.feedbackForm;
 
     return Column(
       children: [
@@ -60,7 +62,7 @@ class _ScreenshotFeedbackFormState
                     children: [
                       Flexible(
                         child: DropdownButton<FeedbackType>(
-                          value: feedback.feedbackType,
+                          value: feedbackForm.feedbackType,
                           items: FeedbackType.values
                               .map(
                                 (type) => DropdownMenuItem<FeedbackType>(
@@ -73,8 +75,8 @@ class _ScreenshotFeedbackFormState
                               )
                               .toList(),
                           onChanged: (feedbackType) {
-                            final controller =
-                                ref.read(feedbackControllerProvider.notifier);
+                            final controller = ref.read(
+                                feedbackFormSettingControllerProvider.notifier);
                             controller.updateFeedbackType(feedbackType!);
                           },
                         ),
@@ -113,8 +115,8 @@ class _ScreenshotFeedbackFormState
                       ),
                     ),
                     onChanged: (newFeedback) {
-                      final controller =
-                          ref.read(feedbackControllerProvider.notifier);
+                      final controller = ref
+                          .read(feedbackFormSettingControllerProvider.notifier);
                       controller.updateFeedbackText(newFeedback);
                     },
                   ),
@@ -127,11 +129,11 @@ class _ScreenshotFeedbackFormState
           padding: EdgeInsets.symmetric(horizontal: 14.w),
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: feedback.feedbackType != null
+            onPressed: feedbackForm.feedbackType != null
                 ? () {
                     widget.onSubmit(
-                      feedback.feedbackText ?? '',
-                      extras: feedback.toJson(),
+                      feedbackForm.feedbackText ?? '',
+                      extras: feedbackForm.toJson(),
                     );
                     ref
                         .read(

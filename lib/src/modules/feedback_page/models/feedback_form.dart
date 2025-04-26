@@ -1,5 +1,5 @@
 import 'package:aries/aries.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:religion_calendar_app/src/utils/utils.dart';
 
@@ -10,11 +10,13 @@ part "feedback_form.g.dart";
 class FeedbackForm with _$FeedbackForm {
   const factory FeedbackForm({
     required String id,
-    @Default(FeedbackResponseStatus.submitting) FeedbackResponseStatus? status,
-    @Default(false) bool? isExpanded,
+    @Default(FeedbackResponseStatus.pending) FeedbackResponseStatus? status,
     @Default('') String? feedbackText,
     @Default(FeedbackType.featureRecommendation) FeedbackType? feedbackType,
+    @Default('') String? feedbackResponse,
     FeelingRates? selectedSentiment,
+    required DateTime createdAt,
+    required DateTime updatedAt,
   }) = _FeedbackForm;
 
   factory FeedbackForm.fromJson(Map<String, dynamic> json) =>
@@ -37,12 +39,36 @@ enum FeelingRates {
 }
 
 enum FeedbackResponseStatus {
-  @JsonValue("SUBMITTING")
-  submitting,
   @JsonValue("PENDING")
   pending,
   @JsonValue("RESPONDED")
   responded,
+}
+
+extension FeedbackResponseStatusExtension on FeedbackResponseStatus {
+  Icon getIcon() {
+    switch (this) {
+      case FeedbackResponseStatus.pending:
+        return Icon(
+          Icons.pending_actions_rounded,
+          color: AriesColor.neutral300,
+        );
+      case FeedbackResponseStatus.responded:
+        return Icon(
+          Icons.check,
+          color: AriesColor.success400,
+        );
+    }
+  }
+
+  String getLocalized(BuildContext context) {
+    switch (this) {
+      case FeedbackResponseStatus.pending:
+        return context.l10n.pendingText;
+      case FeedbackResponseStatus.responded:
+        return context.l10n.respondedText;
+    }
+  }
 }
 
 extension FeelingRatesExtension on FeelingRates {
@@ -78,7 +104,9 @@ extension FeelingRatesExtension on FeelingRates {
 }
 
 enum FeedbackType {
+  @JsonValue("BUG_REPORT")
   bugReport,
+  @JsonValue("FEATURE_RECOMMENDATION")
   featureRecommendation,
 }
 
@@ -89,6 +117,15 @@ extension FeedbackTypeExtension on FeedbackType {
         return context.l10n.bugReportText;
       case FeedbackType.featureRecommendation:
         return context.l10n.featureRecommendationText;
+    }
+  }
+
+  String getUserFeedbackTitleLocalized(BuildContext context) {
+    switch (this) {
+      case FeedbackType.bugReport:
+        return context.l10n.reportDetailsTitleText;
+      case FeedbackType.featureRecommendation:
+        return context.l10n.feedbackDetailsTitleText;
     }
   }
 }

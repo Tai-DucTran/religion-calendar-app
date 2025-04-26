@@ -27,3 +27,4 @@ flutter:
     - assets/images/religions/
     - assets/images/events/
     - assets/images/background_wallpapers/
+    - assets/images/app_state/empty_state/

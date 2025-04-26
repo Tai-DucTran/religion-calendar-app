@@ -236,6 +236,12 @@ RouteBase get $profileRoute => GoRouteData.$route(
         GoRouteData.$route(
           path: 'feedback-and-report',
           factory: $FeedbackAndReportSettingRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'feedback-statuses-list',
+              factory: $FeedbackStatusListPageRouteExtension._fromState,
+            ),
+          ],
         ),
         GoRouteData.$route(
           path: 'help-and-faqs',
@@ -314,6 +320,24 @@ extension $FeedbackAndReportSettingRouteExtension
 
   String get location => GoRouteData.$location(
         '/profile/feedback-and-report',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $FeedbackStatusListPageRouteExtension on FeedbackStatusListPageRoute {
+  static FeedbackStatusListPageRoute _fromState(GoRouterState state) =>
+      const FeedbackStatusListPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/profile/feedback-and-report/feedback-statuses-list',
       );
 
   void go(BuildContext context) => context.go(location);

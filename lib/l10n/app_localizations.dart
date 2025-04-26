@@ -959,6 +959,66 @@ abstract class AppLocalizations {
   /// **'See all your feedbacks/reports responses'**
   String get feedbackOrReportStatusesDescText;
 
+  /// No description provided for @pendingText.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get pendingText;
+
+  /// No description provided for @respondedText.
+  ///
+  /// In en, this message translates to:
+  /// **'Responded'**
+  String get respondedText;
+
+  /// No description provided for @feedbackDetailsTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback details:'**
+  String get feedbackDetailsTitleText;
+
+  /// No description provided for @reportDetailsTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'Report details:'**
+  String get reportDetailsTitleText;
+
+  /// No description provided for @detailsText.
+  ///
+  /// In en, this message translates to:
+  /// **'Your report/feedback details:'**
+  String get detailsText;
+
+  /// No description provided for @readMoreButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Read more'**
+  String get readMoreButtonText;
+
+  /// No description provided for @showLessButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Show less'**
+  String get showLessButtonText;
+
+  /// No description provided for @statusText.
+  ///
+  /// In en, this message translates to:
+  /// **'Status:'**
+  String get statusText;
+
+  /// No description provided for @feedbackListTitlePageText.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Feedback List'**
+  String get feedbackListTitlePageText;
+
+  /// No description provided for @emptyFeedbackText.
+  ///
+  /// In en, this message translates to:
+  /// **'No feedback submitted yet! If you have any, we would love to heard from you.'**
+  String get emptyFeedbackText;
+
   /// No description provided for @explorePageHeaderText.
   ///
   /// In en, this message translates to:
@@ -974,7 +1034,7 @@ abstract class AppLocalizations {
   /// No description provided for @errorLoadingContentText.
   ///
   /// In en, this message translates to:
-  /// **'Không thể hiển thị được nội dung'**
+  /// **'Error loading content'**
   String get errorLoadingContentText;
 
   /// No description provided for @errorSomethingWentWrongText.
@@ -982,6 +1042,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong!'**
   String get errorSomethingWentWrongText;
+
+  /// No description provided for @noDataFoundTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'No Data Found!'**
+  String get noDataFoundTitleText;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

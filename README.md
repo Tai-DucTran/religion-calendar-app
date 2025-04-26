@@ -10,14 +10,6 @@ The religion mobile app.
 4. Generate the necessary files with `melos run generate` or check out [makefile].
    **_Small Note_**: [router.g.dart] will be fail after running this command. so you only need to discard its changes.
 
-## Flutter Version Management
-
-We are using [fvm](https://fvm.app/docs/getting_started/overview) and flutter version is set in .fvmrc
-
-1. [install fvm](https://fvm.app/docs/getting_started/installation)
-2. in project root folder, run `fvm use`
-3. setup IDE configuration https://fvm.app/docs/getting_started/configuration#ide
-
 ## Melos
 
 Melos is a CLI tool used to help manage Dart projects with multiple packages.
@@ -49,7 +41,6 @@ Melos also comes with IDE support for `VSCode` and `IntelliJ` to make running sc
 
 Run this command `make install_pre_git` in your terminal to install pre-commit hook!
 To ensure we don't acidentially commit and push google-service.json and GoogleService-Info.plist
-
 
 ## Directory Structure
 
@@ -103,6 +94,7 @@ This project uses Flutter's built-in localization system.
 #### How to add a new localization?
 
 1. Add new value into all `.arb` files (do not forget any file)
+
    - Files are located in `lib/l10n/` directory (app_en.arb, app_vi.arb, etc.)
    - If some keys don't have localization, we return English version as default
 
@@ -127,7 +119,7 @@ This project uses Flutter's built-in localization system.
 ## JSON serialization
 
 This project uses json_serializable to [auto-generate](https://flutter.dev/docs/development/data-and-backend/json#serializing-json-using-code-generation-libraries) `.fromJson` and `.toJson`.
-After specifying the model, run `fvm flutter pub run build_runner build --delete-conflicting-outputs`.
+After specifying the model, run `flutter pub run build_runner build --delete-conflicting-outputs`.
 
 ## Aries
 

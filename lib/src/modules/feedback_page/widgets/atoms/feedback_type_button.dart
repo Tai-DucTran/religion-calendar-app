@@ -2,8 +2,8 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:religion_calendar_app/src/modules/feedback_page/controllers/controllers.dart';
 
-import 'package:religion_calendar_app/src/modules/feedback_page/controllers/feedback_controller.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
 
 class FeedbackTypeButton extends ConsumerWidget {
@@ -22,7 +22,8 @@ class FeedbackTypeButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
-        final controller = ref.read(feedbackControllerProvider.notifier);
+        final controller =
+            ref.read(feedbackFormSettingControllerProvider.notifier);
         controller.updateFeedbackType(type);
       },
       child: Container(

@@ -11,35 +11,38 @@ _$FeedbackFormImpl _$$FeedbackFormImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       status: $enumDecodeNullable(
               _$FeedbackResponseStatusEnumMap, json['status']) ??
-          FeedbackResponseStatus.submitting,
-      isExpanded: json['isExpanded'] as bool? ?? false,
+          FeedbackResponseStatus.pending,
       feedbackText: json['feedbackText'] as String? ?? '',
       feedbackType:
           $enumDecodeNullable(_$FeedbackTypeEnumMap, json['feedbackType']) ??
               FeedbackType.featureRecommendation,
+      feedbackResponse: json['feedbackResponse'] as String? ?? '',
       selectedSentiment:
           $enumDecodeNullable(_$FeelingRatesEnumMap, json['selectedSentiment']),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$$FeedbackFormImplToJson(_$FeedbackFormImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'status': _$FeedbackResponseStatusEnumMap[instance.status],
-      'isExpanded': instance.isExpanded,
       'feedbackText': instance.feedbackText,
       'feedbackType': _$FeedbackTypeEnumMap[instance.feedbackType],
+      'feedbackResponse': instance.feedbackResponse,
       'selectedSentiment': _$FeelingRatesEnumMap[instance.selectedSentiment],
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
     };
 
 const _$FeedbackResponseStatusEnumMap = {
-  FeedbackResponseStatus.submitting: 'SUBMITTING',
   FeedbackResponseStatus.pending: 'PENDING',
   FeedbackResponseStatus.responded: 'RESPONDED',
 };
 
 const _$FeedbackTypeEnumMap = {
-  FeedbackType.bugReport: 'bugReport',
-  FeedbackType.featureRecommendation: 'featureRecommendation',
+  FeedbackType.bugReport: 'BUG_REPORT',
+  FeedbackType.featureRecommendation: 'FEATURE_RECOMMENDATION',
 };
 
 const _$FeelingRatesEnumMap = {
