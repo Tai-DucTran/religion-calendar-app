@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:religion_calendar_app/src/modules/calendar/widgets/pages/full_calendar_page.dart';
+import 'package:religion_calendar_app/src/modules/feedback_page/widgets/pages/pages.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/forgot_pasword_page.dart';
 import 'package:religion_calendar_app/src/modules/login/widgets/page/login_page.dart';
 import 'package:religion_calendar_app/src/modules/navigation_bottom_bar/widgets/organisms/navigation_bottom_bar.dart';
@@ -157,8 +158,12 @@ class FullCalendarRoute extends GoRouteData {
       path: NotificationSettingRoute.path,
     ),
     TypedGoRoute<FeedbackAndReportSettingRoute>(
-      path: FeedbackAndReportSettingRoute.path,
-    ),
+        path: FeedbackAndReportSettingRoute.path,
+        routes: [
+          TypedGoRoute<FeedbackStatusListPageRoute>(
+            path: FeedbackStatusListPageRoute.path,
+          ),
+        ]),
     TypedGoRoute<HelpAndFAQsSettingRoute>(
       path: HelpAndFAQsSettingRoute.path,
     ),
@@ -209,6 +214,16 @@ class NotificationSettingRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const NotificationSettingPage();
+  }
+}
+
+class FeedbackStatusListPageRoute extends GoRouteData {
+  const FeedbackStatusListPageRoute();
+  static const path = 'feedback-statuses-list';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const FeedbackStatusListPage();
   }
 }
 

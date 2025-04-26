@@ -1,7 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 
-class CustomElevatedButton extends StatelessWidget {
+class CustomElevatedButton extends StatefulWidget {
   const CustomElevatedButton({
     super.key,
     this.marginHorizontal = 0,
@@ -9,51 +9,92 @@ class CustomElevatedButton extends StatelessWidget {
     this.fontSize = 18,
     this.height = 48,
     this.radius = 8,
-    required this.buttonColor,
+    this.buttonColor = AriesColor.yellowP950,
     required this.text,
-    required this.onPressed,
+    this.onPressed,
+    this.onPressedAsync,
     this.width,
-    this.textStyle = const TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
-      color: AriesColor.neutral900,
-    ),
+    this.textStyle,
+    this.showLoadingIndicator = true,
   });
 
   final double marginHorizontal;
   final double marginVertical;
-  final Color? buttonColor;
   final double radius;
   final String text;
   final double fontSize;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
+  final Future<void> Function()? onPressedAsync;
+  final Color? buttonColor;
   final double? width;
   final double? height;
   final TextStyle? textStyle;
+  final bool showLoadingIndicator;
+
+  @override
+  State<CustomElevatedButton> createState() => _CustomElevatedButtonState();
+}
+
+class _CustomElevatedButtonState extends State<CustomElevatedButton> {
+  bool _isLoading = false;
+
+  Future<void> _handlePress() async {
+    if (widget.onPressedAsync != null) {
+      setState(() {
+        _isLoading = true;
+      });
+      try {
+        await widget.onPressedAsync!();
+      } finally {
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
+      }
+    } else if (widget.onPressed != null) {
+      widget.onPressed!();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height,
-      width: width,
+      height: widget.height,
+      width: widget.width,
       margin: EdgeInsets.symmetric(
-        vertical: marginVertical,
-        horizontal: marginHorizontal,
+        vertical: widget.marginVertical,
+        horizontal: widget.marginHorizontal,
       ),
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: _isLoading ? null : _handlePress,
         style: ElevatedButton.styleFrom(
-          backgroundColor: buttonColor,
+          backgroundColor: widget.buttonColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
-              Radius.circular(radius),
+              Radius.circular(widget.radius),
             ),
           ),
+          disabledBackgroundColor: AriesColor.neutral40,
         ),
-        child: Text(
-          text,
-          style: textStyle,
-        ),
+        child: _isLoading && widget.showLoadingIndicator
+            ? SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    widget.textStyle?.color ?? AriesColor.neutral0,
+                  ),
+                ),
+              )
+            : Text(
+                widget.text,
+                style: widget.textStyle ??
+                    AriesTextStyles.textHeading7.copyWith(
+                      color: AriesColor.neutral0,
+                    ),
+              ),
       ),
     );
   }

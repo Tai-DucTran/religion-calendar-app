@@ -24,6 +24,7 @@ mixin _$FeedbackForm {
   FeedbackResponseStatus? get status => throw _privateConstructorUsedError;
   String? get feedbackText => throw _privateConstructorUsedError;
   FeedbackType? get feedbackType => throw _privateConstructorUsedError;
+  String? get feedbackResponse => throw _privateConstructorUsedError;
   FeelingRates? get selectedSentiment => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
@@ -49,6 +50,7 @@ abstract class $FeedbackFormCopyWith<$Res> {
       FeedbackResponseStatus? status,
       String? feedbackText,
       FeedbackType? feedbackType,
+      String? feedbackResponse,
       FeelingRates? selectedSentiment,
       DateTime createdAt,
       DateTime updatedAt});
@@ -73,6 +75,7 @@ class _$FeedbackFormCopyWithImpl<$Res, $Val extends FeedbackForm>
     Object? status = freezed,
     Object? feedbackText = freezed,
     Object? feedbackType = freezed,
+    Object? feedbackResponse = freezed,
     Object? selectedSentiment = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -94,6 +97,10 @@ class _$FeedbackFormCopyWithImpl<$Res, $Val extends FeedbackForm>
           ? _value.feedbackType
           : feedbackType // ignore: cast_nullable_to_non_nullable
               as FeedbackType?,
+      feedbackResponse: freezed == feedbackResponse
+          ? _value.feedbackResponse
+          : feedbackResponse // ignore: cast_nullable_to_non_nullable
+              as String?,
       selectedSentiment: freezed == selectedSentiment
           ? _value.selectedSentiment
           : selectedSentiment // ignore: cast_nullable_to_non_nullable
@@ -123,6 +130,7 @@ abstract class _$$FeedbackFormImplCopyWith<$Res>
       FeedbackResponseStatus? status,
       String? feedbackText,
       FeedbackType? feedbackType,
+      String? feedbackResponse,
       FeelingRates? selectedSentiment,
       DateTime createdAt,
       DateTime updatedAt});
@@ -145,6 +153,7 @@ class __$$FeedbackFormImplCopyWithImpl<$Res>
     Object? status = freezed,
     Object? feedbackText = freezed,
     Object? feedbackType = freezed,
+    Object? feedbackResponse = freezed,
     Object? selectedSentiment = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -166,6 +175,10 @@ class __$$FeedbackFormImplCopyWithImpl<$Res>
           ? _value.feedbackType
           : feedbackType // ignore: cast_nullable_to_non_nullable
               as FeedbackType?,
+      feedbackResponse: freezed == feedbackResponse
+          ? _value.feedbackResponse
+          : feedbackResponse // ignore: cast_nullable_to_non_nullable
+              as String?,
       selectedSentiment: freezed == selectedSentiment
           ? _value.selectedSentiment
           : selectedSentiment // ignore: cast_nullable_to_non_nullable
@@ -190,6 +203,7 @@ class _$FeedbackFormImpl extends _FeedbackForm {
       this.status = FeedbackResponseStatus.pending,
       this.feedbackText = '',
       this.feedbackType = FeedbackType.featureRecommendation,
+      this.feedbackResponse = '',
       this.selectedSentiment,
       required this.createdAt,
       required this.updatedAt})
@@ -210,6 +224,9 @@ class _$FeedbackFormImpl extends _FeedbackForm {
   @JsonKey()
   final FeedbackType? feedbackType;
   @override
+  @JsonKey()
+  final String? feedbackResponse;
+  @override
   final FeelingRates? selectedSentiment;
   @override
   final DateTime createdAt;
@@ -218,7 +235,7 @@ class _$FeedbackFormImpl extends _FeedbackForm {
 
   @override
   String toString() {
-    return 'FeedbackForm(id: $id, status: $status, feedbackText: $feedbackText, feedbackType: $feedbackType, selectedSentiment: $selectedSentiment, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'FeedbackForm(id: $id, status: $status, feedbackText: $feedbackText, feedbackType: $feedbackType, feedbackResponse: $feedbackResponse, selectedSentiment: $selectedSentiment, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -232,6 +249,8 @@ class _$FeedbackFormImpl extends _FeedbackForm {
                 other.feedbackText == feedbackText) &&
             (identical(other.feedbackType, feedbackType) ||
                 other.feedbackType == feedbackType) &&
+            (identical(other.feedbackResponse, feedbackResponse) ||
+                other.feedbackResponse == feedbackResponse) &&
             (identical(other.selectedSentiment, selectedSentiment) ||
                 other.selectedSentiment == selectedSentiment) &&
             (identical(other.createdAt, createdAt) ||
@@ -243,7 +262,7 @@ class _$FeedbackFormImpl extends _FeedbackForm {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, status, feedbackText,
-      feedbackType, selectedSentiment, createdAt, updatedAt);
+      feedbackType, feedbackResponse, selectedSentiment, createdAt, updatedAt);
 
   /// Create a copy of FeedbackForm
   /// with the given fields replaced by the non-null parameter values.
@@ -267,6 +286,7 @@ abstract class _FeedbackForm extends FeedbackForm {
       final FeedbackResponseStatus? status,
       final String? feedbackText,
       final FeedbackType? feedbackType,
+      final String? feedbackResponse,
       final FeelingRates? selectedSentiment,
       required final DateTime createdAt,
       required final DateTime updatedAt}) = _$FeedbackFormImpl;
@@ -283,6 +303,8 @@ abstract class _FeedbackForm extends FeedbackForm {
   String? get feedbackText;
   @override
   FeedbackType? get feedbackType;
+  @override
+  String? get feedbackResponse;
   @override
   FeelingRates? get selectedSentiment;
   @override

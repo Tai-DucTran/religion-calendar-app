@@ -6,6 +6,7 @@ import 'package:religion_calendar_app/src/modules/feedback_page/controllers/feed
 import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/widgets/atoms/atoms.dart';
 import 'package:religion_calendar_app/src/utils/utils.dart';
+import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class ExpandedFeedbackForm extends ConsumerWidget {
   const ExpandedFeedbackForm({super.key});
@@ -54,7 +55,9 @@ class ExpandedFeedbackForm extends ConsumerWidget {
           style: AriesTextStyles.textBodySmall,
           decoration: InputDecoration(
             hintText: context.l10n.inputFeedbackContentHintText,
-            hintStyle: AriesTextStyles.textHintTextField,
+            hintStyle: AriesTextStyles.textBodySmall.copyWith(
+              color: AriesColor.neutral300,
+            ),
             fillColor: AriesColor.neutral0,
             filled: true,
             border: OutlineInputBorder(
@@ -79,28 +82,20 @@ class ExpandedFeedbackForm extends ConsumerWidget {
           ),
         ),
         Center(
-          child: ElevatedButton(
-            onPressed: controller.isSubmitEnabled()
+          child: CustomElevatedButton(
+            onPressedAsync: controller.isSubmitEnabled()
                 ? () async {
                     await controller.submitFeedback(
                       feedbackForm: feedbackFormSetting,
                     );
-                    _showFeedbackSubmittedDialog(context);
+                    if (context.mounted) {
+                      _showFeedbackSubmittedDialog(context);
+                    }
                   }
                 : null,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AriesColor.yellowP950,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  8.r,
-                ),
-              ),
-              disabledBackgroundColor: AriesColor.neutral40,
-            ),
-            child: Text(
-              context.l10n.submitButtonText,
-            ),
+            width: double.infinity,
+            height: 40,
+            text: context.l10n.submitButtonText,
           ),
         ),
       ],
@@ -112,16 +107,19 @@ class ExpandedFeedbackForm extends ConsumerWidget {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AriesColor.neutral0,
-        title: Text('Thank You!'),
+        title: Text(
+          context.l10n.thankYouText,
+        ),
         content: Text(
-            'Your feedback has been submitted successfully. We appreciate your input.'),
+          context.l10n.submittedSuccessfullyText,
+        ),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
             child: Text(
-              'Close',
+              context.l10n.closeButtonText,
               style: TextStyle(
                 color: AriesColor.yellowP950,
               ),
