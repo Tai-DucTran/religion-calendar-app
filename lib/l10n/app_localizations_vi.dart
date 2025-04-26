@@ -420,7 +420,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get submitButtonText => 'Gửi';
 
   @override
-  String get closeButtonText => 'Close';
+  String get closeButtonText => 'Đóng';
 
   @override
   String get thankYouText => 'Cảm ơn bạn!';
@@ -441,14 +441,47 @@ class AppLocalizationsVi extends AppLocalizations {
   String get feedbackOrReportStatusesDescText => 'Theo dõi chi tiết các góp ý và phản hồi của chúng tôi';
 
   @override
+  String get pendingText => 'Đang xử lý';
+
+  @override
+  String get respondedText => 'Đã phản hồi';
+
+  @override
+  String get feedbackDetailsTitleText => 'Nội dung góp ý:';
+
+  @override
+  String get reportDetailsTitleText => 'Nội dung báo lỗi:';
+
+  @override
+  String get detailsText => 'Nội dung chi tiết:';
+
+  @override
+  String get readMoreButtonText => 'Xem thêm';
+
+  @override
+  String get showLessButtonText => 'Đóng';
+
+  @override
+  String get statusText => 'Tình trạng:';
+
+  @override
+  String get feedbackListTitlePageText => 'Danh Sách Góp Ý';
+
+  @override
+  String get emptyFeedbackText => 'Danh sách báo cáo hoặc góp ý trống! Nếu bạn có góp ý gì, chúng tôi rất vui được lắng nghe bạn.';
+
+  @override
   String get explorePageHeaderText => 'Khám phá';
 
   @override
   String get completeButtonText => 'Hoàn thành';
 
   @override
-  String get errorLoadingContentText => 'Error loading contente';
+  String get errorLoadingContentText => 'Không thể hiển thị được nội dung';
 
   @override
   String get errorSomethingWentWrongText => 'Đã có lỗi xảy ra!';
+
+  @override
+  String get noDataFoundTitleText => 'Không Có Dữ Liệu!';
 }

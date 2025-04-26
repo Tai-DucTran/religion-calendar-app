@@ -441,14 +441,47 @@ class AppLocalizationsEn extends AppLocalizations {
   String get feedbackOrReportStatusesDescText => 'See all your feedbacks/reports responses';
 
   @override
+  String get pendingText => 'Pending';
+
+  @override
+  String get respondedText => 'Responded';
+
+  @override
+  String get feedbackDetailsTitleText => 'Feedback details:';
+
+  @override
+  String get reportDetailsTitleText => 'Report details:';
+
+  @override
+  String get detailsText => 'Your report/feedback details:';
+
+  @override
+  String get readMoreButtonText => 'Read more';
+
+  @override
+  String get showLessButtonText => 'Show less';
+
+  @override
+  String get statusText => 'Status:';
+
+  @override
+  String get feedbackListTitlePageText => 'Your Feedback List';
+
+  @override
+  String get emptyFeedbackText => 'No feedback submitted yet! If you have any, we would love to heard from you.';
+
+  @override
   String get explorePageHeaderText => 'Explore';
 
   @override
   String get completeButtonText => 'Complete';
 
   @override
-  String get errorLoadingContentText => 'Không thể hiển thị được nội dung';
+  String get errorLoadingContentText => 'Error loading content';
 
   @override
   String get errorSomethingWentWrongText => 'Something went wrong!';
+
+  @override
+  String get noDataFoundTitleText => 'No Data Found!';
 }
