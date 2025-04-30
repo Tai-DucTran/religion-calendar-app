@@ -2,25 +2,27 @@ import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:readmore/readmore.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
-import 'package:religion_calendar_app/src/utils/localization_extension.dart';
+import 'package:religion_calendar_app/src/modules/feedback_page/repositories/repositories.dart';
+import 'package:religion_calendar_app/src/modules/feedback_page/widgets/molecules/molecules.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class FeedbackStatusDetailsBottomSheet extends ConsumerStatefulWidget {
   const FeedbackStatusDetailsBottomSheet({
     super.key,
-    required this.feedback,
+    required this.conversationId,
+    this.initialFeedback,
     required this.feedbackTitle,
   });
 
-  final FeedbackConversation? feedback;
-  final String? feedbackTitle;
-
+  final String conversationId;
+  final FeedbackConversation? initialFeedback;
+  final String feedbackTitle;
   static Future<void> show({
     required BuildContext context,
-    required FeedbackConversation? feedback,
-    required String? feedbackTitle,
+    required String conversationId,
+    FeedbackConversation? initialFeedback,
+    required String feedbackTitle,
   }) async {
     await showModalBottomSheet(
       context: context,
@@ -33,13 +35,12 @@ class FeedbackStatusDetailsBottomSheet extends ConsumerStatefulWidget {
       barrierColor: Colors.black54,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(
-            20.0,
-          ),
+          top: Radius.circular(20.0),
         ),
       ),
       builder: (context) => FeedbackStatusDetailsBottomSheet(
-        feedback: feedback,
+        conversationId: conversationId,
+        initialFeedback: initialFeedback,
         feedbackTitle: feedbackTitle,
       ),
     );
@@ -53,101 +54,83 @@ class FeedbackStatusDetailsBottomSheet extends ConsumerStatefulWidget {
 class _FeedbackStatusDetailsBottomSheetState
     extends ConsumerState<FeedbackStatusDetailsBottomSheet> {
   @override
-  Widget build(BuildContext context) {
-    if (widget.feedback == null) {
-      return SomethingWentWrong();
-    }
+  void dispose() {
+    super.dispose();
+  }
 
-    final feedback = widget.feedback;
-    final isStatusReponded =
-        feedback?.status == FeedbackResponseStatus.responded;
+  @override
+  Widget build(BuildContext context) {
+    // Use the stream provider to get real-time updates
+    final conversationAsync = ref.watch(
+      feedbackConversationStreamProvider(widget.conversationId),
+    );
+
+    return conversationAsync.when(
+      data: (feedback) {
+        if (feedback == null) {
+          return SomethingWentWrong();
+        }
+
+        return _buildBottomSheetContent(feedback);
+      },
+      loading: () => Center(child: CircularProgressIndicator()),
+      error: (error, stack) => SomethingWentWrong(),
+    );
+  }
+
+  Widget _buildBottomSheetContent(FeedbackConversation feedback) {
+    final hasAdditionalMessages = feedback.messages.length > 1;
+    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
 
     return Container(
       width: double.infinity,
-      padding: REdgeInsets.all(
-        20,
+      padding: EdgeInsets.only(
+        top: 20.r,
+        left: 20.r,
+        right: 20.r,
+        bottom: bottomInset > 0 ? 8.r : 20.r,
       ),
-      child: SingleChildScrollView(
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.85,
+      ),
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.only(
+          bottom: bottomInset + 20.r,
+        ),
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.85,
+          minHeight: 300.h,
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: Text(
-                widget.feedbackTitle ?? "",
-                style: AriesTextStyles.textHeading5.copyWith(
-                  color: AriesColor.yellowP900,
-                ),
-              ),
-            ),
-            Spacing.sp24,
-            Text(
-              feedback?.feedbackType?.getUserFeedbackTitleLocalized(context) ??
-                  context.l10n.detailsText,
-              style: AriesTextStyles.textHeading6,
-            ),
-            Spacing.sp24,
-            Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  left: BorderSide(
-                    color: AriesColor.neutral30,
-                    width: 4.0,
-                  ),
-                ),
-              ),
-              padding: EdgeInsets.only(
-                left: 12.w,
-              ),
-              child: ReadMoreText(
-                '${feedback?.feedbackTitle ?? ''}\n',
-                trimCollapsedText: context.l10n.readMoreButtonText,
-                trimExpandedText: context.l10n.showLessButtonText,
-                delimiter: '\n',
-                moreStyle: AriesTextStyles.textHeading7.copyWith(
-                  color: AriesColor.yellowP900,
-                ),
-                lessStyle: AriesTextStyles.textHeading7.copyWith(
-                  color: AriesColor.yellowP900,
-                ),
-              ),
-            ),
-            Spacing.sp24,
-            if (feedback?.status != null)
-              Row(
-                children: [
-                  Text(
-                    context.l10n.statusText,
-                    style: AriesTextStyles.textHeading6,
-                  ),
-                  Spacing.sp12,
-                  feedback!.status!.getIcon(),
-                  Spacing.sp8,
-                  Container(
-                    padding: EdgeInsets.all(
-                      6,
+            Flexible(
+              child: SingleChildScrollView(
+                reverse: true,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GeneralFeedbackStatusOnBottomSheet(
+                      feedback: feedback,
+                      feedbackTitle: widget.feedbackTitle,
                     ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        8.r,
+                    if (hasAdditionalMessages) ...[
+                      Spacing.sp24,
+                      ConversationSection(
+                        messages: feedback.messages,
                       ),
-                      color: isStatusReponded
-                          ? AriesColor.success700
-                          : AriesColor.neutral600,
-                    ),
-                    child: Text(
-                      feedback.status!.getLocalized(context),
-                      style: AriesTextStyles.textBodyNormal.copyWith(
-                        color: isStatusReponded
-                            ? AriesColor.neutral0
-                            : AriesColor.neutral10,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                ],
+                    ],
+                    Spacing.sp24,
+                  ],
+                ),
               ),
-            Spacing.sp24,
+            ),
+            InputNewMessageField(
+              feedback: feedback,
+            ),
           ],
         ),
       ),

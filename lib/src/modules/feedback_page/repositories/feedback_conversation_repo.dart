@@ -10,6 +10,37 @@ import 'package:uuid/uuid.dart';
 part "feedback_conversation_repo.g.dart";
 
 @riverpod
+class FeedbackConversationStream extends _$FeedbackConversationStream {
+  @override
+  Stream<FeedbackConversation?> build(String conversationId) {
+    if (conversationId.isEmpty) {
+      return Stream.value(null);
+    }
+
+    return FirebaseFirestore.instance
+        .collection('feedbackConversations')
+        .doc(conversationId)
+        .snapshots()
+        .map((snapshot) {
+      if (!snapshot.exists) {
+        Log.error('Conversation document does not exist');
+        return null;
+      }
+
+      try {
+        // Log the raw data for debugging
+        final data = snapshot.data()!;
+        return FeedbackConversation.fromJson(data);
+      } catch (e, stackTrace) {
+        Log.error('Error parsing feedback conversation: $e',
+            error: e, stackTrace: stackTrace);
+        return null;
+      }
+    });
+  }
+}
+
+@riverpod
 FeedbackConversationRepository feedbackConversationRepository(Ref ref) {
   return FeedbackConversationRepository(ref);
 }
@@ -170,96 +201,12 @@ class FeedbackConversationRepository {
       final docSnapshot = await firestoreFeedbackRef.doc(conversationId).get();
 
       if (!docSnapshot.exists) {
-        Log.error('Feedback conversation not found: $conversationId');
         return null;
       }
 
-      final data = docSnapshot.data()!;
-
-      // Parse the messages
-      List<FeedbackMessage> messages = [];
-      if (data['messages'] != null) {
-        final List<dynamic> rawMessages = data['messages'];
-
-        messages = rawMessages.map((msgData) {
-          return FeedbackMessage(
-            id: msgData['id'] ?? '',
-            authorId: msgData['authorId'] ?? '',
-            authorName: msgData['authorName'],
-            messageText: msgData['messageText'],
-            isFromTeam: msgData['isFromTeam'] ?? false,
-            createdAt: DateTime.parse(msgData['createdAt']),
-          );
-        }).toList();
-      }
-
-      // Parse enum values from strings
-      FeedbackResponseStatus? status;
-      if (data['status'] != null) {
-        try {
-          status = FeedbackResponseStatus.values.firstWhere(
-            (e) => e.toString().split('.').last.toUpperCase() == data['status'],
-            orElse: () => FeedbackResponseStatus.pending,
-          );
-        } catch (_) {
-          status = FeedbackResponseStatus.pending;
-        }
-      }
-
-      FeedbackType? feedbackType;
-      if (data['feedbackType'] != null) {
-        try {
-          feedbackType = FeedbackType.values.firstWhere(
-            (e) =>
-                e.toString().split('.').last.toUpperCase() ==
-                data['feedbackType'],
-            orElse: () => FeedbackType.featureRecommendation,
-          );
-        } catch (_) {
-          feedbackType = FeedbackType.featureRecommendation;
-        }
-      }
-
-      // Fixed parsing for FeelingRates - now handles null properly
-      FeelingRates? sentiment;
-      if (data['selectedSentiment'] != null) {
-        try {
-          // First check if the value exists in the enum
-          final sentimentValues = FeelingRates.values.where(
-            (e) =>
-                e.toString().split('.').last.toUpperCase() ==
-                data['selectedSentiment'],
-          );
-
-          // Only assign if we found a match
-          if (sentimentValues.isNotEmpty) {
-            sentiment = sentimentValues.first;
-          }
-        } catch (_) {
-          // Leave sentiment as null if there's an error
-        }
-      }
-
-      // Create the FeedbackConversation object
-      return FeedbackConversation(
-        id: data['id'] ?? docSnapshot.id,
-        userId: data['userId'] ?? '',
-        userDisplayName: data['userDisplayName'],
-        userEmail: data['userEmail'],
-        status: status,
-        feedbackTitle: data['feedbackTitle'] ?? '',
-        feedbackType: feedbackType,
-        selectedSentiment: sentiment,
-        messages: messages,
-        createdAt: data['createdAt'] != null
-            ? DateTime.parse(data['createdAt'])
-            : DateTime.now(),
-        updatedAt: data['updatedAt'] != null
-            ? DateTime.parse(data['updatedAt'])
-            : DateTime.now(),
-      );
+      return FeedbackConversation.fromJson(docSnapshot.data()!);
     } catch (e) {
-      Log.error('Failed to fetch feedback conversation $conversationId: $e');
+      Log.error('Error fetching feedback conversation: $e');
       return null;
     }
   }

@@ -1,12 +1,13 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/modules/calendar/utils/helpers.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/widgets/organisms/organisms.dart';
 
-class FeedbackOrReportDetailsCard extends StatelessWidget {
+class FeedbackOrReportDetailsCard extends ConsumerWidget {
   const FeedbackOrReportDetailsCard({
     super.key,
     required this.feedback,
@@ -15,7 +16,7 @@ class FeedbackOrReportDetailsCard extends StatelessWidget {
   final FeedbackConversation feedback;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final feedbackDate = getFullSolarDateText(
       locale: Localizations.localeOf(context).toString(),
       inputDate: feedback.createdAt,
@@ -56,10 +57,11 @@ class FeedbackOrReportDetailsCard extends StatelessWidget {
           ],
         ),
         trailing: feedback.status!.getIcon(),
-        onTap: () async {
+        onTap: () {
           FeedbackStatusDetailsBottomSheet.show(
             context: context,
-            feedback: feedback,
+            conversationId: feedback.id,
+            initialFeedback: feedback,
             feedbackTitle: feedbackTitle,
           );
         },
