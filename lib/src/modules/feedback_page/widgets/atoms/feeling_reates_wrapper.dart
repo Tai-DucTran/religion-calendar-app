@@ -10,7 +10,7 @@ class FeelingReatesWrapper extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final feedbackFormSetting =
-        ref.watch(feedbackFormSettingControllerProvider).feedbackForm;
+        ref.watch(feedbackFormSettingControllerProvider).feedback;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

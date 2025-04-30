@@ -10,13 +10,13 @@ _$FeedbackFormSettingImpl _$$FeedbackFormSettingImplFromJson(
         Map<String, dynamic> json) =>
     _$FeedbackFormSettingImpl(
       isExpanded: json['isExpanded'] as bool? ?? false,
-      feedbackForm:
-          FeedbackForm.fromJson(json['feedbackForm'] as Map<String, dynamic>),
+      feedback: FeedbackConversation.fromJson(
+          json['feedback'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$FeedbackFormSettingImplToJson(
         _$FeedbackFormSettingImpl instance) =>
     <String, dynamic>{
       'isExpanded': instance.isExpanded,
-      'feedbackForm': instance.feedbackForm,
+      'feedback': instance.feedback,
     };

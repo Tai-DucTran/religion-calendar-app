@@ -14,7 +14,7 @@ class ExpandedFeedbackForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final feedbackFormSetting =
-        ref.watch(feedbackFormSettingControllerProvider).feedbackForm;
+        ref.watch(feedbackFormSettingControllerProvider).feedback;
     final controller = ref.read(feedbackFormSettingControllerProvider.notifier);
 
     return Column(
@@ -83,16 +83,12 @@ class ExpandedFeedbackForm extends ConsumerWidget {
         ),
         Center(
           child: CustomElevatedButton(
-            onPressedAsync: controller.isSubmitEnabled()
-                ? () async {
-                    await controller.submitFeedback(
-                      feedbackForm: feedbackFormSetting,
-                    );
-                    if (context.mounted) {
-                      _showFeedbackSubmittedDialog(context);
-                    }
-                  }
-                : null,
+            onPressedAsync: () async {
+              await controller.submitFeedback();
+              if (context.mounted) {
+                _showFeedbackSubmittedDialog(context);
+              }
+            },
             width: double.infinity,
             height: 40,
             text: context.l10n.submitButtonText,

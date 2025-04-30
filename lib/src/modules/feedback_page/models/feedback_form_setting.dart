@@ -8,7 +8,7 @@ part "feedback_form_setting.g.dart";
 class FeedbackFormSetting with _$FeedbackFormSetting {
   const factory FeedbackFormSetting({
     @Default(false) bool isExpanded,
-    required FeedbackForm feedbackForm,
+    required FeedbackConversation feedback,
   }) = _FeedbackFormSetting;
 
   factory FeedbackFormSetting.fromJson(Map<String, dynamic> json) =>

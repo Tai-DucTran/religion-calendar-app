@@ -35,7 +35,7 @@ class _ScreenshotFeedbackFormState
   Widget build(BuildContext context) {
     final feedbackFormSetting =
         ref.watch(feedbackFormSettingControllerProvider);
-    final feedbackForm = feedbackFormSetting.feedbackForm;
+    final feedbackForm = feedbackFormSetting.feedback;
 
     return Column(
       children: [
@@ -132,7 +132,7 @@ class _ScreenshotFeedbackFormState
             onPressed: feedbackForm.feedbackType != null
                 ? () {
                     widget.onSubmit(
-                      feedbackForm.feedbackText ?? '',
+                      feedbackForm.messages.first.toString() ?? '',
                       extras: feedbackForm.toJson(),
                     );
                     ref

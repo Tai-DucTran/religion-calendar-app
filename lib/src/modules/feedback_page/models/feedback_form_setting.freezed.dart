@@ -21,7 +21,7 @@ FeedbackFormSetting _$FeedbackFormSettingFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$FeedbackFormSetting {
   bool get isExpanded => throw _privateConstructorUsedError;
-  FeedbackForm get feedbackForm => throw _privateConstructorUsedError;
+  FeedbackConversation get feedback => throw _privateConstructorUsedError;
 
   /// Serializes this FeedbackFormSetting to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,9 +39,9 @@ abstract class $FeedbackFormSettingCopyWith<$Res> {
           FeedbackFormSetting value, $Res Function(FeedbackFormSetting) then) =
       _$FeedbackFormSettingCopyWithImpl<$Res, FeedbackFormSetting>;
   @useResult
-  $Res call({bool isExpanded, FeedbackForm feedbackForm});
+  $Res call({bool isExpanded, FeedbackConversation feedback});
 
-  $FeedbackFormCopyWith<$Res> get feedbackForm;
+  $FeedbackConversationCopyWith<$Res> get feedback;
 }
 
 /// @nodoc
@@ -60,17 +60,17 @@ class _$FeedbackFormSettingCopyWithImpl<$Res, $Val extends FeedbackFormSetting>
   @override
   $Res call({
     Object? isExpanded = null,
-    Object? feedbackForm = null,
+    Object? feedback = null,
   }) {
     return _then(_value.copyWith(
       isExpanded: null == isExpanded
           ? _value.isExpanded
           : isExpanded // ignore: cast_nullable_to_non_nullable
               as bool,
-      feedbackForm: null == feedbackForm
-          ? _value.feedbackForm
-          : feedbackForm // ignore: cast_nullable_to_non_nullable
-              as FeedbackForm,
+      feedback: null == feedback
+          ? _value.feedback
+          : feedback // ignore: cast_nullable_to_non_nullable
+              as FeedbackConversation,
     ) as $Val);
   }
 
@@ -78,9 +78,9 @@ class _$FeedbackFormSettingCopyWithImpl<$Res, $Val extends FeedbackFormSetting>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $FeedbackFormCopyWith<$Res> get feedbackForm {
-    return $FeedbackFormCopyWith<$Res>(_value.feedbackForm, (value) {
-      return _then(_value.copyWith(feedbackForm: value) as $Val);
+  $FeedbackConversationCopyWith<$Res> get feedback {
+    return $FeedbackConversationCopyWith<$Res>(_value.feedback, (value) {
+      return _then(_value.copyWith(feedback: value) as $Val);
     });
   }
 }
@@ -93,10 +93,10 @@ abstract class _$$FeedbackFormSettingImplCopyWith<$Res>
       __$$FeedbackFormSettingImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isExpanded, FeedbackForm feedbackForm});
+  $Res call({bool isExpanded, FeedbackConversation feedback});
 
   @override
-  $FeedbackFormCopyWith<$Res> get feedbackForm;
+  $FeedbackConversationCopyWith<$Res> get feedback;
 }
 
 /// @nodoc
@@ -113,17 +113,17 @@ class __$$FeedbackFormSettingImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isExpanded = null,
-    Object? feedbackForm = null,
+    Object? feedback = null,
   }) {
     return _then(_$FeedbackFormSettingImpl(
       isExpanded: null == isExpanded
           ? _value.isExpanded
           : isExpanded // ignore: cast_nullable_to_non_nullable
               as bool,
-      feedbackForm: null == feedbackForm
-          ? _value.feedbackForm
-          : feedbackForm // ignore: cast_nullable_to_non_nullable
-              as FeedbackForm,
+      feedback: null == feedback
+          ? _value.feedback
+          : feedback // ignore: cast_nullable_to_non_nullable
+              as FeedbackConversation,
     ));
   }
 }
@@ -132,7 +132,7 @@ class __$$FeedbackFormSettingImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$FeedbackFormSettingImpl extends _FeedbackFormSetting {
   const _$FeedbackFormSettingImpl(
-      {this.isExpanded = false, required this.feedbackForm})
+      {this.isExpanded = false, required this.feedback})
       : super._();
 
   factory _$FeedbackFormSettingImpl.fromJson(Map<String, dynamic> json) =>
@@ -142,11 +142,11 @@ class _$FeedbackFormSettingImpl extends _FeedbackFormSetting {
   @JsonKey()
   final bool isExpanded;
   @override
-  final FeedbackForm feedbackForm;
+  final FeedbackConversation feedback;
 
   @override
   String toString() {
-    return 'FeedbackFormSetting(isExpanded: $isExpanded, feedbackForm: $feedbackForm)';
+    return 'FeedbackFormSetting(isExpanded: $isExpanded, feedback: $feedback)';
   }
 
   @override
@@ -156,13 +156,13 @@ class _$FeedbackFormSettingImpl extends _FeedbackFormSetting {
             other is _$FeedbackFormSettingImpl &&
             (identical(other.isExpanded, isExpanded) ||
                 other.isExpanded == isExpanded) &&
-            (identical(other.feedbackForm, feedbackForm) ||
-                other.feedbackForm == feedbackForm));
+            (identical(other.feedback, feedback) ||
+                other.feedback == feedback));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, isExpanded, feedbackForm);
+  int get hashCode => Object.hash(runtimeType, isExpanded, feedback);
 
   /// Create a copy of FeedbackFormSetting
   /// with the given fields replaced by the non-null parameter values.
@@ -183,8 +183,9 @@ class _$FeedbackFormSettingImpl extends _FeedbackFormSetting {
 
 abstract class _FeedbackFormSetting extends FeedbackFormSetting {
   const factory _FeedbackFormSetting(
-      {final bool isExpanded,
-      required final FeedbackForm feedbackForm}) = _$FeedbackFormSettingImpl;
+          {final bool isExpanded,
+          required final FeedbackConversation feedback}) =
+      _$FeedbackFormSettingImpl;
   const _FeedbackFormSetting._() : super._();
 
   factory _FeedbackFormSetting.fromJson(Map<String, dynamic> json) =
@@ -193,7 +194,7 @@ abstract class _FeedbackFormSetting extends FeedbackFormSetting {
   @override
   bool get isExpanded;
   @override
-  FeedbackForm get feedbackForm;
+  FeedbackConversation get feedback;
 
   /// Create a copy of FeedbackFormSetting
   /// with the given fields replaced by the non-null parameter values.
