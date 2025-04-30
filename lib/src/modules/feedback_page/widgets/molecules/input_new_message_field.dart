@@ -76,7 +76,7 @@ class _InputNewMessageFieldState extends ConsumerState<InputNewMessageField> {
                         hintText: canSendMoreMessages
                             ? context.l10n.sendingMessageHintText
                             : context.l10n.exceededSendingMessageHintText,
-                        hintStyle: AriesTextStyles.textHintTextField.copyWith(
+                        hintStyle: AriesTextStyles.textBodySmall.copyWith(
                           color: canSendMoreMessages
                               ? AriesColor.neutral200
                               : AriesColor.neutral500,

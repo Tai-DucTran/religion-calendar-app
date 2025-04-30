@@ -36,12 +36,9 @@ extension ConsecutiveMessageHelper on FeedbackConversation {
     int consecutiveCount = 0;
 
     for (final message in reversedMessages) {
-      // Stop counting if we encounter a team message
       if (message.isFromTeam) {
         break;
       }
-
-      // Increment consecutive count
       consecutiveCount++;
     }
 
@@ -49,7 +46,7 @@ extension ConsecutiveMessageHelper on FeedbackConversation {
   }
 
   bool canSendMoreMessages() {
-    return getConsecutiveUserMessages() < 4;
+    return getConsecutiveUserMessages() < 9;
   }
 }
 
