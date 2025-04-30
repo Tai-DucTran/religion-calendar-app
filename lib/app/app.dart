@@ -108,7 +108,9 @@ class _ReligionAppState extends ConsumerState<ReligionApp> {
               children: [
                 if (child != null) child,
                 if (authState is AsyncLoading || userState is AsyncLoading)
-                  const LoadingOverlayContainer()
+                  const LoadingOverlayContainer(
+                    hasOverlayBackground: true,
+                  )
               ],
             ),
           );
