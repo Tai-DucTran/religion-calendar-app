@@ -28,6 +28,31 @@ class FeedbackConversation with _$FeedbackConversation {
   const FeedbackConversation._();
 }
 
+extension ConsecutiveMessageHelper on FeedbackConversation {
+  int getConsecutiveUserMessages() {
+    // Reverse the messages to start from the most recent
+    final reversedMessages = messages.reversed.toList();
+
+    int consecutiveCount = 0;
+
+    for (final message in reversedMessages) {
+      // Stop counting if we encounter a team message
+      if (message.isFromTeam) {
+        break;
+      }
+
+      // Increment consecutive count
+      consecutiveCount++;
+    }
+
+    return consecutiveCount;
+  }
+
+  bool canSendMoreMessages() {
+    return getConsecutiveUserMessages() < 4;
+  }
+}
+
 @freezed
 class FeedbackMessage with _$FeedbackMessage {
   const factory FeedbackMessage({

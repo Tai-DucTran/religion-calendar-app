@@ -298,6 +298,10 @@ class FeedbackConversationRepository {
         throw Exception('User ID is not available');
       }
 
+      if (messageText.trim().length > 1000) {
+        throw Exception('Message exceeds 1000 characters');
+      }
+
       // Create a new message as a simple map
       final messageId = const Uuid().v4();
       final now = DateTime.now();
@@ -312,9 +316,8 @@ class FeedbackConversationRepository {
 
       // Get a reference to the conversation document
       final conversationRef = firestoreFeedbackRef.doc(conversationId);
-
-      // Update the document directly without using a transaction
       final doc = await conversationRef.get();
+
       if (!doc.exists) {
         throw Exception('Feedback conversation not found');
       }

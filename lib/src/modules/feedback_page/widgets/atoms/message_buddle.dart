@@ -57,14 +57,12 @@ class MessageBuddle extends StatelessWidget {
                   ),
                   SizedBox(height: 4.h),
                 ],
-
-                // Message content
                 ReadMoreText(
                   message.messageText ?? "",
                   trimCollapsedText: context.l10n.readMoreButtonText,
                   trimExpandedText: context.l10n.showLessButtonText,
                   trimLines: 5,
-                  style: AriesTextStyles.textBodyNormal.copyWith(
+                  style: AriesTextStyles.textBodySmall.copyWith(
                     color: isFromTeam
                         ? AriesColor.success600
                         : AriesColor.neutral900,
