@@ -1025,6 +1025,24 @@ abstract class AppLocalizations {
   /// **'No feedback submitted yet! If you have any, we would love to heard from you.'**
   String get emptyFeedbackText;
 
+  /// No description provided for @sendingMessageHintText.
+  ///
+  /// In en, this message translates to:
+  /// **'Type your response...'**
+  String get sendingMessageHintText;
+
+  /// No description provided for @exceededSendingMessageHintText.
+  ///
+  /// In en, this message translates to:
+  /// **'We will respond you soon!'**
+  String get exceededSendingMessageHintText;
+
+  /// No description provided for @exceededMaxSendingMessageText.
+  ///
+  /// In en, this message translates to:
+  /// **'Can only send max 10 consecutive message!'**
+  String get exceededMaxSendingMessageText;
+
   /// No description provided for @explorePageHeaderText.
   ///
   /// In en, this message translates to:

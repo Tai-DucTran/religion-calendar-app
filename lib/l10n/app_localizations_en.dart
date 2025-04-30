@@ -474,6 +474,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get emptyFeedbackText => 'No feedback submitted yet! If you have any, we would love to heard from you.';
 
   @override
+  String get sendingMessageHintText => 'Type your response...';
+
+  @override
+  String get exceededSendingMessageHintText => 'We will respond you soon!';
+
+  @override
+  String get exceededMaxSendingMessageText => 'Can only send max 10 consecutive message!';
+
+  @override
   String get explorePageHeaderText => 'Explore';
 
   @override

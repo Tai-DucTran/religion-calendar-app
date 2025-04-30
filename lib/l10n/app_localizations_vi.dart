@@ -474,6 +474,15 @@ class AppLocalizationsVi extends AppLocalizations {
   String get emptyFeedbackText => 'Danh sách báo cáo hoặc góp ý trống! Nếu bạn có góp ý gì, chúng tôi rất vui được lắng nghe bạn.';
 
   @override
+  String get sendingMessageHintText => 'Nhập nội dung...';
+
+  @override
+  String get exceededSendingMessageHintText => 'Chúng tôi sẽ sớm phản hồi!';
+
+  @override
+  String get exceededMaxSendingMessageText => 'Chỉ có thể gửi tối đa 10 tin nhắn liên tục!';
+
+  @override
   String get explorePageHeaderText => 'Khám phá';
 
   @override
