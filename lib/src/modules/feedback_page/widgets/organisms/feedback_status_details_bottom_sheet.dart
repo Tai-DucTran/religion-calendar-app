@@ -59,6 +59,8 @@ class _FeedbackStatusDetailsBottomSheetState
     }
 
     final feedback = widget.feedbackForm;
+    final isStatusReponded =
+        feedback?.status == FeedbackResponseStatus.responded;
 
     return Container(
       width: double.infinity,
@@ -121,9 +123,27 @@ class _FeedbackStatusDetailsBottomSheetState
                   Spacing.sp12,
                   feedback!.status!.getIcon(),
                   Spacing.sp8,
-                  Text(
-                    feedback.status!.getLocalized(context),
-                    style: AriesTextStyles.textBodyNormal,
+                  Container(
+                    padding: EdgeInsets.all(
+                      6,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        8.r,
+                      ),
+                      color: isStatusReponded
+                          ? AriesColor.success700
+                          : AriesColor.neutral600,
+                    ),
+                    child: Text(
+                      feedback.status!.getLocalized(context),
+                      style: AriesTextStyles.textBodyNormal.copyWith(
+                        color: isStatusReponded
+                            ? AriesColor.neutral0
+                            : AriesColor.neutral40,
+                        fontSize: 12,
+                      ),
+                    ),
                   ),
                 ],
               ),
