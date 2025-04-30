@@ -8,7 +8,6 @@ import 'package:uuid/uuid.dart';
 part "feedback_form_setting_controller.g.dart";
 
 @Riverpod(keepAlive: true)
-@riverpod
 class FeedbackFormSettingController extends _$FeedbackFormSettingController {
   final defaultFeedbackForm = FeedbackConversation(
     id: '',
@@ -134,48 +133,34 @@ class FeedbackFormSettingController extends _$FeedbackFormSettingController {
         'Form reset complete. Message count: ${state.feedback.messages.length}');
   }
 
+  // Completely rewritten submitFeedback method to avoid Future completion issues
   Future<String?> submitFeedback() async {
+    Log.dev(
+        'Submitting feedback with ${state.feedback.messages.length} messages');
+
+    // Don't modify state during async operation
+    final FeedbackConversation feedbackToSubmit = state.feedback.copyWith();
+
+    // Check if we actually have content to submit
+    if (feedbackToSubmit.messages.isEmpty) {
+      if (feedbackToSubmit.feedbackTitle == null ||
+          feedbackToSubmit.feedbackTitle!.isEmpty) {
+        Log.error('Cannot submit feedback: No content');
+        return null;
+      }
+    }
+
     try {
-      // Debug: Log the feedback we're submitting
-      Log.dev(
-          'Submitting feedback with ${state.feedback.messages.length} messages');
-
-      // Validate data before submitting
-      if (state.feedback.messages.isEmpty) {
-        Log.warn('No messages in feedback to submit');
-
-        // If we have a title but no messages, create a message from the title
-        if (state.feedback.feedbackTitle != null &&
-            state.feedback.feedbackTitle!.isNotEmpty) {
-          Log.dev('Creating a message from feedback title');
-          updateFeedbackText(state.feedback.feedbackTitle!);
-        } else {
-          Log.error('Cannot submit feedback: No content');
-          return null;
-        }
-      }
-
-      // Debugging: Check message structure
-      for (var i = 0; i < state.feedback.messages.length; i++) {
-        final message = state.feedback.messages[i];
-        Log.dev('Message $i: ${message.messageText}, ID: ${message.id}');
-      }
-
-      // Use the new conversation controller to create a feedback conversation
-      final conversationController =
+      // Create the conversation directly without updating state
+      final controller =
           ref.read(newFeedbackConversationControllerProvider.notifier);
-
-      // FIX: Store the result in a local variable
       final String? conversationId =
-          await conversationController.createFeedbackConversation(
-        state.feedback,
-      );
+          await controller.createFeedbackConversation(feedbackToSubmit);
 
       if (conversationId != null) {
-        Log.info(
-            'Feedback submitted successfully with conversation ID: $conversationId');
+        Log.info('Feedback submitted successfully with ID: $conversationId');
 
-        // FIX: Move the reset AFTER we check the result and BEFORE we return
+        // Only reset the form after successful submission
         resetForm();
 
         return conversationId;

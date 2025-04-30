@@ -34,8 +34,7 @@ class FeedbackConversationRepository {
   String? get _currentUserDisplayName =>
       _ref.read(authenticatorRepositoryProvider).displayName;
 
-  // Create a new feedback conversation
-  // Create a new feedback conversation
+  // Create a new feedback conversation - completely rewritten to avoid Future completion issues
   Future<String> createFeedbackConversation(
     FeedbackConversation initialFeedback,
   ) async {
@@ -44,37 +43,62 @@ class FeedbackConversationRepository {
       final feedbackDocRef = firestoreFeedbackRef.doc();
       final feedbackId = feedbackDocRef.id;
 
-      // Update the feedback with the generated ID
+      // Update the feedback with the generated ID and timestamps
+      final now = DateTime.now();
       final conversation = initialFeedback.copyWith(
         id: feedbackId,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
+        createdAt: now,
+        updatedAt: now,
       );
 
-      // THIS IS THE KEY FIX: Convert messages to JSON manually to ensure proper serialization
-      final Map<String, dynamic> conversationData = conversation.toJson();
+      // Create a simple map that won't have serialization issues
+      final Map<String, dynamic> conversationData = {
+        'id': conversation.id,
+        'userId': conversation.userId,
+        'userDisplayName': conversation.userDisplayName,
+        'userEmail': conversation.userEmail,
+        'status':
+            conversation.status?.toString().split('.').last.toUpperCase() ??
+                'PENDING',
+        'feedbackTitle': conversation.feedbackTitle ?? '',
+        'feedbackType': conversation.feedbackType
+                ?.toString()
+                .split('.')
+                .last
+                .toUpperCase() ??
+            'FEATURE_RECOMMENDATION',
+        'selectedSentiment': conversation.selectedSentiment
+            ?.toString()
+            .split('.')
+            .last
+            .toUpperCase(),
+        'createdAt': conversation.createdAt.toIso8601String(),
+        'updatedAt': conversation.updatedAt.toIso8601String(),
+        'messages': conversation.messages
+            .map((m) => {
+                  'id': m.id,
+                  'authorId': m.authorId,
+                  'authorName': m.authorName ?? '',
+                  'messageText': m.messageText ?? '',
+                  'isFromTeam': m.isFromTeam,
+                  'createdAt': m.createdAt.toIso8601String(),
+                })
+            .toList(),
+      };
 
-      // Convert messages array to JSON explicitly
-      final List<Map<String, dynamic>> messagesJson =
-          conversation.messages.map((message) => message.toJson()).toList();
-
-      // Replace the messages with the JSON list
-      conversationData['messages'] = messagesJson;
-
-      Log.dev('Saving conversation data: $conversationData');
-
-      // Save the properly serialized map to Firestore
+      // Save to Firestore - handle this in a single operation
       await feedbackDocRef.set(conversationData);
 
-      // Also add a reference in the user's subcollection
+      // Add a reference in the user's subcollection if user is authenticated
       if (_currentUserId != null) {
+        // Create a separate transaction for the user reference
         await firestoreUserRef
             .doc(_currentUserId)
             .collection(FirebaseCollectionName.feedbackForms)
             .doc(feedbackId)
             .set({
           'referenceId': feedbackId,
-          'createdAt': DateTime.now().toIso8601String()
+          'createdAt': now.toIso8601String(),
         });
       }
 
@@ -97,43 +121,36 @@ class FeedbackConversationRepository {
         throw Exception('User ID is not available');
       }
 
-      final newMessage = FeedbackMessage(
-        id: const Uuid().v4(),
-        authorId: _currentUserId!,
-        authorName: _currentUserDisplayName,
-        messageText: messageText,
-        isFromTeam: false,
-        createdAt: DateTime.now(),
-      );
+      // Create a new message as a simple map
+      final messageId = const Uuid().v4();
+      final now = DateTime.now();
+      final newMessage = {
+        'id': messageId,
+        'authorId': _currentUserId!,
+        'authorName': _currentUserDisplayName,
+        'messageText': messageText,
+        'isFromTeam': false,
+        'createdAt': now.toIso8601String(),
+      };
 
-      // Get a reference to the conversation
+      // Get a reference to the conversation document
       final conversationRef = firestoreFeedbackRef.doc(conversationId);
 
-      // Convert message to JSON manually to avoid serialization issues
-      final newMessageMap = newMessage.toJson();
+      // Update the document directly without using a transaction
+      final doc = await conversationRef.get();
+      if (!doc.exists) {
+        throw Exception('Feedback conversation not found');
+      }
 
-      // Add the new message to the messages array
-      await FirebaseFirestore.instance.runTransaction((transaction) async {
-        final snapshot = await transaction.get(conversationRef);
+      final data = doc.data()!;
+      final List<dynamic> currentMessages = data['messages'] ?? [];
+      final updatedMessages = [...currentMessages, newMessage];
 
-        if (!snapshot.exists) {
-          throw Exception('Feedback conversation not found');
-        }
-
-        final data = snapshot.data()!;
-
-        // Get current messages as List<dynamic>
-        final List<dynamic> currentMessages = data['messages'] ?? [];
-
-        // Add the new message as a Map
-        final updatedMessages = [...currentMessages, newMessageMap];
-
-        transaction.update(conversationRef, {
-          'messages': updatedMessages,
-          'updatedAt': DateTime.now().toIso8601String(),
-          // If the status was 'responded', change it back to 'pending'
-          if (data['status'] == 'RESPONDED') 'status': 'PENDING',
-        });
+      await conversationRef.update({
+        'messages': updatedMessages,
+        'updatedAt': now.toIso8601String(),
+        // If the status was 'responded', change it back to 'pending'
+        if (data['status'] == 'RESPONDED') 'status': 'PENDING',
       });
 
       Log.info('Message added to conversation: $conversationId');

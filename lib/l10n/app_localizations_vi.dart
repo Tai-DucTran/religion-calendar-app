@@ -420,6 +420,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get submitButtonText => 'Gửi';
 
   @override
+  String get submittingText => 'Đang gửi...';
+
+  @override
   String get closeButtonText => 'Đóng';
 
   @override

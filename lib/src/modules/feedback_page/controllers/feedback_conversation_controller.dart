@@ -13,41 +13,40 @@ class NewFeedbackConversationController
   @override
   FutureOr<String?> build() => null; // Initially null
 
-  // Create a new feedback conversation
+  // Create a new feedback conversation - completely rewritten
   Future<String?> createFeedbackConversation(
     FeedbackConversation feedback,
   ) async {
-    state = const AsyncValue.loading();
-    try {
-      // Debug validation
-      Log.dev("Creating feedback conversation");
-      Log.dev("Messages count: ${feedback.messages.length}");
+    // Important: Don't use state.whenData here as it can cause the Future already completed error
 
-      // Validate the feedback object
+    try {
+      // Validate the feedback
       if (feedback.messages.isEmpty &&
           (feedback.feedbackTitle == null || feedback.feedbackTitle!.isEmpty)) {
         Log.error("Cannot create conversation: No content provided");
-        state = const AsyncValue.data(null);
         return null;
       }
 
-      // IMPORTANT: Create a validated copy of the feedback object
+      // Create a validated copy of the feedback
       final validatedFeedback = _createValidatedFeedback(feedback);
 
-      // Debug: check the message structure
-      for (final message in validatedFeedback.messages) {
-        Log.dev("Message: ${message.messageText}, ID: ${message.id}");
-      }
+      // Get the repository instance
+      final repository = ref.read(feedbackConversationRepositoryProvider);
 
-      final conversationId = await ref
-          .read(feedbackConversationRepositoryProvider)
-          .createFeedbackConversation(validatedFeedback);
+      // Create the conversation directly without updating state during the operation
+      final conversationId =
+          await repository.createFeedbackConversation(validatedFeedback);
 
-      state = AsyncValue.data(conversationId);
+      // Only after completion, update the state
+      state = AsyncData(conversationId);
+
       return conversationId;
-    } catch (e, st) {
-      state = AsyncValue.error(e, st);
+    } catch (e) {
       Log.error('Error creating conversation: $e');
+
+      // Update state with error but don't rethrow
+      state = AsyncError(e, StackTrace.current);
+
       return null;
     }
   }
@@ -95,7 +94,7 @@ class NewFeedbackConversationController
           (validMessages.isNotEmpty ? validMessages.first.messageText : ''),
       feedbackType: feedback.feedbackType,
       selectedSentiment: feedback.selectedSentiment,
-      messages: validMessages, // Use the validated messages
+      messages: validMessages,
       createdAt: feedback.createdAt,
       updatedAt: feedback.updatedAt,
     );
@@ -103,6 +102,6 @@ class NewFeedbackConversationController
 
   // Reset the state
   void reset() {
-    state = const AsyncValue.data(null);
+    state = const AsyncData(null);
   }
 }

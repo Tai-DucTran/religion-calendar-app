@@ -420,6 +420,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get submitButtonText => 'Submit';
 
   @override
+  String get submittingText => 'Submitting...';
+
+  @override
   String get closeButtonText => 'Close';
 
   @override

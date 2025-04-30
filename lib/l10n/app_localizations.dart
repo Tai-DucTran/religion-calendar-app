@@ -917,6 +917,12 @@ abstract class AppLocalizations {
   /// **'Submit'**
   String get submitButtonText;
 
+  /// No description provided for @submittingText.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitting...'**
+  String get submittingText;
+
   /// No description provided for @closeButtonText.
   ///
   /// In en, this message translates to:

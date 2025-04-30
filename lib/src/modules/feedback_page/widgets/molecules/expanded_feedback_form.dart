@@ -1,6 +1,7 @@
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/controllers/feedback_form_setting_controller.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
@@ -8,7 +9,7 @@ import 'package:religion_calendar_app/src/modules/feedback_page/widgets/atoms/at
 import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
-class ExpandedFeedbackForm extends ConsumerWidget {
+class ExpandedFeedbackForm extends HookConsumerWidget {
   const ExpandedFeedbackForm({super.key});
 
   @override
@@ -17,13 +18,15 @@ class ExpandedFeedbackForm extends ConsumerWidget {
         ref.watch(feedbackFormSettingControllerProvider).feedback;
     final controller = ref.read(feedbackFormSettingControllerProvider.notifier);
 
+    final isSubmitting = useState(false);
+    final feedbackTextController = useTextEditingController();
+
     return Column(
-      spacing: 12.h,
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(height: 12.h),
         Divider(color: AriesColor.neutral20),
+        SizedBox(height: 12.h),
         Row(
-          spacing: 12.w,
           children: [
             Expanded(
               child: FeedbackTypeButton(
@@ -33,6 +36,7 @@ class ExpandedFeedbackForm extends ConsumerWidget {
                     feedbackFormSetting.feedbackType == FeedbackType.bugReport,
               ),
             ),
+            SizedBox(width: 12.w),
             Expanded(
               child: FeedbackTypeButton(
                 type: FeedbackType.featureRecommendation,
@@ -43,11 +47,17 @@ class ExpandedFeedbackForm extends ConsumerWidget {
             ),
           ],
         ),
-        Text(
-          context.l10n.tellUsMoreText,
-          style: AriesTextStyles.textBodySmall,
+        SizedBox(height: 12.h),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            context.l10n.tellUsMoreText,
+            style: AriesTextStyles.textBodySmall,
+          ),
         ),
+        SizedBox(height: 12.h),
         TextField(
+          controller: feedbackTextController,
           onChanged: (value) {
             controller.updateFeedbackText(value);
           },
@@ -81,13 +91,36 @@ class ExpandedFeedbackForm extends ConsumerWidget {
             ),
           ),
         ),
+        SizedBox(height: 12.h),
         Center(
           child: CustomElevatedButton(
             onPressedAsync: () async {
-              await controller.submitFeedback();
-              if (context.mounted) {
-                _showFeedbackSubmittedDialog(context);
+              // Prevent multiple submissions
+              if (isSubmitting.value) return;
+
+              try {
+                // Set submitting state to true
+                isSubmitting.value = true;
+
+                // Submit the feedback
+                final result = await controller.submitFeedback();
+
+                // Handle the result
+                if (result != null && context.mounted) {
+                  // Clear the text input
+                  feedbackTextController.clear();
+
+                  // Show success dialog
+                  _showFeedbackSubmittedDialog(context);
+                }
+              } finally {
+                // Always reset the submitting state
+                if (context.mounted) {
+                  isSubmitting.value = false;
+                }
               }
+
+              return;
             },
             width: double.infinity,
             height: 40,
