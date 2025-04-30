@@ -72,14 +72,9 @@ class FeedbackFormSettingController extends _$FeedbackFormSettingController {
     // Create a new list with the existing messages plus the new one
     final updatedMessages = [...state.feedback.messages, message];
 
-    // Debug: Check what we're adding
-    Log.dev('Adding message to feedback: ${message.messageText}');
-    Log.dev('Updated messages count: ${updatedMessages.length}');
-
     state = state.copyWith(
       feedback: state.feedback.copyWith(
         messages: updatedMessages,
-        // Also update the feedbackTitle to use the first part of the message
         feedbackTitle: feedbackText.split('\n').first,
       ),
     );
@@ -127,10 +122,6 @@ class FeedbackFormSettingController extends _$FeedbackFormSettingController {
       isExpanded: false,
       feedback: resetForm,
     );
-
-    // Log the state after reset to verify
-    Log.dev(
-        'Form reset complete. Message count: ${state.feedback.messages.length}');
   }
 
   // Completely rewritten submitFeedback method to avoid Future completion issues

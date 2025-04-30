@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:religion_calendar_app/src/modules/feedback_page/providers/feedback_statuses_provider.dart';
+import 'package:religion_calendar_app/src/modules/feedback_page/providers/providers.dart';
+
 import 'package:religion_calendar_app/src/modules/feedback_page/widgets/atoms/atoms.dart';
 import 'package:religion_calendar_app/src/modules/profile/widgets/widgets.dart';
-import 'package:religion_calendar_app/src/utils/localization_extension.dart';
+import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class FeedbackStatusListPage extends ConsumerWidget {
@@ -11,7 +12,8 @@ class FeedbackStatusListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final feedbackListAsync = ref.watch(feedbackStatusesProviderProvider);
+    final feedbackListAsync =
+        ref.watch(userFeedbackConversationsProviderProvider());
 
     return SettingPageTemplate(
       header: context.l10n.feedbackListTitlePageText,
@@ -42,7 +44,7 @@ class FeedbackStatusListPage extends ConsumerWidget {
             );
           },
           loading: () => const Center(
-            child: CircularProgressIndicator(),
+            child: LoadingOverlayContainer(),
           ),
           error: (error, stack) => Center(
             child: Text(

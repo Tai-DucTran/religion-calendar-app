@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:religion_calendar_app/constants/constants.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
-import 'package:religion_calendar_app/src/modules/feedback_page/models/feedback_conversation.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
 import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -34,7 +33,238 @@ class FeedbackConversationRepository {
   String? get _currentUserDisplayName =>
       _ref.read(authenticatorRepositoryProvider).displayName;
 
-  // Create a new feedback conversation - completely rewritten to avoid Future completion issues
+  // Get all feedback conversations for the current user
+  Future<List<FeedbackConversation>> getUserFeedbackConversations({
+    int limit = 20,
+    bool includeAllMessages =
+        true, // Set to false to limit message count for performance
+    int maxMessages = 10, // Only used if includeAllMessages is false
+  }) async {
+    try {
+      final userId = _currentUserId;
+      if (userId == null) {
+        Log.error('Cannot fetch feedback conversations: No user ID available');
+        return [];
+      }
+
+      // Query the root-level collection for this user's conversations
+      final querySnapshot = await firestoreFeedbackRef
+          .where('userId', isEqualTo: userId)
+          .orderBy('updatedAt', descending: true)
+          .limit(limit)
+          .get();
+
+      if (querySnapshot.docs.isEmpty) {
+        Log.info('No feedback conversations found for user: $userId');
+        return [];
+      }
+
+      Log.info(
+          'Found ${querySnapshot.docs.length} feedback conversations for user: $userId');
+
+      // Convert Firestore documents to FeedbackConversation objects
+      return querySnapshot.docs.map((doc) {
+        final data = doc.data();
+
+        // Parse the messages
+        List<FeedbackMessage> messages = [];
+        if (data['messages'] != null) {
+          final List<dynamic> rawMessages = data['messages'];
+
+          // Optionally limit the number of messages for performance
+          final messagesToProcess = includeAllMessages
+              ? rawMessages
+              : rawMessages.length > maxMessages
+                  ? rawMessages.sublist(rawMessages.length - maxMessages)
+                  : rawMessages;
+
+          messages = messagesToProcess.map((msgData) {
+            return FeedbackMessage(
+              id: msgData['id'] ?? '',
+              authorId: msgData['authorId'] ?? '',
+              authorName: msgData['authorName'],
+              messageText: msgData['messageText'],
+              isFromTeam: msgData['isFromTeam'] ?? false,
+              createdAt: DateTime.parse(msgData['createdAt']),
+            );
+          }).toList();
+        }
+
+        // Parse enum values from strings
+        FeedbackResponseStatus? status;
+        if (data['status'] != null) {
+          try {
+            status = FeedbackResponseStatus.values.firstWhere(
+              (e) =>
+                  e.toString().split('.').last.toUpperCase() == data['status'],
+              orElse: () => FeedbackResponseStatus.pending,
+            );
+          } catch (_) {
+            status = FeedbackResponseStatus.pending;
+          }
+        }
+
+        FeedbackType? feedbackType;
+        if (data['feedbackType'] != null) {
+          try {
+            feedbackType = FeedbackType.values.firstWhere(
+              (e) =>
+                  e.toString().split('.').last.toUpperCase() ==
+                  data['feedbackType'],
+              orElse: () => FeedbackType.featureRecommendation,
+            );
+          } catch (_) {
+            feedbackType = FeedbackType.featureRecommendation;
+          }
+        }
+
+        // Fixed parsing for FeelingRates - now handles null properly
+        FeelingRates? sentiment;
+        if (data['selectedSentiment'] != null) {
+          try {
+            // First check if the value exists in the enum
+            final sentimentValues = FeelingRates.values.where(
+              (e) =>
+                  e.toString().split('.').last.toUpperCase() ==
+                  data['selectedSentiment'],
+            );
+
+            // Only assign if we found a match
+            if (sentimentValues.isNotEmpty) {
+              sentiment = sentimentValues.first;
+            }
+          } catch (_) {
+            // Leave sentiment as null if there's an error
+          }
+        }
+
+        // Create the FeedbackConversation object
+        return FeedbackConversation(
+          id: data['id'] ?? doc.id,
+          userId: data['userId'] ?? '',
+          userDisplayName: data['userDisplayName'],
+          userEmail: data['userEmail'],
+          status: status,
+          feedbackTitle: data['feedbackTitle'] ?? '',
+          feedbackType: feedbackType,
+          selectedSentiment: sentiment,
+          messages: messages,
+          createdAt: data['createdAt'] != null
+              ? DateTime.parse(data['createdAt'])
+              : DateTime.now(),
+          updatedAt: data['updatedAt'] != null
+              ? DateTime.parse(data['updatedAt'])
+              : DateTime.now(),
+        );
+      }).toList();
+    } catch (e) {
+      Log.error('Failed to fetch user feedback conversations: $e');
+      return [];
+    }
+  }
+
+  // Get a single feedback conversation by ID
+  Future<FeedbackConversation?> getFeedbackConversationById(
+      String conversationId) async {
+    try {
+      final docSnapshot = await firestoreFeedbackRef.doc(conversationId).get();
+
+      if (!docSnapshot.exists) {
+        Log.error('Feedback conversation not found: $conversationId');
+        return null;
+      }
+
+      final data = docSnapshot.data()!;
+
+      // Parse the messages
+      List<FeedbackMessage> messages = [];
+      if (data['messages'] != null) {
+        final List<dynamic> rawMessages = data['messages'];
+
+        messages = rawMessages.map((msgData) {
+          return FeedbackMessage(
+            id: msgData['id'] ?? '',
+            authorId: msgData['authorId'] ?? '',
+            authorName: msgData['authorName'],
+            messageText: msgData['messageText'],
+            isFromTeam: msgData['isFromTeam'] ?? false,
+            createdAt: DateTime.parse(msgData['createdAt']),
+          );
+        }).toList();
+      }
+
+      // Parse enum values from strings
+      FeedbackResponseStatus? status;
+      if (data['status'] != null) {
+        try {
+          status = FeedbackResponseStatus.values.firstWhere(
+            (e) => e.toString().split('.').last.toUpperCase() == data['status'],
+            orElse: () => FeedbackResponseStatus.pending,
+          );
+        } catch (_) {
+          status = FeedbackResponseStatus.pending;
+        }
+      }
+
+      FeedbackType? feedbackType;
+      if (data['feedbackType'] != null) {
+        try {
+          feedbackType = FeedbackType.values.firstWhere(
+            (e) =>
+                e.toString().split('.').last.toUpperCase() ==
+                data['feedbackType'],
+            orElse: () => FeedbackType.featureRecommendation,
+          );
+        } catch (_) {
+          feedbackType = FeedbackType.featureRecommendation;
+        }
+      }
+
+      // Fixed parsing for FeelingRates - now handles null properly
+      FeelingRates? sentiment;
+      if (data['selectedSentiment'] != null) {
+        try {
+          // First check if the value exists in the enum
+          final sentimentValues = FeelingRates.values.where(
+            (e) =>
+                e.toString().split('.').last.toUpperCase() ==
+                data['selectedSentiment'],
+          );
+
+          // Only assign if we found a match
+          if (sentimentValues.isNotEmpty) {
+            sentiment = sentimentValues.first;
+          }
+        } catch (_) {
+          // Leave sentiment as null if there's an error
+        }
+      }
+
+      // Create the FeedbackConversation object
+      return FeedbackConversation(
+        id: data['id'] ?? docSnapshot.id,
+        userId: data['userId'] ?? '',
+        userDisplayName: data['userDisplayName'],
+        userEmail: data['userEmail'],
+        status: status,
+        feedbackTitle: data['feedbackTitle'] ?? '',
+        feedbackType: feedbackType,
+        selectedSentiment: sentiment,
+        messages: messages,
+        createdAt: data['createdAt'] != null
+            ? DateTime.parse(data['createdAt'])
+            : DateTime.now(),
+        updatedAt: data['updatedAt'] != null
+            ? DateTime.parse(data['updatedAt'])
+            : DateTime.now(),
+      );
+    } catch (e) {
+      Log.error('Failed to fetch feedback conversation $conversationId: $e');
+      return null;
+    }
+  }
+
+  // Create a new feedback conversation
   Future<String> createFeedbackConversation(
     FeedbackConversation initialFeedback,
   ) async {

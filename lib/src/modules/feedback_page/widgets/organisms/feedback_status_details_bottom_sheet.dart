@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readmore/readmore.dart';
-import 'package:religion_calendar_app/src/modules/feedback_page/models/feedback_form.dart';
+import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
 import 'package:religion_calendar_app/src/utils/localization_extension.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class FeedbackStatusDetailsBottomSheet extends ConsumerStatefulWidget {
   const FeedbackStatusDetailsBottomSheet({
     super.key,
-    required this.feedbackForm,
+    required this.feedback,
     required this.feedbackTitle,
   });
 
-  final FeedbackForm? feedbackForm;
+  final FeedbackConversation? feedback;
   final String? feedbackTitle;
 
   static Future<void> show({
     required BuildContext context,
-    required FeedbackForm? feedbackForm,
+    required FeedbackConversation? feedback,
     required String? feedbackTitle,
   }) async {
     await showModalBottomSheet(
@@ -39,7 +39,7 @@ class FeedbackStatusDetailsBottomSheet extends ConsumerStatefulWidget {
         ),
       ),
       builder: (context) => FeedbackStatusDetailsBottomSheet(
-        feedbackForm: feedbackForm,
+        feedback: feedback,
         feedbackTitle: feedbackTitle,
       ),
     );
@@ -54,11 +54,11 @@ class _FeedbackStatusDetailsBottomSheetState
     extends ConsumerState<FeedbackStatusDetailsBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    if (widget.feedbackForm == null) {
+    if (widget.feedback == null) {
       return SomethingWentWrong();
     }
 
-    final feedback = widget.feedbackForm;
+    final feedback = widget.feedback;
     final isStatusReponded =
         feedback?.status == FeedbackResponseStatus.responded;
 
@@ -100,7 +100,7 @@ class _FeedbackStatusDetailsBottomSheetState
                 left: 12.w,
               ),
               child: ReadMoreText(
-                '${feedback?.feedbackText ?? ''}\n',
+                '${feedback?.feedbackTitle ?? ''}\n',
                 trimCollapsedText: context.l10n.readMoreButtonText,
                 trimExpandedText: context.l10n.showLessButtonText,
                 delimiter: '\n',
@@ -140,7 +140,7 @@ class _FeedbackStatusDetailsBottomSheetState
                       style: AriesTextStyles.textBodyNormal.copyWith(
                         color: isStatusReponded
                             ? AriesColor.neutral0
-                            : AriesColor.neutral40,
+                            : AriesColor.neutral10,
                         fontSize: 12,
                       ),
                     ),

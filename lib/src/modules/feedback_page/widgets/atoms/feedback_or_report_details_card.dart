@@ -12,7 +12,7 @@ class FeedbackOrReportDetailsCard extends StatelessWidget {
     required this.feedback,
   });
 
-  final FeedbackForm feedback;
+  final FeedbackConversation feedback;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class FeedbackOrReportDetailsCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              feedback.feedbackText ?? '',
+              feedback.feedbackTitle ?? '',
               style: AriesTextStyles.textBodySmall.copyWith(
                 color: AriesColor.neutral100,
               ),
@@ -59,7 +59,7 @@ class FeedbackOrReportDetailsCard extends StatelessWidget {
         onTap: () async {
           FeedbackStatusDetailsBottomSheet.show(
             context: context,
-            feedbackForm: feedback,
+            feedback: feedback,
             feedbackTitle: feedbackTitle,
           );
         },
