@@ -3,11 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class SettingPageTemplate extends StatelessWidget {
-  const SettingPageTemplate(
-      {super.key, required this.child, required this.header});
+  const SettingPageTemplate({
+    super.key,
+    required this.child,
+    required this.header,
+    this.onPressed,
+  });
 
   final Widget child;
   final String header;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +21,7 @@ class SettingPageTemplate extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AriesColor.yellowP50,
         leading: IconButton(
-          onPressed: () {
-            context.pop();
-          },
+          onPressed: onPressed ?? () => context.pop(),
           icon: Icon(
             Icons.arrow_back,
             color: AriesColor.neutral700,

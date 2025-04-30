@@ -9,6 +9,9 @@ part of 'feedback_form.dart';
 _$FeedbackFormImpl _$$FeedbackFormImplFromJson(Map<String, dynamic> json) =>
     _$FeedbackFormImpl(
       id: json['id'] as String,
+      userId: json['userId'] as String,
+      userDisplayName: json['userDisplayName'] as String?,
+      userEmail: json['userEmail'] as String?,
       status: $enumDecodeNullable(
               _$FeedbackResponseStatusEnumMap, json['status']) ??
           FeedbackResponseStatus.pending,
@@ -26,6 +29,9 @@ _$FeedbackFormImpl _$$FeedbackFormImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$FeedbackFormImplToJson(_$FeedbackFormImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'userId': instance.userId,
+      'userDisplayName': instance.userDisplayName,
+      'userEmail': instance.userEmail,
       'status': _$FeedbackResponseStatusEnumMap[instance.status],
       'feedbackText': instance.feedbackText,
       'feedbackType': _$FeedbackTypeEnumMap[instance.feedbackType],

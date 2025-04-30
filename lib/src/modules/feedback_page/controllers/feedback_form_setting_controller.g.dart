@@ -7,11 +7,11 @@ part of 'feedback_form_setting_controller.dart';
 // **************************************************************************
 
 String _$feedbackFormSettingControllerHash() =>
-    r'1cefe0e42ad6b93c4ab4bfe43649289353a5dc49';
+    r'8521bc54a091190d630d21a6a162a14ddb14ddac';
 
 /// See also [FeedbackFormSettingController].
 @ProviderFor(FeedbackFormSettingController)
-final feedbackFormSettingControllerProvider = AutoDisposeNotifierProvider<
+final feedbackFormSettingControllerProvider = NotifierProvider<
     FeedbackFormSettingController, FeedbackFormSetting>.internal(
   FeedbackFormSettingController.new,
   name: r'feedbackFormSettingControllerProvider',
@@ -22,7 +22,6 @@ final feedbackFormSettingControllerProvider = AutoDisposeNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$FeedbackFormSettingController
-    = AutoDisposeNotifier<FeedbackFormSetting>;
+typedef _$FeedbackFormSettingController = Notifier<FeedbackFormSetting>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

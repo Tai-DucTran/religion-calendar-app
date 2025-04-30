@@ -21,6 +21,9 @@ FeedbackForm _$FeedbackFormFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$FeedbackForm {
   String get id => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
+  String? get userDisplayName => throw _privateConstructorUsedError;
+  String? get userEmail => throw _privateConstructorUsedError;
   FeedbackResponseStatus? get status => throw _privateConstructorUsedError;
   String? get feedbackText => throw _privateConstructorUsedError;
   FeedbackType? get feedbackType => throw _privateConstructorUsedError;
@@ -47,6 +50,9 @@ abstract class $FeedbackFormCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String userId,
+      String? userDisplayName,
+      String? userEmail,
       FeedbackResponseStatus? status,
       String? feedbackText,
       FeedbackType? feedbackType,
@@ -72,6 +78,9 @@ class _$FeedbackFormCopyWithImpl<$Res, $Val extends FeedbackForm>
   @override
   $Res call({
     Object? id = null,
+    Object? userId = null,
+    Object? userDisplayName = freezed,
+    Object? userEmail = freezed,
     Object? status = freezed,
     Object? feedbackText = freezed,
     Object? feedbackType = freezed,
@@ -85,6 +94,18 @@ class _$FeedbackFormCopyWithImpl<$Res, $Val extends FeedbackForm>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userDisplayName: freezed == userDisplayName
+          ? _value.userDisplayName
+          : userDisplayName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userEmail: freezed == userEmail
+          ? _value.userEmail
+          : userEmail // ignore: cast_nullable_to_non_nullable
+              as String?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -127,6 +148,9 @@ abstract class _$$FeedbackFormImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
+      String userId,
+      String? userDisplayName,
+      String? userEmail,
       FeedbackResponseStatus? status,
       String? feedbackText,
       FeedbackType? feedbackType,
@@ -150,6 +174,9 @@ class __$$FeedbackFormImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? userId = null,
+    Object? userDisplayName = freezed,
+    Object? userEmail = freezed,
     Object? status = freezed,
     Object? feedbackText = freezed,
     Object? feedbackType = freezed,
@@ -163,6 +190,18 @@ class __$$FeedbackFormImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userDisplayName: freezed == userDisplayName
+          ? _value.userDisplayName
+          : userDisplayName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userEmail: freezed == userEmail
+          ? _value.userEmail
+          : userEmail // ignore: cast_nullable_to_non_nullable
+              as String?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -200,6 +239,9 @@ class __$$FeedbackFormImplCopyWithImpl<$Res>
 class _$FeedbackFormImpl extends _FeedbackForm {
   const _$FeedbackFormImpl(
       {required this.id,
+      required this.userId,
+      this.userDisplayName,
+      this.userEmail,
       this.status = FeedbackResponseStatus.pending,
       this.feedbackText = '',
       this.feedbackType = FeedbackType.featureRecommendation,
@@ -214,6 +256,12 @@ class _$FeedbackFormImpl extends _FeedbackForm {
 
   @override
   final String id;
+  @override
+  final String userId;
+  @override
+  final String? userDisplayName;
+  @override
+  final String? userEmail;
   @override
   @JsonKey()
   final FeedbackResponseStatus? status;
@@ -235,7 +283,7 @@ class _$FeedbackFormImpl extends _FeedbackForm {
 
   @override
   String toString() {
-    return 'FeedbackForm(id: $id, status: $status, feedbackText: $feedbackText, feedbackType: $feedbackType, feedbackResponse: $feedbackResponse, selectedSentiment: $selectedSentiment, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'FeedbackForm(id: $id, userId: $userId, userDisplayName: $userDisplayName, userEmail: $userEmail, status: $status, feedbackText: $feedbackText, feedbackType: $feedbackType, feedbackResponse: $feedbackResponse, selectedSentiment: $selectedSentiment, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -244,6 +292,11 @@ class _$FeedbackFormImpl extends _FeedbackForm {
         (other.runtimeType == runtimeType &&
             other is _$FeedbackFormImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.userDisplayName, userDisplayName) ||
+                other.userDisplayName == userDisplayName) &&
+            (identical(other.userEmail, userEmail) ||
+                other.userEmail == userEmail) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.feedbackText, feedbackText) ||
                 other.feedbackText == feedbackText) &&
@@ -261,8 +314,19 @@ class _$FeedbackFormImpl extends _FeedbackForm {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, status, feedbackText,
-      feedbackType, feedbackResponse, selectedSentiment, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      userId,
+      userDisplayName,
+      userEmail,
+      status,
+      feedbackText,
+      feedbackType,
+      feedbackResponse,
+      selectedSentiment,
+      createdAt,
+      updatedAt);
 
   /// Create a copy of FeedbackForm
   /// with the given fields replaced by the non-null parameter values.
@@ -283,6 +347,9 @@ class _$FeedbackFormImpl extends _FeedbackForm {
 abstract class _FeedbackForm extends FeedbackForm {
   const factory _FeedbackForm(
       {required final String id,
+      required final String userId,
+      final String? userDisplayName,
+      final String? userEmail,
       final FeedbackResponseStatus? status,
       final String? feedbackText,
       final FeedbackType? feedbackType,
@@ -297,6 +364,12 @@ abstract class _FeedbackForm extends FeedbackForm {
 
   @override
   String get id;
+  @override
+  String get userId;
+  @override
+  String? get userDisplayName;
+  @override
+  String? get userEmail;
   @override
   FeedbackResponseStatus? get status;
   @override

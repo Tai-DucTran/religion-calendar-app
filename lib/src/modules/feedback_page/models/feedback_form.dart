@@ -10,6 +10,9 @@ part "feedback_form.g.dart";
 class FeedbackForm with _$FeedbackForm {
   const factory FeedbackForm({
     required String id,
+    required String userId,
+    String? userDisplayName,
+    String? userEmail,
     @Default(FeedbackResponseStatus.pending) FeedbackResponseStatus? status,
     @Default('') String? feedbackText,
     @Default(FeedbackType.featureRecommendation) FeedbackType? feedbackType,
@@ -56,7 +59,7 @@ extension FeedbackResponseStatusExtension on FeedbackResponseStatus {
       case FeedbackResponseStatus.responded:
         return Icon(
           Icons.check,
-          color: AriesColor.success400,
+          color: AriesColor.success600,
         );
     }
   }

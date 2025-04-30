@@ -22,7 +22,7 @@ class FeelingReatesWrapper extends ConsumerWidget {
               final controller =
                   ref.read(feedbackFormSettingControllerProvider.notifier);
               controller.selectSentiment(sentiment);
-              controller.toggleExpanded();
+              controller.toggleExpanded(true);
             },
             iconPath: sentiment.getIconPath(),
             color: isSelected
