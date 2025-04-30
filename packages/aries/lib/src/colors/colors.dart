@@ -33,6 +33,8 @@ class AriesColor {
   static const success200 = Color(0xFF4eee71);
   static const success400 = Color(0xFF1da43b);
   static const success500 = Color(0xFF1a8f33);
+  static const success600 = Color.fromARGB(255, 27, 121, 48);
+  static const success700 = Color.fromARGB(255, 24, 85, 38);
 
   /* Warning */
   static const warning50 = Color(0xFFfffde6);
