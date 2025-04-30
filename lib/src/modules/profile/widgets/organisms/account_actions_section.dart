@@ -19,7 +19,6 @@ class AccountActionsSection extends ConsumerWidget {
           ),
           child: CustomElevatedButton(
             text: context.l10n.logoutButtonText,
-            buttonColor: AriesColor.neutral10,
             width: double.infinity,
             height: 34.h,
             onPressed: () async {
