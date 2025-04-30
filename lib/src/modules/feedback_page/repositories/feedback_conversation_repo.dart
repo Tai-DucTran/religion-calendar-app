@@ -238,12 +238,9 @@ class FeedbackConversationRepository {
             conversation.status?.toString().split('.').last.toUpperCase() ??
                 'PENDING',
         'feedbackTitle': conversation.feedbackTitle ?? '',
-        'feedbackType': conversation.feedbackType
-                ?.toString()
-                .split('.')
-                .last
-                .toUpperCase() ??
-            'FEATURE_RECOMMENDATION',
+        'feedbackType': conversation.feedbackType == FeedbackType.bugReport
+            ? 'BUG_REPORT'
+            : 'FEATURE_RECOMMENDATION',
         'selectedSentiment': conversation.selectedSentiment
             ?.toString()
             .split('.')
