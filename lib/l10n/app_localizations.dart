@@ -977,6 +977,12 @@ abstract class AppLocalizations {
   /// **'Responded'**
   String get respondedText;
 
+  /// No description provided for @closedText.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get closedText;
+
   /// No description provided for @feedbackDetailsTitleText.
   ///
   /// In en, this message translates to:
@@ -1042,6 +1048,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Can only send max 10 consecutive message!'**
   String get exceededMaxSendingMessageText;
+
+  /// No description provided for @closedChatMessageText.
+  ///
+  /// In en, this message translates to:
+  /// **'This chat is closed!'**
+  String get closedChatMessageText;
 
   /// No description provided for @explorePageHeaderText.
   ///

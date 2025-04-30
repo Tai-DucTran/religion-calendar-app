@@ -329,8 +329,6 @@ class FeedbackConversationRepository {
       await conversationRef.update({
         'messages': updatedMessages,
         'updatedAt': now.toIso8601String(),
-        // If the status was 'responded', change it back to 'pending'
-        if (data['status'] == 'RESPONDED') 'status': 'PENDING',
       });
 
       Log.info('Message added to conversation: $conversationId');

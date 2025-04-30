@@ -450,6 +450,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get respondedText => 'Đã phản hồi';
 
   @override
+  String get closedText => 'Đã đóng';
+
+  @override
   String get feedbackDetailsTitleText => 'Nội dung góp ý:';
 
   @override
@@ -481,6 +484,9 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get exceededMaxSendingMessageText => 'Chỉ có thể gửi tối đa 10 tin nhắn liên tục!';
+
+  @override
+  String get closedChatMessageText => 'Đoạn chat đã đóng!';
 
   @override
   String get explorePageHeaderText => 'Khám phá';

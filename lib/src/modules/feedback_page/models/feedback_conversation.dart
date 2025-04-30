@@ -85,6 +85,8 @@ enum FeedbackResponseStatus {
   pending,
   @JsonValue("RESPONDED")
   responded,
+  @JsonValue("CLOSED")
+  closed,
 }
 
 extension FeedbackResponseStatusExtension on FeedbackResponseStatus {
@@ -97,8 +99,13 @@ extension FeedbackResponseStatusExtension on FeedbackResponseStatus {
         );
       case FeedbackResponseStatus.responded:
         return Icon(
-          Icons.check,
+          Icons.chat_outlined,
           color: AriesColor.success600,
+        );
+      case FeedbackResponseStatus.closed:
+        return Icon(
+          Icons.check_box_outlined,
+          color: AriesColor.neutral300,
         );
     }
   }
@@ -109,6 +116,8 @@ extension FeedbackResponseStatusExtension on FeedbackResponseStatus {
         return context.l10n.pendingText;
       case FeedbackResponseStatus.responded:
         return context.l10n.respondedText;
+      case FeedbackResponseStatus.closed:
+        return context.l10n.closedText;
     }
   }
 }

@@ -49,6 +49,7 @@ Map<String, dynamic> _$$FeedbackConversationImplToJson(
 const _$FeedbackResponseStatusEnumMap = {
   FeedbackResponseStatus.pending: 'PENDING',
   FeedbackResponseStatus.responded: 'RESPONDED',
+  FeedbackResponseStatus.closed: 'CLOSED',
 };
 
 const _$FeedbackTypeEnumMap = {

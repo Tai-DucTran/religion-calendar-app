@@ -36,86 +36,89 @@ class _InputNewMessageFieldState extends ConsumerState<InputNewMessageField> {
   Widget build(BuildContext context) {
     final feedback = widget.feedback;
     final canSendMoreMessages = feedback.canSendMoreMessages();
+    final isClosed = feedback.status == FeedbackResponseStatus.closed;
 
-    return AbsorbPointer(
-      absorbing: !canSendMoreMessages,
-      child: Opacity(
-        opacity: canSendMoreMessages ? 1.0 : 0.5,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Divider(),
-            SizedBox(height: 12.h),
-            if (!canSendMoreMessages) ExceedMaxConsecutiveMessages(),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: AriesColor.neutral0,
-                      borderRadius: BorderRadius.circular(20.r),
-                      border: Border.all(
-                        color: AriesColor.neutral30,
-                      ),
-                    ),
-                    child: TextField(
-                      controller: _messageController,
-                      focusNode: _focusNode,
-                      maxLines: 3,
-                      minLines: 1,
-                      textCapitalization: TextCapitalization.sentences,
-                      onSubmitted: (value) {
-                        if (value.isNotEmpty && !_isSubmitting) {
-                          _submitMessage(
-                            feedback,
-                          );
-                        }
-                      },
-                      decoration: InputDecoration(
-                        hintText: canSendMoreMessages
-                            ? context.l10n.sendingMessageHintText
-                            : context.l10n.exceededSendingMessageHintText,
-                        hintStyle: AriesTextStyles.textBodySmall.copyWith(
-                          color: canSendMoreMessages
-                              ? AriesColor.neutral200
-                              : AriesColor.neutral500,
-                        ),
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                          vertical: 12.h,
-                        ),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 8.w,
-                ),
-                InkWell(
-                  onTap: _isSubmitting
-                      ? null
-                      : () => _submitMessage(
-                            feedback,
+    return isClosed
+        ? CloseStatusBottomText()
+        : AbsorbPointer(
+            absorbing: !canSendMoreMessages,
+            child: Opacity(
+              opacity: canSendMoreMessages ? 1.0 : 0.5,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Divider(),
+                  SizedBox(height: 12.h),
+                  if (!canSendMoreMessages) ExceedMaxConsecutiveMessages(),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AriesColor.neutral0,
+                            borderRadius: BorderRadius.circular(20.r),
+                            border: Border.all(
+                              color: AriesColor.neutral30,
+                            ),
                           ),
-                  borderRadius: BorderRadius.circular(
-                    8.r,
+                          child: TextField(
+                            controller: _messageController,
+                            focusNode: _focusNode,
+                            maxLines: 3,
+                            minLines: 1,
+                            textCapitalization: TextCapitalization.sentences,
+                            onSubmitted: (value) {
+                              if (value.isNotEmpty && !_isSubmitting) {
+                                _submitMessage(
+                                  feedback,
+                                );
+                              }
+                            },
+                            decoration: InputDecoration(
+                              hintText: canSendMoreMessages
+                                  ? context.l10n.sendingMessageHintText
+                                  : context.l10n.exceededSendingMessageHintText,
+                              hintStyle: AriesTextStyles.textBodySmall.copyWith(
+                                color: canSendMoreMessages
+                                    ? AriesColor.neutral200
+                                    : AriesColor.neutral500,
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16.w,
+                                vertical: 12.h,
+                              ),
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 8.w,
+                      ),
+                      InkWell(
+                        onTap: _isSubmitting
+                            ? null
+                            : () => _submitMessage(
+                                  feedback,
+                                ),
+                        borderRadius: BorderRadius.circular(
+                          8.r,
+                        ),
+                        child: Icon(
+                          Icons.send,
+                          color: canSendMoreMessages
+                              ? AriesColor.yellowP900
+                              : AriesColor.neutral200,
+                          size: 24.r,
+                        ),
+                      ),
+                    ],
                   ),
-                  child: Icon(
-                    Icons.send,
-                    color: canSendMoreMessages
-                        ? AriesColor.yellowP900
-                        : AriesColor.neutral200,
-                    size: 24.r,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 
   void _submitMessage(FeedbackConversation feedback) async {

@@ -450,6 +450,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get respondedText => 'Responded';
 
   @override
+  String get closedText => 'Closed';
+
+  @override
   String get feedbackDetailsTitleText => 'Feedback details:';
 
   @override
@@ -481,6 +484,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exceededMaxSendingMessageText => 'Can only send max 10 consecutive message!';
+
+  @override
+  String get closedChatMessageText => 'This chat is closed!';
 
   @override
   String get explorePageHeaderText => 'Explore';
