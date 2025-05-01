@@ -230,32 +230,33 @@ class FeedbackConversationRepository {
 
       // Create a simple map that won't have serialization issues
       final Map<String, dynamic> conversationData = {
-        'id': conversation.id,
-        'userId': conversation.userId,
-        'userDisplayName': conversation.userDisplayName,
-        'userEmail': conversation.userEmail,
-        'status':
+        FirebaseFieldName.id: conversation.id,
+        FirebaseFieldName.userId: conversation.userId,
+        FirebaseFieldName.userDisplayName: conversation.userDisplayName,
+        FirebaseFieldName.userEmail: conversation.userEmail,
+        FirebaseFieldName.status:
             conversation.status?.toString().split('.').last.toUpperCase() ??
                 'PENDING',
-        'feedbackTitle': conversation.feedbackTitle ?? '',
-        'feedbackType': conversation.feedbackType == FeedbackType.bugReport
-            ? 'BUG_REPORT'
-            : 'FEATURE_RECOMMENDATION',
-        'selectedSentiment': conversation.selectedSentiment
+        FirebaseFieldName.feedbackTitle: conversation.feedbackTitle ?? '',
+        FirebaseFieldName.feedbackType:
+            conversation.feedbackType == FeedbackType.bugReport
+                ? 'BUG_REPORT'
+                : 'FEATURE_RECOMMENDATION',
+        FirebaseFieldName.selectedSentiment: conversation.selectedSentiment
             ?.toString()
             .split('.')
             .last
             .toUpperCase(),
-        'createdAt': conversation.createdAt.toIso8601String(),
-        'updatedAt': conversation.updatedAt.toIso8601String(),
-        'messages': conversation.messages
+        FirebaseFieldName.createdAt: conversation.createdAt.toIso8601String(),
+        FirebaseFieldName.updatedAt: conversation.updatedAt.toIso8601String(),
+        FirebaseFieldName.messages: conversation.messages
             .map((m) => {
-                  'id': m.id,
-                  'authorId': m.authorId,
-                  'authorName': m.authorName ?? '',
-                  'messageText': m.messageText ?? '',
-                  'isFromTeam': m.isFromTeam,
-                  'createdAt': m.createdAt.toIso8601String(),
+                  FirebaseFieldName.id: m.id,
+                  FirebaseFieldName.authorId: m.authorId,
+                  FirebaseFieldName.authorName: m.authorName ?? '',
+                  FirebaseFieldName.messageText: m.messageText ?? '',
+                  FirebaseFieldName.isFromTeam: m.isFromTeam,
+                  FirebaseFieldName.createdAt: m.createdAt.toIso8601String(),
                 })
             .toList(),
       };

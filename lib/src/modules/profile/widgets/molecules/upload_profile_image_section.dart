@@ -40,22 +40,26 @@ class _UploadProfileImageSectionState
     }
   }
 
-  Future<void> askPermissionAndPickImage(
-    BuildContext context,
-  ) async {
-    final status = await Permission.photos.status;
+  Future<void> askPermissionAndPickImage(BuildContext context) async {
+    try {
+      final status = await Permission.photos.status;
 
-    if (status.isGranted) {
-      await pickImageInGallery();
-    } else if (status.isDenied) {
-      final result = await Permission.photos.request();
-      if (result.isGranted) {
+      if (status.isGranted) {
         await pickImageInGallery();
+      } else if (status.isDenied) {
+        // Use a small delay before requesting permission to allow any current UI events to complete
+        await Future.delayed(const Duration(milliseconds: 100));
+        final result = await Permission.photos.request();
+        if (result.isGranted) {
+          await pickImageInGallery();
+        }
+      } else if (status.isPermanentlyDenied) {
+        if (context.mounted) {
+          showAlertDialog(context);
+        }
       }
-    } else if (status.isPermanentlyDenied) {
-      if (context.mounted) {
-        showAlertDialog(context);
-      }
+    } catch (e) {
+      Log.error('Error handling permission: $e');
     }
   }
 
@@ -112,7 +116,7 @@ showAlertDialog(context) => showCupertinoDialog(
             child: Text(
               context.l10n.cancelButtonText,
               style: TextStyle(
-                color: AriesColor.neutral700,
+                color: AriesColor.neutral10,
               ),
             ),
             onPressed: () => context.pop(),
@@ -121,7 +125,7 @@ showAlertDialog(context) => showCupertinoDialog(
             child: Text(
               context.l10n.openSettingsButtonText,
               style: TextStyle(
-                color: AriesColor.neutral700,
+                color: AriesColor.neutral10,
               ),
             ),
             onPressed: () {
