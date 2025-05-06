@@ -20,6 +20,7 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
 
     final isSubmitting = useState(false);
     final feedbackTextController = useTextEditingController();
+    final hasUploadedImage = useState(false);
 
     return Column(
       children: [
@@ -92,40 +93,121 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
           ),
         ),
         SizedBox(height: 12.h),
-        Center(
-          child: CustomElevatedButton(
-            onPressedAsync: () async {
-              // Prevent multiple submissions
-              if (isSubmitting.value) return;
 
-              try {
-                // Set submitting state to true
-                isSubmitting.value = true;
-
-                // Submit the feedback
-                final result = await controller.submitFeedback();
-
-                // Handle the result
-                if (result != null && context.mounted) {
-                  // Clear the text input
-                  feedbackTextController.clear();
-
-                  // Show success dialog
-                  _showFeedbackSubmittedDialog(context);
-                }
-              } finally {
-                // Always reset the submitting state
-                if (context.mounted) {
-                  isSubmitting.value = false;
-                }
-              }
-
-              return;
-            },
+        // Display the uploaded image if any
+        if (hasUploadedImage.value)
+          Container(
+            margin: EdgeInsets.only(bottom: 12.h),
+            height: 100.h,
             width: double.infinity,
-            height: 40,
-            text: context.l10n.submitButtonText,
+            decoration: BoxDecoration(
+              color: AriesColor.neutral10,
+              borderRadius: BorderRadius.circular(8.r),
+              border: Border.all(color: AriesColor.neutral40),
+            ),
+            child: Stack(
+              children: [
+                Center(
+                  child: Text(
+                    "Image attached",
+                    style: AriesTextStyles.textBodySmall.copyWith(
+                      color: AriesColor.neutral500,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 4.h,
+                  right: 4.w,
+                  child: InkWell(
+                    onTap: () {
+                      hasUploadedImage.value = false;
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(4.r),
+                      decoration: BoxDecoration(
+                        color: AriesColor.neutral0,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AriesColor.neutral40),
+                      ),
+                      child: Icon(
+                        Icons.close,
+                        size: 14.sp,
+                        color: AriesColor.neutral700,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
+
+        // Buttons row
+        Row(
+          spacing: 8.w,
+          children: [
+            Expanded(
+              child: CustomElevatedButton(
+                onPressedAsync: () async {
+                  // Prevent multiple submissions
+                  if (isSubmitting.value) return;
+
+                  try {
+                    // Set submitting state to true
+                    isSubmitting.value = true;
+
+                    // Submit the feedback
+                    final result = await controller.submitFeedback();
+
+                    // Handle the result
+                    if (result != null && context.mounted) {
+                      // Clear the text input
+                      feedbackTextController.clear();
+
+                      // Reset image state
+                      hasUploadedImage.value = false;
+
+                      // Show success dialog
+                      _showFeedbackSubmittedDialog(context);
+                    }
+                  } finally {
+                    if (context.mounted) {
+                      isSubmitting.value = false;
+                    }
+                  }
+
+                  return;
+                },
+                height: 40,
+                text: context.l10n.submitButtonText,
+              ),
+            ),
+            Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                color: AriesColor.yellowP50,
+                borderRadius: BorderRadius.circular(8.r),
+                border: Border.all(color: AriesColor.yellowP200),
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    // Just for UI demonstration
+                    hasUploadedImage.value = true;
+                  },
+                  borderRadius: BorderRadius.circular(8.r),
+                  child: Center(
+                    child: Icon(
+                      Icons.upload_file_outlined,
+                      size: 20.h,
+                      color: AriesColor.yellowP950,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );

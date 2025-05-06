@@ -16,6 +16,8 @@ class ExceedMaxConsecutiveMessages extends StatelessWidget {
         context.l10n.exceededMaxSendingMessageText,
         style: AriesTextStyles.textBodySmall.copyWith(
           fontSize: 12.sp,
+          fontWeight: FontWeight.w700,
+          color: AriesColor.danger500,
         ),
       ),
     );
