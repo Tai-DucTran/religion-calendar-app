@@ -18,7 +18,10 @@ class MessageBuddle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final timestamp =
-        "${message.createdAt.day}/${message.createdAt.month}/${message.createdAt.year} ${message.createdAt.hour}:${message.createdAt.minute.toString().padLeft(2, '0')}";
+        "${message.createdAt.day}/${message.createdAt.month}/${message.createdAt.year} ${message.createdAt.hour}:${message.createdAt.minute.toString().padLeft(
+              2,
+              '0',
+            )}";
 
     return Container(
       width: double.infinity,
@@ -32,31 +35,37 @@ class MessageBuddle extends StatelessWidget {
             isFromTeam ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.all(12.r),
+            padding: EdgeInsets.all(
+              12.r,
+            ),
             decoration: BoxDecoration(
               color: isFromTeam ? AriesColor.success50 : AriesColor.neutral20,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16.r),
-                topRight: Radius.circular(16.r),
-                bottomLeft:
-                    isFromTeam ? Radius.circular(16.r) : Radius.circular(4.r),
-                bottomRight:
-                    isFromTeam ? Radius.circular(4.r) : Radius.circular(16.r),
+                topLeft: Radius.circular(
+                  16.r,
+                ),
+                topRight: Radius.circular(
+                  16.r,
+                ),
+                bottomLeft: isFromTeam
+                    ? Radius.circular(
+                        16.r,
+                      )
+                    : Radius.circular(
+                        4.r,
+                      ),
+                bottomRight: isFromTeam
+                    ? Radius.circular(
+                        4.r,
+                      )
+                    : Radius.circular(
+                        16.r,
+                      ),
               ),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                if (isFromTeam && message.authorName != null) ...[
-                  Text(
-                    message.authorName!,
-                    style: AriesTextStyles.textBodySmall.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AriesColor.success700,
-                    ),
-                  ),
-                  SizedBox(height: 4.h),
-                ],
                 ReadMoreText(
                   message.messageText ?? "",
                   trimCollapsedText: context.l10n.readMoreButtonText,
@@ -74,6 +83,17 @@ class MessageBuddle extends StatelessWidget {
                     color: AriesColor.yellowP900,
                   ),
                 ),
+                if (isFromTeam && message.authorName != null) ...[
+                  SizedBox(height: 2.h),
+                  Text(
+                    message.authorName ?? '',
+                    style: AriesTextStyles.textBodySmall.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AriesColor.success700,
+                      fontSize: 11,
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
