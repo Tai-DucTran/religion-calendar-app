@@ -24,7 +24,6 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
 
     return Column(
       children: [
-        SizedBox(height: 12.h),
         Divider(color: AriesColor.neutral20),
         SizedBox(height: 12.h),
         Row(
@@ -48,53 +47,11 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
             ),
           ],
         ),
-        SizedBox(height: 12.h),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            context.l10n.tellUsMoreText,
-            style: AriesTextStyles.textBodySmall,
-          ),
+        SizedBox(height: 24.h),
+        FeedbackDetailsTextArea(
+          feedbackTextController: feedbackTextController,
         ),
         SizedBox(height: 12.h),
-        TextField(
-          controller: feedbackTextController,
-          onChanged: (value) {
-            controller.updateFeedbackText(value);
-          },
-          maxLines: 4,
-          style: AriesTextStyles.textBodySmall,
-          decoration: InputDecoration(
-            hintText: context.l10n.inputFeedbackContentHintText,
-            hintStyle: AriesTextStyles.textBodySmall.copyWith(
-              color: AriesColor.neutral300,
-            ),
-            fillColor: AriesColor.neutral0,
-            filled: true,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide(color: AriesColor.neutral40),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide(
-                color: AriesColor.yellowP950,
-                width: 2,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide(color: AriesColor.neutral40),
-            ),
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 12.w,
-              vertical: 12.h,
-            ),
-          ),
-        ),
-        SizedBox(height: 12.h),
-
-        // Display the uploaded image if any
         if (hasUploadedImage.value)
           Container(
             margin: EdgeInsets.only(bottom: 12.h),
@@ -140,33 +97,20 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
               ],
             ),
           ),
-
-        // Buttons row
         Row(
           spacing: 8.w,
           children: [
             Expanded(
               child: CustomElevatedButton(
                 onPressedAsync: () async {
-                  // Prevent multiple submissions
                   if (isSubmitting.value) return;
 
                   try {
-                    // Set submitting state to true
                     isSubmitting.value = true;
-
-                    // Submit the feedback
                     final result = await controller.submitFeedback();
-
-                    // Handle the result
                     if (result != null && context.mounted) {
-                      // Clear the text input
                       feedbackTextController.clear();
-
-                      // Reset image state
                       hasUploadedImage.value = false;
-
-                      // Show success dialog
                       _showFeedbackSubmittedDialog(context);
                     }
                   } finally {
@@ -193,7 +137,6 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
-                    // Just for UI demonstration
                     hasUploadedImage.value = true;
                   },
                   borderRadius: BorderRadius.circular(8.r),

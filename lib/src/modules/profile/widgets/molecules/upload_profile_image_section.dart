@@ -47,7 +47,6 @@ class _UploadProfileImageSectionState
       if (status.isGranted) {
         await pickImageInGallery();
       } else if (status.isDenied) {
-        // Use a small delay before requesting permission to allow any current UI events to complete
         await Future.delayed(const Duration(milliseconds: 100));
         final result = await Permission.photos.request();
         if (result.isGranted) {

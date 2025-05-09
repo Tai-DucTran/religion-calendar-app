@@ -1,5 +1,6 @@
 export 'close_status_bottom_text.dart';
 export 'exceed_max_consecutive_messages.dart';
+export 'feedback_details_text_area.dart';
 export 'feedback_or_report_details_card.dart';
 export 'feedback_or_report_statuses_card.dart';
 export 'feedback_type_button.dart';
