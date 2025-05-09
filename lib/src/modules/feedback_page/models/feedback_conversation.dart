@@ -95,7 +95,7 @@ extension FeedbackResponseStatusExtension on FeedbackResponseStatus {
       case FeedbackResponseStatus.pending:
         return Icon(
           Icons.pending_actions_rounded,
-          color: AriesColor.neutral300,
+          color: AriesColor.yellowP500,
         );
       case FeedbackResponseStatus.responded:
         return Icon(
@@ -118,6 +118,17 @@ extension FeedbackResponseStatusExtension on FeedbackResponseStatus {
         return context.l10n.respondedText;
       case FeedbackResponseStatus.closed:
         return context.l10n.closedText;
+    }
+  }
+
+  Color getColorStatus() {
+    switch (this) {
+      case FeedbackResponseStatus.pending:
+        return AriesColor.yellowP500;
+      case FeedbackResponseStatus.responded:
+        return AriesColor.success600;
+      case FeedbackResponseStatus.closed:
+        return AriesColor.neutral300;
     }
   }
 }

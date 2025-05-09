@@ -24,8 +24,6 @@ class FeedbackOrReportDetailsCard extends ConsumerWidget {
     );
     final feedbackTitle =
         '${feedback.feedbackType!.getLocalized(context)} - $feedbackDate';
-    final isStatusResponded =
-        feedback.status == FeedbackResponseStatus.responded;
 
     return Card(
       elevation: 1,
@@ -39,9 +37,7 @@ class FeedbackOrReportDetailsCard extends ConsumerWidget {
         title: Text(
           feedbackTitle,
           style: AriesTextStyles.textHeading7.copyWith(
-            color: isStatusResponded
-                ? AriesColor.success600
-                : AriesColor.neutral200,
+            color: feedback.status?.getColorStatus(),
           ),
         ),
         subtitle: Column(
