@@ -35,6 +35,7 @@ class FirebaseFieldName {
   static const authorName = 'authorName';
   static const messageText = 'messageText';
   static const isFromTeam = 'isFromTeam';
+  static const feedbackImageUrl = 'feedbackImageUrl';
 
   const FirebaseFieldName._();
 }

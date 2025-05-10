@@ -26,6 +26,7 @@ _$FeedbackConversationImpl _$$FeedbackConversationImplFromJson(
               ?.map((e) => FeedbackMessage.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      feedbackImageUrl: json['feedbackImageUrl'] as String? ?? null,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
@@ -42,6 +43,7 @@ Map<String, dynamic> _$$FeedbackConversationImplToJson(
       'feedbackType': _$FeedbackTypeEnumMap[instance.feedbackType],
       'selectedSentiment': _$FeelingRatesEnumMap[instance.selectedSentiment],
       'messages': instance.messages,
+      'feedbackImageUrl': instance.feedbackImageUrl,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };

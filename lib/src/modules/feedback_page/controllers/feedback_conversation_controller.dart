@@ -51,12 +51,9 @@ class NewFeedbackConversationController
     }
   }
 
-  // Helper method to create a clean, validated feedback object
   FeedbackConversation _createValidatedFeedback(FeedbackConversation feedback) {
-    // Ensure we have valid messages
     final List<FeedbackMessage> validMessages = feedback.messages.isNotEmpty
         ? feedback.messages.map((message) {
-            // Ensure each message has valid properties
             return FeedbackMessage(
               id: message.id,
               authorId: message.authorId,
@@ -68,11 +65,9 @@ class NewFeedbackConversationController
           }).toList()
         : [];
 
-    // If no messages but we have a title, create a message from the title
     if (validMessages.isEmpty &&
         feedback.feedbackTitle != null &&
         feedback.feedbackTitle!.isNotEmpty) {
-      // Create a default message from the feedback title
       validMessages.add(FeedbackMessage(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         authorId: feedback.userId,
@@ -94,6 +89,7 @@ class NewFeedbackConversationController
           (validMessages.isNotEmpty ? validMessages.first.messageText : ''),
       feedbackType: feedback.feedbackType,
       selectedSentiment: feedback.selectedSentiment,
+      feedbackImageUrl: feedback.feedbackImageUrl,
       messages: validMessages,
       createdAt: feedback.createdAt,
       updatedAt: feedback.updatedAt,

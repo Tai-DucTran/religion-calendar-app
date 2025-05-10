@@ -1,11 +1,15 @@
+import 'dart:io';
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/controllers/feedback_form_setting_controller.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/widgets/atoms/atoms.dart';
+import 'package:religion_calendar_app/src/modules/firebase_storage/firebase_storage.dart';
 import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
@@ -20,7 +24,10 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
 
     final isSubmitting = useState(false);
     final feedbackTextController = useTextEditingController();
-    final hasUploadedImage = useState(false);
+    final selectedImage = useState<XFile?>(null);
+    final isUploading = useState(false);
+    final uploadedImageUrl =
+        useState<String?>(feedbackFormSetting.feedbackImageUrl);
 
     return Column(
       children: [
@@ -52,10 +59,11 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
           feedbackTextController: feedbackTextController,
         ),
         SizedBox(height: 12.h),
-        if (hasUploadedImage.value)
+        // Image preview container
+        if (selectedImage.value != null || uploadedImageUrl.value != null)
           Container(
             margin: EdgeInsets.only(bottom: 12.h),
-            height: 100.h,
+            height: 160.h,
             width: double.infinity,
             decoration: BoxDecoration(
               color: AriesColor.neutral10,
@@ -65,19 +73,52 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
             child: Stack(
               children: [
                 Center(
-                  child: Text(
-                    "Image attached",
-                    style: AriesTextStyles.textBodySmall.copyWith(
-                      color: AriesColor.neutral500,
-                    ),
-                  ),
+                  child: selectedImage.value != null
+                      ? Image.file(
+                          File(selectedImage.value!.path),
+                          height: 140.h,
+                          fit: BoxFit.contain,
+                        )
+                      : uploadedImageUrl.value != null
+                          ? Image.network(
+                              uploadedImageUrl.value!,
+                              height: 140.h,
+                              fit: BoxFit.contain,
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                        : null,
+                                  ),
+                                );
+                              },
+                              errorBuilder: (context, error, stackTrace) {
+                                return Center(
+                                  child: Icon(
+                                    Icons.broken_image,
+                                    size: 48.sp,
+                                    color: AriesColor.neutral300,
+                                  ),
+                                );
+                              },
+                            )
+                          : const SizedBox(),
                 ),
+                // Close button to remove image
                 Positioned(
                   top: 4.h,
                   right: 4.w,
                   child: InkWell(
                     onTap: () {
-                      hasUploadedImage.value = false;
+                      selectedImage.value = null;
+                      uploadedImageUrl.value = null;
+                      controller.updateFeedbackImage(null);
                     },
                     child: Container(
                       padding: EdgeInsets.all(4.r),
@@ -94,6 +135,16 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
                     ),
                   ),
                 ),
+                // Loading overlay
+                if (isUploading.value)
+                  Positioned.fill(
+                    child: Container(
+                      color: AriesColor.neutral900.withOpacity(0.3),
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),
@@ -110,7 +161,8 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
                     final result = await controller.submitFeedback();
                     if (result != null && context.mounted) {
                       feedbackTextController.clear();
-                      hasUploadedImage.value = false;
+                      selectedImage.value = null;
+                      uploadedImageUrl.value = null;
                       _showFeedbackSubmittedDialog(context);
                     }
                   } finally {
@@ -125,6 +177,7 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
                 text: context.l10n.submitButtonText,
               ),
             ),
+            // Image upload button
             Container(
               height: 40,
               width: 40,
@@ -136,16 +189,79 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  onTap: () {
-                    hasUploadedImage.value = true;
+                  onTap: () async {
+                    if (isUploading.value) return;
+
+                    // Use PermissionHandlerDialog to handle permissions and pick an image
+                    final pickedFile =
+                        await PermissionHandlerDialog.pickImageFromGallery(
+                      context,
+                    );
+
+                    // Handle the picked image
+                    if (pickedFile != null && context.mounted) {
+                      selectedImage.value = pickedFile;
+
+                      // Now upload the image
+                      try {
+                        isUploading.value = true;
+
+                        final authRepo =
+                            ref.read(authenticatorRepositoryProvider);
+                        final userId = authRepo.userId;
+
+                        if (userId != null) {
+                          final imageRepo =
+                              ref.read(firebaseImageRepositoryProvider);
+                          final imageUrl = await imageRepo.uploadImage(
+                            pickedImage: pickedFile,
+                            imageType: ImageType.feedbackScreenshot,
+                            userId: userId,
+                            associatedId:
+                                null, // Will be linked to feedback after creation
+                            metadata: {
+                              'purpose': 'feedback',
+                              'feedbackType':
+                                  feedbackFormSetting.feedbackType.toString(),
+                            },
+                          );
+
+                          if (imageUrl != null && context.mounted) {
+                            uploadedImageUrl.value = imageUrl;
+                            controller.updateFeedbackImage(imageUrl);
+                          }
+                        }
+                      } catch (e) {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content:
+                                  Text('context.l10n.errorUploadingImageText'),
+                              backgroundColor: AriesColor.danger500,
+                            ),
+                          );
+                        }
+                      } finally {
+                        isUploading.value = false;
+                      }
+                    }
                   },
                   borderRadius: BorderRadius.circular(8.r),
                   child: Center(
-                    child: Icon(
-                      Icons.upload_file_outlined,
-                      size: 20.h,
-                      color: AriesColor.yellowP950,
-                    ),
+                    child: isUploading.value
+                        ? SizedBox(
+                            width: 16.h,
+                            height: 16.h,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: AriesColor.yellowP950,
+                            ),
+                          )
+                        : Icon(
+                            Icons.add_photo_alternate_outlined,
+                            size: 20.h,
+                            color: AriesColor.yellowP950,
+                          ),
                   ),
                 ),
               ),

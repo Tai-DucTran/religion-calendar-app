@@ -7,7 +7,7 @@ part of 'feedback_conversation_controller.dart';
 // **************************************************************************
 
 String _$newFeedbackConversationControllerHash() =>
-    r'63ad0e26a33301a9e511b12116fe15673ead417d';
+    r'2949542a83ac80bc50d2c7fd43bdd39d48c1e91c';
 
 /// See also [NewFeedbackConversationController].
 @ProviderFor(NewFeedbackConversationController)

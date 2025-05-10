@@ -228,7 +228,6 @@ class FeedbackConversationRepository {
         updatedAt: now,
       );
 
-      // Create a simple map that won't have serialization issues
       final Map<String, dynamic> conversationData = {
         FirebaseFieldName.id: conversation.id,
         FirebaseFieldName.userId: conversation.userId,
@@ -247,6 +246,7 @@ class FeedbackConversationRepository {
             .split('.')
             .last
             .toUpperCase(),
+        FirebaseFieldName.feedbackImageUrl: conversation.feedbackImageUrl,
         FirebaseFieldName.createdAt: conversation.createdAt.toIso8601String(),
         FirebaseFieldName.updatedAt: conversation.updatedAt.toIso8601String(),
         FirebaseFieldName.messages: conversation.messages

@@ -29,6 +29,7 @@ mixin _$FeedbackConversation {
   FeedbackType? get feedbackType => throw _privateConstructorUsedError;
   FeelingRates? get selectedSentiment => throw _privateConstructorUsedError;
   List<FeedbackMessage> get messages => throw _privateConstructorUsedError;
+  String? get feedbackImageUrl => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
@@ -58,6 +59,7 @@ abstract class $FeedbackConversationCopyWith<$Res> {
       FeedbackType? feedbackType,
       FeelingRates? selectedSentiment,
       List<FeedbackMessage> messages,
+      String? feedbackImageUrl,
       DateTime createdAt,
       DateTime updatedAt});
 }
@@ -87,6 +89,7 @@ class _$FeedbackConversationCopyWithImpl<$Res,
     Object? feedbackType = freezed,
     Object? selectedSentiment = freezed,
     Object? messages = null,
+    Object? feedbackImageUrl = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -127,6 +130,10 @@ class _$FeedbackConversationCopyWithImpl<$Res,
           ? _value.messages
           : messages // ignore: cast_nullable_to_non_nullable
               as List<FeedbackMessage>,
+      feedbackImageUrl: freezed == feedbackImageUrl
+          ? _value.feedbackImageUrl
+          : feedbackImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -157,6 +164,7 @@ abstract class _$$FeedbackConversationImplCopyWith<$Res>
       FeedbackType? feedbackType,
       FeelingRates? selectedSentiment,
       List<FeedbackMessage> messages,
+      String? feedbackImageUrl,
       DateTime createdAt,
       DateTime updatedAt});
 }
@@ -183,6 +191,7 @@ class __$$FeedbackConversationImplCopyWithImpl<$Res>
     Object? feedbackType = freezed,
     Object? selectedSentiment = freezed,
     Object? messages = null,
+    Object? feedbackImageUrl = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -223,6 +232,10 @@ class __$$FeedbackConversationImplCopyWithImpl<$Res>
           ? _value._messages
           : messages // ignore: cast_nullable_to_non_nullable
               as List<FeedbackMessage>,
+      feedbackImageUrl: freezed == feedbackImageUrl
+          ? _value.feedbackImageUrl
+          : feedbackImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -248,6 +261,7 @@ class _$FeedbackConversationImpl extends _FeedbackConversation {
       this.feedbackType = FeedbackType.featureRecommendation,
       this.selectedSentiment,
       final List<FeedbackMessage> messages = const [],
+      this.feedbackImageUrl = null,
       required this.createdAt,
       required this.updatedAt})
       : _messages = messages,
@@ -285,13 +299,16 @@ class _$FeedbackConversationImpl extends _FeedbackConversation {
   }
 
   @override
+  @JsonKey()
+  final String? feedbackImageUrl;
+  @override
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'FeedbackConversation(id: $id, userId: $userId, userDisplayName: $userDisplayName, userEmail: $userEmail, status: $status, feedbackTitle: $feedbackTitle, feedbackType: $feedbackType, selectedSentiment: $selectedSentiment, messages: $messages, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'FeedbackConversation(id: $id, userId: $userId, userDisplayName: $userDisplayName, userEmail: $userEmail, status: $status, feedbackTitle: $feedbackTitle, feedbackType: $feedbackType, selectedSentiment: $selectedSentiment, messages: $messages, feedbackImageUrl: $feedbackImageUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -313,6 +330,8 @@ class _$FeedbackConversationImpl extends _FeedbackConversation {
             (identical(other.selectedSentiment, selectedSentiment) ||
                 other.selectedSentiment == selectedSentiment) &&
             const DeepCollectionEquality().equals(other._messages, _messages) &&
+            (identical(other.feedbackImageUrl, feedbackImageUrl) ||
+                other.feedbackImageUrl == feedbackImageUrl) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -332,6 +351,7 @@ class _$FeedbackConversationImpl extends _FeedbackConversation {
       feedbackType,
       selectedSentiment,
       const DeepCollectionEquality().hash(_messages),
+      feedbackImageUrl,
       createdAt,
       updatedAt);
 
@@ -364,6 +384,7 @@ abstract class _FeedbackConversation extends FeedbackConversation {
       final FeedbackType? feedbackType,
       final FeelingRates? selectedSentiment,
       final List<FeedbackMessage> messages,
+      final String? feedbackImageUrl,
       required final DateTime createdAt,
       required final DateTime updatedAt}) = _$FeedbackConversationImpl;
   const _FeedbackConversation._() : super._();
@@ -389,6 +410,8 @@ abstract class _FeedbackConversation extends FeedbackConversation {
   FeelingRates? get selectedSentiment;
   @override
   List<FeedbackMessage> get messages;
+  @override
+  String? get feedbackImageUrl;
   @override
   DateTime get createdAt;
   @override

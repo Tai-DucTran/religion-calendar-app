@@ -69,7 +69,6 @@ class FeedbackFormSettingController extends _$FeedbackFormSettingController {
       createdAt: DateTime.now(),
     );
 
-    // Create a new list with the existing messages plus the new one
     final updatedMessages = [...state.feedback.messages, message];
 
     state = state.copyWith(
@@ -124,7 +123,6 @@ class FeedbackFormSettingController extends _$FeedbackFormSettingController {
     );
   }
 
-  // Completely rewritten submitFeedback method to avoid Future completion issues
   Future<String?> submitFeedback() async {
     Log.dev(
         'Submitting feedback with ${state.feedback.messages.length} messages');
@@ -132,21 +130,45 @@ class FeedbackFormSettingController extends _$FeedbackFormSettingController {
     // Don't modify state during async operation
     final FeedbackConversation feedbackToSubmit = state.feedback.copyWith();
 
-    // Check if we actually have content to submit
-    if (feedbackToSubmit.messages.isEmpty) {
-      if (feedbackToSubmit.feedbackTitle == null ||
-          feedbackToSubmit.feedbackTitle!.isEmpty) {
-        Log.error('Cannot submit feedback: No content');
-        return null;
-      }
+    // Check if we have content to submit
+    if (feedbackToSubmit.feedbackTitle == null ||
+        feedbackToSubmit.feedbackTitle!.isEmpty) {
+      Log.error('Cannot submit feedback: No content');
+      return null;
     }
 
     try {
-      // Create the conversation directly without updating state
+      // Create a proper message from the feedback title if none exists
+      FeedbackConversation conversationToSubmit = feedbackToSubmit;
+
+      // If no messages, create one from the title
+      if (feedbackToSubmit.messages.isEmpty &&
+          feedbackToSubmit.feedbackTitle != null) {
+        final authRepo = ref.read(authenticatorRepositoryProvider);
+        final userId = authRepo.userId ?? '';
+        final userName = authRepo.displayName;
+
+        // Create a single message with the feedback title as content
+        final newMessage = FeedbackMessage(
+          id: const Uuid().v4(),
+          authorId: userId,
+          authorName: userName,
+          messageText: feedbackToSubmit.feedbackTitle,
+          isFromTeam: false,
+          createdAt: DateTime.now(),
+        );
+
+        // Update the conversation with this message
+        conversationToSubmit = feedbackToSubmit.copyWith(
+          messages: [newMessage],
+        );
+      }
+
+      // Create the conversation with the properly prepared data
       final controller =
           ref.read(newFeedbackConversationControllerProvider.notifier);
       final String? conversationId =
-          await controller.createFeedbackConversation(feedbackToSubmit);
+          await controller.createFeedbackConversation(conversationToSubmit);
 
       if (conversationId != null) {
         Log.info('Feedback submitted successfully with ID: $conversationId');
@@ -163,5 +185,13 @@ class FeedbackFormSettingController extends _$FeedbackFormSettingController {
       Log.error('Failed to submit feedback: $e', error: e);
       return null;
     }
+  }
+
+  void updateFeedbackImage(String? imageUrl) {
+    state = state.copyWith(
+      feedback: state.feedback.copyWith(
+        feedbackImageUrl: imageUrl,
+      ),
+    );
   }
 }
