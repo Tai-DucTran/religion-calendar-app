@@ -23,7 +23,6 @@ class FeedbackFormSettingController extends _$FeedbackFormSettingController {
     final userName = authRepo.displayName;
     final userEmail = authRepo.email;
 
-    // Initialize with user data from auth
     final initialFeedbackForm = FeedbackConversation(
       id: '',
       userId: userId,
@@ -56,24 +55,8 @@ class FeedbackFormSettingController extends _$FeedbackFormSettingController {
   }
 
   void updateFeedbackText(String feedbackText) {
-    final authRepo = ref.watch(authenticatorRepositoryProvider);
-    final userId = authRepo.userId ?? '';
-    final userName = authRepo.displayName;
-
-    final message = FeedbackMessage(
-      id: const Uuid().v4(),
-      authorId: userId,
-      authorName: userName,
-      messageText: feedbackText,
-      isFromTeam: false,
-      createdAt: DateTime.now(),
-    );
-
-    final updatedMessages = [...state.feedback.messages, message];
-
     state = state.copyWith(
       feedback: state.feedback.copyWith(
-        messages: updatedMessages,
         feedbackTitle: feedbackText.split('\n').first,
       ),
     );
@@ -98,7 +81,6 @@ class FeedbackFormSettingController extends _$FeedbackFormSettingController {
     final userName = authRepo.displayName;
     final userEmail = authRepo.email;
 
-    // Create a completely new feedback conversation object
     final resetForm = FeedbackConversation(
       id: '',
       userId: userId,
@@ -109,14 +91,13 @@ class FeedbackFormSettingController extends _$FeedbackFormSettingController {
       feedbackType: FeedbackType.featureRecommendation,
       status: FeedbackResponseStatus.pending,
       selectedSentiment: null,
+      feedbackImageUrl: null,
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     );
 
-    // Log that we're resetting the form
     Log.dev('Resetting feedback form');
 
-    // Update the state with the reset form and collapse the form
     state = FeedbackFormSetting(
       isExpanded: false,
       feedback: resetForm,
@@ -124,10 +105,6 @@ class FeedbackFormSettingController extends _$FeedbackFormSettingController {
   }
 
   Future<String?> submitFeedback() async {
-    Log.dev(
-        'Submitting feedback with ${state.feedback.messages.length} messages');
-
-    // Don't modify state during async operation
     final FeedbackConversation feedbackToSubmit = state.feedback.copyWith();
 
     // Check if we have content to submit
@@ -138,42 +115,32 @@ class FeedbackFormSettingController extends _$FeedbackFormSettingController {
     }
 
     try {
-      // Create a proper message from the feedback title if none exists
-      FeedbackConversation conversationToSubmit = feedbackToSubmit;
+      final authRepo = ref.read(authenticatorRepositoryProvider);
+      final userId = authRepo.userId ?? '';
+      final userName = authRepo.displayName;
 
-      // If no messages, create one from the title
-      if (feedbackToSubmit.messages.isEmpty &&
-          feedbackToSubmit.feedbackTitle != null) {
-        final authRepo = ref.read(authenticatorRepositoryProvider);
-        final userId = authRepo.userId ?? '';
-        final userName = authRepo.displayName;
+      final message = FeedbackMessage(
+        id: const Uuid().v4(),
+        authorId: userId,
+        authorName: userName,
+        messageText: feedbackToSubmit.feedbackTitle,
+        isFromTeam: false,
+        createdAt: DateTime.now(),
+      );
 
-        // Create a single message with the feedback title as content
-        final newMessage = FeedbackMessage(
-          id: const Uuid().v4(),
-          authorId: userId,
-          authorName: userName,
-          messageText: feedbackToSubmit.feedbackTitle,
-          isFromTeam: false,
-          createdAt: DateTime.now(),
-        );
+      final cleanFeedback = feedbackToSubmit.copyWith(
+        messages: [message],
+        feedbackImageUrl: feedbackToSubmit.feedbackImageUrl,
+      );
 
-        // Update the conversation with this message
-        conversationToSubmit = feedbackToSubmit.copyWith(
-          messages: [newMessage],
-        );
-      }
-
-      // Create the conversation with the properly prepared data
       final controller =
           ref.read(newFeedbackConversationControllerProvider.notifier);
       final String? conversationId =
-          await controller.createFeedbackConversation(conversationToSubmit);
+          await controller.createFeedbackConversation(cleanFeedback);
 
       if (conversationId != null) {
         Log.info('Feedback submitted successfully with ID: $conversationId');
 
-        // Only reset the form after successful submission
         resetForm();
 
         return conversationId;

@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/repositories/repositories.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/widgets/molecules/molecules.dart';
+import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class FeedbackStatusDetailsBottomSheet extends ConsumerStatefulWidget {
@@ -60,9 +61,10 @@ class _FeedbackStatusDetailsBottomSheetState
 
   @override
   Widget build(BuildContext context) {
-    // Use the stream provider to get real-time updates
     final conversationAsync = ref.watch(
-      feedbackConversationStreamProvider(widget.conversationId),
+      feedbackConversationStreamProvider(
+        widget.conversationId,
+      ),
     );
 
     return conversationAsync.when(
@@ -81,6 +83,8 @@ class _FeedbackStatusDetailsBottomSheetState
   Widget _buildBottomSheetContent(FeedbackConversation feedback) {
     final hasAdditionalMessages = feedback.messages.length > 1;
     final bottomInset = MediaQuery.of(context).viewInsets.bottom;
+
+    Log.dev("feedback details: $feedback");
 
     return Container(
       width: double.infinity,
