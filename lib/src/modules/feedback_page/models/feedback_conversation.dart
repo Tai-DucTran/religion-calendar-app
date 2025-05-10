@@ -7,7 +7,6 @@ part "feedback_conversation.freezed.dart";
 part "feedback_conversation.g.dart";
 
 @freezed
-@freezed
 class FeedbackConversation with _$FeedbackConversation {
   const factory FeedbackConversation({
     required String id,
@@ -28,6 +27,8 @@ class FeedbackConversation with _$FeedbackConversation {
       _$FeedbackConversationFromJson(json);
 
   const FeedbackConversation._();
+
+  bool get hasFeedbackImage => feedbackImageUrl != null;
 }
 
 extension ConsecutiveMessageHelper on FeedbackConversation {

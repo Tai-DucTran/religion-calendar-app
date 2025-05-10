@@ -19,6 +19,8 @@ class GeneralFeedbackStatusOnBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final isStatusReponded =
         feedback.status == FeedbackResponseStatus.responded;
+    final hasAttachedImage = feedback.hasFeedbackImage;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,11 +74,10 @@ class GeneralFeedbackStatusOnBottomSheet extends StatelessWidget {
                 style: AriesTextStyles.textHeading6,
               ),
               Spacing.sp12,
-              feedback.status!.getIcon(),
-              Spacing.sp8,
               Container(
-                padding: EdgeInsets.all(
-                  6,
+                padding: EdgeInsets.symmetric(
+                  vertical: 4,
+                  horizontal: 6,
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
@@ -96,6 +97,41 @@ class GeneralFeedbackStatusOnBottomSheet extends StatelessWidget {
                   ),
                 ),
               ),
+              Spacing.sp12,
+              if (hasAttachedImage)
+                GestureDetector(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 4,
+                      horizontal: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AriesColor.yellowP900,
+                      borderRadius: BorderRadius.circular(
+                        8.r,
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Image',
+                          style: AriesTextStyles.textBodyNormal.copyWith(
+                            color: isStatusReponded
+                                ? AriesColor.neutral0
+                                : AriesColor.neutral10,
+                            fontSize: 12,
+                          ),
+                        ),
+                        Spacing.sp2,
+                        Icon(
+                          Icons.attach_file_outlined,
+                          size: 14,
+                          color: AriesColor.neutral0,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
             ],
           ),
       ],
