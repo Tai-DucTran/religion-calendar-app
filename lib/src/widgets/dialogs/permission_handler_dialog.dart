@@ -1,5 +1,3 @@
-// lib/src/utils/permission_handler_util.dart
-
 import 'package:aries/aries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
@@ -50,7 +48,7 @@ class PermissionHandlerDialog {
     );
   }
 
-  // Specialized method for photo permission dialog
+  /// Specialized method for photo permission dialog
   static Future<void> showPhotoPermissionDialog(BuildContext context) async {
     return showPermissionDialog(
       context: context,
@@ -59,46 +57,88 @@ class PermissionHandlerDialog {
     );
   }
 
-  // Complete image picking flow with permission handling
-  static Future<XFile?> pickImageWithPermission({
+  /// Specialized method for camera permission dialog
+  static Future<void> showCameraPermissionDialog(BuildContext context) async {
+    return showPermissionDialog(
+      context: context,
+      permissionTitle: context.l10n.permissionDeninedText,
+      permissionMessage: context.l10n.grantAccessToCameraText,
+    );
+  }
+
+  /// Generic method to handle any permission request with appropriate dialogs
+  static Future<bool> requestPermission({
     required BuildContext context,
-    required ImageSource source,
+    required Permission permission,
+    String? permissionTitle,
+    String? permissionMessage,
   }) async {
     try {
-      // Check permission status
-      final Permission permission =
-          source == ImageSource.camera ? Permission.camera : Permission.photos;
-
+      // Check current status
       final status = await permission.status;
 
       if (status.isGranted) {
-        // Permission already granted, proceed with picking
-        return await ImagePicker().pickImage(source: source);
+        // Permission is already granted
+        return true;
       } else if (status.isDenied) {
         // Request permission
-        await Future.delayed(const Duration(milliseconds: 100));
         final result = await permission.request();
-
-        if (result.isGranted) {
-          // Permission granted, proceed with picking
-          return await ImagePicker().pickImage(source: source);
-        }
+        return result.isGranted;
       } else if (status.isPermanentlyDenied) {
-        // Show dialog to open settings
-        if (context.mounted) {
-          if (source == ImageSource.camera) {
-            await showPermissionDialog(
-              context: context,
-              permissionTitle: context.l10n.permissionDeninedText,
-              permissionMessage: context.l10n.grantAccessToCameraText,
-            );
-          } else {
-            await showPhotoPermissionDialog(context);
-          }
+        // Show dialog to open settings if permission is permanently denied
+        if (context.mounted &&
+            permissionTitle != null &&
+            permissionMessage != null) {
+          await showPermissionDialog(
+            context: context,
+            permissionTitle: permissionTitle,
+            permissionMessage: permissionMessage,
+          );
         }
+        return false;
       }
 
-      // Return null if permission not granted or image not picked
+      return false;
+    } catch (e) {
+      Log.error('Error requesting permission: $e');
+      return false;
+    }
+  }
+
+  /// Method to pick image with proper permission handling
+  static Future<XFile?> pickImageWithPermission({
+    required BuildContext context,
+    required ImageSource source,
+    Function(XFile?)? onImagePicked,
+  }) async {
+    try {
+      final permission =
+          source == ImageSource.camera ? Permission.camera : Permission.photos;
+
+      // Default messages for permissions
+      final title = context.l10n.permissionDeninedText;
+      final message = source == ImageSource.camera
+          ? context.l10n.grantAccessToCameraText
+          : context.l10n.grantAccessToPhotosText;
+
+      // Request permission
+      final granted = await requestPermission(
+        context: context,
+        permission: permission,
+        permissionTitle: title,
+        permissionMessage: message,
+      );
+
+      if (granted) {
+        final pickedFile = await ImagePicker().pickImage(source: source);
+
+        if (onImagePicked != null) {
+          onImagePicked(pickedFile);
+        }
+
+        return pickedFile;
+      }
+
       return null;
     } catch (e) {
       Log.error('Error picking image: $e');
@@ -106,19 +146,14 @@ class PermissionHandlerDialog {
     }
   }
 
-  // Specialized method for gallery images
-  static Future<XFile?> pickImageFromGallery(BuildContext context) async {
+  static Future<XFile?> pickImageFromGallery(
+    BuildContext context, {
+    Function(XFile?)? onImagePicked,
+  }) async {
     return pickImageWithPermission(
       context: context,
       source: ImageSource.gallery,
-    );
-  }
-
-  // Specialized method for camera images
-  static Future<XFile?> pickImageFromCamera(BuildContext context) async {
-    return pickImageWithPermission(
-      context: context,
-      source: ImageSource.camera,
+      onImagePicked: onImagePicked,
     );
   }
 }

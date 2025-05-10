@@ -1,14 +1,12 @@
 import 'package:aries/aries.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/modules/profile/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/profile/profile_page.dart';
+import 'package:religion_calendar_app/src/widgets/dialogs/permission_handler_dialog.dart';
 
 class UploadProfileImageSection extends ConsumerStatefulWidget {
   const UploadProfileImageSection({super.key});
@@ -22,44 +20,17 @@ class _UploadProfileImageSectionState
     extends ConsumerState<UploadProfileImageSection> {
   XFile? pickedImage;
 
-  Future<void> pickImageInGallery() async {
+  Future<void> handleProfileImageSelection(XFile? pickedFile) async {
+    if (pickedFile == null) return;
+
     final profileImageController =
         ref.read(profileImageControllerProvider.notifier);
-    try {
-      XFile? pickedFile = await ImagePicker().pickImage(
-        source: ImageSource.gallery,
-      );
-      if (pickedFile != null) {
-        setState(() {
-          pickedImage = pickedFile;
-        });
-        await profileImageController.uploadProfileImage(pickedImage);
-      }
-    } catch (e) {
-      Log.error('Error picking image: $e');
-    }
-  }
 
-  Future<void> askPermissionAndPickImage(BuildContext context) async {
-    try {
-      final status = await Permission.photos.status;
+    setState(() {
+      pickedImage = pickedFile;
+    });
 
-      if (status.isGranted) {
-        await pickImageInGallery();
-      } else if (status.isDenied) {
-        await Future.delayed(const Duration(milliseconds: 100));
-        final result = await Permission.photos.request();
-        if (result.isGranted) {
-          await pickImageInGallery();
-        }
-      } else if (status.isPermanentlyDenied) {
-        if (context.mounted) {
-          showAlertDialog(context);
-        }
-      }
-    } catch (e) {
-      Log.error('Error handling permission: $e');
-    }
+    await profileImageController.uploadProfileImage(pickedImage);
   }
 
   @override
@@ -73,8 +44,9 @@ class _UploadProfileImageSectionState
             bottom: 0,
             child: GestureDetector(
               onTap: () async {
-                await askPermissionAndPickImage(
+                await PermissionHandlerDialog.pickImageFromGallery(
                   context,
+                  onImagePicked: handleProfileImageSelection,
                 );
               },
               child: Container(
@@ -100,38 +72,3 @@ class _UploadProfileImageSectionState
     );
   }
 }
-
-showAlertDialog(context) => showCupertinoDialog(
-      context: context,
-      builder: (BuildContext context) => CupertinoAlertDialog(
-        title: Text(
-          context.l10n.permissionDeninedText,
-        ),
-        content: Text(
-          context.l10n.grantAccessToPhotosText,
-        ),
-        actions: <CupertinoDialogAction>[
-          CupertinoDialogAction(
-            child: Text(
-              context.l10n.cancelButtonText,
-              style: TextStyle(
-                color: AriesColor.neutral10,
-              ),
-            ),
-            onPressed: () => context.pop(),
-          ),
-          CupertinoDialogAction(
-            child: Text(
-              context.l10n.openSettingsButtonText,
-              style: TextStyle(
-                color: AriesColor.neutral10,
-              ),
-            ),
-            onPressed: () {
-              context.pop();
-              openAppSettings();
-            },
-          )
-        ],
-      ),
-    );
