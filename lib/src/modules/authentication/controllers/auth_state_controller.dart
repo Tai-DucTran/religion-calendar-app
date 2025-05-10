@@ -4,6 +4,7 @@ import 'package:religion_calendar_app/src/modules/authentication/repositories/au
 import 'package:religion_calendar_app/src/modules/notification/notification.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 import 'package:religion_calendar_app/src/modules/user/repositories/user_firestore_repo.dart';
+import 'package:religion_calendar_app/src/utils/log.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_state_controller.g.dart';
@@ -27,7 +28,9 @@ class AuthStateController extends _$AuthStateController {
           isLoading: false,
           user: user,
         );
-      } catch (e) {
+      } catch (e, stackTrace) {
+        Log.error("Error in getting user detailed infor: $e",
+            error: e, stackTrace: stackTrace);
         return AuthState(
           result: AuthResults.success,
           isLoading: false,

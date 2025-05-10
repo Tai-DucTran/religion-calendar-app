@@ -1084,6 +1084,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Data Found!'**
   String get noDataFoundTitleText;
+
+  /// No description provided for @grantAccessToCameraText.
+  ///
+  /// In en, this message translates to:
+  /// **'Please allow access to your camera in device settings to take photos in this app.'**
+  String get grantAccessToCameraText;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

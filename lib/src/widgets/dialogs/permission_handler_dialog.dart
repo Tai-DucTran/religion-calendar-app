@@ -90,7 +90,7 @@ class PermissionHandlerDialog {
             await showPermissionDialog(
               context: context,
               permissionTitle: context.l10n.permissionDeninedText,
-              permissionMessage: 'context.l10n.grantAccessToCameraText',
+              permissionMessage: context.l10n.grantAccessToCameraText,
             );
           } else {
             await showPhotoPermissionDialog(context);

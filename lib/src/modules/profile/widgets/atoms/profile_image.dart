@@ -1,4 +1,5 @@
 import 'package:aries/aries.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:religion_calendar_app/constants/firebase_image.dart';
@@ -16,18 +17,43 @@ class ProfileImage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profileImagePath = ref.watch(profileImageControllerProvider);
+
     return profileImagePath.when(
-      data: (imageUrl) => CircleAvatar(
-        radius: imageSize,
-        backgroundColor: AriesColor.neutral30,
-        backgroundImage: imageUrl != null
-            ? NetworkImage(
-                imageUrl,
-              )
-            : const NetworkImage(
-                FirebaseImage.defaultUserProfileImage,
-              ) as ImageProvider,
-      ),
+      data: (imageUrl) {
+        if (imageUrl != null && imageUrl.isNotEmpty) {
+          return CircleAvatar(
+            radius: imageSize,
+            backgroundColor: AriesColor.neutral30,
+            child: ClipOval(
+              child: CachedNetworkImage(
+                imageUrl: imageUrl,
+                width: imageSize! * 2,
+                height: imageSize! * 2,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => Container(
+                  color: AriesColor.neutral10,
+                ),
+                errorWidget: (context, url, error) => Container(
+                  color: AriesColor.neutral30,
+                  child: Icon(
+                    Icons.person,
+                    color: AriesColor.neutral60,
+                    size: imageSize,
+                  ),
+                ),
+              ),
+            ),
+          );
+        } else {
+          return CircleAvatar(
+            radius: imageSize,
+            backgroundColor: AriesColor.neutral30,
+            backgroundImage: const NetworkImage(
+              FirebaseImage.defaultUserProfileImage,
+            ),
+          );
+        }
+      },
       loading: () => DefaultSkeleton(
         child: ClipOval(
           child: Container(
@@ -39,9 +65,11 @@ class ProfileImage extends ConsumerWidget {
       ),
       error: (error, stack) => CircleAvatar(
         radius: imageSize,
+        backgroundColor: AriesColor.neutral30,
         child: Icon(
           Icons.error,
           color: AriesColor.danger200,
+          size: imageSize! * 0.7,
         ),
       ),
     );

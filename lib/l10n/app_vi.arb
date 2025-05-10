@@ -169,5 +169,6 @@
   "errorLoadingContentText": "Không thể hiển thị được nội dung",
   "errorSomethingWentWrongText": "Đã có lỗi xảy ra!",
   "noDataFoundTitleText": "Không Có Dữ Liệu!",
+  "grantAccessToCameraText": "Vui lòng cho phép truy cập vào máy ảnh trong cài đặt thiết bị để chụp ảnh trong ứng dụng này.",
   "@@locale": "vi"
 }

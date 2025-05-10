@@ -169,5 +169,6 @@
   "errorLoadingContentText": "Error loading content",
   "errorSomethingWentWrongText": "Something went wrong!",
   "noDataFoundTitleText": "No Data Found!",
+  "grantAccessToCameraText": "Please allow access to your camera in device settings to take photos in this app.",
   "@@locale": "en"
 }

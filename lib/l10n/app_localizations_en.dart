@@ -502,4 +502,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noDataFoundTitleText => 'No Data Found!';
+
+  @override
+  String get grantAccessToCameraText => 'Please allow access to your camera in device settings to take photos in this app.';
 }

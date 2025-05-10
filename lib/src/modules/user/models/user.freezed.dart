@@ -23,7 +23,9 @@ mixin _$User {
   String get userId => throw _privateConstructorUsedError;
   String? get displayName => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
+  @TimestampConverter()
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  @TimestampConverter()
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   bool? get hasCompleteOnboarding => throw _privateConstructorUsedError;
   bool? get isVerified => throw _privateConstructorUsedError;
@@ -49,8 +51,8 @@ abstract class $UserCopyWith<$Res> {
       {String userId,
       String? displayName,
       String? email,
-      DateTime? createdAt,
-      DateTime? updatedAt,
+      @TimestampConverter() DateTime? createdAt,
+      @TimestampConverter() DateTime? updatedAt,
       bool? hasCompleteOnboarding,
       bool? isVerified,
       String? profileImageUrl,
@@ -134,8 +136,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       {String userId,
       String? displayName,
       String? email,
-      DateTime? createdAt,
-      DateTime? updatedAt,
+      @TimestampConverter() DateTime? createdAt,
+      @TimestampConverter() DateTime? updatedAt,
       bool? hasCompleteOnboarding,
       bool? isVerified,
       String? profileImageUrl,
@@ -212,8 +214,8 @@ class _$UserImpl extends _User {
       {required this.userId,
       required this.displayName,
       required this.email,
-      this.createdAt,
-      this.updatedAt,
+      @TimestampConverter() this.createdAt,
+      @TimestampConverter() this.updatedAt,
       this.hasCompleteOnboarding = false,
       this.isVerified = false,
       this.profileImageUrl = null,
@@ -230,8 +232,10 @@ class _$UserImpl extends _User {
   @override
   final String? email;
   @override
+  @TimestampConverter()
   final DateTime? createdAt;
   @override
+  @TimestampConverter()
   final DateTime? updatedAt;
   @override
   @JsonKey()
@@ -308,8 +312,8 @@ abstract class _User extends User {
       {required final String userId,
       required final String? displayName,
       required final String? email,
-      final DateTime? createdAt,
-      final DateTime? updatedAt,
+      @TimestampConverter() final DateTime? createdAt,
+      @TimestampConverter() final DateTime? updatedAt,
       final bool? hasCompleteOnboarding,
       final bool? isVerified,
       final String? profileImageUrl,
@@ -325,8 +329,10 @@ abstract class _User extends User {
   @override
   String? get email;
   @override
+  @TimestampConverter()
   DateTime? get createdAt;
   @override
+  @TimestampConverter()
   DateTime? get updatedAt;
   @override
   bool? get hasCompleteOnboarding;

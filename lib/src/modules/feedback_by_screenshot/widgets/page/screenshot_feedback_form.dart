@@ -132,7 +132,7 @@ class _ScreenshotFeedbackFormState
             onPressed: feedbackForm.feedbackType != null
                 ? () {
                     widget.onSubmit(
-                      feedbackForm.messages.first.toString() ?? '',
+                      feedbackForm.messages.first.toString(),
                       extras: feedbackForm.toJson(),
                     );
                     ref

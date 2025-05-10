@@ -10,12 +10,8 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       userId: json['userId'] as String,
       displayName: json['displayName'] as String?,
       email: json['email'] as String?,
-      createdAt: json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
+      createdAt: const TimestampConverter().fromJson(json['createdAt']),
+      updatedAt: const TimestampConverter().fromJson(json['updatedAt']),
       hasCompleteOnboarding: json['hasCompleteOnboarding'] as bool? ?? false,
       isVerified: json['isVerified'] as bool? ?? false,
       profileImageUrl: json['profileImageUrl'] as String? ?? null,
@@ -28,8 +24,8 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'userId': instance.userId,
       'displayName': instance.displayName,
       'email': instance.email,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'createdAt': const TimestampConverter().toJson(instance.createdAt),
+      'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
       'hasCompleteOnboarding': instance.hasCompleteOnboarding,
       'isVerified': instance.isVerified,
       'profileImageUrl': instance.profileImageUrl,

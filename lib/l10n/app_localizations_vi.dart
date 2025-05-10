@@ -502,4 +502,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get noDataFoundTitleText => 'Không Có Dữ Liệu!';
+
+  @override
+  String get grantAccessToCameraText => 'Vui lòng cho phép truy cập vào máy ảnh trong cài đặt thiết bị để chụp ảnh trong ứng dụng này.';
 }
