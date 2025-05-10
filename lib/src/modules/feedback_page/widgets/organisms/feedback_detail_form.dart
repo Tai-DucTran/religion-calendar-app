@@ -43,7 +43,9 @@ class FeedbackDetailForm extends ConsumerWidget {
             FeelingReatesWrapper(),
             AnimatedCrossFade(
               firstChild: SizedBox(height: 0),
-              secondChild: ExpandedFeedbackForm(),
+              secondChild: ExpandedFeedbackForm(
+                isScreenShootFeedback: false,
+              ),
               crossFadeState: feedbackFormSetting.isExpanded
                   ? CrossFadeState.showSecond
                   : CrossFadeState.showFirst,

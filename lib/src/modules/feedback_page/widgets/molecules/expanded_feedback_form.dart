@@ -14,7 +14,12 @@ import 'package:religion_calendar_app/src/utils/utils.dart';
 import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class ExpandedFeedbackForm extends HookConsumerWidget {
-  const ExpandedFeedbackForm({super.key});
+  const ExpandedFeedbackForm({
+    super.key,
+    required this.isScreenShootFeedback,
+  });
+
+  final bool isScreenShootFeedback;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -59,8 +64,8 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
           feedbackTextController: feedbackTextController,
         ),
         SizedBox(height: 12.h),
-        // Image preview container
-        if (selectedImage.value != null || uploadedImageUrl.value != null)
+        if (!isScreenShootFeedback && selectedImage.value != null ||
+            uploadedImageUrl.value != null)
           Container(
             margin: EdgeInsets.only(bottom: 12.h),
             height: 160.h,
@@ -110,7 +115,6 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
                             )
                           : const SizedBox(),
                 ),
-                // Close button to remove image
                 Positioned(
                   top: 4.h,
                   right: 4.w,
@@ -177,95 +181,95 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
                 text: context.l10n.submitButtonText,
               ),
             ),
-            // Image upload button
-            Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                color: AriesColor.yellowP50,
-                borderRadius: BorderRadius.circular(8.r),
-                border: Border.all(color: AriesColor.yellowP200),
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () async {
-                    if (isUploading.value) return;
-
-                    // Use PermissionHandlerDialog to handle permissions and pick an image
-                    final pickedFile =
-                        await PermissionHandlerDialog.pickImageFromGallery(
-                      context,
-                    );
-
-                    // Handle the picked image
-                    if (pickedFile != null && context.mounted) {
-                      selectedImage.value = pickedFile;
-
-                      // Now upload the image
-                      try {
-                        isUploading.value = true;
-
-                        final authRepo =
-                            ref.read(authenticatorRepositoryProvider);
-                        final userId = authRepo.userId;
-
-                        if (userId != null) {
-                          final imageRepo =
-                              ref.read(firebaseImageRepositoryProvider);
-                          final imageUrl = await imageRepo.uploadImage(
-                            pickedImage: pickedFile,
-                            imageType: ImageType.feedbackScreenshot,
-                            userId: userId,
-                            associatedId:
-                                null, // Will be linked to feedback after creation
-                            metadata: {
-                              'purpose': 'feedback',
-                              'feedbackType':
-                                  feedbackFormSetting.feedbackType.toString(),
-                            },
-                          );
-
-                          if (imageUrl != null && context.mounted) {
-                            uploadedImageUrl.value = imageUrl;
-                            controller.updateFeedbackImage(imageUrl);
-                          }
-                        }
-                      } catch (e) {
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content:
-                                  Text('context.l10n.errorUploadingImageText'),
-                              backgroundColor: AriesColor.danger500,
-                            ),
-                          );
-                        }
-                      } finally {
-                        isUploading.value = false;
-                      }
-                    }
-                  },
+            if (!isScreenShootFeedback)
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: AriesColor.yellowP50,
                   borderRadius: BorderRadius.circular(8.r),
-                  child: Center(
-                    child: isUploading.value
-                        ? SizedBox(
-                            width: 16.h,
-                            height: 16.h,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
+                  border: Border.all(color: AriesColor.yellowP200),
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () async {
+                      if (isUploading.value) return;
+
+                      // Use PermissionHandlerDialog to handle permissions and pick an image
+                      final pickedFile =
+                          await PermissionHandlerDialog.pickImageFromGallery(
+                        context,
+                      );
+
+                      // Handle the picked image
+                      if (pickedFile != null && context.mounted) {
+                        selectedImage.value = pickedFile;
+
+                        // Now upload the image
+                        try {
+                          isUploading.value = true;
+
+                          final authRepo =
+                              ref.read(authenticatorRepositoryProvider);
+                          final userId = authRepo.userId;
+
+                          if (userId != null) {
+                            final imageRepo =
+                                ref.read(firebaseImageRepositoryProvider);
+                            final imageUrl = await imageRepo.uploadImage(
+                              pickedImage: pickedFile,
+                              imageType: ImageType.feedbackScreenshot,
+                              userId: userId,
+                              associatedId:
+                                  null, // Will be linked to feedback after creation
+                              metadata: {
+                                'purpose': 'feedback',
+                                'feedbackType':
+                                    feedbackFormSetting.feedbackType.toString(),
+                              },
+                            );
+
+                            if (imageUrl != null && context.mounted) {
+                              uploadedImageUrl.value = imageUrl;
+                              controller.updateFeedbackImage(imageUrl);
+                            }
+                          }
+                        } catch (e) {
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                    'context.l10n.errorUploadingImageText'),
+                                backgroundColor: AriesColor.danger500,
+                              ),
+                            );
+                          }
+                        } finally {
+                          isUploading.value = false;
+                        }
+                      }
+                    },
+                    borderRadius: BorderRadius.circular(8.r),
+                    child: Center(
+                      child: isUploading.value
+                          ? SizedBox(
+                              width: 16.h,
+                              height: 16.h,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: AriesColor.yellowP950,
+                              ),
+                            )
+                          : Icon(
+                              Icons.add_photo_alternate_outlined,
+                              size: 20.h,
                               color: AriesColor.yellowP950,
                             ),
-                          )
-                        : Icon(
-                            Icons.add_photo_alternate_outlined,
-                            size: 20.h,
-                            color: AriesColor.yellowP950,
-                          ),
+                    ),
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ],
