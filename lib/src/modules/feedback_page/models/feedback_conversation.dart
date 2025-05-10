@@ -155,13 +155,11 @@ extension FeelingRatesExtension on FeelingRates {
   Color getColor() {
     switch (this) {
       case FeelingRates.hate:
-        return AriesColor.danger300;
       case FeelingRates.dislike:
         return AriesColor.danger100;
       case FeelingRates.neutral:
-        return AriesColor.yellowP400;
+        return AriesColor.yellowP800;
       case FeelingRates.like:
-        return AriesColor.success300;
       case FeelingRates.love:
         return AriesColor.success400;
     }
