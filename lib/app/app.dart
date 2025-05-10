@@ -69,7 +69,6 @@ class _ReligionAppState extends ConsumerState<ReligionApp> {
           Colors.yellow,
         ],
       ),
-      darkTheme: FeedbackThemeData.dark(),
       localizationsDelegates: [
         GlobalFeedbackLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,

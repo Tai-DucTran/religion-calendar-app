@@ -53,6 +53,10 @@ class _ScreenshotFeedbackFormState
                   0,
                 ),
                 children: [
+                  FeelingReatesWrapper(),
+                  const SizedBox(
+                    height: 8,
+                  ),
                   Text(
                     context.l10n.whatKindOfFeedbackTitleText,
                     style: AriesTextStyles.textHeading7,
@@ -81,7 +85,6 @@ class _ScreenshotFeedbackFormState
                           },
                         ),
                       ),
-                      FeelingReatesWrapper(),
                     ],
                   ),
                   const SizedBox(
