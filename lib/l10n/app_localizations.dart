@@ -1055,6 +1055,30 @@ abstract class AppLocalizations {
   /// **'This chat is closed!'**
   String get closedChatMessageText;
 
+  /// No description provided for @swipeUpFeedbackInstructionText.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe up for more details feedback form'**
+  String get swipeUpFeedbackInstructionText;
+
+  /// No description provided for @pleaseCompleteTheFormText.
+  ///
+  /// In en, this message translates to:
+  /// **'Please complete the feedback form!'**
+  String get pleaseCompleteTheFormText;
+
+  /// No description provided for @uploadingImageErrorText.
+  ///
+  /// In en, this message translates to:
+  /// **'Error uploading image'**
+  String get uploadingImageErrorText;
+
+  /// No description provided for @submittingFeedbackErrorText.
+  ///
+  /// In en, this message translates to:
+  /// **'Error submitting feedback'**
+  String get submittingFeedbackErrorText;
+
   /// No description provided for @explorePageHeaderText.
   ///
   /// In en, this message translates to:

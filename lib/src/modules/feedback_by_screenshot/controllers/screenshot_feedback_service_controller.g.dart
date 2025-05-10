@@ -7,7 +7,7 @@ part of 'screenshot_feedback_service_controller.dart';
 // **************************************************************************
 
 String _$screenshotFeedbackServiceHash() =>
-    r'c3a7691d70713c7ac455665883473abb3e45f146';
+    r'62a70b9515b94707324594252abb0a7b6f5c19c0';
 
 /// See also [ScreenshotFeedbackService].
 @ProviderFor(ScreenshotFeedbackService)

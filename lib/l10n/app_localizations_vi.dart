@@ -489,6 +489,18 @@ class AppLocalizationsVi extends AppLocalizations {
   String get closedChatMessageText => 'Đoạn chat đã đóng!';
 
   @override
+  String get swipeUpFeedbackInstructionText => 'Kéo lên để hiện form góp ý!';
+
+  @override
+  String get pleaseCompleteTheFormText => 'Vui lòng cung cấp đầy đủ thông tin!';
+
+  @override
+  String get uploadingImageErrorText => 'Lỗi tải hình ảnh lên';
+
+  @override
+  String get submittingFeedbackErrorText => 'Lỗi khi gửi phản hồi / góp ý';
+
+  @override
   String get explorePageHeaderText => 'Khám phá';
 
   @override

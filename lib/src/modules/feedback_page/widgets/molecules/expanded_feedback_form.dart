@@ -33,6 +33,8 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
     final isUploading = useState(false);
     final uploadedImageUrl =
         useState<String?>(feedbackFormSetting.feedbackImageUrl);
+    final isFormValid =
+        controller.isFormValid(feedbackText: feedbackTextController.text);
 
     return Column(
       children: [
@@ -143,7 +145,9 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
                 if (isUploading.value)
                   Positioned.fill(
                     child: Container(
-                      color: AriesColor.neutral900.withOpacity(0.3),
+                      color: AriesColor.neutral900.withValues(
+                        alpha: 0.3,
+                      ),
                       child: Center(
                         child: CircularProgressIndicator(),
                       ),
@@ -157,26 +161,47 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
           children: [
             Expanded(
               child: CustomElevatedButton(
-                onPressedAsync: () async {
-                  if (isSubmitting.value) return;
+                buttonColor:
+                    isFormValid ? AriesColor.yellowP950 : AriesColor.neutral40,
+                onPressedAsync: isFormValid
+                    ? () async {
+                        if (isSubmitting.value) return;
+                        try {
+                          isSubmitting.value = true;
+                          final result = await controller.submitFeedback();
+                          if (result != null && context.mounted) {
+                            feedbackTextController.clear();
+                            selectedImage.value = null;
+                            uploadedImageUrl.value = null;
 
-                  try {
-                    isSubmitting.value = true;
-                    final result = await controller.submitFeedback();
-                    if (result != null && context.mounted) {
-                      feedbackTextController.clear();
-                      selectedImage.value = null;
-                      uploadedImageUrl.value = null;
-                      _showFeedbackSubmittedDialog(context);
-                    }
-                  } finally {
-                    if (context.mounted) {
-                      isSubmitting.value = false;
-                    }
-                  }
-
-                  return;
-                },
+                            // Show success message with custom snackbar
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              getCustomSnackbar(
+                                message: context.l10n.submittedSuccessfullyText,
+                                snackbarType: SnackbarType.success,
+                                context: context,
+                              ),
+                            );
+                          }
+                        } catch (e) {
+                          // Show error message if submission fails
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              getCustomSnackbar(
+                                message:
+                                    context.l10n.submittingFeedbackErrorText,
+                                snackbarType: SnackbarType.error,
+                                context: context,
+                              ),
+                            );
+                          }
+                        } finally {
+                          if (context.mounted) {
+                            isSubmitting.value = false;
+                          }
+                        }
+                      }
+                    : null,
                 height: 40,
                 text: context.l10n.submitButtonText,
               ),
@@ -195,18 +220,14 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
                   child: InkWell(
                     onTap: () async {
                       if (isUploading.value) return;
-
-                      // Use PermissionHandlerDialog to handle permissions and pick an image
                       final pickedFile =
                           await PermissionHandlerDialog.pickImageFromGallery(
                         context,
                       );
 
-                      // Handle the picked image
                       if (pickedFile != null && context.mounted) {
                         selectedImage.value = pickedFile;
 
-                        // Now upload the image
                         try {
                           isUploading.value = true;
 
@@ -221,8 +242,7 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
                               pickedImage: pickedFile,
                               imageType: ImageType.feedbackScreenshot,
                               userId: userId,
-                              associatedId:
-                                  null, // Will be linked to feedback after creation
+                              associatedId: null,
                               metadata: {
                                 'purpose': 'feedback',
                                 'feedbackType':
@@ -238,10 +258,10 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
                         } catch (e) {
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                    'context.l10n.errorUploadingImageText'),
-                                backgroundColor: AriesColor.danger500,
+                              getCustomSnackbar(
+                                message: context.l10n.uploadingImageErrorText,
+                                snackbarType: SnackbarType.error,
+                                context: context,
                               ),
                             );
                           }
@@ -273,34 +293,6 @@ class ExpandedFeedbackForm extends HookConsumerWidget {
           ],
         ),
       ],
-    );
-  }
-
-  void _showFeedbackSubmittedDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AriesColor.neutral0,
-        title: Text(
-          context.l10n.thankYouText,
-        ),
-        content: Text(
-          context.l10n.submittedSuccessfullyText,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(
-              context.l10n.closeButtonText,
-              style: TextStyle(
-                color: AriesColor.yellowP950,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

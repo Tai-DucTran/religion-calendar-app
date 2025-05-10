@@ -7,7 +7,7 @@ part of 'feedback_form_setting_controller.dart';
 // **************************************************************************
 
 String _$feedbackFormSettingControllerHash() =>
-    r'477d5e9459327caed76ec7425c60d7b2b4dc3b08';
+    r'6d839d40892e4f6d1d46b8d26aa2273a1eb229f3';
 
 /// See also [FeedbackFormSettingController].
 @ProviderFor(FeedbackFormSettingController)

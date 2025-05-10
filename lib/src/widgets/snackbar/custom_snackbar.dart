@@ -1,4 +1,3 @@
-// custom_snackbar.dart
 import 'package:aries/aries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

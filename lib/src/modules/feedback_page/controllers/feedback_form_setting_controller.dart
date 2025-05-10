@@ -161,4 +161,12 @@ class FeedbackFormSettingController extends _$FeedbackFormSettingController {
       ),
     );
   }
+
+  bool isFormValid({String? feedbackText}) {
+    final text = feedbackText ?? state.feedback.feedbackTitle ?? '';
+
+    return state.feedback.selectedSentiment != null &&
+        state.feedback.feedbackType != null &&
+        text.trim().isNotEmpty;
+  }
 }

@@ -489,6 +489,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get closedChatMessageText => 'This chat is closed!';
 
   @override
+  String get swipeUpFeedbackInstructionText => 'Swipe up for more details feedback form';
+
+  @override
+  String get pleaseCompleteTheFormText => 'Please complete the feedback form!';
+
+  @override
+  String get uploadingImageErrorText => 'Error uploading image';
+
+  @override
+  String get submittingFeedbackErrorText => 'Error submitting feedback';
+
+  @override
   String get explorePageHeaderText => 'Explore';
 
   @override
