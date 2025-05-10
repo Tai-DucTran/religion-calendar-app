@@ -15,6 +15,7 @@ class User with _$User {
     DateTime? updatedAt,
     @Default(false) bool? hasCompleteOnboarding,
     @Default(false) bool? isVerified,
+    @Default(null) String? profileImageUrl,
     ReligionPreference? religionPreference,
   }) = _User;
 

@@ -22,9 +22,7 @@ AuthState _$AuthStateFromJson(Map<String, dynamic> json) {
 mixin _$AuthState {
   AuthResults? get result => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  String? get userId => throw _privateConstructorUsedError;
-  bool get isLoggedIn => throw _privateConstructorUsedError;
-  bool? get hasCompleteOnboarding => throw _privateConstructorUsedError;
+  User? get user => throw _privateConstructorUsedError;
 
   /// Serializes this AuthState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,12 +39,9 @@ abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
-  $Res call(
-      {AuthResults? result,
-      bool isLoading,
-      String? userId,
-      bool isLoggedIn,
-      bool? hasCompleteOnboarding});
+  $Res call({AuthResults? result, bool isLoading, User? user});
+
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -66,9 +61,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   $Res call({
     Object? result = freezed,
     Object? isLoading = null,
-    Object? userId = freezed,
-    Object? isLoggedIn = null,
-    Object? hasCompleteOnboarding = freezed,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
       result: freezed == result
@@ -79,19 +72,25 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isLoggedIn: null == isLoggedIn
-          ? _value.isLoggedIn
-          : isLoggedIn // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hasCompleteOnboarding: freezed == hasCompleteOnboarding
-          ? _value.hasCompleteOnboarding
-          : hasCompleteOnboarding // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
     ) as $Val);
+  }
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.user!, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
   }
 }
 
@@ -103,12 +102,10 @@ abstract class _$$AuthStateImplCopyWith<$Res>
       __$$AuthStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {AuthResults? result,
-      bool isLoading,
-      String? userId,
-      bool isLoggedIn,
-      bool? hasCompleteOnboarding});
+  $Res call({AuthResults? result, bool isLoading, User? user});
+
+  @override
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -126,9 +123,7 @@ class __$$AuthStateImplCopyWithImpl<$Res>
   $Res call({
     Object? result = freezed,
     Object? isLoading = null,
-    Object? userId = freezed,
-    Object? isLoggedIn = null,
-    Object? hasCompleteOnboarding = freezed,
+    Object? user = freezed,
   }) {
     return _then(_$AuthStateImpl(
       result: freezed == result
@@ -139,18 +134,10 @@ class __$$AuthStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isLoggedIn: null == isLoggedIn
-          ? _value.isLoggedIn
-          : isLoggedIn // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hasCompleteOnboarding: freezed == hasCompleteOnboarding
-          ? _value.hasCompleteOnboarding
-          : hasCompleteOnboarding // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
     ));
   }
 }
@@ -159,11 +146,7 @@ class __$$AuthStateImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AuthStateImpl extends _AuthState with DiagnosticableTreeMixin {
   const _$AuthStateImpl(
-      {required this.result,
-      required this.isLoading,
-      required this.userId,
-      required this.isLoggedIn,
-      required this.hasCompleteOnboarding})
+      {required this.result, required this.isLoading, required this.user})
       : super._();
 
   factory _$AuthStateImpl.fromJson(Map<String, dynamic> json) =>
@@ -174,15 +157,11 @@ class _$AuthStateImpl extends _AuthState with DiagnosticableTreeMixin {
   @override
   final bool isLoading;
   @override
-  final String? userId;
-  @override
-  final bool isLoggedIn;
-  @override
-  final bool? hasCompleteOnboarding;
+  final User? user;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AuthState(result: $result, isLoading: $isLoading, userId: $userId, isLoggedIn: $isLoggedIn, hasCompleteOnboarding: $hasCompleteOnboarding)';
+    return 'AuthState(result: $result, isLoading: $isLoading, user: $user)';
   }
 
   @override
@@ -192,10 +171,7 @@ class _$AuthStateImpl extends _AuthState with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'AuthState'))
       ..add(DiagnosticsProperty('result', result))
       ..add(DiagnosticsProperty('isLoading', isLoading))
-      ..add(DiagnosticsProperty('userId', userId))
-      ..add(DiagnosticsProperty('isLoggedIn', isLoggedIn))
-      ..add(
-          DiagnosticsProperty('hasCompleteOnboarding', hasCompleteOnboarding));
+      ..add(DiagnosticsProperty('user', user));
   }
 
   @override
@@ -206,17 +182,12 @@ class _$AuthStateImpl extends _AuthState with DiagnosticableTreeMixin {
             (identical(other.result, result) || other.result == result) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.isLoggedIn, isLoggedIn) ||
-                other.isLoggedIn == isLoggedIn) &&
-            (identical(other.hasCompleteOnboarding, hasCompleteOnboarding) ||
-                other.hasCompleteOnboarding == hasCompleteOnboarding));
+            (identical(other.user, user) || other.user == user));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, result, isLoading, userId,
-      isLoggedIn, hasCompleteOnboarding);
+  int get hashCode => Object.hash(runtimeType, result, isLoading, user);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -238,9 +209,7 @@ abstract class _AuthState extends AuthState {
   const factory _AuthState(
       {required final AuthResults? result,
       required final bool isLoading,
-      required final String? userId,
-      required final bool isLoggedIn,
-      required final bool? hasCompleteOnboarding}) = _$AuthStateImpl;
+      required final User? user}) = _$AuthStateImpl;
   const _AuthState._() : super._();
 
   factory _AuthState.fromJson(Map<String, dynamic> json) =
@@ -251,11 +220,7 @@ abstract class _AuthState extends AuthState {
   @override
   bool get isLoading;
   @override
-  String? get userId;
-  @override
-  bool get isLoggedIn;
-  @override
-  bool? get hasCompleteOnboarding;
+  User? get user;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.

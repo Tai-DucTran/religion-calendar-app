@@ -6,7 +6,7 @@ part of 'user_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userControllerHash() => r'ff71962994a7252bb3301fe5264b809664bf78d8';
+String _$userControllerHash() => r'9d09cf56094fe14b70cd3147c39310e3b7028cf0';
 
 /// See also [UserController].
 @ProviderFor(UserController)

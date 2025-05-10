@@ -1,3 +1,4 @@
+import 'package:religion_calendar_app/constants/firebase_field_name.dart';
 import 'package:religion_calendar_app/src/modules/authentication/authentication.dart';
 import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 import 'package:religion_calendar_app/src/modules/user/repositories/repositories.dart';
@@ -13,26 +14,49 @@ class UserController extends _$UserController {
 
     // If already logged in, fetch user data
     if (authState.isLoggedIn && authState.userId != null) {
-      final user = await fetchUserInfor(authState.userId!);
-      return UserState(
-        isLoading: false,
-        user: user,
-        error: null,
-      );
+      try {
+        state = const AsyncLoading();
+        final user = await ref
+            .read(userFirestoreRepositoryProvider)
+            .getUserDetailedInfor(authState.userId!);
+
+        return UserState(
+          isLoading: false,
+          user: user,
+          error: null,
+        );
+      } catch (error) {
+        return UserState(
+          isLoading: false,
+          user: null,
+          error: error.toString(),
+        );
+      }
     }
 
-    // Set up listener for future auth changes
     ref.listen<AsyncValue<AuthState>>(
       authStateControllerProvider,
       (previous, next) async {
         next.whenData((auth) async {
           if (auth.isLoggedIn && auth.userId != null) {
-            final user = await fetchUserInfor(auth.userId!);
-            state = AsyncData(UserState(
-              isLoading: false,
-              user: user,
-              error: null,
-            ));
+            try {
+              state = const AsyncLoading();
+              final user = await ref
+                  .read(userFirestoreRepositoryProvider)
+                  .getUserDetailedInfor(auth.userId!);
+
+              state = AsyncData(UserState(
+                isLoading: false,
+                user: user,
+                error: null,
+              ));
+            } catch (error) {
+              state = AsyncData(UserState(
+                isLoading: false,
+                user: null,
+                error: error.toString(),
+              ));
+            }
           } else {
             state = AsyncData(UserState.unknow());
           }
@@ -56,36 +80,78 @@ class UserController extends _$UserController {
     }
   }
 
-  Future<bool> updateBasicUserInfo({
-    required String input,
+  Future<bool> updateUserFields({
+    required Map<String, dynamic> fields,
   }) async {
     try {
-      final userFireStoreRepo = ref.read(userFirestoreRepositoryProvider);
-      final authState = ref.read(authStateControllerProvider);
-      final userId = authState.value?.userId;
+      // Get the current auth state directly from the controller
+      final currentAuthState =
+          await ref.watch(authStateControllerProvider.future);
+      final userId = currentAuthState.userId;
 
       if (userId == null) {
-        throw Exception(
-          'Update basic user info failed - userId is null',
-        );
+        throw Exception('Update user fields failed - userId is null');
       }
 
-      state = await AsyncValue.guard(() async {
-        await userFireStoreRepo.updateBasicUserInfo(
-          userId: userId,
-          newUserName: input,
-        );
-        final userData = await fetchUserInfor(userId);
-        return UserState(
+      // Update the data in Firestore
+      final success = await userFireStoreRepo.updateUserField(
+        userId: userId,
+        fieldsToUpdate: fields,
+      );
+
+      if (success) {
+        // Fetch the updated user data
+        final updatedUser =
+            await userFireStoreRepo.getUserDetailedInfor(userId);
+
+        // Update UserController state
+        state = AsyncData(UserState(
           isLoading: false,
-          user: userData,
+          user: updatedUser,
           error: null,
-        );
-      });
-      return true;
+        ));
+
+        // Update AuthStateController directly
+        if (updatedUser != null) {
+          final authController = ref.read(authStateControllerProvider.notifier);
+          authController.updateUserState(updatedUser);
+        }
+
+        return true;
+      } else {
+        return false;
+      }
     } catch (error, stackTrace) {
       state = AsyncError(error, stackTrace);
       return false;
     }
+  }
+
+  // Use the generic method for specific updates
+  Future<bool> updateBasicUserInfo({required String input}) async {
+    return updateUserFields(fields: {
+      FirebaseFieldName.displayName: input,
+    });
+  }
+
+  Future<bool> updateProfileImageUrl({required String url}) async {
+    return updateUserFields(fields: {
+      FirebaseFieldName.profileImageUrl: url,
+    });
+  }
+
+  Future<bool> updateReligionPreference(
+      {required ReligionPreference preference}) async {
+    return updateUserFields(fields: {
+      FirebaseFieldName.religionPreference: preference.toString(),
+    });
+  }
+
+  Future<bool> completeOnboarding(
+      {required ReligionPreference preference}) async {
+    return updateUserFields(fields: {
+      FirebaseFieldName.hasCompleteOnboarding: true,
+      FirebaseFieldName.religionPreference: preference.toString(),
+    });
   }
 }

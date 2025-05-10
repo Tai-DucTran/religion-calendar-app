@@ -27,6 +27,7 @@ mixin _$User {
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   bool? get hasCompleteOnboarding => throw _privateConstructorUsedError;
   bool? get isVerified => throw _privateConstructorUsedError;
+  String? get profileImageUrl => throw _privateConstructorUsedError;
   ReligionPreference? get religionPreference =>
       throw _privateConstructorUsedError;
 
@@ -52,6 +53,7 @@ abstract class $UserCopyWith<$Res> {
       DateTime? updatedAt,
       bool? hasCompleteOnboarding,
       bool? isVerified,
+      String? profileImageUrl,
       ReligionPreference? religionPreference});
 }
 
@@ -77,6 +79,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? updatedAt = freezed,
     Object? hasCompleteOnboarding = freezed,
     Object? isVerified = freezed,
+    Object? profileImageUrl = freezed,
     Object? religionPreference = freezed,
   }) {
     return _then(_value.copyWith(
@@ -108,6 +111,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
               as bool?,
+      profileImageUrl: freezed == profileImageUrl
+          ? _value.profileImageUrl
+          : profileImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       religionPreference: freezed == religionPreference
           ? _value.religionPreference
           : religionPreference // ignore: cast_nullable_to_non_nullable
@@ -131,6 +138,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       DateTime? updatedAt,
       bool? hasCompleteOnboarding,
       bool? isVerified,
+      String? profileImageUrl,
       ReligionPreference? religionPreference});
 }
 
@@ -153,6 +161,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? hasCompleteOnboarding = freezed,
     Object? isVerified = freezed,
+    Object? profileImageUrl = freezed,
     Object? religionPreference = freezed,
   }) {
     return _then(_$UserImpl(
@@ -184,6 +193,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
               as bool?,
+      profileImageUrl: freezed == profileImageUrl
+          ? _value.profileImageUrl
+          : profileImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       religionPreference: freezed == religionPreference
           ? _value.religionPreference
           : religionPreference // ignore: cast_nullable_to_non_nullable
@@ -203,6 +216,7 @@ class _$UserImpl extends _User {
       this.updatedAt,
       this.hasCompleteOnboarding = false,
       this.isVerified = false,
+      this.profileImageUrl = null,
       this.religionPreference})
       : super._();
 
@@ -226,11 +240,14 @@ class _$UserImpl extends _User {
   @JsonKey()
   final bool? isVerified;
   @override
+  @JsonKey()
+  final String? profileImageUrl;
+  @override
   final ReligionPreference? religionPreference;
 
   @override
   String toString() {
-    return 'User(userId: $userId, displayName: $displayName, email: $email, createdAt: $createdAt, updatedAt: $updatedAt, hasCompleteOnboarding: $hasCompleteOnboarding, isVerified: $isVerified, religionPreference: $religionPreference)';
+    return 'User(userId: $userId, displayName: $displayName, email: $email, createdAt: $createdAt, updatedAt: $updatedAt, hasCompleteOnboarding: $hasCompleteOnboarding, isVerified: $isVerified, profileImageUrl: $profileImageUrl, religionPreference: $religionPreference)';
   }
 
   @override
@@ -250,6 +267,8 @@ class _$UserImpl extends _User {
                 other.hasCompleteOnboarding == hasCompleteOnboarding) &&
             (identical(other.isVerified, isVerified) ||
                 other.isVerified == isVerified) &&
+            (identical(other.profileImageUrl, profileImageUrl) ||
+                other.profileImageUrl == profileImageUrl) &&
             (identical(other.religionPreference, religionPreference) ||
                 other.religionPreference == religionPreference));
   }
@@ -265,6 +284,7 @@ class _$UserImpl extends _User {
       updatedAt,
       hasCompleteOnboarding,
       isVerified,
+      profileImageUrl,
       religionPreference);
 
   /// Create a copy of User
@@ -292,6 +312,7 @@ abstract class _User extends User {
       final DateTime? updatedAt,
       final bool? hasCompleteOnboarding,
       final bool? isVerified,
+      final String? profileImageUrl,
       final ReligionPreference? religionPreference}) = _$UserImpl;
   const _User._() : super._();
 
@@ -311,6 +332,8 @@ abstract class _User extends User {
   bool? get hasCompleteOnboarding;
   @override
   bool? get isVerified;
+  @override
+  String? get profileImageUrl;
   @override
   ReligionPreference? get religionPreference;
 

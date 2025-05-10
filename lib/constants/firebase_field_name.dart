@@ -13,6 +13,7 @@ class FirebaseFieldName {
   static const hasCompleteOnboarding = 'hasCompleteOnboarding';
   static const isVerified = 'isVerified';
   static const religionPreference = 'religionPreference';
+  static const profileImageUrl = 'profileImageUrl';
 
   /// Event properties
   static const eventId = 'eventId';

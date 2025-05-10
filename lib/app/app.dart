@@ -11,6 +11,7 @@ import 'package:religion_calendar_app/l10n/app_localizations.dart';
 import 'package:religion_calendar_app/src/modules/feedback_by_screenshot/controllers/controllers.dart';
 import 'package:religion_calendar_app/src/modules/feedback_by_screenshot/widgets/page/page.dart';
 import 'package:religion_calendar_app/src/modules/notification/service/notification_service.dart';
+import 'package:religion_calendar_app/src/utils/log.dart';
 import '../src/modules/authentication/authentication.dart';
 import '../src/modules/geoip_and_locales/controllers/controllers.dart';
 import '../src/modules/user/user.dart';
@@ -57,6 +58,8 @@ class _ReligionAppState extends ConsumerState<ReligionApp> {
     final isFeedbackEnabled = ref.watch(
       screenshotFeedbackFormControllerProvider,
     );
+
+    Log.dev("DEBUG - userState: $authState");
 
     return BetterFeedback(
       theme: FeedbackThemeData(

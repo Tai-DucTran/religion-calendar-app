@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:religion_calendar_app/src/modules/authentication/models/auth_results.dart';
-import 'package:religion_calendar_app/src/modules/user/models/user_id.dart';
+import 'package:religion_calendar_app/src/modules/user/models/models.dart';
 import 'package:flutter/foundation.dart';
 
 part 'auth_state.freezed.dart';
@@ -11,9 +11,7 @@ class AuthState with _$AuthState {
   const factory AuthState({
     required AuthResults? result,
     required bool isLoading,
-    required UserId? userId,
-    required bool isLoggedIn,
-    required bool? hasCompleteOnboarding,
+    required User? user,
   }) = _AuthState;
 
   const AuthState._();
@@ -24,18 +22,26 @@ class AuthState with _$AuthState {
   factory AuthState.unknown() => const AuthState(
         result: null,
         isLoading: false,
-        userId: null,
-        isLoggedIn: false,
-        hasCompleteOnboarding: null,
+        user: null,
       );
 
   AuthState copyWithIsLoading(bool isLoading) {
     return AuthState(
       result: result,
       isLoading: isLoading,
-      userId: userId,
-      isLoggedIn: false,
-      hasCompleteOnboarding: hasCompleteOnboarding,
+      user: user,
     );
   }
+
+  UserId? get userId => user?.userId;
+  bool get isLoggedIn => user != null;
+  bool? get hasCompleteOnboarding => user?.hasCompleteOnboarding;
+  String? get profileImageUrl => user?.profileImageUrl;
+  ReligionPreference? get religionPreference => user?.religionPreference;
+  String? get userName => user?.displayName;
+  String? get userEmail => user?.email;
+  bool get isAuthenticated => user != null;
+  bool get isNotAuthenticated => user == null;
+  bool get isOnboardingComplete => user?.hasCompleteOnboarding == true;
+  bool get isVerified => user?.isVerified == true;
 }

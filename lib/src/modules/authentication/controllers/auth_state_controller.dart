@@ -17,29 +17,43 @@ class AuthStateController extends _$AuthStateController {
 
     final isLoggedIn = authenticatorRepo.isAlreadyLoggedIn;
     final userId = authenticatorRepo.userId ?? '';
-    if (isLoggedIn) {
-      final hasCompleteOnboarding =
-          await userFireStoreRepo.hasCompleteOnboarding(userId: userId);
 
-      return AuthState(
-        result: AuthResults.success,
-        isLoading: false,
-        userId: authenticatorRepo.userId,
-        isLoggedIn: isLoggedIn,
-        hasCompleteOnboarding: hasCompleteOnboarding,
-      );
+    if (isLoggedIn) {
+      try {
+        final user = await userFireStoreRepo.getUserDetailedInfor(userId);
+
+        return AuthState(
+          result: AuthResults.success,
+          isLoading: false,
+          user: user,
+        );
+      } catch (e) {
+        return AuthState(
+          result: AuthResults.success,
+          isLoading: false,
+          user: User(
+            userId: userId,
+            displayName: authenticatorRepo.displayName,
+            email: authenticatorRepo.email,
+            hasCompleteOnboarding: false,
+          ),
+        );
+      }
     }
+
     return AuthState.unknown();
   }
 
   bool get isAlreadyLoggedIn => state.value?.result == AuthResults.success;
-  String? get userId => state.value?.userId;
+  String? get userId => state.value?.user?.userId;
   bool? get isLoading => state.value?.isLoading;
 
   void updateOnboardingStatus(bool hasCompleted) {
-    if (state.value != null) {
-      state = AsyncValue.data(
-          state.value!.copyWith(hasCompleteOnboarding: hasCompleted));
+    if (state.value != null && state.value!.user != null) {
+      final updatedUser =
+          state.value!.user!.copyWith(hasCompleteOnboarding: hasCompleted);
+
+      state = AsyncValue.data(state.value!.copyWith(user: updatedUser));
     }
   }
 
@@ -78,18 +92,22 @@ class AuthStateController extends _$AuthStateController {
 
         final deviceTokenRepo = ref.read(deviceTokenRepositoryProvider);
         await deviceTokenRepo.saveDeviceToken(userId);
+
+        // Fetch the complete user data from Firestore
+        final userData = await userFireStoreRepo.getUserDetailedInfor(userId);
+
+        state = AsyncData(AuthState(
+          result: result,
+          isLoading: false,
+          user: userData ?? user,
+        ));
+      } else {
+        state = AsyncData(AuthState(
+          result: result,
+          isLoading: false,
+          user: null,
+        ));
       }
-
-      final hasCompleteOnboarding =
-          await userFireStoreRepo.hasCompleteOnboarding(userId: userId ?? '');
-
-      state = AsyncData(AuthState(
-        result: result,
-        isLoading: false,
-        userId: userId,
-        isLoggedIn: result == AuthResults.success,
-        hasCompleteOnboarding: hasCompleteOnboarding,
-      ));
     } catch (e, stackTrace) {
       state = AsyncError(e, stackTrace);
     }
@@ -120,25 +138,29 @@ class AuthStateController extends _$AuthStateController {
 
         final deviceTokenRepo = ref.read(deviceTokenRepositoryProvider);
         await deviceTokenRepo.saveDeviceToken(userId);
-      }
 
-      state = AsyncValue.data(
-        AuthState(
-          result: result,
-          isLoading: false,
-          userId: userId,
-          isLoggedIn: result == AuthResults.success ? true : false,
-          hasCompleteOnboarding: false,
-        ),
-      );
+        state = AsyncValue.data(
+          AuthState(
+            result: result,
+            isLoading: false,
+            user: user,
+          ),
+        );
+      } else {
+        state = AsyncValue.data(
+          AuthState(
+            result: result,
+            isLoading: false,
+            user: null,
+          ),
+        );
+      }
     } catch (e) {
       state = const AsyncValue.data(
         AuthState(
           result: AuthResults.failure,
           isLoading: false,
-          userId: null,
-          isLoggedIn: false,
-          hasCompleteOnboarding: false,
+          user: null,
         ),
       );
       rethrow;
@@ -153,41 +175,54 @@ class AuthStateController extends _$AuthStateController {
     final userFireStoreRepo = ref.read(userFirestoreRepositoryProvider);
 
     state = const AsyncLoading();
-    final result = await authenticatorRepo.loginWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    final userId = authenticatorRepo.userId;
-    final hasCompleteOnboarding =
-        await userFireStoreRepo.hasCompleteOnboarding(userId: userId ?? '');
 
-    state = AsyncValue.data(
-      AuthState(
-        result: result,
-        isLoading: false,
-        userId: userId,
-        isLoggedIn: result == AuthResults.success ? true : false,
-        hasCompleteOnboarding: hasCompleteOnboarding,
-      ),
-    );
+    try {
+      final result = await authenticatorRepo.loginWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      final userId = authenticatorRepo.userId;
+
+      if (result == AuthResults.success && userId != null) {
+        final userData = await userFireStoreRepo.getUserDetailedInfor(userId);
+
+        state = AsyncValue.data(
+          AuthState(
+            result: result,
+            isLoading: false,
+            user: userData,
+          ),
+        );
+      } else {
+        state = AsyncValue.data(
+          AuthState(
+            result: result,
+            isLoading: false,
+            user: null,
+          ),
+        );
+      }
+    } catch (e) {
+      state = AsyncValue.data(
+        AuthState(
+          result: AuthResults.failure,
+          isLoading: false,
+          user: null,
+        ),
+      );
+      rethrow;
+    }
   }
 
-  // Future<void> completeOnboarding(ReligionPreference religionPreference) async {
-  //   final userFireStoreRepo = ref.read(userFirestoreRepositoryProvider);
-  //   final userId = state.value?.userId;
-
-  //   if (userId != null) {
-  //     await userFireStoreRepo.updateReligionPreferenceOnboarding(
-  //       userId: userId,
-  //       religionPreference: religionPreference,
-  //     );
-
-  //     state = AsyncValue.data(
-  //       state.value?.copyWith(
-  //         isLoggedIn: true,
-  //         hasCompletedOnboarding: true,
-  //       ),
-  //     );
-  //   }
-  // }
+  void updateUserState(User updatedUser) {
+    if (state.value != null) {
+      state = AsyncValue.data(
+        AuthState(
+          result: state.value!.result,
+          isLoading: state.value!.isLoading,
+          user: updatedUser,
+        ),
+      );
+    }
+  }
 }
