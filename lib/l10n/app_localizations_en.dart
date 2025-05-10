@@ -505,4 +505,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get grantAccessToCameraText => 'Please allow access to your camera in device settings to take photos in this app.';
+
+  @override
+  String get attachmentText => 'Attachment';
 }

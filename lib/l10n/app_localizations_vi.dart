@@ -505,4 +505,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get grantAccessToCameraText => 'Vui lòng cho phép truy cập vào máy ảnh trong cài đặt thiết bị để chụp ảnh trong ứng dụng này.';
+
+  @override
+  String get attachmentText => 'Tệp đính kèm';
 }

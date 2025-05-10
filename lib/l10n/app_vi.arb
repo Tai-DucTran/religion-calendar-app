@@ -170,5 +170,6 @@
   "errorSomethingWentWrongText": "Đã có lỗi xảy ra!",
   "noDataFoundTitleText": "Không Có Dữ Liệu!",
   "grantAccessToCameraText": "Vui lòng cho phép truy cập vào máy ảnh trong cài đặt thiết bị để chụp ảnh trong ứng dụng này.",
+  "attachmentText": "Tệp đính kèm",
   "@@locale": "vi"
 }

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readmore/readmore.dart';
 import 'package:religion_calendar_app/src/modules/feedback_page/models/models.dart';
 import 'package:religion_calendar_app/src/utils/utils.dart';
+import 'package:religion_calendar_app/src/widgets/widgets.dart';
 
 class GeneralFeedbackStatusOnBottomSheet extends StatelessWidget {
   const GeneralFeedbackStatusOnBottomSheet({
@@ -20,6 +21,14 @@ class GeneralFeedbackStatusOnBottomSheet extends StatelessWidget {
     final isStatusReponded =
         feedback.status == FeedbackResponseStatus.responded;
     final hasAttachedImage = feedback.hasFeedbackImage;
+
+    void showFullScreenImage(BuildContext context, String imageUrl) {
+      FullScreenImageView.show(
+        context,
+        imageUrl: imageUrl,
+        title: feedbackTitle,
+      );
+    }
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -100,6 +109,10 @@ class GeneralFeedbackStatusOnBottomSheet extends StatelessWidget {
               Spacing.sp12,
               if (hasAttachedImage)
                 GestureDetector(
+                  onTap: () => showFullScreenImage(
+                    context,
+                    feedback.feedbackImageUrl!,
+                  ),
                   child: Container(
                     padding: EdgeInsets.symmetric(
                       vertical: 4,
@@ -114,7 +127,7 @@ class GeneralFeedbackStatusOnBottomSheet extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          'Image',
+                          context.l10n.attachmentText,
                           style: AriesTextStyles.textBodyNormal.copyWith(
                             color: isStatusReponded
                                 ? AriesColor.neutral0
